@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jQuery File Upload Example</title>
+    <script src="../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
+
+    <script src="../js/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="../js/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+    <script src="../js/jquery-file-upload/js/jquery.fileupload.js"></script>
+
+    <!-- bootstrap just to have good looking page -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+    *{font-family: 微软雅黑}
+    tr{height: 30px}
+    td{text-align: center}
+        th{text-align: center}
+    </style>
+
+</head>
+
+<body>
+
+<div style="width:800px;padding:20px;box-shadow: 10px 10px 5px #888888 ">
+
+    <input id="fileupload" type="file" name="files[]" data-url="/file/upload" multiple>
+
+
+    <div id="progress">
+        <div class="bar" style="width: 0%;height: 20px; background-color: #6b9cde" ></div>
+    </div>
+
+    <table id="uploaded-files" style="width: 100%">
+        <tr>
+            <th>资源名称</th>
+            <th>文件大小</th>
+            <th>文件类型</th>
+            <th>操作</th>
+            <th>上传进度</th>
+        </tr>
+    </table>
+
+</div>
+<script type="text/javascript">
+$(function () {
+$('#fileupload').fileupload({
+dataType: 'json',
+add:function(e, data){
+
+      var file=data.files[0];
+      var fileid = data.files[0].name.substring(0,data.files[0].name.lastIndexOf("."));
+
+    jqXHR= data.submit();
+
+      $("#uploaded-files").append(
+          $('<tr/>')
+              .append($('<td/>').text(file.name))
+              .append($('<td/>').text(Math.round(file.size/1024)+"KB"))
+              .append($('<td/>').text(file.type))
+
+              .append($('<td/>').html(" <div id='"+fileid+"' style='width: 100%;height:20px;'>" +
+                  "        <div class=\"bar\" style=\"width: 0%;height: 20px; background-color: #6b9cde\" ></div>\n" +
+                  "    </div>"))
+              .append($('<td/>').html("<a href='javascript:abort("+jqXHR+")'>取消</a>"))
+      )
+
+},
+    progress :function(e,data){
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        var progressid = data.files[0].name.substring(0,data.files[0].name.lastIndexOf("."));
+
+        $("#"+progressid+" .bar").css(
+            'width',
+            progress + '%'
+        ).text( progress + '%');
+
+    }
+
+});
+});
+function abort(jq){
+    console.info(jq);
+}
+
+</script>
+</body>
+</html>
