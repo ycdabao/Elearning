@@ -42,13 +42,18 @@
             <th>资源名称</th>
             <th>文件大小</th>
             <th>文件类型</th>
-            <th>操作</th>
             <th>上传进度</th>
+            <th>操作</th>
         </tr>
     </table>
 
 </div>
 <script type="text/javascript">
+    function start1(pp){
+       pp.abort();
+    }
+
+
 $(function () {
 $('#fileupload').fileupload({
 dataType: 'json',
@@ -57,7 +62,8 @@ add:function(e, data){
       var file=data.files[0];
       var fileid = data.files[0].name.substring(0,data.files[0].name.lastIndexOf("."));
 
-    jqXHR= data.submit();
+  var jqXHR1= data.submit();
+
 
       $("#uploaded-files").append(
           $('<tr/>')
@@ -68,7 +74,7 @@ add:function(e, data){
               .append($('<td/>').html(" <div id='"+fileid+"' style='width: 100%;height:20px;'>" +
                   "        <div class=\"bar\" style=\"width: 0%;height: 20px; background-color: #6b9cde\" ></div>\n" +
                   "    </div>"))
-              .append($('<td/>').html("<a href='javascript:abort("+jqXHR+")'>取消</a>"))
+              .append($('<td/>').html("<a href='javascript:start1("+jqXHR1+")'>上传</a>"))
       )
 
 },
@@ -84,10 +90,15 @@ add:function(e, data){
     }
 
 });
+
+
+
+
+
+
 });
-function abort(jq){
-    console.info(jq);
-}
+
+
 
 </script>
 </body>
