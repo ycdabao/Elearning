@@ -26,7 +26,12 @@
 	</head>
 	<body>
 		<div id="uploader">
-			<ul id="theList"></ul>
+			<table id="theList">
+				<tr>
+					<td>文件名称</td><td>大小</td><td>类型</td><td>上传进度</td><td>操作</td>
+				</tr>
+
+			</table>
 			<div id="picker">选择文件</div>
 		</div>
 
@@ -191,10 +196,10 @@
 
 			uploader.on("fileQueued", function(file){
 
-				$("#theList").append('<li id="'+file.id+'">' +
-					'<img /><span>'+file.name+'</span><span class="itemUpload">上传</span><span class="itemStop">暂停</span><span class="itemDel">删除</span>' +
-					'<div class="percentage"></div>' +
-				'</li>');
+				$("#theList").append('<tr id="'+file.id+'">' +
+					'<td><span>'+file.name+'</span></td><td><span>'+file.size+'</span></td><td><span>'+file.type+'</span></td><td><div class="percentage"></div></td><td><span class="itemUpload">上传</span><span class="itemStop">暂停</span><span class="itemDel">删除</span></td>' +
+
+				'</tr>');
 
 				var $img = $("#" + file.id).find("img");
 
@@ -232,7 +237,7 @@
 			});
 
 			uploader.on("uploadProgress", function(file, percentage){
-				$("#" + file.id + " .percentage").text(percentage * 100 + "%");
+				$("#" + file.id + " .percentage").text(Math.ceil(percentage * 100) + "%");
 			});
 
             function UploadComlate(file){
