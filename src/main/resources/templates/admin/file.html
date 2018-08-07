@@ -5,11 +5,9 @@
 		<title>WebUploader</title>
 		<link rel="stylesheet" href="../js/webuploader/webuploader.css" />
 		<style type="text/css">
-			.itemDel, .itemStop, .itemUpload{
-				margin-left: 15px;
-				color: blue;
-				cursor: pointer;
-			}
+
+
+		*{font-family: 微软雅黑}
 			#theList{
 				width: 80%;
 				min-height: 100px;
@@ -26,13 +24,14 @@
 	</head>
 	<body>
 		<div id="uploader">
+			<div id="picker">选择文件</div> <div >开始</div>
 			<table id="theList">
 				<tr>
 					<td>文件名称</td><td>大小</td><td>类型</td><td>上传进度</td><td>操作</td>
 				</tr>
 
 			</table>
-			<div id="picker">选择文件</div>
+
 		</div>
 
 		<script type="text/javascript">
@@ -197,23 +196,20 @@
 			uploader.on("fileQueued", function(file){
 
 				$("#theList").append('<tr id="'+file.id+'">' +
-					'<td><span>'+file.name+'</span></td><td><span>'+file.size+'</span></td><td><span>'+file.type+'</span></td><td><div class="percentage"></div></td><td><span class="itemUpload">上传</span><span class="itemStop">暂停</span><span class="itemDel">删除</span></td>' +
+					'<td><span>'+file.name+'</span></td><td><span>'+file.size+'</span></td><td><span>'+file.type+'</span></td><td><div class="percentage"></div></td><td></td>' +
 
 				'</tr>');
 
-				var $img = $("#" + file.id).find("img");
+				var delbutton =$("<span>").addClass("delbutton").html("删除").appendTo($("#theList td:last"));
+                delbutton.click(function(){
+				    console.info(file);
+				    uploader.upload(file.id);
+				})
 
-				uploader.makeThumb(file, function(error, src){
-					if(error){
-						$img.replaceWith("<span>不能预览</span>");
-					}
-
-					$img.attr("src", src);
-				});
 
 			});
 
-			$("#theList").on("click", ".itemUpload", function(){
+			/*$("#theList").on("click", ".itemUpload", function(){
 				uploader.upload();
 
                 //"上传"-->"暂停"
@@ -227,7 +223,7 @@
                 //"暂停"-->"上传"
                 $(this).hide();
                 $(".itemUpload").show();
-            });
+            });*/
 
             //todo 如果要删除的文件正在上传（包括暂停），则需要发送给后端一个请求用来清除服务器端的缓存文件
 			$("#theList").on("click", ".itemDel", function(){

@@ -17,11 +17,36 @@
 	border-radius: 3px;
 	overflow: hidden;
 }
+
+
 .webuploader-pick-hover {
 	background: #00a2d4;
 }
 
 .webuploader-pick-disable {
+	opacity: 0.6;
+	pointer-events:none;
+}
+
+
+.delbutton {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	background: #00b7ee;
+	padding: 5px 10px;
+	color: #fff;
+	text-align: center;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+
+.delbutton-hover {
+	background: #00a2d4;
+}
+
+.delbutton-disable {
 	opacity: 0.6;
 	pointer-events:none;
 }
