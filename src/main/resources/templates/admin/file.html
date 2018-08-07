@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>WebUploader</title>
-		<link rel="stylesheet" href="webuploader.css" />
+		<link rel="stylesheet" href="../js/webuploader/webuploader.css" />
 		<style type="text/css">
 			.itemDel, .itemStop, .itemUpload{
 				margin-left: 15px;
@@ -14,6 +14,7 @@
 				width: 80%;
 				min-height: 100px;
 				border: 1px solid red;
+				box-shadow: 5px 5px 5px grey;
 			}
             #theList .itemStop{
                 display: none;
@@ -28,7 +29,7 @@
 			<ul id="theList"></ul>
 			<div id="picker">选择文件</div>
 		</div>
-		
+
 		<script type="text/javascript">
             var userInfo = {userId:"kazaff", md5:""};   //用户会话信息
             var chunkSize = 5000 * 1024;        //分块大小
@@ -121,6 +122,7 @@
                     if((chunksTotal = Math.ceil(file.size/chunkSize)) > 1){
                         //合并请求
                         var task = new $.Deferred();
+                        uniqueFileName = md5(''+userInfo.userId+file.name+file.type+file.lastModifiedDate+file.size);
                         $.ajax({
                             type: "POST"
                             , url: backEndUrl
@@ -188,14 +190,14 @@
 			});
 
 			uploader.on("fileQueued", function(file){
-				
+
 				$("#theList").append('<li id="'+file.id+'">' +
 					'<img /><span>'+file.name+'</span><span class="itemUpload">上传</span><span class="itemStop">暂停</span><span class="itemDel">删除</span>' +
 					'<div class="percentage"></div>' +
 				'</li>');
-				
+
 				var $img = $("#" + file.id).find("img");
-				
+
 				uploader.makeThumb(file, function(error, src){
 					if(error){
 						$img.replaceWith("<span>不能预览</span>");
@@ -203,9 +205,9 @@
 
 					$img.attr("src", src);
 				});
-				
+
 			});
-			
+
 			$("#theList").on("click", ".itemUpload", function(){
 				uploader.upload();
 
@@ -228,7 +230,7 @@
 
 				$(this).parent().remove();	//从上传列表dom中删除
 			});
-			
+
 			uploader.on("uploadProgress", function(file, percentage){
 				$("#" + file.id + " .percentage").text(percentage * 100 + "%");
 			});
