@@ -10,13 +10,18 @@
 		*{font-family: 微软雅黑}
 			#theList{
 				width: 80%;
-				min-height: 100px;
-				border: 1px solid red;
+				border: 1px solid #F2F2F2;
 				box-shadow: 5px 5px 5px grey;
 			}
-            #theList .itemStop{
-                display: none;
-            }
+
+		.percentage{
+			height: 20px;
+			width: 100%;
+		}
+
+			.percentage .bar{
+				height: 20px;
+			}
 		</style>
 		<script src="../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
@@ -24,9 +29,13 @@
 	</head>
 	<body>
 		<div id="uploader">
-			<div id="picker">选择文件</div> <div >开始</div>
-			<table id="theList">
-				<tr>
+			<div id="operator">
+				<div id="picker">选择文件</div>
+				<div id="startupload">开始</div>
+				<div style="clear:both"></div>
+			</div>
+			<table id="theList" cellpadding="0px" cellspacing="0px">
+				<tr style="height: 50px; font-weight: bold">
 					<td>文件名称</td><td>大小</td><td>类型</td><td>上传进度</td><td>操作</td>
 				</tr>
 
@@ -54,9 +63,9 @@
                     var task = new $.Deferred();
                     var start = new Date().getTime();
                     (new WebUploader.Uploader()).md5File(file, 0, 10*1024*1024).progress(function(percentage){
-                        console.log(percentage);
+
                     }).then(function(val){
-                        console.log("总耗时: "+((new Date().getTime()) - start)/1000);
+
 
                         md5Mark = val;
                         userInfo.md5 = val;
@@ -73,7 +82,7 @@
                             , dataType: "json"
                         }).then(function(data, textStatus, jqXHR){
 
-                            //console.log(data);
+
 
                             if(data.ifExist){   //若存在，这返回失败给WebUploader，表明该文件不需要上传
                                 task.reject();
@@ -95,6 +104,8 @@
                     return $.when(task);
                 }
                 , beforeSend: function(block){
+
+                   uniqueFileName = md5(''+userInfo.userId+block.file.name+block.file.type+block.file.lastModifiedDate+block.file.size);
                     //分片验证是否已传过，用于断点续传
                     var task = new $.Deferred();
                     $.ajax({
@@ -110,6 +121,7 @@
                         , timeout: 1000 //todo 超时的话，只能认为该分片未上传过
                         , dataType: "json"
                     }).then(function(data, textStatus, jqXHR){
+
                         if(data.ifExist){   //若存在，返回失败给WebUploader，表明该分块不需要上传
                             task.reject();
                         }else{
@@ -186,9 +198,9 @@
 				, prepareNextFile: true
 				, chunked: true
 				, chunkSize: chunkSize
-				, threads: true
+
 				, formData: function(){return $.extend(true, {}, userInfo);}
-				, fileNumLimit: 5
+				, fileNumLimit: 10
 				, fileSingleSizeLimit: 1000 * 1024 * 1024
 				, duplicate: true
 			});
@@ -196,44 +208,44 @@
 			uploader.on("fileQueued", function(file){
 
 				$("#theList").append('<tr id="'+file.id+'">' +
-					'<td><span>'+file.name+'</span></td><td><span>'+file.size+'</span></td><td><span>'+file.type+'</span></td><td><div class="percentage"></div></td><td></td>' +
+					'<td><span>'+file.name+'</span></td><td><span>'+Math.ceil(file.size/1024)+'kb</span></td><td><span>'+file.type+'</span></td><td><div class="percentage"><div class="bar"></div></div></td><td></td>' +
 
 				'</tr>');
 
 				var delbutton =$("<span>").addClass("delbutton").html("删除").appendTo($("#theList td:last"));
                 delbutton.click(function(){
-				    console.info(file);
-				    uploader.upload(file.id);
+                    uploader.removeFile(file,true);	//从上传文件列表中删除
+
+                    $(this).parent().parent().remove();	//从上传列表dom中删除
 				})
 
 
 			});
 
-			/*$("#theList").on("click", ".itemUpload", function(){
-				uploader.upload();
+			$("#startupload").click(function(){
 
-                //"上传"-->"暂停"
-                $(this).hide();
-                $(".itemStop").show();
+			    if(this.innerHTML=="开始") {
+                    this.innerHTML = "暂停";
+                    uploader.upload();
+
+                }
+				else if(this.innerHTML=="暂停"){
+			        uploader.stop(true);
+                    this.innerHTML="开始";
+				}
 			});
 
-            $("#theList").on("click", ".itemStop", function(){
-                uploader.stop(true);
-
-                //"暂停"-->"上传"
-                $(this).hide();
-                $(".itemUpload").show();
-            });*/
 
             //todo 如果要删除的文件正在上传（包括暂停），则需要发送给后端一个请求用来清除服务器端的缓存文件
-			$("#theList").on("click", ".itemDel", function(){
+			/*$("#theList").on("click", ".itemDel", function(){
 				uploader.removeFile($(this).parent().attr("id"));	//从上传文件列表中删除
 
 				$(this).parent().remove();	//从上传列表dom中删除
-			});
+			});*/
 
 			uploader.on("uploadProgress", function(file, percentage){
-				$("#" + file.id + " .percentage").text(Math.ceil(percentage * 100) + "%");
+                $("#" + file.id + " .percentage .bar").css("width",Math.ceil(percentage * 100) + "%").css("background-color","#00a2d4");
+				$("#" + file.id + " .percentage .bar").text(Math.ceil(percentage * 100) + "%");
 			});
 
             function UploadComlate(file){

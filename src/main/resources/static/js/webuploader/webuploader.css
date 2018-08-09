@@ -36,6 +36,7 @@
 	background: #00b7ee;
 	padding: 5px 10px;
 	color: #fff;
+	margin-top: 5px;
 	text-align: center;
 	border-radius: 3px;
 	overflow: hidden;
@@ -51,3 +52,34 @@
 	pointer-events:none;
 }
 
+
+#startupload{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: #00b7ee;
+    padding: 10px 15px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+
+#startupload-hover {
+    background: #00a2d4;
+}
+
+#startupload-disable {
+    opacity: 0.6;
+    pointer-events:none;
+}
+
+#operator{margin-bottom: 5px;}
+#operator #picker{float:left;margin-right: 10px}
+#operator #startupload{float:left;margin-right: 10px}
+
+
+
+#theList tr:nth-child(odd){background-color:lavender;}
+#theList td{text-align: center;vertical-align:middle}
