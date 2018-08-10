@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.modou.elearning.mapper.FilesMapper" >
+  <resultMap id="BaseResultMap" type="com.modou.elearning.pojo.Files" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="file_createby" property="fileCreateby" jdbcType="VARCHAR" />
+    <result column="file_createdate" property="fileCreatedate" jdbcType="DATE" />
+    <result column="file_type" property="fileType" jdbcType="VARCHAR" />
+    <result column="file_folder" property="fileFolder" jdbcType="VARCHAR" />
+    <result column="file_count" property="fileCount" jdbcType="INTEGER" />
+    <result column="file_favorites" property="fileFavorites" jdbcType="INTEGER" />
+    <result column="file_share" property="fileShare" jdbcType="INTEGER" />
+    <result column="file_status" property="fileStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.modou.elearning.pojo.Files" extends="BaseResultMap" >
+    <result column="file_content" property="fileContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, file_createby, file_createdate, file_type, file_folder, file_count, file_favorites, 
+    file_share, file_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    file_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.modou.elearning.pojo.FilesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from files
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.FilesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from files
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from files
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from files
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.modou.elearning.pojo.FilesExample" >
+    delete from files
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.modou.elearning.pojo.Files" >
+    insert into files (id, file_createby, file_createdate, 
+      file_type, file_folder, file_count, 
+      file_favorites, file_share, file_status, 
+      file_content)
+    values (#{id,jdbcType=VARCHAR}, #{fileCreateby,jdbcType=VARCHAR}, #{fileCreatedate,jdbcType=DATE}, 
+      #{fileType,jdbcType=VARCHAR}, #{fileFolder,jdbcType=VARCHAR}, #{fileCount,jdbcType=INTEGER}, 
+      #{fileFavorites,jdbcType=INTEGER}, #{fileShare,jdbcType=INTEGER}, #{fileStatus,jdbcType=VARCHAR}, 
+      #{fileContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.modou.elearning.pojo.Files" >
+    insert into files
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fileCreateby != null" >
+        file_createby,
+      </if>
+      <if test="fileCreatedate != null" >
+        file_createdate,
+      </if>
+      <if test="fileType != null" >
+        file_type,
+      </if>
+      <if test="fileFolder != null" >
+        file_folder,
+      </if>
+      <if test="fileCount != null" >
+        file_count,
+      </if>
+      <if test="fileFavorites != null" >
+        file_favorites,
+      </if>
+      <if test="fileShare != null" >
+        file_share,
+      </if>
+      <if test="fileStatus != null" >
+        file_status,
+      </if>
+      <if test="fileContent != null" >
+        file_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCreateby != null" >
+        #{fileCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCreatedate != null" >
+        #{fileCreatedate,jdbcType=DATE},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileFolder != null" >
+        #{fileFolder,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCount != null" >
+        #{fileCount,jdbcType=INTEGER},
+      </if>
+      <if test="fileFavorites != null" >
+        #{fileFavorites,jdbcType=INTEGER},
+      </if>
+      <if test="fileShare != null" >
+        #{fileShare,jdbcType=INTEGER},
+      </if>
+      <if test="fileStatus != null" >
+        #{fileStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fileContent != null" >
+        #{fileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.modou.elearning.pojo.FilesExample" resultType="java.lang.Integer" >
+    select count(*) from files
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update files
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileCreateby != null" >
+        file_createby = #{record.fileCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileCreatedate != null" >
+        file_createdate = #{record.fileCreatedate,jdbcType=DATE},
+      </if>
+      <if test="record.fileType != null" >
+        file_type = #{record.fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileFolder != null" >
+        file_folder = #{record.fileFolder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileCount != null" >
+        file_count = #{record.fileCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileFavorites != null" >
+        file_favorites = #{record.fileFavorites,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileShare != null" >
+        file_share = #{record.fileShare,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileStatus != null" >
+        file_status = #{record.fileStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileContent != null" >
+        file_content = #{record.fileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update files
+    set id = #{record.id,jdbcType=VARCHAR},
+      file_createby = #{record.fileCreateby,jdbcType=VARCHAR},
+      file_createdate = #{record.fileCreatedate,jdbcType=DATE},
+      file_type = #{record.fileType,jdbcType=VARCHAR},
+      file_folder = #{record.fileFolder,jdbcType=VARCHAR},
+      file_count = #{record.fileCount,jdbcType=INTEGER},
+      file_favorites = #{record.fileFavorites,jdbcType=INTEGER},
+      file_share = #{record.fileShare,jdbcType=INTEGER},
+      file_status = #{record.fileStatus,jdbcType=VARCHAR},
+      file_content = #{record.fileContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update files
+    set id = #{record.id,jdbcType=VARCHAR},
+      file_createby = #{record.fileCreateby,jdbcType=VARCHAR},
+      file_createdate = #{record.fileCreatedate,jdbcType=DATE},
+      file_type = #{record.fileType,jdbcType=VARCHAR},
+      file_folder = #{record.fileFolder,jdbcType=VARCHAR},
+      file_count = #{record.fileCount,jdbcType=INTEGER},
+      file_favorites = #{record.fileFavorites,jdbcType=INTEGER},
+      file_share = #{record.fileShare,jdbcType=INTEGER},
+      file_status = #{record.fileStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.modou.elearning.pojo.Files" >
+    update files
+    <set >
+      <if test="fileCreateby != null" >
+        file_createby = #{fileCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCreatedate != null" >
+        file_createdate = #{fileCreatedate,jdbcType=DATE},
+      </if>
+      <if test="fileType != null" >
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileFolder != null" >
+        file_folder = #{fileFolder,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCount != null" >
+        file_count = #{fileCount,jdbcType=INTEGER},
+      </if>
+      <if test="fileFavorites != null" >
+        file_favorites = #{fileFavorites,jdbcType=INTEGER},
+      </if>
+      <if test="fileShare != null" >
+        file_share = #{fileShare,jdbcType=INTEGER},
+      </if>
+      <if test="fileStatus != null" >
+        file_status = #{fileStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fileContent != null" >
+        file_content = #{fileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.modou.elearning.pojo.Files" >
+    update files
+    set file_createby = #{fileCreateby,jdbcType=VARCHAR},
+      file_createdate = #{fileCreatedate,jdbcType=DATE},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      file_folder = #{fileFolder,jdbcType=VARCHAR},
+      file_count = #{fileCount,jdbcType=INTEGER},
+      file_favorites = #{fileFavorites,jdbcType=INTEGER},
+      file_share = #{fileShare,jdbcType=INTEGER},
+      file_status = #{fileStatus,jdbcType=VARCHAR},
+      file_content = #{fileContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.modou.elearning.pojo.Files" >
+    update files
+    set file_createby = #{fileCreateby,jdbcType=VARCHAR},
+      file_createdate = #{fileCreatedate,jdbcType=DATE},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      file_folder = #{fileFolder,jdbcType=VARCHAR},
+      file_count = #{fileCount,jdbcType=INTEGER},
+      file_favorites = #{fileFavorites,jdbcType=INTEGER},
+      file_share = #{fileShare,jdbcType=INTEGER},
+      file_status = #{fileStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

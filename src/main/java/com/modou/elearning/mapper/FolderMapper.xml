@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.modou.elearning.mapper.FolderMapper" >
+  <resultMap id="BaseResultMap" type="com.modou.elearning.pojo.Folder" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="folder_name" property="folderName" jdbcType="VARCHAR" />
+    <result column="folder_createby" property="folderCreateby" jdbcType="VARCHAR" />
+    <result column="folder_createdate" property="folderCreatedate" jdbcType="DATE" />
+    <result column="folder_modifyby" property="folderModifyby" jdbcType="VARCHAR" />
+    <result column="folder_modifydate" property="folderModifydate" jdbcType="DATE" />
+    <result column="folder_desc" property="folderDesc" jdbcType="VARCHAR" />
+    <result column="folder_status" property="folderStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, folder_name, folder_createby, folder_createdate, folder_modifyby, folder_modifydate, 
+    folder_desc, folder_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.FolderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from folder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from folder
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from folder
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.modou.elearning.pojo.FolderExample" >
+    delete from folder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.modou.elearning.pojo.Folder" >
+    insert into folder (id, folder_name, folder_createby, 
+      folder_createdate, folder_modifyby, folder_modifydate, 
+      folder_desc, folder_status)
+    values (#{id,jdbcType=VARCHAR}, #{folderName,jdbcType=VARCHAR}, #{folderCreateby,jdbcType=VARCHAR}, 
+      #{folderCreatedate,jdbcType=DATE}, #{folderModifyby,jdbcType=VARCHAR}, #{folderModifydate,jdbcType=DATE}, 
+      #{folderDesc,jdbcType=VARCHAR}, #{folderStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.modou.elearning.pojo.Folder" >
+    insert into folder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="folderName != null" >
+        folder_name,
+      </if>
+      <if test="folderCreateby != null" >
+        folder_createby,
+      </if>
+      <if test="folderCreatedate != null" >
+        folder_createdate,
+      </if>
+      <if test="folderModifyby != null" >
+        folder_modifyby,
+      </if>
+      <if test="folderModifydate != null" >
+        folder_modifydate,
+      </if>
+      <if test="folderDesc != null" >
+        folder_desc,
+      </if>
+      <if test="folderStatus != null" >
+        folder_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="folderName != null" >
+        #{folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="folderCreateby != null" >
+        #{folderCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="folderCreatedate != null" >
+        #{folderCreatedate,jdbcType=DATE},
+      </if>
+      <if test="folderModifyby != null" >
+        #{folderModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="folderModifydate != null" >
+        #{folderModifydate,jdbcType=DATE},
+      </if>
+      <if test="folderDesc != null" >
+        #{folderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="folderStatus != null" >
+        #{folderStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.modou.elearning.pojo.FolderExample" resultType="java.lang.Integer" >
+    select count(*) from folder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update folder
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.folderName != null" >
+        folder_name = #{record.folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.folderCreateby != null" >
+        folder_createby = #{record.folderCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.folderCreatedate != null" >
+        folder_createdate = #{record.folderCreatedate,jdbcType=DATE},
+      </if>
+      <if test="record.folderModifyby != null" >
+        folder_modifyby = #{record.folderModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.folderModifydate != null" >
+        folder_modifydate = #{record.folderModifydate,jdbcType=DATE},
+      </if>
+      <if test="record.folderDesc != null" >
+        folder_desc = #{record.folderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.folderStatus != null" >
+        folder_status = #{record.folderStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update folder
+    set id = #{record.id,jdbcType=VARCHAR},
+      folder_name = #{record.folderName,jdbcType=VARCHAR},
+      folder_createby = #{record.folderCreateby,jdbcType=VARCHAR},
+      folder_createdate = #{record.folderCreatedate,jdbcType=DATE},
+      folder_modifyby = #{record.folderModifyby,jdbcType=VARCHAR},
+      folder_modifydate = #{record.folderModifydate,jdbcType=DATE},
+      folder_desc = #{record.folderDesc,jdbcType=VARCHAR},
+      folder_status = #{record.folderStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.modou.elearning.pojo.Folder" >
+    update folder
+    <set >
+      <if test="folderName != null" >
+        folder_name = #{folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="folderCreateby != null" >
+        folder_createby = #{folderCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="folderCreatedate != null" >
+        folder_createdate = #{folderCreatedate,jdbcType=DATE},
+      </if>
+      <if test="folderModifyby != null" >
+        folder_modifyby = #{folderModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="folderModifydate != null" >
+        folder_modifydate = #{folderModifydate,jdbcType=DATE},
+      </if>
+      <if test="folderDesc != null" >
+        folder_desc = #{folderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="folderStatus != null" >
+        folder_status = #{folderStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.modou.elearning.pojo.Folder" >
+    update folder
+    set folder_name = #{folderName,jdbcType=VARCHAR},
+      folder_createby = #{folderCreateby,jdbcType=VARCHAR},
+      folder_createdate = #{folderCreatedate,jdbcType=DATE},
+      folder_modifyby = #{folderModifyby,jdbcType=VARCHAR},
+      folder_modifydate = #{folderModifydate,jdbcType=DATE},
+      folder_desc = #{folderDesc,jdbcType=VARCHAR},
+      folder_status = #{folderStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
