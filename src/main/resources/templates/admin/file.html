@@ -23,9 +23,7 @@
 				height: 20px;
 			}
 		</style>
-		<script src="../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
+
 	</head>
 	<body>
 		<div id="uploader">
@@ -42,7 +40,9 @@
 			</table>
 
 		</div>
-
+		<script src="../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
             var userInfo = {userId:"kazaff", md5:""};   //用户会话信息
             var chunkSize = 5000 * 1024;        //分块大小
@@ -65,7 +65,7 @@
                     (new WebUploader.Uploader()).md5File(file, 0, 10*1024*1024).progress(function(percentage){
 
                     }).then(function(val){
-
+						console.warn(val);
 
                         md5Mark = val;
                         userInfo.md5 = val;
@@ -106,6 +106,7 @@
                 , beforeSend: function(block){
 
                    uniqueFileName = md5(''+userInfo.userId+block.file.name+block.file.type+block.file.lastModifiedDate+block.file.size);
+
                     //分片验证是否已传过，用于断点续传
                     var task = new $.Deferred();
                     $.ajax({
@@ -139,6 +140,7 @@
                         //合并请求
                         var task = new $.Deferred();
                         uniqueFileName = md5(''+userInfo.userId+file.name+file.type+file.lastModifiedDate+file.size);
+
                         $.ajax({
                             type: "POST"
                             , url: backEndUrl
@@ -212,11 +214,26 @@
 
 				'</tr>');
 
-				var delbutton =$("<span>").addClass("delbutton").html("删除").appendTo($("#theList td:last"));
+				var delbutton =$("<span>").addClass("delbutton").html("取消").appendTo($("#theList td:last"));
                 delbutton.click(function(){
-                    uploader.removeFile(file,true);	//从上传文件列表中删除
 
-                    $(this).parent().parent().remove();	//从上传列表dom中删除
+                    var fileName = md5(''+userInfo.userId+file.name+file.type+file.lastModifiedDate+file.size);
+
+
+					uploader.cancelFile(file);
+              uploader.removeFile(file,true);	//从上传文件列表中删除
+                       $.ajax({
+                      type: "POST",
+                      url: "/file/removeFile",
+                      data: "fileName="+fileName+"&extention="+file.name.substring(file.name.lastIndexOf("." )),
+                      success: function(msg){
+
+                      }
+                  });
+
+
+
+                  $(this).parent().parent().remove();	//从上传列表dom中删除
 				})
 
 
@@ -249,7 +266,7 @@
 			});
 
             function UploadComlate(file){
-                console.log(file);
+
 
                 $("#" + file.id + " .percentage").text("上传完毕");
                 $(".itemStop").hide();

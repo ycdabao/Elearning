@@ -221,7 +221,7 @@ public class FileServiceImpl {
      * @param path      上传文件根路径
      * @return
      */
-    private boolean cleanSpace(String folder, String path){
+    public boolean cleanSpace(String folder, String path){
         //删除分片文件夹
         File garbage = new File(path + "/" + folder);
         if(!garbage.delete()){
@@ -235,6 +235,45 @@ public class FileServiceImpl {
         }
 
         return true;
+    }
+
+
+    /**
+     * 删除上传队列中正在上传的文件
+     * @param folder
+     * @param path
+     * @return
+     */
+
+    public void removeFile(String folder, String path,String extention){
+
+
+        //删除分片文件夹
+        File garbage = new File(path + "/" + folder);
+
+       File[] files =  garbage.listFiles();
+       if(files!=null) {
+           for (File file : files) {
+               file.delete();
+
+           }
+       }
+
+
+      garbage.delete();
+
+
+        //删除tmp文件
+        garbage = new File(path + "/" + folder + ".tmp");
+       garbage.delete();
+
+
+
+        //如果已经上传，则将上传文件删除
+        File complet = new File(path + "/" + folder+extention);
+        complet.delete();
+
+
     }
 
     /**

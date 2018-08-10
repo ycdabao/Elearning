@@ -99,4 +99,12 @@ public class FileController {
         log.error("请求参数不完整");
         return "{\"status\": 0, \"message\": \"请求参数不完整\"}";
     }
+
+    //删除
+    @RequestMapping(value = "removeFile", method = RequestMethod.POST)
+    @ResponseBody
+    public String removeFile(String fileName,String extention){
+        wu.removeFile(fileName,this.uploadFolder,extention);
+        return "success";
+    }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库驱动包位置 -->
+	<classPathEntry location="e:\mysql-connector-java-5.1.45-bin.jar" />
+	<context id="sqlserverTables">
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 数据库链接URL、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://116.62.159.48:3306/elearning"
+			userId="root" password="imodou20170212">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- 生成实体类的包名和位置 -->
+		<javaModelGenerator targetPackage="com.modou.elearning.pojo" targetProject="Elearning/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成的映射文件包名和位置 -->
+		<sqlMapGenerator targetPackage="com.modou.elearning.mapper" targetProject="Elearning/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.modou.elearning.mapper" targetProject="Elearning/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
+		<table tableName="Users" domainObjectName="Users"></table>
+		<table tableName="posts_type" domainObjectName="PostType"></table>
+		<table tableName="folder" domainObjectName="Folder"></table>
+		<table tableName="files" domainObjectName="Files"></table>
+
+
+		
+		
+	</context>
+</generatorConfiguration>
