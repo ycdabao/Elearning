@@ -103,8 +103,8 @@ public class FileController {
     //删除
     @RequestMapping(value = "removeFile", method = RequestMethod.POST)
     @ResponseBody
-    public String removeFile(String fileName,String extention){
-        wu.removeFile(fileName,this.uploadFolder,extention);
+    public String removeFile(String fileName,String extension){
+        wu.removeFile(fileName,this.uploadFolder,extension);
         return "success";
     }
 }
