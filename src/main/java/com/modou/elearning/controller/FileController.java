@@ -1,6 +1,7 @@
 package com.modou.elearning.controller;
 
 
+import com.modou.elearning.pojo.Files;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 
@@ -38,7 +40,7 @@ public class FileController {
     //大文件上传
     @RequestMapping(value = "fileUpload", method = RequestMethod.POST)
     @ResponseBody
-    public String fileUpload(String status, FileInfo info, @RequestParam(value = "file", required = false) MultipartFile file){
+    public String fileUpload(String status, FileInfo info, @RequestParam(value = "file", required = false) MultipartFile file,HttpSession session){
 
         if(status == null){	//文件上传
             if(file != null && !file.isEmpty()){	//验证请求不会包含数据上传，所以避免NullPoint这里要检查一下file变量是否为null
@@ -86,6 +88,8 @@ public class FileController {
                 }
 
             }else if(status.equals("chunksMerge")){	//分块合并
+
+
 
                 String path = wu.chunksMerge(info.getName(), info.getExt(), info.getChunks(), info.getMd5(), this.uploadFolder);
                 if(path == null){
