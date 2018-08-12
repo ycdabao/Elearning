@@ -1,6 +1,8 @@
 package com.modou.elearning.pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class UsersExample {
@@ -102,6 +104,32 @@ public class UsersExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -521,6 +549,126 @@ public class UsersExample {
 
         public Criteria andUserEmailNotBetween(String value1, String value2) {
             addCriterion("user_email not between", value1, value2, "userEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateIsNull() {
+            addCriterion("user_createdate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateIsNotNull() {
+            addCriterion("user_createdate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateEqualTo(Date value) {
+            addCriterionForJDBCDate("user_createdate =", value, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("user_createdate <>", value, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateGreaterThan(Date value) {
+            addCriterionForJDBCDate("user_createdate >", value, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("user_createdate >=", value, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateLessThan(Date value) {
+            addCriterionForJDBCDate("user_createdate <", value, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("user_createdate <=", value, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateIn(List<Date> values) {
+            addCriterionForJDBCDate("user_createdate in", values, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("user_createdate not in", values, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("user_createdate between", value1, value2, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserCreatedateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("user_createdate not between", value1, value2, "userCreatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateIsNull() {
+            addCriterion("user_modifydate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateIsNotNull() {
+            addCriterion("user_modifydate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateEqualTo(Date value) {
+            addCriterionForJDBCDate("user_modifydate =", value, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("user_modifydate <>", value, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateGreaterThan(Date value) {
+            addCriterionForJDBCDate("user_modifydate >", value, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("user_modifydate >=", value, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateLessThan(Date value) {
+            addCriterionForJDBCDate("user_modifydate <", value, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("user_modifydate <=", value, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateIn(List<Date> values) {
+            addCriterionForJDBCDate("user_modifydate in", values, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("user_modifydate not in", values, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("user_modifydate between", value1, value2, "userModifydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserModifydateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("user_modifydate not between", value1, value2, "userModifydate");
             return (Criteria) this;
         }
 

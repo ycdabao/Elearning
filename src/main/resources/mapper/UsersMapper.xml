@@ -8,6 +8,8 @@
     <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
     <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
     <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_createdate" property="userCreatedate" jdbcType="DATE" />
+    <result column="user_modifydate" property="userModifydate" jdbcType="DATE" />
     <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
     <result column="user_pic" property="userPic" jdbcType="VARCHAR" />
   </resultMap>
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_name, user_pass, user_tel, user_nickname, user_email, user_status, user_pic
+    id, user_name, user_pass, user_tel, user_nickname, user_email, user_createdate, user_modifydate, 
+    user_status, user_pic
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.UsersExample" >
     select
@@ -105,10 +108,12 @@
   <insert id="insert" parameterType="com.modou.elearning.pojo.Users" >
     insert into users (id, user_name, user_pass, 
       user_tel, user_nickname, user_email, 
-      user_status, user_pic)
+      user_createdate, user_modifydate, user_status, 
+      user_pic)
     values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, 
       #{userTel,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{userStatus,jdbcType=VARCHAR}, #{userPic,jdbcType=VARCHAR})
+      #{userCreatedate,jdbcType=DATE}, #{userModifydate,jdbcType=DATE}, #{userStatus,jdbcType=VARCHAR}, 
+      #{userPic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.modou.elearning.pojo.Users" >
     insert into users
@@ -130,6 +135,12 @@
       </if>
       <if test="userEmail != null" >
         user_email,
+      </if>
+      <if test="userCreatedate != null" >
+        user_createdate,
+      </if>
+      <if test="userModifydate != null" >
+        user_modifydate,
       </if>
       <if test="userStatus != null" >
         user_status,
@@ -156,6 +167,12 @@
       </if>
       <if test="userEmail != null" >
         #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreatedate != null" >
+        #{userCreatedate,jdbcType=DATE},
+      </if>
+      <if test="userModifydate != null" >
+        #{userModifydate,jdbcType=DATE},
       </if>
       <if test="userStatus != null" >
         #{userStatus,jdbcType=VARCHAR},
@@ -192,6 +209,12 @@
       <if test="record.userEmail != null" >
         user_email = #{record.userEmail,jdbcType=VARCHAR},
       </if>
+      <if test="record.userCreatedate != null" >
+        user_createdate = #{record.userCreatedate,jdbcType=DATE},
+      </if>
+      <if test="record.userModifydate != null" >
+        user_modifydate = #{record.userModifydate,jdbcType=DATE},
+      </if>
       <if test="record.userStatus != null" >
         user_status = #{record.userStatus,jdbcType=VARCHAR},
       </if>
@@ -211,6 +234,8 @@
       user_tel = #{record.userTel,jdbcType=VARCHAR},
       user_nickname = #{record.userNickname,jdbcType=VARCHAR},
       user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_createdate = #{record.userCreatedate,jdbcType=DATE},
+      user_modifydate = #{record.userModifydate,jdbcType=DATE},
       user_status = #{record.userStatus,jdbcType=VARCHAR},
       user_pic = #{record.userPic,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -235,6 +260,12 @@
       <if test="userEmail != null" >
         user_email = #{userEmail,jdbcType=VARCHAR},
       </if>
+      <if test="userCreatedate != null" >
+        user_createdate = #{userCreatedate,jdbcType=DATE},
+      </if>
+      <if test="userModifydate != null" >
+        user_modifydate = #{userModifydate,jdbcType=DATE},
+      </if>
       <if test="userStatus != null" >
         user_status = #{userStatus,jdbcType=VARCHAR},
       </if>
@@ -251,6 +282,8 @@
       user_tel = #{userTel,jdbcType=VARCHAR},
       user_nickname = #{userNickname,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
+      user_createdate = #{userCreatedate,jdbcType=DATE},
+      user_modifydate = #{userModifydate,jdbcType=DATE},
       user_status = #{userStatus,jdbcType=VARCHAR},
       user_pic = #{userPic,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}

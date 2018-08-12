@@ -1,6 +1,7 @@
 package com.modou.elearning.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Users implements Serializable {
     private String id;
@@ -14,6 +15,10 @@ public class Users implements Serializable {
     private String userNickname;
 
     private String userEmail;
+
+    private Date userCreatedate;
+
+    private Date userModifydate;
 
     private String userStatus;
 
@@ -67,6 +72,22 @@ public class Users implements Serializable {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail == null ? null : userEmail.trim();
+    }
+
+    public Date getUserCreatedate() {
+        return userCreatedate;
+    }
+
+    public void setUserCreatedate(Date userCreatedate) {
+        this.userCreatedate = userCreatedate;
+    }
+
+    public Date getUserModifydate() {
+        return userModifydate;
+    }
+
+    public void setUserModifydate(Date userModifydate) {
+        this.userModifydate = userModifydate;
     }
 
     public String getUserStatus() {
