@@ -40,6 +40,18 @@ public class UserServiceImpl implements UserService{
             }
         }
 
+        UsersExample example1= new UsersExample();
+        UsersExample.Criteria c1 = example1.createCriteria();
+        c1.andUserTelEqualTo(name);
+        List<Users> usersList1 = usersMapper.selectByExample(example1);
+        if(usersList1!=null&&usersList1.size()>0){
+            Users users = usersList1.get(0);
+            if(DigestUtils.md5Digest(password.getBytes()).equals(users.getUserPass()))
+            {
+                return users;
+            }
+        }
+
         return null;
     }
 
@@ -48,9 +60,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public ModouResult register(Users users) {
 
-        if(StringUtils.isBlank(users.getUserName())){
-           return  ModouResult.build(400,"用户名不能为空");
-        }
+
 
         if(StringUtils.isBlank(users.getUserPass())){
           return   ModouResult.build(400,"密码不能为空");

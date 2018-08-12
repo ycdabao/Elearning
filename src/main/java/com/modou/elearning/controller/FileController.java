@@ -1,7 +1,6 @@
 package com.modou.elearning.controller;
 
 
-import com.modou.elearning.pojo.Files;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import org.slf4j.Logger;
@@ -31,10 +30,10 @@ public class FileController {
     @Autowired
     private FileServiceImpl wu;
 
-    @RequestMapping(value="/index")
+    @RequestMapping(value="/list")
     public String printWelcome(ModelMap model) {
 
-        return "admin/file";
+        return "admin/files/list";
     }
 
     //大文件上传
