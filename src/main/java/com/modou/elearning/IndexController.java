@@ -14,4 +14,16 @@ public class IndexController {
     public String file(){
         return "/admin/files/file";
     }
+
+    @RequestMapping(value="/tologin")
+    public String tologin(){
+        return "/admin/login";
+    }
+
+    @RequestMapping(value="/toindex")
+    public String toindex(){
+        return "/courses/index";
+    }
+
+
 }

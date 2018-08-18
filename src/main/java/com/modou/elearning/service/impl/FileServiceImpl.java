@@ -34,6 +34,14 @@ public class FileServiceImpl {
      */
     private String msg;
 
+
+
+    public List<Files> list(){
+        return null;
+    }
+
+
+
     /**
      * 秒传验证
      * 根据文件的MD5签名判断该文件是否已经存在

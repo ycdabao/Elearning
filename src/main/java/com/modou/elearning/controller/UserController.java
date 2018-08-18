@@ -7,11 +7,12 @@ import com.modou.elearning.utils.ValidateCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 @Controller
 @RequestMapping(value = "/user")
@@ -44,7 +45,7 @@ public class UserController {
         response.setContentType("image/jpeg");
 
        String code= ValidateCode.generateVerifyCode(4);
-        ValidateCode.outputImage(200,100,response.getOutputStream(),code);
+        ValidateCode.outputImage(100,30,response.getOutputStream(),code);
 
 
     }
@@ -70,13 +71,17 @@ public class UserController {
      * @return
      */
     @RequestMapping(value="/dologin")
-    public String login(String login,String password,HttpSession session){
+    @ResponseBody
+    public ModouResult login(String login, String password, HttpSession session){
         Users  user = userService.login(login,password);
+
         if(user==null){
-            return "index";
+            ModouResult result = new ModouResult(400,"用户名或密码错误",null);
+            return result;
         }else{
             session.setAttribute("user",user);
-            return "admin/index";
+            ModouResult result = new ModouResult(200,"登录成功","/index");
+            return result;
         }
     }
 

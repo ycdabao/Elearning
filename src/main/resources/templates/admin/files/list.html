@@ -15,7 +15,12 @@
 
 <script type="text/javascript">
     $("#videodatagrid").datagrid({
+        url:'datagrid_data.json',
+        columns:[[
+            {field:'fileName',title:'文件名称',width:100},
+            {field:'fileCreatedate',title:'上传时间',width:100},
 
+        ]]
     });
 
 </script>

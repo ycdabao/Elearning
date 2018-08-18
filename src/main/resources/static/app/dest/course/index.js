@@ -2916,6 +2916,7 @@
                                         }),
                                     this.$signupForm.on("submit",
                                         function() {
+
                                             return t.signup(),
                                                 !1
                                         })

@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService{
         List<Users> usersList = usersMapper.selectByExample(example);
         if(usersList!=null&&usersList.size()>0){
             Users users = usersList.get(0);
-            if(DigestUtils.md5Digest(password.getBytes()).equals(users.getUserPass()))
+            if(DigestUtils.md5DigestAsHex(password.getBytes()).equals(users.getUserPass()))
             {
                 return users;
             }
@@ -46,7 +46,8 @@ public class UserServiceImpl implements UserService{
         List<Users> usersList1 = usersMapper.selectByExample(example1);
         if(usersList1!=null&&usersList1.size()>0){
             Users users = usersList1.get(0);
-            if(DigestUtils.md5Digest(password.getBytes()).equals(users.getUserPass()))
+
+            if(DigestUtils.md5DigestAsHex(password.getBytes()).equals(users.getUserPass()))
             {
                 return users;
             }
