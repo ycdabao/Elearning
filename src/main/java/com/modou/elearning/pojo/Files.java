@@ -10,6 +10,8 @@ public class Files implements Serializable {
 
     private Date fileCreatedate;
 
+    private String fileName;
+
     private String fileType;
 
     private String fileFolder;
@@ -48,6 +50,14 @@ public class Files implements Serializable {
 
     public void setFileCreatedate(Date fileCreatedate) {
         this.fileCreatedate = fileCreatedate;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName == null ? null : fileName.trim();
     }
 
     public String getFileType() {

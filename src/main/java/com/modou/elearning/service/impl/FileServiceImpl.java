@@ -2,7 +2,6 @@ package com.modou.elearning.service.impl;
 
 import com.modou.elearning.mapper.FilesMapper;
 import com.modou.elearning.pojo.Files;
-import com.modou.elearning.pojo.FilesExample;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import com.modou.elearning.utils.fileutil.FileLock;
 
@@ -88,7 +87,7 @@ public class FileServiceImpl {
      * @param path   合并后的文件所存储的位置
      * @return
      */
-    public String chunksMerge(String folder, String ext, int chunks, String md5, String path) {
+    public String chunksMerge(String folder, String ext, int chunks, String md5, String path,String originalName) {
 
         //合并后的目标文件
         String target;
@@ -143,7 +142,7 @@ public class FileServiceImpl {
 
 
                     //将MD5签名和合并后的文件path存入持久层
-                    if (this.saveMd52FileMap(md5, outputFile.getName())) {
+                    if (this.saveMd52FileMap(md5, outputFile.getName(),originalName)) {
                         log.error("文件[" + md5 + "=>" + outputFile.getName() + "]保存关系到持久成失败，但并不影响文件上传，只会导致日后该文件可能被重复上传而已");
                     }
 
@@ -184,12 +183,13 @@ public class FileServiceImpl {
      * @return
      */
     @Transactional
-    public boolean saveMd52FileMap(String key, String file) {
+    public boolean saveMd52FileMap(String key, String file,String originalName) {
 
         Files files = new Files();
         files.setId(key);
         files.setFileCreatedate(new Date());
         files.setFileContent(file);
+        files.setFileName(originalName);
         filesMapper.insert(files);
 
         return true;

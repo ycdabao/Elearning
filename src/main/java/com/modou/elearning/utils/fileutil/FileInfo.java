@@ -7,6 +7,9 @@ public class FileInfo {
 
     private String md5;
     private int chunkIndex;
+
+
+
     private String size;
     private String name;
     private String userId;
@@ -29,6 +32,8 @@ public class FileInfo {
         this.userId = userId;
         this.id = id;
     }
+
+
 
     public FileInfo(String md5){
         this.md5 = md5;

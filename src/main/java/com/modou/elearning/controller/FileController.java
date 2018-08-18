@@ -30,7 +30,7 @@ public class FileController {
     @Autowired
     private FileServiceImpl wu;
 
-    @RequestMapping(value="/list")
+    @RequestMapping(value="/tolist")
     public String printWelcome(ModelMap model) {
 
         return "admin/files/list";
@@ -54,7 +54,7 @@ public class FileController {
                     //将MD5签名和合并后的文件path存入持久层，注意这里这个需求导致需要修改webuploader.js源码3170行
                     //因为原始webuploader.js不支持为formData设置函数类型参数，这将导致不能在控件初始化后修改该参数
                     if(info.getChunks() <= 0){
-                        if(!wu.saveMd52FileMap(info.getMd5(), target.getName())){
+                        if(!wu.saveMd52FileMap(info.getMd5(), target.getName(),file.getOriginalFilename())){
                             log.error("文件[" + info.getMd5() + "=>" + target.getName() + "]保存关系到持久成失败，但并不影响文件上传，只会导致日后该文件可能被重复上传而已");
                         }
                     }
@@ -90,7 +90,7 @@ public class FileController {
 
 
 
-                String path = wu.chunksMerge(info.getName(), info.getExt(), info.getChunks(), info.getMd5(), this.uploadFolder);
+                String path = wu.chunksMerge(info.getName(), info.getExt(), info.getChunks(), info.getMd5(), this.uploadFolder,file.getOriginalFilename());
                 if(path == null){
                     return "{\"status\": 0, \"message\": \"" + wu.getErrorMsg() + "\"}";
                 }

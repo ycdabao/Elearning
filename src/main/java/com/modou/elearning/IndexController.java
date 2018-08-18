@@ -8,6 +8,10 @@ public class IndexController {
     @RequestMapping(value="/index")
     public String index(){
 
-        return "/courses/index";
+        return "/admin/index";
+    }
+    @RequestMapping(value="/tofile")
+    public String file(){
+        return "/admin/files/file";
     }
 }
