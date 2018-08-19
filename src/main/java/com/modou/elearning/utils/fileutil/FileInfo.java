@@ -8,6 +8,15 @@ public class FileInfo {
     private String md5;
     private int chunkIndex;
 
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    public void setOriginalName(String originalName) {
+        this.originalName = originalName;
+    }
+
+    private String originalName;
 
 
     private String size;

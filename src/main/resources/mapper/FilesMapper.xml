@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.modou.elearning.pojo.Files" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="file_createby" property="fileCreateby" jdbcType="VARCHAR" />
-    <result column="file_createdate" property="fileCreatedate" jdbcType="DATE" />
+    <result column="file_createdate" property="fileCreatedate" jdbcType="TIMESTAMP" />
     <result column="file_name" property="fileName" jdbcType="VARCHAR" />
     <result column="file_type" property="fileType" jdbcType="VARCHAR" />
     <result column="file_folder" property="fileFolder" jdbcType="VARCHAR" />
@@ -134,7 +134,7 @@
       file_name, file_type, file_folder, 
       file_count, file_favorites, file_share, 
       file_status, file_content)
-    values (#{id,jdbcType=VARCHAR}, #{fileCreateby,jdbcType=VARCHAR}, #{fileCreatedate,jdbcType=DATE}, 
+    values (#{id,jdbcType=VARCHAR}, #{fileCreateby,jdbcType=VARCHAR}, #{fileCreatedate,jdbcType=TIMESTAMP}, 
       #{fileName,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, #{fileFolder,jdbcType=VARCHAR}, 
       #{fileCount,jdbcType=INTEGER}, #{fileFavorites,jdbcType=INTEGER}, #{fileShare,jdbcType=INTEGER}, 
       #{fileStatus,jdbcType=VARCHAR}, #{fileContent,jdbcType=LONGVARCHAR})
@@ -184,7 +184,7 @@
         #{fileCreateby,jdbcType=VARCHAR},
       </if>
       <if test="fileCreatedate != null" >
-        #{fileCreatedate,jdbcType=DATE},
+        #{fileCreatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="fileName != null" >
         #{fileName,jdbcType=VARCHAR},
@@ -228,7 +228,7 @@
         file_createby = #{record.fileCreateby,jdbcType=VARCHAR},
       </if>
       <if test="record.fileCreatedate != null" >
-        file_createdate = #{record.fileCreatedate,jdbcType=DATE},
+        file_createdate = #{record.fileCreatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.fileName != null" >
         file_name = #{record.fileName,jdbcType=VARCHAR},
@@ -263,7 +263,7 @@
     update files
     set id = #{record.id,jdbcType=VARCHAR},
       file_createby = #{record.fileCreateby,jdbcType=VARCHAR},
-      file_createdate = #{record.fileCreatedate,jdbcType=DATE},
+      file_createdate = #{record.fileCreatedate,jdbcType=TIMESTAMP},
       file_name = #{record.fileName,jdbcType=VARCHAR},
       file_type = #{record.fileType,jdbcType=VARCHAR},
       file_folder = #{record.fileFolder,jdbcType=VARCHAR},
@@ -280,7 +280,7 @@
     update files
     set id = #{record.id,jdbcType=VARCHAR},
       file_createby = #{record.fileCreateby,jdbcType=VARCHAR},
-      file_createdate = #{record.fileCreatedate,jdbcType=DATE},
+      file_createdate = #{record.fileCreatedate,jdbcType=TIMESTAMP},
       file_name = #{record.fileName,jdbcType=VARCHAR},
       file_type = #{record.fileType,jdbcType=VARCHAR},
       file_folder = #{record.fileFolder,jdbcType=VARCHAR},
@@ -299,7 +299,7 @@
         file_createby = #{fileCreateby,jdbcType=VARCHAR},
       </if>
       <if test="fileCreatedate != null" >
-        file_createdate = #{fileCreatedate,jdbcType=DATE},
+        file_createdate = #{fileCreatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="fileName != null" >
         file_name = #{fileName,jdbcType=VARCHAR},
@@ -331,7 +331,7 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.modou.elearning.pojo.Files" >
     update files
     set file_createby = #{fileCreateby,jdbcType=VARCHAR},
-      file_createdate = #{fileCreatedate,jdbcType=DATE},
+      file_createdate = #{fileCreatedate,jdbcType=TIMESTAMP},
       file_name = #{fileName,jdbcType=VARCHAR},
       file_type = #{fileType,jdbcType=VARCHAR},
       file_folder = #{fileFolder,jdbcType=VARCHAR},
@@ -345,7 +345,7 @@
   <update id="updateByPrimaryKey" parameterType="com.modou.elearning.pojo.Files" >
     update files
     set file_createby = #{fileCreateby,jdbcType=VARCHAR},
-      file_createdate = #{fileCreatedate,jdbcType=DATE},
+      file_createdate = #{fileCreatedate,jdbcType=TIMESTAMP},
       file_name = #{fileName,jdbcType=VARCHAR},
       file_type = #{fileType,jdbcType=VARCHAR},
       file_folder = #{fileFolder,jdbcType=VARCHAR},

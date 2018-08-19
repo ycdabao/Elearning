@@ -9,20 +9,51 @@
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
     <!-- 中文化 -->
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+
 </head>
 <body>
-    <table class="easyui-datagrid" id="videodatagrid"></table>
+
+<div style="margin: 5px">
+    <a id="btn-add" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',text:'上传文件'"></a>
+</div>
+
+<div id="window-upload" class="easyui-window" data-options="width:'800px',modal:true,shadow:true,closed:true"></div>
+
+
+    <table class="easyui-datagrid" id="filedatagrid"></table>
 
 <script type="text/javascript">
-    $("#videodatagrid").datagrid({
-        url:'datagrid_data.json',
-        columns:[[
-            {field:'fileName',title:'文件名称',width:100},
-            {field:'fileCreatedate',title:'上传时间',width:100},
-
-        ]]
+    <!--初始化文件列表-->
+    $("#filedatagrid").datagrid({
+        url:'/file/list',
+        columns:[
+            [
+            {field:'fileName',title:'文件名称'},
+            {field:'fileCreatedate',title:'上传时间'}
+        ]
+        ],
+        pagination:true
     });
 
+    <!--打开上传窗口-->
+$("#btn-add").linkbutton({
+    onClick:function(){
+        $('#window-upload').window("resize",{top:$(document).scrollTop() + ($(window).height()-250) * 0.5});
+        var content1 = '<iframe id="iframe1"  scrolling="auto" frameborder="0"  src="/tofile" style="width:100%;height:300px;"></iframe>';
+
+        $("#window-upload").window({"content":content1});
+        $("#window-upload").window("open");
+    },
+
+})
+    <!--关闭上传窗口同时刷新列表-->
+    $("#window-upload").window({
+        onClose:function(){
+            $("#filedatagrid").datagrid("load");
+        }
+    })
+
 </script>
+
 </body>
 </html>

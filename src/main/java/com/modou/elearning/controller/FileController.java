@@ -1,7 +1,10 @@
 package com.modou.elearning.controller;
 
 
+import com.modou.elearning.pojo.Files;
+import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.impl.FileServiceImpl;
+import com.modou.elearning.utils.EasyuiResult;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping(value="/file")
@@ -33,13 +37,30 @@ public class FileController {
     @RequestMapping(value="/tolist")
     public String printWelcome(ModelMap model) {
 
-        return "admin/files/list";
+        return "/admin/files/list";
     }
+
+
+    @RequestMapping(value="/list")
+    @ResponseBody
+    public EasyuiResult<Files> list(@RequestParam(defaultValue = "1") Integer page,@RequestParam(defaultValue ="10" ) Integer rows,HttpSession session){
+
+        Users  user = (Users)session.getAttribute("user");
+
+        List<Files> list = wu.list(user.getId(),page,rows);
+        int total = wu.count(user.getId());
+        EasyuiResult<Files> result = new EasyuiResult<Files>(list,total);
+        return result;
+    }
+
+
 
     //大文件上传
     @RequestMapping(value = "fileUpload", method = RequestMethod.POST)
     @ResponseBody
     public String fileUpload(String status, FileInfo info, @RequestParam(value = "file", required = false) MultipartFile file,HttpSession session){
+
+        Users  user = (Users)session.getAttribute("user");
 
         if(status == null){	//文件上传
             if(file != null && !file.isEmpty()){	//验证请求不会包含数据上传，所以避免NullPoint这里要检查一下file变量是否为null
@@ -54,7 +75,7 @@ public class FileController {
                     //将MD5签名和合并后的文件path存入持久层，注意这里这个需求导致需要修改webuploader.js源码3170行
                     //因为原始webuploader.js不支持为formData设置函数类型参数，这将导致不能在控件初始化后修改该参数
                     if(info.getChunks() <= 0){
-                        if(!wu.saveMd52FileMap(info.getMd5(), target.getName(),file.getOriginalFilename())){
+                        if(!wu.saveMd52FileMap(info.getMd5(), target.getName(),file.getOriginalFilename(),user.getId())){
                             log.error("文件[" + info.getMd5() + "=>" + target.getName() + "]保存关系到持久成失败，但并不影响文件上传，只会导致日后该文件可能被重复上传而已");
                         }
                     }
@@ -90,7 +111,7 @@ public class FileController {
 
 
 
-                String path = wu.chunksMerge(info.getName(), info.getExt(), info.getChunks(), info.getMd5(), this.uploadFolder,file.getOriginalFilename());
+                String path = wu.chunksMerge(info.getName(), info.getExt(), info.getChunks(), info.getMd5(), this.uploadFolder,info.getOriginalName(),user.getId());
                 if(path == null){
                     return "{\"status\": 0, \"message\": \"" + wu.getErrorMsg() + "\"}";
                 }

@@ -1,7 +1,9 @@
 package com.modou.elearning.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.modou.elearning.mapper.FilesMapper;
 import com.modou.elearning.pojo.Files;
+import com.modou.elearning.pojo.FilesExample;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import com.modou.elearning.utils.fileutil.FileLock;
 
@@ -36,8 +38,28 @@ public class FileServiceImpl {
 
 
 
-    public List<Files> list(){
-        return null;
+    public List<Files> list(String userid,Integer page,Integer pageSize){
+
+        FilesExample example = new FilesExample();
+        FilesExample.Criteria c = example.createCriteria();
+        if(userid!=null&&!userid.equals("")){
+            c.andFileCreatebyEqualTo(userid);
+        }
+        example.setOrderByClause("file_createdate desc");
+        PageHelper.offsetPage((page-1)*pageSize,pageSize);
+        List<Files> filesList = filesMapper.selectByExample(example);
+        return filesList;
+
+    }
+
+
+    public int count(String userid){
+        FilesExample example = new FilesExample();
+        FilesExample.Criteria c = example.createCriteria();
+        if(userid!=null&&!userid.equals("")){
+            c.andFileCreatebyEqualTo(userid);
+        }
+        return filesMapper.countByExample(example);
     }
 
 
@@ -95,7 +117,7 @@ public class FileServiceImpl {
      * @param path   合并后的文件所存储的位置
      * @return
      */
-    public String chunksMerge(String folder, String ext, int chunks, String md5, String path,String originalName) {
+    public String chunksMerge(String folder, String ext, int chunks, String md5, String path,String originalName,String userid) {
 
         //合并后的目标文件
         String target;
@@ -150,7 +172,7 @@ public class FileServiceImpl {
 
 
                     //将MD5签名和合并后的文件path存入持久层
-                    if (this.saveMd52FileMap(md5, outputFile.getName(),originalName)) {
+                    if (this.saveMd52FileMap(md5, outputFile.getName(),originalName,userid)) {
                         log.error("文件[" + md5 + "=>" + outputFile.getName() + "]保存关系到持久成失败，但并不影响文件上传，只会导致日后该文件可能被重复上传而已");
                     }
 
@@ -191,13 +213,14 @@ public class FileServiceImpl {
      * @return
      */
     @Transactional
-    public boolean saveMd52FileMap(String key, String file,String originalName) {
+    public boolean saveMd52FileMap(String key, String file,String originalName,String userid) {
 
         Files files = new Files();
         files.setId(key);
         files.setFileCreatedate(new Date());
         files.setFileContent(file);
         files.setFileName(originalName);
+        files.setFileCreateby(userid);
         filesMapper.insert(files);
 
         return true;
