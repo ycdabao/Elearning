@@ -10,32 +10,197 @@
     <!-- 中文化 -->
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
 
+<!--kindEditor-->
+    <link rel="stylesheet" href="../../js/kindeditor/themes/default/default.css" />
+    <script charset="utf-8" src="../../js/kindeditor/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="../../js/kindeditor/lang/zh-CN.js"></script>
+    <script>
+        KindEditor.ready(function(K) {
+            var editor1 = K.create('textarea[name="content1"]', {
+                uploadJson : '../jsp/upload_json.jsp',
+                allowFileManager : false,
+                items:[
+                    'source', '|', 'undo', 'redo', '|',   'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|',
+                     'table', 'hr',  'pagebreak'
+                ],
+                afterCreate : function() {
+                    var self = this;
+                    K.ctrl(document, 13, function() {
+                        self.sync();
+                        document.forms['example'].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function() {
+                        self.sync();
+                        document.forms['example'].submit();
+                    });
+                }
+            });
+
+        });
+    </script>
+    <style type="text/css">
+
+        *{font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;}
+        dd{    float: left;
+            width: 900px;
+            margin-bottom: 30px;
+            min-height: 28px;
+            line-height: 28px;
+            position: relative;}
+
+        dt{
+            float: left;
+            width: 115px;
+            padding-right: 40px;
+            text-align: right;
+            line-height: 28px;
+        }
+        .cover {
+            width: 500px;
+            height: 300px;
+            background: #EEE;
+            border: 1px solid #DDD;
+            position: relative;
+        }
+        .cover img{
+
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+
+        }
+        .cover .webuploader-pick {
+            font-size: 18px;
+            background: #00b7ee;
+            border-radius: 3px;
+            line-height: 44px;
+            width: 100px;
+            padding: 0 30px;
+            color: #fff;
+            display: block;
+            margin: 80px auto 30px auto;
+            cursor: pointer;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .cover p{padding-left: 80px;
+            display: block;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+            color: #6a6a6a;
+        }
+        .clear {
+            clear: both;
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 
     <form id="ff" method="post">
-        <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="name" style="width:80%" data-options="label:'课程标题:',required:true">
-        </div>
-        <div style="margin-bottom:20px">
-            <input class="easyui-combobox" id="type1" name="language" style="width:100%;" />
+        <div>
+        <dl>
+            <dt>课程标题:</dt>
+            <dd>
+                <div >
+                    <input class="easyui-textbox" name="name" style="width:80%" data-options="required:true,prompt:'请填写课程标题，最多50字'">
+                </div>
+            </dd>
+            <dt>分类:</dt>
+            <dd>
+                <div >
+                    <input class="easyui-combobox" id="type1" name="language" style="width:20%;" data-options="label:'一级分类'"/>
+                    <input class="easyui-combobox" id="type2" name="language" style="width:20%;" data-options="label:'二级分类'"/>
+                    <input class="easyui-combobox" id="type3" name="language" style="width:20%;" data-options="label:'三级分类'"/>
+                </div>
+            </dd>
+            <dt>课程简介:</dt>
+            <dd>
+                <div >
+                    <input class="easyui-textbox" name="message" style="width:80%;height:60px" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
+                </div>
+            </dd>
 
-        </div>
-        <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="subject" style="width:80%" data-options="label:'Subject:',required:true">
-        </div>
-        <div style="margin-bottom:20px">
-            <input class="easyui-textbox" name="message" style="width:80%;height:60px" data-options="label:'Message:',multiline:true">
-        </div>
-        <div style="margin-bottom:20px">
-            <select class="easyui-combobox" name="language" label="Language" style="width:100%"><option value="ar">Arabic</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="zh-cht">Chinese Traditional</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="en" selected="selected">English</option><option value="et">Estonian</option><option value="fi">Finnish</option><option value="fr">French</option><option value="de">German</option><option value="el">Greek</option><option value="ht">Haitian Creole</option><option value="he">Hebrew</option><option value="hi">Hindi</option><option value="mww">Hmong Daw</option><option value="hu">Hungarian</option><option value="id">Indonesian</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sv">Swedish</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="vi">Vietnamese</option></select>
-        </div>
-        <div style="margin-bottom:20px">
-            <label for="accept" class="textbox-label">Accept:</label>
-            <input id="accept" type="checkbox" name="accept" value="true">
+            <dt>课程详情</dt>
+            <dd>
+                <div >
+                    <textarea name="content1" cols="100" rows="8" style="width:80%;height:200px;"></textarea>
+                </div>
+
+            </dd>
+            <dt>课程封面</dt>
+            <dd>
+                <div class="cover">
+                    <div class="clear"></div>
+                    <div class="webuploader-pick">上传图片</div>
+                    <p>文件大小：2M以内</p>
+                    <p>支持格式：png/jpg/jpeg</p>
+                    <p>尺寸规则：500px * 300px (此尺寸等比例缩放)</p>
+                    <img src="" id="upControl_IMG">
+                    <div class="upControl" id="upControl_Btn">&nbsp;</div>
+                </div>
+                <input type="hidden" name="image_url" id="c_image_url" value="">
+
+            </dd>
+
+
+
+        </dl>
         </div>
     </form>
 
+<script type="text/javascript">
+    //图片上传
+    // 初始化Web Uploader
+    var uploader = WebUploader.create({
 
+        // 选完文件后，是否自动上传。
+        auto: true,
+        // 文件接收服务端。
+        server: 'http://webuploader.duapp.com/server/fileupload.php',
+
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        }
+    });
+
+    //分类
+    $("#type1").combobox({
+        url:'/types/findbyparentid',
+        valueField:'id',
+        textField:'typeName',
+        onSelect:function(record){
+            var parentid = record.id;
+            $("#type2").combobox({
+                url:'/types/findbyparentid?parentid='+parentid,
+                valueField:'id',
+                textField:'typeName',
+                onSelect:function(record1){
+                    $("#type3").combobox({
+                        url: '/types/findbyparentid?parentid=' + record1.id,
+                        valueField: 'id',
+                        textField: 'typeName'
+                    }
+                    )
+                }
+            })
+        }
+    })
+
+</script>
 </body>
 </html>
