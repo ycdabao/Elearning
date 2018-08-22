@@ -5,10 +5,13 @@
     <title>发布课程</title>
     <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
-    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
+    <script src="../../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
     <!-- 中文化 -->
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+
+    <link rel="stylesheet" href="../../js/webuploader/webuploader.css" />
 
 <!--kindEditor-->
     <link rel="stylesheet" href="../../js/kindeditor/themes/default/default.css" />
@@ -76,19 +79,10 @@
             top: 0px;
 
         }
-        .cover .webuploader-pick {
-            font-size: 18px;
-            background: #00b7ee;
-            border-radius: 3px;
-            line-height: 44px;
-            width: 100px;
-            padding: 0 30px;
-            color: #fff;
-            display: block;
+        .cover #picker {
+           text-align: center;
+            z-index: 1000;
             margin: 80px auto 30px auto;
-            cursor: pointer;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-            position: relative;
         }
         .cover p{padding-left: 80px;
             display: block;
@@ -125,10 +119,24 @@
                     <input class="easyui-combobox" id="type3" name="language" style="width:20%;" data-options="label:'三级分类'"/>
                 </div>
             </dd>
+            <dt>课程难度:</dt>
+            <dd>
+                <div >
+                    <input type="radio" name="level" value="1" checked/>初级
+                    <input type="radio" name="level" value="2"/>中级
+                    <input type="radio" name="level" value="3"/>高级
+                </div>
+            </dd>
             <dt>课程简介:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="message" style="width:80%;height:60px" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
+                    <input class="easyui-textbox" name="message" style="width:80%;height:60px" data-options="prompt:'不能少于10字，方便用户快速匹配自己是否为该课程使用人群',required:true,multiline:true">
+                </div>
+            </dd>
+            <dt>适用人群:</dt>
+            <dd>
+                <div >
+                    <input class="easyui-textbox" name="message" style="width:80%;" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
                 </div>
             </dd>
 
@@ -139,11 +147,17 @@
                 </div>
 
             </dd>
+            <dt>课程标签:</dt>
+            <dd>
+                <div >
+                    <input class="easyui-textbox" name="message" style="width:80%;" data-options="prompt:'多个标签用空格进行间隔',required:true">
+                </div>
+            </dd>
             <dt>课程封面</dt>
             <dd>
                 <div class="cover">
-                    <div class="clear"></div>
-                    <div class="webuploader-pick">上传图片</div>
+
+                    <div id="picker">上传图片</div>
                     <p>文件大小：2M以内</p>
                     <p>支持格式：png/jpg/jpeg</p>
                     <p>尺寸规则：500px * 300px (此尺寸等比例缩放)</p>
@@ -153,30 +167,63 @@
                 <input type="hidden" name="image_url" id="c_image_url" value="">
 
             </dd>
+            <dt>课程价格:</dt>
+            <dd>
+                <div >
+                   <input type="radio" name="price" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
 
+                </div>
+                <div >
+                    <input type="radio" name="price" />付费
+                    <input class="easyui-textbox" name="price" style="display: inline-block;margin-left: 20px"/>
+                </div>
+            </dd>
+
+            <dt>
+            </dt>
+            <dd style="text-align: center">
+                <a class="easyui-linkbutton">保存进入下一步</a>
+                <a class="easyui-linkbutton">清空</a>
+            </dd>
 
 
         </dl>
         </div>
     </form>
 
+    <script src="../../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     //图片上传
     // 初始化Web Uploader
     var uploader = WebUploader.create({
-
-        // 选完文件后，是否自动上传。
-        auto: true,
+        swf: "Uploader.swf",
         // 文件接收服务端。
-        server: 'http://webuploader.duapp.com/server/fileupload.php',
+        server : '/course/uploadcover',
+        pick: {
+            id: '#picker',
+            label: '点击选择图片'
+        },
+        auto:true,
+        paste: document.body,
+        //限制只能上传一个文件
 
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize : false,
         // 只允许选择图片文件。
         accept: {
             title: 'Images',
             extensions: 'gif,jpg,jpeg,bmp,png',
             mimeTypes: 'image/*'
-        }
+        },
+        chunked:false
     });
+
+    uploader.on("uploadSuccess",function(file,response){
+
+        $("#c_image_url").val(response.data);
+        $("#upControl_IMG").attr("src","/"+response.data);
+    })
 
     //分类
     $("#type1").combobox({

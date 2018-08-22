@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.modou.elearning.mapper.CoursesMapper" >
+  <resultMap id="BaseResultMap" type="com.modou.elearning.pojo.Courses" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="course_type" property="courseType" jdbcType="INTEGER" />
+    <result column="course_difficulty" property="courseDifficulty" jdbcType="VARCHAR" />
+    <result column="course_crowd" property="courseCrowd" jdbcType="VARCHAR" />
+    <result column="course_details" property="courseDetails" jdbcType="VARCHAR" />
+    <result column="course_label" property="courseLabel" jdbcType="VARCHAR" />
+    <result column="course_cover" property="courseCover" jdbcType="VARCHAR" />
+    <result column="course_price" property="coursePrice" jdbcType="REAL" />
+    <result column="course_status" property="courseStatus" jdbcType="VARCHAR" />
+    <result column="course_createby" property="courseCreateby" jdbcType="VARCHAR" />
+    <result column="course_createdate" property="courseCreatedate" jdbcType="TIMESTAMP" />
+    <result column="course_modifyby" property="courseModifyby" jdbcType="VARCHAR" />
+    <result column="course_modifydate" property="courseModifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, course_name, course_type, course_difficulty, course_crowd, course_details, course_label, 
+    course_cover, course_price, course_status, course_createby, course_createdate, course_modifyby, 
+    course_modifydate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.CoursesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from courses
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from courses
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from courses
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.modou.elearning.pojo.CoursesExample" >
+    delete from courses
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.modou.elearning.pojo.Courses" >
+    insert into courses (id, course_name, course_type, 
+      course_difficulty, course_crowd, course_details, 
+      course_label, course_cover, course_price, 
+      course_status, course_createby, course_createdate, 
+      course_modifyby, course_modifydate)
+    values (#{id,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, #{courseType,jdbcType=INTEGER}, 
+      #{courseDifficulty,jdbcType=VARCHAR}, #{courseCrowd,jdbcType=VARCHAR}, #{courseDetails,jdbcType=VARCHAR}, 
+      #{courseLabel,jdbcType=VARCHAR}, #{courseCover,jdbcType=VARCHAR}, #{coursePrice,jdbcType=REAL}, 
+      #{courseStatus,jdbcType=VARCHAR}, #{courseCreateby,jdbcType=VARCHAR}, #{courseCreatedate,jdbcType=TIMESTAMP}, 
+      #{courseModifyby,jdbcType=VARCHAR}, #{courseModifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.modou.elearning.pojo.Courses" >
+    insert into courses
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="courseType != null" >
+        course_type,
+      </if>
+      <if test="courseDifficulty != null" >
+        course_difficulty,
+      </if>
+      <if test="courseCrowd != null" >
+        course_crowd,
+      </if>
+      <if test="courseDetails != null" >
+        course_details,
+      </if>
+      <if test="courseLabel != null" >
+        course_label,
+      </if>
+      <if test="courseCover != null" >
+        course_cover,
+      </if>
+      <if test="coursePrice != null" >
+        course_price,
+      </if>
+      <if test="courseStatus != null" >
+        course_status,
+      </if>
+      <if test="courseCreateby != null" >
+        course_createby,
+      </if>
+      <if test="courseCreatedate != null" >
+        course_createdate,
+      </if>
+      <if test="courseModifyby != null" >
+        course_modifyby,
+      </if>
+      <if test="courseModifydate != null" >
+        course_modifydate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseType != null" >
+        #{courseType,jdbcType=INTEGER},
+      </if>
+      <if test="courseDifficulty != null" >
+        #{courseDifficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCrowd != null" >
+        #{courseCrowd,jdbcType=VARCHAR},
+      </if>
+      <if test="courseDetails != null" >
+        #{courseDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="courseLabel != null" >
+        #{courseLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCover != null" >
+        #{courseCover,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePrice != null" >
+        #{coursePrice,jdbcType=REAL},
+      </if>
+      <if test="courseStatus != null" >
+        #{courseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCreateby != null" >
+        #{courseCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCreatedate != null" >
+        #{courseCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courseModifyby != null" >
+        #{courseModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="courseModifydate != null" >
+        #{courseModifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.modou.elearning.pojo.CoursesExample" resultType="java.lang.Integer" >
+    select count(*) from courses
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update courses
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseName != null" >
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseType != null" >
+        course_type = #{record.courseType,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseDifficulty != null" >
+        course_difficulty = #{record.courseDifficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseCrowd != null" >
+        course_crowd = #{record.courseCrowd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseDetails != null" >
+        course_details = #{record.courseDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseLabel != null" >
+        course_label = #{record.courseLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseCover != null" >
+        course_cover = #{record.courseCover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursePrice != null" >
+        course_price = #{record.coursePrice,jdbcType=REAL},
+      </if>
+      <if test="record.courseStatus != null" >
+        course_status = #{record.courseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseCreateby != null" >
+        course_createby = #{record.courseCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseCreatedate != null" >
+        course_createdate = #{record.courseCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.courseModifyby != null" >
+        course_modifyby = #{record.courseModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseModifydate != null" >
+        course_modifydate = #{record.courseModifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update courses
+    set id = #{record.id,jdbcType=VARCHAR},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      course_type = #{record.courseType,jdbcType=INTEGER},
+      course_difficulty = #{record.courseDifficulty,jdbcType=VARCHAR},
+      course_crowd = #{record.courseCrowd,jdbcType=VARCHAR},
+      course_details = #{record.courseDetails,jdbcType=VARCHAR},
+      course_label = #{record.courseLabel,jdbcType=VARCHAR},
+      course_cover = #{record.courseCover,jdbcType=VARCHAR},
+      course_price = #{record.coursePrice,jdbcType=REAL},
+      course_status = #{record.courseStatus,jdbcType=VARCHAR},
+      course_createby = #{record.courseCreateby,jdbcType=VARCHAR},
+      course_createdate = #{record.courseCreatedate,jdbcType=TIMESTAMP},
+      course_modifyby = #{record.courseModifyby,jdbcType=VARCHAR},
+      course_modifydate = #{record.courseModifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.modou.elearning.pojo.Courses" >
+    update courses
+    <set >
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseType != null" >
+        course_type = #{courseType,jdbcType=INTEGER},
+      </if>
+      <if test="courseDifficulty != null" >
+        course_difficulty = #{courseDifficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCrowd != null" >
+        course_crowd = #{courseCrowd,jdbcType=VARCHAR},
+      </if>
+      <if test="courseDetails != null" >
+        course_details = #{courseDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="courseLabel != null" >
+        course_label = #{courseLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCover != null" >
+        course_cover = #{courseCover,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePrice != null" >
+        course_price = #{coursePrice,jdbcType=REAL},
+      </if>
+      <if test="courseStatus != null" >
+        course_status = #{courseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCreateby != null" >
+        course_createby = #{courseCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCreatedate != null" >
+        course_createdate = #{courseCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courseModifyby != null" >
+        course_modifyby = #{courseModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="courseModifydate != null" >
+        course_modifydate = #{courseModifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.modou.elearning.pojo.Courses" >
+    update courses
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      course_type = #{courseType,jdbcType=INTEGER},
+      course_difficulty = #{courseDifficulty,jdbcType=VARCHAR},
+      course_crowd = #{courseCrowd,jdbcType=VARCHAR},
+      course_details = #{courseDetails,jdbcType=VARCHAR},
+      course_label = #{courseLabel,jdbcType=VARCHAR},
+      course_cover = #{courseCover,jdbcType=VARCHAR},
+      course_price = #{coursePrice,jdbcType=REAL},
+      course_status = #{courseStatus,jdbcType=VARCHAR},
+      course_createby = #{courseCreateby,jdbcType=VARCHAR},
+      course_createdate = #{courseCreatedate,jdbcType=TIMESTAMP},
+      course_modifyby = #{courseModifyby,jdbcType=VARCHAR},
+      course_modifydate = #{courseModifydate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,148 @@
+package com.modou.elearning.pojo;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Courses implements Serializable {
+    private String id;
+
+    private String courseName;
+
+    private Integer courseType;
+
+    private String courseDifficulty;
+
+    private String courseCrowd;
+
+    private String courseDetails;
+
+    private String courseLabel;
+
+    private String courseCover;
+
+    private Float coursePrice;
+
+    private String courseStatus;
+
+    private String courseCreateby;
+
+    private Date courseCreatedate;
+
+    private String courseModifyby;
+
+    private Date courseModifydate;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName == null ? null : courseName.trim();
+    }
+
+    public Integer getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(Integer courseType) {
+        this.courseType = courseType;
+    }
+
+    public String getCourseDifficulty() {
+        return courseDifficulty;
+    }
+
+    public void setCourseDifficulty(String courseDifficulty) {
+        this.courseDifficulty = courseDifficulty == null ? null : courseDifficulty.trim();
+    }
+
+    public String getCourseCrowd() {
+        return courseCrowd;
+    }
+
+    public void setCourseCrowd(String courseCrowd) {
+        this.courseCrowd = courseCrowd == null ? null : courseCrowd.trim();
+    }
+
+    public String getCourseDetails() {
+        return courseDetails;
+    }
+
+    public void setCourseDetails(String courseDetails) {
+        this.courseDetails = courseDetails == null ? null : courseDetails.trim();
+    }
+
+    public String getCourseLabel() {
+        return courseLabel;
+    }
+
+    public void setCourseLabel(String courseLabel) {
+        this.courseLabel = courseLabel == null ? null : courseLabel.trim();
+    }
+
+    public String getCourseCover() {
+        return courseCover;
+    }
+
+    public void setCourseCover(String courseCover) {
+        this.courseCover = courseCover == null ? null : courseCover.trim();
+    }
+
+    public Float getCoursePrice() {
+        return coursePrice;
+    }
+
+    public void setCoursePrice(Float coursePrice) {
+        this.coursePrice = coursePrice;
+    }
+
+    public String getCourseStatus() {
+        return courseStatus;
+    }
+
+    public void setCourseStatus(String courseStatus) {
+        this.courseStatus = courseStatus == null ? null : courseStatus.trim();
+    }
+
+    public String getCourseCreateby() {
+        return courseCreateby;
+    }
+
+    public void setCourseCreateby(String courseCreateby) {
+        this.courseCreateby = courseCreateby == null ? null : courseCreateby.trim();
+    }
+
+    public Date getCourseCreatedate() {
+        return courseCreatedate;
+    }
+
+    public void setCourseCreatedate(Date courseCreatedate) {
+        this.courseCreatedate = courseCreatedate;
+    }
+
+    public String getCourseModifyby() {
+        return courseModifyby;
+    }
+
+    public void setCourseModifyby(String courseModifyby) {
+        this.courseModifyby = courseModifyby == null ? null : courseModifyby.trim();
+    }
+
+    public Date getCourseModifydate() {
+        return courseModifydate;
+    }
+
+    public void setCourseModifydate(Date courseModifydate) {
+        this.courseModifydate = courseModifydate;
+    }
+}
