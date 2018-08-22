@@ -25,7 +25,7 @@ public class IndexController {
         return "/courses/index";
     }
 
-    @RequestMapping(value="/course/add")
+    @RequestMapping(value="/course/toadd")
     public String courseadd(){
         return "/admin/courses/add";
     }

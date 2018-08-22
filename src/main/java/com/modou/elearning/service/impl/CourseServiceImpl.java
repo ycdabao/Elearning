@@ -1,7 +1,12 @@
 package com.modou.elearning.service.impl;
 
+
+import com.modou.elearning.mapper.CoursesMapper;
+import com.modou.elearning.pojo.Courses;
 import com.modou.elearning.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -12,6 +17,9 @@ import java.util.UUID;
 @Service
 public class CourseServiceImpl implements CourseService {
 
+    @Autowired
+    CoursesMapper coursesMapper;
+
     @Override
     public String saveCover(MultipartFile file,String path)throws IOException {
         String originalFilename = file.getOriginalFilename();
@@ -19,5 +27,12 @@ public class CourseServiceImpl implements CourseService {
         file.transferTo(new File(path+ java.io.File.separator+filename));
 
         return filename;
+    }
+
+    @Override
+    @Transactional
+    public void add(Courses courses) {
+
+        coursesMapper.insert(courses);
     }
 }

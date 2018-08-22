@@ -1,6 +1,7 @@
 package com.modou.elearning.controller;
 
 import com.modou.elearning.pojo.Courses;
+import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.CourseService;
 import com.modou.elearning.utils.ModouResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(value="/course")
@@ -37,8 +41,13 @@ public class CourseController {
 
 @RequestMapping(value = "/add")
 @ResponseBody
-    public ModouResult addCourse(Courses courses){
+    public ModouResult addCourse(Courses courses, HttpSession session){
 
+    Users user = (Users)session.getAttribute("user");
+    courses.setCourseCreateby(user.getId());
+    courses.setCourseCreatedate(new Date());
+    courses.setId(UUID.randomUUID().toString());
+    courseService.add(courses);
         return null;
     }
 }

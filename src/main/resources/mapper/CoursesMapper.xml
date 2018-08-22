@@ -6,10 +6,12 @@
     <result column="course_name" property="courseName" jdbcType="VARCHAR" />
     <result column="course_type" property="courseType" jdbcType="INTEGER" />
     <result column="course_difficulty" property="courseDifficulty" jdbcType="VARCHAR" />
+    <result column="course_summary" property="courseSummary" jdbcType="VARCHAR" />
     <result column="course_crowd" property="courseCrowd" jdbcType="VARCHAR" />
     <result column="course_details" property="courseDetails" jdbcType="VARCHAR" />
     <result column="course_label" property="courseLabel" jdbcType="VARCHAR" />
     <result column="course_cover" property="courseCover" jdbcType="VARCHAR" />
+    <result column="course_price_type" property="coursePriceType" jdbcType="VARCHAR" />
     <result column="course_price" property="coursePrice" jdbcType="REAL" />
     <result column="course_status" property="courseStatus" jdbcType="VARCHAR" />
     <result column="course_createby" property="courseCreateby" jdbcType="VARCHAR" />
@@ -76,9 +78,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, course_name, course_type, course_difficulty, course_crowd, course_details, course_label, 
-    course_cover, course_price, course_status, course_createby, course_createdate, course_modifyby, 
-    course_modifydate
+    id, course_name, course_type, course_difficulty, course_summary, course_crowd, course_details, 
+    course_label, course_cover, course_price_type, course_price, course_status, course_createby, 
+    course_createdate, course_modifyby, course_modifydate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.CoursesExample" >
     select
@@ -112,15 +114,17 @@
   </delete>
   <insert id="insert" parameterType="com.modou.elearning.pojo.Courses" >
     insert into courses (id, course_name, course_type, 
-      course_difficulty, course_crowd, course_details, 
-      course_label, course_cover, course_price, 
-      course_status, course_createby, course_createdate, 
-      course_modifyby, course_modifydate)
+      course_difficulty, course_summary, course_crowd, 
+      course_details, course_label, course_cover, 
+      course_price_type, course_price, course_status, 
+      course_createby, course_createdate, course_modifyby, 
+      course_modifydate)
     values (#{id,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, #{courseType,jdbcType=INTEGER}, 
-      #{courseDifficulty,jdbcType=VARCHAR}, #{courseCrowd,jdbcType=VARCHAR}, #{courseDetails,jdbcType=VARCHAR}, 
-      #{courseLabel,jdbcType=VARCHAR}, #{courseCover,jdbcType=VARCHAR}, #{coursePrice,jdbcType=REAL}, 
-      #{courseStatus,jdbcType=VARCHAR}, #{courseCreateby,jdbcType=VARCHAR}, #{courseCreatedate,jdbcType=TIMESTAMP}, 
-      #{courseModifyby,jdbcType=VARCHAR}, #{courseModifydate,jdbcType=TIMESTAMP})
+      #{courseDifficulty,jdbcType=VARCHAR}, #{courseSummary,jdbcType=VARCHAR}, #{courseCrowd,jdbcType=VARCHAR}, 
+      #{courseDetails,jdbcType=VARCHAR}, #{courseLabel,jdbcType=VARCHAR}, #{courseCover,jdbcType=VARCHAR}, 
+      #{coursePriceType,jdbcType=VARCHAR}, #{coursePrice,jdbcType=REAL}, #{courseStatus,jdbcType=VARCHAR}, 
+      #{courseCreateby,jdbcType=VARCHAR}, #{courseCreatedate,jdbcType=TIMESTAMP}, #{courseModifyby,jdbcType=VARCHAR}, 
+      #{courseModifydate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.modou.elearning.pojo.Courses" >
     insert into courses
@@ -137,6 +141,9 @@
       <if test="courseDifficulty != null" >
         course_difficulty,
       </if>
+      <if test="courseSummary != null" >
+        course_summary,
+      </if>
       <if test="courseCrowd != null" >
         course_crowd,
       </if>
@@ -148,6 +155,9 @@
       </if>
       <if test="courseCover != null" >
         course_cover,
+      </if>
+      <if test="coursePriceType != null" >
+        course_price_type,
       </if>
       <if test="coursePrice != null" >
         course_price,
@@ -181,6 +191,9 @@
       <if test="courseDifficulty != null" >
         #{courseDifficulty,jdbcType=VARCHAR},
       </if>
+      <if test="courseSummary != null" >
+        #{courseSummary,jdbcType=VARCHAR},
+      </if>
       <if test="courseCrowd != null" >
         #{courseCrowd,jdbcType=VARCHAR},
       </if>
@@ -192,6 +205,9 @@
       </if>
       <if test="courseCover != null" >
         #{courseCover,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePriceType != null" >
+        #{coursePriceType,jdbcType=VARCHAR},
       </if>
       <if test="coursePrice != null" >
         #{coursePrice,jdbcType=REAL},
@@ -234,6 +250,9 @@
       <if test="record.courseDifficulty != null" >
         course_difficulty = #{record.courseDifficulty,jdbcType=VARCHAR},
       </if>
+      <if test="record.courseSummary != null" >
+        course_summary = #{record.courseSummary,jdbcType=VARCHAR},
+      </if>
       <if test="record.courseCrowd != null" >
         course_crowd = #{record.courseCrowd,jdbcType=VARCHAR},
       </if>
@@ -245,6 +264,9 @@
       </if>
       <if test="record.courseCover != null" >
         course_cover = #{record.courseCover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursePriceType != null" >
+        course_price_type = #{record.coursePriceType,jdbcType=VARCHAR},
       </if>
       <if test="record.coursePrice != null" >
         course_price = #{record.coursePrice,jdbcType=REAL},
@@ -275,10 +297,12 @@
       course_name = #{record.courseName,jdbcType=VARCHAR},
       course_type = #{record.courseType,jdbcType=INTEGER},
       course_difficulty = #{record.courseDifficulty,jdbcType=VARCHAR},
+      course_summary = #{record.courseSummary,jdbcType=VARCHAR},
       course_crowd = #{record.courseCrowd,jdbcType=VARCHAR},
       course_details = #{record.courseDetails,jdbcType=VARCHAR},
       course_label = #{record.courseLabel,jdbcType=VARCHAR},
       course_cover = #{record.courseCover,jdbcType=VARCHAR},
+      course_price_type = #{record.coursePriceType,jdbcType=VARCHAR},
       course_price = #{record.coursePrice,jdbcType=REAL},
       course_status = #{record.courseStatus,jdbcType=VARCHAR},
       course_createby = #{record.courseCreateby,jdbcType=VARCHAR},
@@ -301,6 +325,9 @@
       <if test="courseDifficulty != null" >
         course_difficulty = #{courseDifficulty,jdbcType=VARCHAR},
       </if>
+      <if test="courseSummary != null" >
+        course_summary = #{courseSummary,jdbcType=VARCHAR},
+      </if>
       <if test="courseCrowd != null" >
         course_crowd = #{courseCrowd,jdbcType=VARCHAR},
       </if>
@@ -312,6 +339,9 @@
       </if>
       <if test="courseCover != null" >
         course_cover = #{courseCover,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePriceType != null" >
+        course_price_type = #{coursePriceType,jdbcType=VARCHAR},
       </if>
       <if test="coursePrice != null" >
         course_price = #{coursePrice,jdbcType=REAL},
@@ -339,10 +369,12 @@
     set course_name = #{courseName,jdbcType=VARCHAR},
       course_type = #{courseType,jdbcType=INTEGER},
       course_difficulty = #{courseDifficulty,jdbcType=VARCHAR},
+      course_summary = #{courseSummary,jdbcType=VARCHAR},
       course_crowd = #{courseCrowd,jdbcType=VARCHAR},
       course_details = #{courseDetails,jdbcType=VARCHAR},
       course_label = #{courseLabel,jdbcType=VARCHAR},
       course_cover = #{courseCover,jdbcType=VARCHAR},
+      course_price_type = #{coursePriceType,jdbcType=VARCHAR},
       course_price = #{coursePrice,jdbcType=REAL},
       course_status = #{courseStatus,jdbcType=VARCHAR},
       course_createby = #{courseCreateby,jdbcType=VARCHAR},

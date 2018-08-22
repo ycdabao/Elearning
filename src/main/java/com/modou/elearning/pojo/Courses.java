@@ -12,6 +12,8 @@ public class Courses implements Serializable {
 
     private String courseDifficulty;
 
+    private String courseSummary;
+
     private String courseCrowd;
 
     private String courseDetails;
@@ -19,6 +21,8 @@ public class Courses implements Serializable {
     private String courseLabel;
 
     private String courseCover;
+
+    private String coursePriceType;
 
     private Float coursePrice;
 
@@ -66,6 +70,14 @@ public class Courses implements Serializable {
         this.courseDifficulty = courseDifficulty == null ? null : courseDifficulty.trim();
     }
 
+    public String getCourseSummary() {
+        return courseSummary;
+    }
+
+    public void setCourseSummary(String courseSummary) {
+        this.courseSummary = courseSummary == null ? null : courseSummary.trim();
+    }
+
     public String getCourseCrowd() {
         return courseCrowd;
     }
@@ -96,6 +108,14 @@ public class Courses implements Serializable {
 
     public void setCourseCover(String courseCover) {
         this.courseCover = courseCover == null ? null : courseCover.trim();
+    }
+
+    public String getCoursePriceType() {
+        return coursePriceType;
+    }
+
+    public void setCoursePriceType(String coursePriceType) {
+        this.coursePriceType = coursePriceType == null ? null : coursePriceType.trim();
     }
 
     public Float getCoursePrice() {

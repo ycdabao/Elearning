@@ -19,7 +19,7 @@
     <script charset="utf-8" src="../../js/kindeditor/lang/zh-CN.js"></script>
     <script>
         KindEditor.ready(function(K) {
-            var editor1 = K.create('textarea[name="content1"]', {
+            var editor1 = K.create('textarea[name="courseDetails"]', {
                 uploadJson : '../jsp/upload_json.jsp',
                 allowFileManager : false,
                 items:[
@@ -108,49 +108,49 @@
             <dt>课程标题:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="name" style="width:80%" data-options="required:true,prompt:'请填写课程标题，最多50字'">
+                    <input class="easyui-textbox" name="courseName" style="width:80%" data-options="required:true,prompt:'请填写课程标题，最多50字'">
                 </div>
             </dd>
             <dt>分类:</dt>
             <dd>
                 <div >
-                    <input class="easyui-combobox" id="type1" name="language" style="width:20%;" data-options="label:'一级分类'"/>
-                    <input class="easyui-combobox" id="type2" name="language" style="width:20%;" data-options="label:'二级分类'"/>
-                    <input class="easyui-combobox" id="type3" name="language" style="width:20%;" data-options="label:'三级分类'"/>
+                    <input class="easyui-combobox" id="type1" name="courseType1" style="width:20%;" data-options="label:'一级分类'"/>
+                    <input class="easyui-combobox" id="type2" name="courseType2" style="width:20%;" data-options="label:'二级分类'"/>
+                    <input class="easyui-combobox" id="type3" name="courseType" style="width:20%;" data-options="label:'三级分类'"/>
                 </div>
             </dd>
             <dt>课程难度:</dt>
             <dd>
                 <div >
-                    <input type="radio" name="level" value="1" checked/>初级
-                    <input type="radio" name="level" value="2"/>中级
-                    <input type="radio" name="level" value="3"/>高级
+                    <input type="radio" name="courseDifficulty" value="初级" checked/>初级
+                    <input type="radio" name="courseDifficulty" value="中级"/>中级
+                    <input type="radio" name="courseDifficulty" value="高级"/>高级
                 </div>
             </dd>
             <dt>课程简介:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="message" style="width:80%;height:60px" data-options="prompt:'不能少于10字，方便用户快速匹配自己是否为该课程使用人群',required:true,multiline:true">
+                    <input class="easyui-textbox" name="courseSummary" style="width:80%;height:60px" data-options="prompt:'不能少于10字，方便用户快速匹配自己是否为该课程使用人群',required:true,multiline:true">
                 </div>
             </dd>
             <dt>适用人群:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="message" style="width:80%;" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
+                    <input class="easyui-textbox" name="courseCrowd" style="width:80%;" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
                 </div>
             </dd>
 
             <dt>课程详情</dt>
             <dd>
                 <div >
-                    <textarea name="content1" cols="100" rows="8" style="width:80%;height:200px;"></textarea>
+                    <textarea name="courseDetails" cols="100" rows="8" style="width:80%;height:200px;"></textarea>
                 </div>
 
             </dd>
             <dt>课程标签:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="message" style="width:80%;" data-options="prompt:'多个标签用空格进行间隔',required:true">
+                    <input class="easyui-textbox" name="courseLabel" style="width:80%;" data-options="prompt:'多个标签用空格进行间隔',required:true">
                 </div>
             </dd>
             <dt>课程封面</dt>
@@ -164,25 +164,25 @@
                     <img src="" id="upControl_IMG">
                     <div class="upControl" id="upControl_Btn">&nbsp;</div>
                 </div>
-                <input type="hidden" name="image_url" id="c_image_url" value="">
+                <input type="hidden" name="courseCover" id="c_image_url" value="">
 
             </dd>
             <dt>课程价格:</dt>
             <dd>
                 <div >
-                   <input type="radio" name="price" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
+                   <input type="radio" name="coursePriceType" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
 
                 </div>
                 <div >
-                    <input type="radio" name="price" />付费
-                    <input class="easyui-textbox" name="price" style="display: inline-block;margin-left: 20px"/>
+                    <input type="radio" name="coursePriceType" />付费
+                    <input class="easyui-textbox" name="coursePrice" style="display: inline-block;margin-left: 20px"/>
                 </div>
             </dd>
 
             <dt>
             </dt>
             <dd style="text-align: center">
-                <a class="easyui-linkbutton">保存进入下一步</a>
+                <a class="easyui-linkbutton" id="btn_save">保存</a>
                 <a class="easyui-linkbutton">清空</a>
             </dd>
 
@@ -247,6 +247,18 @@
             })
         }
     })
+
+    //保存
+    $("#btn_save").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/course/add",
+            data: $("#ff").serialize(),
+            success: function(msg){
+
+            }
+        });
+    });
 
 </script>
 </body>
