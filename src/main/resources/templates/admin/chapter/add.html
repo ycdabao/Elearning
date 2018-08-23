@@ -11,6 +11,42 @@
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
     <style type="text/css">
         *{font-family: 微软雅黑}
+        .chaptername {
+            position: relative;
+            border: 1px solid #95B8E7;
+            background-color: #fff;
+            vertical-align: middle;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0;
+            padding: 0;
+            -moz-border-radius: 5px 5px 5px 5px;
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+            height:30px;
+            width:50%;
+            margin-left: 20px;
+        }
+
+        .chaptercontent {
+            position: relative;
+            border: 1px solid #95B8E7;
+            background-color: #fff;
+            vertical-align: middle;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0;
+            padding: 0;
+            -moz-border-radius: 5px 5px 5px 5px;
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+            height:30px;
+            width:50%;
+            margin-left: 20px;
+        }
+        dt{margin-bottom: 10px}
     </style>
 </head>
 <body>
@@ -27,9 +63,19 @@
     })
 
     function addChapter(){
-        var chapternode = $("<dt></dt>").html("<input class='easyui-textbox' />");
-        $("#chapterdl").append(chapternode);
+      var chapterNumber =   $(".chaptername").length;
+        var dtnode = $("<dt></dt>").html("<label>第"+(chapterNumber+1)+"章</label><input class='chaptername'>");
+        var ddaddnode =$("<dd></dd>").html("<lable>添加课时</lable>").css("text-algin","center");
 
+        ddaddnode.bind("click",function(){
+            var ddtemp=$("<dd></dd>").html("<div><p><label>课时名称</label><input class='chaptercontent'></p><p><label>课时视频</label><input type='button' value='添加'/></p></div>").css("border","1px dashed gray");
+            ddaddnode.before(ddtemp);
+        })
+
+
+
+        $("#chapterdl").append(dtnode);
+        $("#chapterdl").append(ddaddnode);
     }
 </script>
 
