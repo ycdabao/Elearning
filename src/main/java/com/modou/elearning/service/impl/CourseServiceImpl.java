@@ -1,8 +1,10 @@
 package com.modou.elearning.service.impl;
 
 
+import com.github.pagehelper.PageHelper;
 import com.modou.elearning.mapper.CoursesMapper;
 import com.modou.elearning.pojo.Courses;
+import com.modou.elearning.pojo.CoursesExample;
 import com.modou.elearning.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -34,5 +37,41 @@ public class CourseServiceImpl implements CourseService {
     public void add(Courses courses) {
 
         coursesMapper.insert(courses);
+    }
+
+    @Override
+    public List<Courses> findbyCodition(Courses courses,int page,int pageSize) {
+        CoursesExample coursesExample = new CoursesExample();
+        CoursesExample.Criteria c = coursesExample.createCriteria();
+        if(courses!=null){
+            if(courses.getCourseName()!=null&&!courses.getCourseName().equals("")){
+                c.andCourseNameLike("%"+courses.getCourseName()+"%");
+            }
+
+            if(courses.getCourseCreateby()!=null&&!courses.getCourseCreateby().equals("")){
+                c.andCourseCreatebyEqualTo(courses.getCourseCreateby());
+            }
+        }
+
+        PageHelper.offsetPage((page-1)*pageSize,pageSize);
+
+
+        return   coursesMapper.selectByExample(coursesExample);
+    }
+
+
+    @Override
+    public int count(Courses courses) {
+        CoursesExample coursesExample = new CoursesExample();
+        CoursesExample.Criteria c = coursesExample.createCriteria();
+        if(courses!=null){
+            if(courses.getCourseName()!=null&&!courses.getCourseName().equals("")){
+                c.andCourseNameLike("%"+courses.getCourseName()+"%");
+            }
+            if(courses.getCourseCreateby()!=null&&!courses.getCourseCreateby().equals("")){
+                c.andCourseCreatebyEqualTo(courses.getCourseCreateby());
+            }
+        }
+        return coursesMapper.countByExample(coursesExample);
     }
 }

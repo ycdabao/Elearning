@@ -30,5 +30,14 @@ public class IndexController {
         return "/admin/courses/add";
     }
 
+    @RequestMapping(value="/course/tolist")
+    public String tocourselist(){
+        return "/admin/courses/list";
+    }
+
+    @RequestMapping(value="/chapter/toadd")
+    public String chapteradd(){
+        return "/admin/chapter/add";
+    }
 
 }

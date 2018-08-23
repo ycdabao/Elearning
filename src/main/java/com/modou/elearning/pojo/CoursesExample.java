@@ -1184,6 +1184,136 @@ public class CoursesExample {
             addCriterion("course_modifydate not between", value1, value2, "courseModifydate");
             return (Criteria) this;
         }
+
+        public Criteria andCourseCheckStatusIsNull() {
+            addCriterion("course_check_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusIsNotNull() {
+            addCriterion("course_check_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusEqualTo(String value) {
+            addCriterion("course_check_status =", value, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusNotEqualTo(String value) {
+            addCriterion("course_check_status <>", value, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusGreaterThan(String value) {
+            addCriterion("course_check_status >", value, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("course_check_status >=", value, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusLessThan(String value) {
+            addCriterion("course_check_status <", value, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusLessThanOrEqualTo(String value) {
+            addCriterion("course_check_status <=", value, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusLike(String value) {
+            addCriterion("course_check_status like", value, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusNotLike(String value) {
+            addCriterion("course_check_status not like", value, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusIn(List<String> values) {
+            addCriterion("course_check_status in", values, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusNotIn(List<String> values) {
+            addCriterion("course_check_status not in", values, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusBetween(String value1, String value2) {
+            addCriterion("course_check_status between", value1, value2, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseCheckStatusNotBetween(String value1, String value2) {
+            addCriterion("course_check_status not between", value1, value2, "courseCheckStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberIsNull() {
+            addCriterion("course_student_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberIsNotNull() {
+            addCriterion("course_student_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberEqualTo(Integer value) {
+            addCriterion("course_student_number =", value, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberNotEqualTo(Integer value) {
+            addCriterion("course_student_number <>", value, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberGreaterThan(Integer value) {
+            addCriterion("course_student_number >", value, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("course_student_number >=", value, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberLessThan(Integer value) {
+            addCriterion("course_student_number <", value, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("course_student_number <=", value, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberIn(List<Integer> values) {
+            addCriterion("course_student_number in", values, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberNotIn(List<Integer> values) {
+            addCriterion("course_student_number not in", values, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberBetween(Integer value1, Integer value2) {
+            addCriterion("course_student_number between", value1, value2, "courseStudentNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseStudentNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("course_student_number not between", value1, value2, "courseStudentNumber");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

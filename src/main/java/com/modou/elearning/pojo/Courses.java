@@ -36,6 +36,10 @@ public class Courses implements Serializable {
 
     private Date courseModifydate;
 
+    private String courseCheckStatus;
+
+    private Integer courseStudentNumber;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -164,5 +168,21 @@ public class Courses implements Serializable {
 
     public void setCourseModifydate(Date courseModifydate) {
         this.courseModifydate = courseModifydate;
+    }
+
+    public String getCourseCheckStatus() {
+        return courseCheckStatus;
+    }
+
+    public void setCourseCheckStatus(String courseCheckStatus) {
+        this.courseCheckStatus = courseCheckStatus == null ? null : courseCheckStatus.trim();
+    }
+
+    public Integer getCourseStudentNumber() {
+        return courseStudentNumber;
+    }
+
+    public void setCourseStudentNumber(Integer courseStudentNumber) {
+        this.courseStudentNumber = courseStudentNumber;
     }
 }

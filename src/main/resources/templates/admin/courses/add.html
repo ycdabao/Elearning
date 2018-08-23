@@ -255,7 +255,11 @@
             url: "/course/add",
             data: $("#ff").serialize(),
             success: function(msg){
+                if(msg.status==200){
 
+                }else{
+                    $.messager.alert('错误','创建失败',"error");
+                }
             }
         });
     });
