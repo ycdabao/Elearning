@@ -50,10 +50,11 @@ public class CourseController {
         courses.setCourseCreatedate(new Date());
         courses.setCourseStatus("草稿");
         courses.setCourseStudentNumber(0);
-        courses.setId(UUID.randomUUID().toString());
+        String courseid=UUID.randomUUID().toString();
+        courses.setId(courseid);
         try {
             courseService.add(courses);
-            return ModouResult.build(200, "succes");
+            return ModouResult.build(200, "succes",courseid);
         } catch (Exception ex) {
             return ModouResult.build(400, "error");
         }

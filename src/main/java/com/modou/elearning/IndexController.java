@@ -1,7 +1,9 @@
 package com.modou.elearning;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class IndexController {
@@ -36,7 +38,8 @@ public class IndexController {
     }
 
     @RequestMapping(value="/chapter/toadd")
-    public String chapteradd(){
+    public String chapteradd(@RequestParam(required = true) String id, Model model){
+        model.addAttribute("courseid",id);
         return "/admin/chapter/add";
     }
 

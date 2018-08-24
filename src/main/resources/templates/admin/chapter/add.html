@@ -11,72 +11,90 @@
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
     <style type="text/css">
         *{font-family: 微软雅黑}
-        .chaptername {
-            position: relative;
-            border: 1px solid #95B8E7;
-            background-color: #fff;
-            vertical-align: middle;
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            margin: 0;
-            padding: 0;
-            -moz-border-radius: 5px 5px 5px 5px;
-            -webkit-border-radius: 5px 5px 5px 5px;
-            border-radius: 5px 5px 5px 5px;
-            height:30px;
-            width:50%;
-            margin-left: 20px;
-        }
 
-        .chaptercontent {
-            position: relative;
-            border: 1px solid #95B8E7;
-            background-color: #fff;
-            vertical-align: middle;
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            margin: 0;
-            padding: 0;
-            -moz-border-radius: 5px 5px 5px 5px;
-            -webkit-border-radius: 5px 5px 5px 5px;
-            border-radius: 5px 5px 5px 5px;
-            height:30px;
-            width:50%;
-            margin-left: 20px;
-        }
         dt{margin-bottom: 10px}
+        dd{margin-bottom: 10px}
     </style>
 </head>
 <body>
-<form>
-<dl id="chapterdl"></dl>
+    <div id="container">
 
-
-</form>
+    </div>
 <a href="javascript:void(0)" class="easyui-linkbutton" id="btn_addchapter" >添加章节</a>
 <script type="text/javascript">
+    var chapternumber=0;
+    //添加章节
+    $("#btn_addchapter").bind("click",function(){
+        chapternumber++;
+        var chapterdiv= $("<div id='div"+chapternumber+"'></div>");
+        var chnametextbox=$("<input class='easyui-textbox' style='width: 50%;'/>");
+        var chaddbutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>保存</a>");
+        var dlnode = $("<dl></dl>");
+        var dtnode=$("<dt></dt>");
+        dtnode.append("<lable>第"+chapternumber+"章:</lable>").append(chnametextbox).append(chaddbutton);
+        dlnode.append(dtnode);
+        chapterdiv.append(dlnode);
+        $("#container").append(chapterdiv);
+         $.parser.parse();
 
-    $("#btn_addchapter").click(function(){
-        addChapter();
+        //保存章节开始
+        chaddbutton.bind("click",function(){
+
+            $.ajax({
+                type: "POST",
+                url: "/chapter/add",
+                data: "chapterName=" + chnametextbox.val() + "&chapterOrder=" + chapternumber + "&chapterCourseid=[[${courseid}]]",
+                success: function (msg1) {
+
+                    if(msg1.status==200){
+                        chaddbutton.remove();
+                        var chaeditbutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>修改</a>");
+                        var charemovebutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>删除</a>");
+
+                        var ddaddnode=$("<dd></dd>");
+                        var ddaddbutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>添加课时</a>");
+                        ddaddnode.append(ddaddbutton);
+                        dlnode.append(ddaddnode);
+
+
+                        dtnode.append(chaeditbutton).append(charemovebutton);
+                        charemovebutton.bind("click",function(){    //删除按事件
+                            $.ajax({
+                                type: "POST",
+                                url: "/chapter/delete",
+                                data:"chapterid="+msg1.data,
+                                success: function (msg2) {
+                                    if(msg1.status==200){
+                                        charemovebutton.parent().parent().parent().remove();
+                                        chapternumber--;
+                                    }
+                                }
+                            });
+                        })
+
+                        chaeditbutton.bind("click",function(){    //更新按钮事件
+                            $.ajax({
+                                type: "POST",
+                                url: "/chapter/update",
+                                data:"chapterid="+msg1.data+"&chapterName="+chnametextbox.val(),
+                                success: function (msg2) {
+
+                                }
+                            });
+                        })
+
+                        ddaddbutton.bind("click",function(){            //添加课时
+
+                        })
+
+                        $.parser.parse();
+                    }
+                }
+            })
+        })
+        //保存章节结束
     })
 
-    function addChapter(){
-      var chapterNumber =   $(".chaptername").length;
-        var dtnode = $("<dt></dt>").html("<label>第"+(chapterNumber+1)+"章</label><input class='chaptername'>");
-        var ddaddnode =$("<dd></dd>").html("<lable>添加课时</lable>").css("text-algin","center");
-
-        ddaddnode.bind("click",function(){
-            var ddtemp=$("<dd></dd>").html("<div><p><label>课时名称</label><input class='chaptercontent'></p><p><label>课时视频</label><input type='button' value='添加'/></p></div>").css("border","1px dashed gray");
-            ddaddnode.before(ddtemp);
-        })
-
-
-
-        $("#chapterdl").append(dtnode);
-        $("#chapterdl").append(ddaddnode);
-    }
 </script>
 
 </body>

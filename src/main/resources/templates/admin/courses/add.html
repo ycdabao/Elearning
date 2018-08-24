@@ -256,6 +256,7 @@
             data: $("#ff").serialize(),
             success: function(msg){
                 if(msg.status==200){
+                    window.open("/chapter/toadd?id="+msg.data,"SelectUser", "scrollbars=yes,width=600,height=400,left=150,top=100,status=yes,resizable=yes");
 
                 }else{
                     $.messager.alert('错误','创建失败',"error");
