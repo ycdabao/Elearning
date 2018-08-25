@@ -245,6 +245,76 @@ public class ChapterContentExample {
             return (Criteria) this;
         }
 
+        public Criteria andChapterContentNameIsNull() {
+            addCriterion("chapter_content_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameIsNotNull() {
+            addCriterion("chapter_content_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameEqualTo(String value) {
+            addCriterion("chapter_content_name =", value, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameNotEqualTo(String value) {
+            addCriterion("chapter_content_name <>", value, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameGreaterThan(String value) {
+            addCriterion("chapter_content_name >", value, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameGreaterThanOrEqualTo(String value) {
+            addCriterion("chapter_content_name >=", value, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameLessThan(String value) {
+            addCriterion("chapter_content_name <", value, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameLessThanOrEqualTo(String value) {
+            addCriterion("chapter_content_name <=", value, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameLike(String value) {
+            addCriterion("chapter_content_name like", value, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameNotLike(String value) {
+            addCriterion("chapter_content_name not like", value, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameIn(List<String> values) {
+            addCriterion("chapter_content_name in", values, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameNotIn(List<String> values) {
+            addCriterion("chapter_content_name not in", values, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameBetween(String value1, String value2) {
+            addCriterion("chapter_content_name between", value1, value2, "chapterContentName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterContentNameNotBetween(String value1, String value2) {
+            addCriterion("chapter_content_name not between", value1, value2, "chapterContentName");
+            return (Criteria) this;
+        }
+
         public Criteria andFileIdIsNull() {
             addCriterion("file_id is null");
             return (Criteria) this;

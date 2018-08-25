@@ -8,6 +8,8 @@ public class ChapterContent implements Serializable {
 
     private String chapterId;
 
+    private String chapterContentName;
+
     private String fileId;
 
     private String free;
@@ -34,6 +36,14 @@ public class ChapterContent implements Serializable {
 
     public void setChapterId(String chapterId) {
         this.chapterId = chapterId == null ? null : chapterId.trim();
+    }
+
+    public String getChapterContentName() {
+        return chapterContentName;
+    }
+
+    public void setChapterContentName(String chapterContentName) {
+        this.chapterContentName = chapterContentName == null ? null : chapterContentName.trim();
     }
 
     public String getFileId() {

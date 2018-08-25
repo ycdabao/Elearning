@@ -17,21 +17,35 @@
     </style>
 </head>
 <body>
+
+    <div id="win1" >
+        <table id="dg1"></table>
+        <a href="javascript:void(0)" id="btn_addvideo" class="easyui-linkbutton">保存</a>
+        <a href="javascript:void(1)" id="btn_cancelvideo" class="easyui-linkbutton">取消</a>
+        <input type="hidden" id="vh" />
+    </div>
+
     <div id="container">
 
     </div>
 <a href="javascript:void(0)" class="easyui-linkbutton" id="btn_addchapter" >添加章节</a>
 <script type="text/javascript">
     var chapternumber=0;
+    var videonumber=0;
     //添加章节
     $("#btn_addchapter").bind("click",function(){
         chapternumber++;
         var chapterdiv= $("<div id='div"+chapternumber+"'></div>");
         var chnametextbox=$("<input class='easyui-textbox' style='width: 50%;'/>");
+        var chorder=$("<input type='hidden'value='"+chapternumber+"'/>");
         var chaddbutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>保存</a>");
         var dlnode = $("<dl></dl>");
         var dtnode=$("<dt></dt>");
-        dtnode.append("<lable>第"+chapternumber+"章:</lable>").append(chnametextbox).append(chaddbutton);
+        dtnode
+            .append("<lable>第"+chapternumber+"章:</lable>")
+            .append(chnametextbox)
+            .append(chaddbutton)
+            .append(chorder);
         dlnode.append(dtnode);
         chapterdiv.append(dlnode);
         $("#container").append(chapterdiv);
@@ -43,7 +57,7 @@
             $.ajax({
                 type: "POST",
                 url: "/chapter/add",
-                data: "chapterName=" + chnametextbox.val() + "&chapterOrder=" + chapternumber + "&chapterCourseid=[[${courseid}]]",
+                data: "chapterName=" + chnametextbox.val() + "&chapterOrder=" + chorder.val() + "&chapterCourseid=[[${courseid}]]",
                 success: function (msg1) {
 
                     if(msg1.status==200){
@@ -54,7 +68,7 @@
                         var ddaddnode=$("<dd></dd>");
                         var ddaddbutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>添加课时</a>");
                         ddaddnode.append(ddaddbutton);
-                        dlnode.append(ddaddnode);
+                        dlnode.append(ddaddnode);               //增加“添加课时”按钮
 
 
                         dtnode.append(chaeditbutton).append(charemovebutton);
@@ -84,7 +98,87 @@
                         })
 
                         ddaddbutton.bind("click",function(){            //添加课时
+                            videonumber++;
+                            var chcnametextbox=$("<input class='easyui-textbox' style='width: 50%;'/>");
+                            var chcaddvidobutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>关联视频</a>");
+                            var videonumberhidden =$("<input type='hidden' value='"+videonumber+"' />");
+                            var p1 = $("<p></p>")
+                                .append("<lable style='display: inline-block;margin-right: 10px'>课时名称:</lable>")
+                                .append(chcnametextbox)
+                                .append(videonumberhidden);
 
+                            var p2 =$("<p></p>")
+                                .append("<lable style='display: inline-block;margin-right: 10px'>视频内容:</lable>")
+                                .append("<label name='videoname'></label>")
+                                .append("<input type='hidden' name='videoid'/>")
+                                .append(chcaddvidobutton);
+                            var p3 = $("<p></p>")
+                                .append("<lable style='display: inline-block;margin-right: 10px'>是否免费:</lable>")
+                                .append("<input type='radio' name='free' value='免费' checked='true'/>免费")
+                                .append("<input type='radio' name='free' value='付费'/>付费");
+
+                            var chcsavevidobutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>保存</a>");
+                            var chccancelsavevidobutton=$("<a href='javascript:void(0)' class='easyui-linkbutton'>取消</a>");
+
+                            var p4=$("<p></p>")
+                                .append(chcsavevidobutton)
+                                .append(chccancelsavevidobutton);
+
+                            var ddchcnode = $("<dd id='dd"+videonumber+"' style='border:1px dashed gray'></dd>")
+                                .append(p1)
+                                .append(p2)
+                                .append(p3)
+                                .append(p4);
+                            ddaddnode.before(ddchcnode);
+
+
+                            chcsavevidobutton.bind("click",function(){          //保存课时
+                                var n1 = $("#dd"+videonumber+" .easyui-textbox").val();
+                                var n2 = $("#dd"+videonumber+" input[name='videoid']").val();
+                                var n3=$("#dd"+videonumber+" input[checked='true']").val();
+
+                                alert(msg1.data);
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/chaptercontent/add",
+                                    data:"chapterId="+msg1.data+"&fileId="+n2+"&free="+n3+"&chapterContentName="+n1+"&chapterContentOrder="+videonumber,
+                                    success: function (msg2) {
+                                            if(msg2.status==200){
+                                                ddchcnode.html("");
+                                            }
+                                    }
+                                });
+                            })
+
+
+                            chccancelsavevidobutton.bind("click",function(){   //取消课时
+                                videonumber--;
+                                chccancelsavevidobutton.parent().parent().remove();
+                            })
+
+
+                            chcaddvidobutton.bind("click",function(){       //关联视频
+                                $("#vh").val(videonumberhidden.val());
+                                    $("#win1").window({
+                                        width:600,
+                                        height:400
+                                    })
+                               $("#dg1").datagrid({
+                                   url:'/file/list',
+                                   columns:[
+                                       [
+                                           {field:'id',title:'id',width:100},
+                                           {field:'fileName',title:'fileName',width:100}
+                                       ]
+                                   ]
+                               });
+
+
+                                $.parser.parse();
+                            })
+
+
+                            $.parser.parse();
                         })
 
                         $.parser.parse();
@@ -94,6 +188,29 @@
         })
         //保存章节结束
     })
+
+
+
+
+
+    $("#btn_addvideo").bind(
+        "click",function(){
+            var row=$("#dg1").datagrid("getSelected");
+
+            $("#dd"+$('#vh').val()+" label[name='videoname']").html(row.fileName);
+            $("#dd"+$('#vh').val()+" input[name='videoid']").val(row.id);
+            $("#win1").window("close");
+
+        }
+    )
+
+    $("#btn_cancelvideo").bind(
+        "click",function(){
+            $("#win1").window("close");
+
+        }
+    )
+$("#win1").css("display","none");
 
 </script>
 

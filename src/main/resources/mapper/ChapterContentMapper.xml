@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.modou.elearning.pojo.ChapterContent" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="chapter_id" property="chapterId" jdbcType="VARCHAR" />
+    <result column="chapter_content_name" property="chapterContentName" jdbcType="VARCHAR" />
     <result column="file_id" property="fileId" jdbcType="VARCHAR" />
     <result column="free" property="free" jdbcType="VARCHAR" />
     <result column="chapter_content_order" property="chapterContentOrder" jdbcType="INTEGER" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, chapter_id, file_id, free, chapter_content_order, chapter_content_createdate, 
+    id, chapter_id, chapter_content_name, file_id, free, chapter_content_order, chapter_content_createdate, 
     chapter_content_modifydate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.ChapterContentExample" >
@@ -103,12 +104,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.modou.elearning.pojo.ChapterContent" >
-    insert into chapter_content (id, chapter_id, file_id, 
-      free, chapter_content_order, chapter_content_createdate, 
-      chapter_content_modifydate)
-    values (#{id,jdbcType=VARCHAR}, #{chapterId,jdbcType=VARCHAR}, #{fileId,jdbcType=VARCHAR}, 
-      #{free,jdbcType=VARCHAR}, #{chapterContentOrder,jdbcType=INTEGER}, #{chapterContentCreatedate,jdbcType=TIMESTAMP}, 
-      #{chapterContentModifydate,jdbcType=TIMESTAMP})
+    insert into chapter_content (id, chapter_id, chapter_content_name, 
+      file_id, free, chapter_content_order, 
+      chapter_content_createdate, chapter_content_modifydate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{chapterId,jdbcType=VARCHAR}, #{chapterContentName,jdbcType=VARCHAR}, 
+      #{fileId,jdbcType=VARCHAR}, #{free,jdbcType=VARCHAR}, #{chapterContentOrder,jdbcType=INTEGER}, 
+      #{chapterContentCreatedate,jdbcType=TIMESTAMP}, #{chapterContentModifydate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.modou.elearning.pojo.ChapterContent" >
     insert into chapter_content
@@ -118,6 +121,9 @@
       </if>
       <if test="chapterId != null" >
         chapter_id,
+      </if>
+      <if test="chapterContentName != null" >
+        chapter_content_name,
       </if>
       <if test="fileId != null" >
         file_id,
@@ -141,6 +147,9 @@
       </if>
       <if test="chapterId != null" >
         #{chapterId,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterContentName != null" >
+        #{chapterContentName,jdbcType=VARCHAR},
       </if>
       <if test="fileId != null" >
         #{fileId,jdbcType=VARCHAR},
@@ -174,6 +183,9 @@
       <if test="record.chapterId != null" >
         chapter_id = #{record.chapterId,jdbcType=VARCHAR},
       </if>
+      <if test="record.chapterContentName != null" >
+        chapter_content_name = #{record.chapterContentName,jdbcType=VARCHAR},
+      </if>
       <if test="record.fileId != null" >
         file_id = #{record.fileId,jdbcType=VARCHAR},
       </if>
@@ -198,6 +210,7 @@
     update chapter_content
     set id = #{record.id,jdbcType=VARCHAR},
       chapter_id = #{record.chapterId,jdbcType=VARCHAR},
+      chapter_content_name = #{record.chapterContentName,jdbcType=VARCHAR},
       file_id = #{record.fileId,jdbcType=VARCHAR},
       free = #{record.free,jdbcType=VARCHAR},
       chapter_content_order = #{record.chapterContentOrder,jdbcType=INTEGER},
@@ -212,6 +225,9 @@
     <set >
       <if test="chapterId != null" >
         chapter_id = #{chapterId,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterContentName != null" >
+        chapter_content_name = #{chapterContentName,jdbcType=VARCHAR},
       </if>
       <if test="fileId != null" >
         file_id = #{fileId,jdbcType=VARCHAR},
@@ -234,6 +250,7 @@
   <update id="updateByPrimaryKey" parameterType="com.modou.elearning.pojo.ChapterContent" >
     update chapter_content
     set chapter_id = #{chapterId,jdbcType=VARCHAR},
+      chapter_content_name = #{chapterContentName,jdbcType=VARCHAR},
       file_id = #{fileId,jdbcType=VARCHAR},
       free = #{free,jdbcType=VARCHAR},
       chapter_content_order = #{chapterContentOrder,jdbcType=INTEGER},
