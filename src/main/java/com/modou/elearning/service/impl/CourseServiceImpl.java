@@ -2,9 +2,6 @@ package com.modou.elearning.service.impl;
 
 
 import com.github.pagehelper.PageHelper;
-import com.modou.elearning.mapper.CoursesMapper;
-import com.modou.elearning.pojo.Courses;
-import com.modou.elearning.pojo.CoursesExample;
 import com.modou.elearning.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,5 +70,11 @@ public class CourseServiceImpl implements CourseService {
             }
         }
         return coursesMapper.countByExample(coursesExample);
+    }
+
+
+    @Override
+    public Courses findById(String id) {
+        return coursesMapper.selectByPrimaryKey(id);
     }
 }

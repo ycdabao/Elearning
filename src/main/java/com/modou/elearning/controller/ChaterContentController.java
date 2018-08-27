@@ -1,6 +1,5 @@
 package com.modou.elearning.controller;
 
-import com.modou.elearning.pojo.ChapterContent;
 import com.modou.elearning.service.ChapterContentService;
 import com.modou.elearning.utils.ModouResult;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -145,6 +145,9 @@
                                     success: function (msg2) {
                                             if(msg2.status==200){
                                                 ddchcnode.html("");
+                                                var e1 = $("<label>"+n1+"</label>");
+                                                var e2 = $("<label>"+n3+"</label>");
+                                                ddchcnode.append(e1).append(e2);
                                             }
                                     }
                                 });

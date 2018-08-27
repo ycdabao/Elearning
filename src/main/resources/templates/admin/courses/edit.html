@@ -108,7 +108,7 @@
             <dt>课程标题:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="courseName" style="width:80%" data-options="required:true,prompt:'请填写课程标题，最多50字'">
+                    <input class="easyui-textbox" id="courseName" name="courseName" style="width:80%" data-options="required:true,prompt:'请填写课程标题，最多50字'">
                 </div>
             </dd>
             <dt>分类:</dt>
@@ -116,7 +116,7 @@
                 <div >
                     <input class="easyui-combobox" id="type1" name="courseType1" style="width:20%;" data-options="label:'一级分类'"/>
                     <input class="easyui-combobox" id="type2" name="courseType2" style="width:20%;" data-options="label:'二级分类'"/>
-                    <input class="easyui-combobox" id="type3" name="courseType3" style="width:20%;" data-options="label:'三级分类'"/>
+                    <input class="easyui-combobox" id="type3" name="courseType" style="width:20%;" data-options="label:'三级分类'"/>
                 </div>
             </dd>
             <dt>课程难度:</dt>
@@ -194,6 +194,12 @@
     <script src="../../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+
+
+
+
+
+
     //图片上传
     // 初始化Web Uploader
     var uploader = WebUploader.create({
@@ -247,6 +253,23 @@
             })
         }
     })
+
+
+    //初始化表单
+    $.ajax({
+        type: "POST",
+        url: "/course/findbyid",
+        data:"id=[[${courseid}]]",
+        success: function (msg) {
+
+            if(msg.status==200){
+                console.log(msg.data.courseName);
+                $("#courseName").textbox("setValue",msg.data.courseName);
+            }
+        }
+    }
+    )
+
 
     //保存
     $("#btn_save").click(function(){

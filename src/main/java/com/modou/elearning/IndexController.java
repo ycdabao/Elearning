@@ -32,6 +32,23 @@ public class IndexController {
         return "/admin/courses/add";
     }
 
+    /**
+     * 修改课程
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/course/toedit")
+    public String courseedit(@RequestParam(required = true) String id, Model model){
+        model.addAttribute("courseid",id);
+
+        return "/admin/courses/edit";
+    }
+
+    /**
+     * 课程列表
+     * @return
+     */
     @RequestMapping(value="/course/tolist")
     public String tocourselist(){
         return "/admin/courses/list";

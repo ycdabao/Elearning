@@ -1,11 +1,8 @@
 package com.modou.elearning.service.impl;
 
-import com.modou.elearning.mapper.ChapterContentMapper;
 import com.modou.elearning.mapper.ChapterMapper;
 
 import com.modou.elearning.pojo.Chapter;
-import com.modou.elearning.pojo.ChapterContent;
-import com.modou.elearning.pojo.ChapterContentExample;
 import com.modou.elearning.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

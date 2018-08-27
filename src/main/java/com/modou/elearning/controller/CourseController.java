@@ -1,6 +1,5 @@
 package com.modou.elearning.controller;
 
-import com.modou.elearning.pojo.Courses;
 import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.CourseService;
 import com.modou.elearning.utils.EasyuiResult;
@@ -69,6 +68,18 @@ public class CourseController {
         int count = courseService.count(courses);
         EasyuiResult<Courses> result = new EasyuiResult<Courses>(coursesList,count);
         return result;
+    }
+
+
+    @RequestMapping(value="/findbyid")
+    @ResponseBody
+    public ModouResult findById(String id){
+        try {
+            Courses courses = courseService.findById(id);
+           return  ModouResult.build(200, "success", courses);
+        }catch(Exception ex){
+           return  ModouResult.build(400,"error");
+        }
     }
 
 }

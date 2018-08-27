@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
     <!-- 中文化 -->
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
     <style type="text/css">
@@ -36,13 +37,28 @@
                 {field:'coursePrice',title:'价格',width:'5%',align:'center'},
                 {field:'courseStatus',title:'状态',align:'center',width:'5%'},
                 {field:'id',title:'操作',formatter:function(value,row,index){
-                    var content="<a href='' style='display: block;margin-bottom: 10px'>编辑课程信息</a><a href='' style='display: block;'>编辑课程章节</a>";
+                    var content="<a href='javascript:editcourse(\""+value+"\")'  style='display: block;margin-bottom: 10px'>编辑课程信息</a><a href='' style='display: block;'>编辑课程章节</a>";
                     return content;
                 }},
             ]
         ],
         pagination:true
     });
+
+    function editcourse(courseid){
+
+
+        var url = "/course/toedit?id="+courseid;
+        //iframe层
+        layer.open({
+            type: 2,
+            title: "编辑课程",
+            shadeClose: true,
+            shade: [0.6, '#606060'],
+            area: ['80%', '90%'],
+            content: url
+        });
+    }
 </script>
 
 </body>

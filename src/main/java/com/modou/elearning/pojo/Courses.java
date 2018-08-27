@@ -8,7 +8,11 @@ public class Courses implements Serializable {
 
     private String courseName;
 
-    private Integer courseType;
+    private Integer courseType1;
+
+    private Integer courseType2;
+
+    private Integer courseType3;
 
     private String courseDifficulty;
 
@@ -58,12 +62,28 @@ public class Courses implements Serializable {
         this.courseName = courseName == null ? null : courseName.trim();
     }
 
-    public Integer getCourseType() {
-        return courseType;
+    public Integer getCourseType1() {
+        return courseType1;
     }
 
-    public void setCourseType(Integer courseType) {
-        this.courseType = courseType;
+    public void setCourseType1(Integer courseType1) {
+        this.courseType1 = courseType1;
+    }
+
+    public Integer getCourseType2() {
+        return courseType2;
+    }
+
+    public void setCourseType2(Integer courseType2) {
+        this.courseType2 = courseType2;
+    }
+
+    public Integer getCourseType3() {
+        return courseType3;
+    }
+
+    public void setCourseType3(Integer courseType3) {
+        this.courseType3 = courseType3;
     }
 
     public String getCourseDifficulty() {
