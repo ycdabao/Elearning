@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
     <script src="../../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
-
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
     <!-- 中文化 -->
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
@@ -18,8 +18,9 @@
     <script charset="utf-8" src="../../js/kindeditor/kindeditor-all-min.js"></script>
     <script charset="utf-8" src="../../js/kindeditor/lang/zh-CN.js"></script>
     <script>
+        var editor1;
         KindEditor.ready(function(K) {
-            var editor1 = K.create('textarea[name="courseDetails"]', {
+            editor1 = K.create('textarea[name="courseDetails"]', {
                 uploadJson : '../jsp/upload_json.jsp',
                 allowFileManager : false,
                 items:[
@@ -170,11 +171,11 @@
             <dt>课程价格:</dt>
             <dd>
                 <div >
-                   <input type="radio" name="coursePriceType" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
+                   <input type="radio" name="coursePriceType" value="免费" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
 
                 </div>
                 <div >
-                    <input type="radio" name="coursePriceType" />付费
+                    <input type="radio" name="coursePriceType" value="付费"/>付费
                     <input class="easyui-textbox" name="coursePrice" style="display: inline-block;margin-left: 20px"/>
                 </div>
             </dd>
@@ -250,20 +251,28 @@
 
     //保存
     $("#btn_save").click(function(){
+        editor1.sync();
         $.ajax({
             type: "POST",
             url: "/course/add",
             data: $("#ff").serialize(),
             success: function(msg){
                 if(msg.status==200){
-                   // window.open("/chapter/toadd?id="+msg.data,"SelectUser", "scrollbars=yes,width=600,height=400,left=150,top=100,status=yes,resizable=yes");
 
-                    var chapterwin = $("<div></div>").window({
-                        width:600,
-                        height:400,
-                        modal:true,
-                        href:"/chapter/toadd?id="+msg.data
-                    })
+
+                    var url = "/chapter/toadd?id="+msg.data;
+                    //iframe层
+                    layer.open({
+                        type: 2,
+                        title: "添加章节",
+                        shadeClose: true,
+                        shade: [0.6, '#606060'],
+                        area: ['80%', '90%'],
+                        content: url
+                    });
+
+
+
 
                 }else{
                     $.messager.alert('错误','创建失败',"error");

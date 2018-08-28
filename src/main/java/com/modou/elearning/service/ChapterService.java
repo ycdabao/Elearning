@@ -1,6 +1,9 @@
 package com.modou.elearning.service;
 
 import com.modou.elearning.pojo.Chapter;
+import com.modou.elearning.pojo.ChapterContent;
+
+import java.util.List;
 
 public interface ChapterService {
 
@@ -9,4 +12,6 @@ public interface ChapterService {
      void delete(String id);
 
     void update(Chapter chapter);
+
+    List<Chapter> selectChapterAndChapterContent(String courseId);
 }

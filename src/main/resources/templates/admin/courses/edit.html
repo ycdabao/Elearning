@@ -18,8 +18,9 @@
     <script charset="utf-8" src="../../js/kindeditor/kindeditor-all-min.js"></script>
     <script charset="utf-8" src="../../js/kindeditor/lang/zh-CN.js"></script>
     <script>
+        var editor1;
         KindEditor.ready(function(K) {
-            var editor1 = K.create('textarea[name="courseDetails"]', {
+            editor1 = K.create('textarea[name="courseDetails"]', {
                 uploadJson : '../jsp/upload_json.jsp',
                 allowFileManager : false,
                 items:[
@@ -130,27 +131,27 @@
             <dt>课程简介:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="courseSummary" style="width:80%;height:60px" data-options="prompt:'不能少于10字，方便用户快速匹配自己是否为该课程使用人群',required:true,multiline:true">
+                    <input id="courseSummary" class="easyui-textbox" name="courseSummary" style="width:80%;height:60px" data-options="prompt:'不能少于10字，方便用户快速匹配自己是否为该课程使用人群',required:true,multiline:true">
                 </div>
             </dd>
             <dt>适用人群:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="courseCrowd" style="width:80%;" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
+                    <input class="easyui-textbox" id="courseCrowd" name="courseCrowd" style="width:80%;" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
                 </div>
             </dd>
 
             <dt>课程详情</dt>
             <dd>
                 <div >
-                    <textarea name="courseDetails" cols="100" rows="8" style="width:80%;height:200px;"></textarea>
+                    <textarea id="courseDetails" name="courseDetails" cols="100" rows="8" style="width:80%;height:200px;"></textarea>
                 </div>
 
             </dd>
             <dt>课程标签:</dt>
             <dd>
                 <div >
-                    <input class="easyui-textbox" name="courseLabel" style="width:80%;" data-options="prompt:'多个标签用空格进行间隔',required:true">
+                    <input class="easyui-textbox" id="courseLabel" name="courseLabel" style="width:80%;" data-options="prompt:'多个标签用空格进行间隔',required:true">
                 </div>
             </dd>
             <dt>课程封面</dt>
@@ -170,12 +171,12 @@
             <dt>课程价格:</dt>
             <dd>
                 <div >
-                   <input type="radio" name="coursePriceType" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
+                   <input type="radio" name="coursePriceType" value="免费" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
 
                 </div>
                 <div >
-                    <input type="radio" name="coursePriceType" />付费
-                    <input class="easyui-textbox" name="coursePrice" style="display: inline-block;margin-left: 20px"/>
+                    <input type="radio" name="coursePriceType" value="付费"/>付费
+                    <input class="easyui-textbox" name="coursePrice" id="coursePrice" style="display: inline-block;margin-left: 20px"/>
                 </div>
             </dd>
 
@@ -237,12 +238,15 @@
         valueField:'id',
         textField:'typeName',
         onSelect:function(record){
+            $("#type2").combobox("clear");
+            $("#type3").combobox("clear");
             var parentid = record.id;
             $("#type2").combobox({
                 url:'/types/findbyparentid?parentid='+parentid,
                 valueField:'id',
                 textField:'typeName',
                 onSelect:function(record1){
+
                     $("#type3").combobox({
                         url: '/types/findbyparentid?parentid=' + record1.id,
                         valueField: 'id',
@@ -263,8 +267,63 @@
         success: function (msg) {
 
             if(msg.status==200){
-                console.log(msg.data.courseName);
+
                 $("#courseName").textbox("setValue",msg.data.courseName);
+                $("input:radio[name='courseDifficulty'][value='"+msg.data.courseDifficulty+"']").attr("checked",true);
+               $("#courseSummary").textbox("setValue",msg.data.courseSummary);
+               $("#courseCrowd").textbox("setValue",msg.data.courseCrowd);
+               //$("#courseDetails").val(msg.data.courseDetails);
+                KindEditor.html("#courseDetails",msg.data.courseDetails);
+               $("#courseLabel").textbox("setValue",msg.data.courseLabel);
+               $("#upControl_IMG").attr("src","/"+msg.data.courseCover);
+                $("input:radio[name='coursePriceType'][value='"+msg.data.coursePriceType+"']").attr("checked",true);
+                $("#coursePrice").textbox("setValue",msg.data.coursePrice);
+                $("#type1").combobox({
+                    url: '/types/findbyparentid',
+                    valueField: 'id',
+                    textField: 'typeName',
+                    onLoadSuccess:function(){
+                       var t1 = $("#type1").combobox("getData");
+                       for(var i=0; i<t1.length; i++){
+                           if(t1[i].id==msg.data.courseType1){
+                               $("#type1").combobox("select",msg.data.courseType1);
+                           }
+                       }
+
+                        $("#type2").combobox({
+                            url:'/types/findbyparentid?parentid='+msg.data.courseType1,
+                            valueField:'id',
+                            textField:'typeName',
+                            onLoadSuccess:function(){
+
+                                var t2 = $("#type2").combobox("getData");
+                                for(var i=0; i<t2.length; i++){
+                                    if(t2[i].id==msg.data.courseType2){
+                                        $("#type2").combobox("select",msg.data.courseType2);
+                                    }
+                                }
+
+                                if($("#type2").combobox("getValue")!=null&&$("#type2").combobox("getValue")!="") {
+
+                                    $("#type3").combobox({
+                                        url: '/types/findbyparentid?parentid=' + msg.data.courseType2,
+                                        valueField: 'id',
+                                        textField: 'typeName',
+                                        onLoadSuccess: function () {
+                                            var t3 = $("#type3").combobox("getData");
+                                            for (var i = 0; i < t3.length; i++) {
+                                                if (t3[i].id == msg.data.courseType3) {
+                                                    $("#type3").combobox("select", msg.data.courseType3);
+                                                }
+                                            }
+
+                                        }
+                                    })
+                                }
+                        }
+                        });
+                    }
+                });
             }
         }
     }
@@ -273,6 +332,7 @@
 
     //保存
     $("#btn_save").click(function(){
+        editor1.sync();
         $.ajax({
             type: "POST",
             url: "/course/add",

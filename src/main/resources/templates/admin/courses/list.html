@@ -37,7 +37,7 @@
                 {field:'coursePrice',title:'价格',width:'5%',align:'center'},
                 {field:'courseStatus',title:'状态',align:'center',width:'5%'},
                 {field:'id',title:'操作',formatter:function(value,row,index){
-                    var content="<a href='javascript:editcourse(\""+value+"\")'  style='display: block;margin-bottom: 10px'>编辑课程信息</a><a href='' style='display: block;'>编辑课程章节</a>";
+                    var content="<a href='javascript:editcourse(\""+value+"\")'  style='display: block;margin-bottom: 10px'>编辑课程信息</a><a href='javascript:editchapter(\""+value+"\")' style='display: block;'>编辑课程章节</a>";
                     return content;
                 }},
             ]
@@ -49,6 +49,20 @@
 
 
         var url = "/course/toedit?id="+courseid;
+        //iframe层
+        layer.open({
+            type: 2,
+            title: "编辑课程",
+            shadeClose: true,
+            shade: [0.6, '#606060'],
+            area: ['80%', '90%'],
+            content: url
+        });
+    }
+
+
+    function editchapter(cousrseid){
+        var url = "/chapter/toedit?id="+cousrseid;
         //iframe层
         layer.open({
             type: 2,

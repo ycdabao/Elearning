@@ -46,6 +46,18 @@ public class IndexController {
     }
 
     /**
+     * 编辑课程大纲
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/chapter/toedit")
+    public String chapteredit(@RequestParam(required = true) String id, Model model){
+        model.addAttribute("courseid",id);
+        return "/admin/chapter/edit";
+    }
+
+    /**
      * 课程列表
      * @return
      */
