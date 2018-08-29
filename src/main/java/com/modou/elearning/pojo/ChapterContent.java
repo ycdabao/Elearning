@@ -20,6 +20,16 @@ public class ChapterContent implements Serializable {
 
     private Date chapterContentModifydate;
 
+    public Files getFile() {
+        return file;
+    }
+
+    public void setFile(Files file) {
+        this.file = file;
+    }
+
+    private Files file;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {

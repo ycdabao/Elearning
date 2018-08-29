@@ -5,6 +5,7 @@ import com.modou.elearning.pojo.Files;
 import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.EasyuiResult;
+import com.modou.elearning.utils.ModouResult;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class FileController {
     @Autowired
     private FileServiceImpl wu;
 
+
     @RequestMapping(value="/tolist")
     public String printWelcome(ModelMap model) {
 
@@ -51,6 +53,17 @@ public class FileController {
         int total = wu.count(user.getId());
         EasyuiResult<Files> result = new EasyuiResult<Files>(list,total);
         return result;
+    }
+
+    @RequestMapping(value="/findbyid")
+    @ResponseBody
+    public ModouResult findbyid(String id){
+        try {
+            Files files = wu.findbyid(id);
+            return ModouResult.build(200,"success",files);
+        }catch(Exception ex){
+            return ModouResult.build(400,"error");
+        }
     }
 
 

@@ -26,6 +26,9 @@ public class ChapterServiceImpl  implements ChapterService{
     @Override
     @Transactional
     public void add(Chapter chapter) {
+/*        Integer maxorder = chapterMapper.selectmaxorder(chapter.getChapterCourseid());
+        maxorder= maxorder==null?1:++maxorder;
+        chapter.setChapterOrder(maxorder);   //设置顺序*/
         chapterMapper.insert(chapter);
     }
 

@@ -37,6 +37,14 @@ public class FileServiceImpl {
     private String msg;
 
 
+    public Files findbyid(String id){
+      Files files=   filesMapper.selectByPrimaryKey(id);
+
+        return files;
+
+    }
+
+
 
     public List<Files> list(String userid,Integer page,Integer pageSize){
 

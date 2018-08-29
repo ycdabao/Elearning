@@ -32,4 +32,40 @@ String id = UUID.randomUUID().toString();
         }
 
     }
+
+    @RequestMapping(value="/delete")
+    @ResponseBody
+    public ModouResult delete(String id){
+       try {
+           chapterContentService.delete(id);
+           return ModouResult.build(200,"success");
+       }catch(Exception ex){
+            return ModouResult.build(400,"error");
+       }
+    }
+
+    @RequestMapping(value="/findbyid")
+    @ResponseBody
+    public ModouResult findbyid(String id){
+
+        try{
+            ChapterContent content = chapterContentService.findbyid(id);
+            return ModouResult.build(200,"success",content);
+        }catch(Exception ex){
+            return ModouResult.build(400,"error");
+        }
+    }
+
+    @RequestMapping(value="/edit")
+    @ResponseBody
+    public ModouResult edit(ChapterContent content){
+        try{
+           chapterContentService.edit(content);
+           ChapterContent rcontent=chapterContentService.findbyid(content.getId());
+            return ModouResult.build(200,"success",rcontent);
+        }catch(Exception ex){
+            return ModouResult.build(400,"error");
+        }
+    }
+
 }
