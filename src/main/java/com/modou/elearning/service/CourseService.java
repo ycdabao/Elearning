@@ -18,4 +18,6 @@ public interface CourseService {
     public int count(Courses courses);
 
     public Courses findById(String id);
+
+    void update(Courses courses);
 }

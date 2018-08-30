@@ -83,4 +83,15 @@ public class CourseController {
         }
     }
 
+    @RequestMapping(value="/update")
+    @ResponseBody
+    public ModouResult update(Courses Courses) {
+        try {
+            courseService.update(Courses);
+            return ModouResult.build(200, "success");
+        } catch (Exception ex) {
+            return ModouResult.build(400, "error");
+        }
+
+    }
 }

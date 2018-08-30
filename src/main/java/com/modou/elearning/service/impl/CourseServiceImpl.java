@@ -80,4 +80,10 @@ public class CourseServiceImpl implements CourseService {
     public Courses findById(String id) {
         return coursesMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    @Transactional
+    public void update(Courses courses) {
+        coursesMapper.updateByPrimaryKeySelective(courses);
+    }
 }

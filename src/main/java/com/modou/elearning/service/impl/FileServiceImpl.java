@@ -125,6 +125,7 @@ public class FileServiceImpl {
      * @param path   合并后的文件所存储的位置
      * @return
      */
+    @Transactional
     public String chunksMerge(String folder, String ext, int chunks, String md5, String path,String originalName,String userid) {
 
         //合并后的目标文件

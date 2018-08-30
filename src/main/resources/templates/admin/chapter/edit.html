@@ -57,7 +57,7 @@
             border: 1px solid lightgray;
         }
 
-        .rightfloat{
+        .rightfloat {
             float: right;
             margin-right: 10px;
         }
@@ -86,7 +86,7 @@
             margin: 10px 10px
         }
 
-        .addcontentdd{
+        .addcontentdd {
 
             text-align: center;
         }
@@ -94,11 +94,11 @@
 </head>
 <body>
 
-<div id="win1" >
+<div id="win1">
     <table id="dg1"></table>
     <a href="javascript:void(0)" id="btn_addvideo" class="easyui-linkbutton">保存</a>
     <a href="javascript:void(1)" id="btn_cancelvideo" class="easyui-linkbutton">取消</a>
-    <input type="hidden" id="dn" /><input type="hidden" id="tn" />
+    <input type="hidden" id="dn"/><input type="hidden" id="tn"/>
 </div>
 
 <input type="hidden" id="courseid"/>
@@ -131,29 +131,40 @@
                     var label1 = $("<label name='chapterlabel'></label>").append("第" + (i + 1) + "章");
                     var label2 = $("<label></label>").append(chapterlist[i].chapterName);
 
-                    var linkbutton1 = $("<a style='display:inline' class='rightfloat' href='javascript:editChapter(\"" + chapterlist[i].id + "\"," + dtnumber + ")'>修改</a>")
-                    var linkbutton2 = $("<a style='display:inline' class='rightfloat' href='javascript:deleteChapter(\"" + chapterlist[i].id + "\"," + dtnumber + ")'>删除</a>")
-                    var dtnode = $("<dt></dt>").append(label1).append(label2).append(linkbutton2).append(linkbutton1);
-                    var divnode = $("<div id='div" + dtnumber + "'></div>");
-                    var dlnode = $("<dl></dl>");
+                    var linkbutton1 = $("<a style='display:inline' class='rightfloat' href='javascript:editChapter(" + dtnumber + ",\""+chapterlist[i].chapterName+"\")'>修改</a>")
+                    var linkbutton2 = $("<a style='display:inline' class='rightfloat' href='javascript:deleteChapter(" + dtnumber + ")'>删除</a>")
+                    var chapternumberhidden=$("<input type='hidden' name='numberhidden' value='" + (i + 1) + "'/>");
                     var idhidden = $("<input type='hidden' name='chapterid' value='" + chapterlist[i].id + "'/>");
                     var dthidden = $("<input type='hidden' name='dthidden' value='" + dtnumber + "'/>");
+                    var dtnode = $("<dt></dt>")
+                        .append(label1)
+                        .append(label2)
+                        .append(linkbutton2)
+                        .append(linkbutton1)
+                        .append(chapternumberhidden)
+                        .append(idhidden)
+                        .append(dthidden);
+
+                    var divnode = $("<div id='div" + dtnumber + "'></div>");
+                    var dlnode = $("<dl></dl>");
+
+
+
                     dlnode.append(dtnode);
                     divnode.append(dlnode);
-                    divnode.append(idhidden)
-                    divnode.append(dthidden);
+
                     $("#container").append(divnode);
 
 
                     var chapterContentList = chapterlist[i].chapterContentList;
                     for (var j = 0; j < chapterContentList.length; j++) {
-                        var ddnumber=chapterContentList[j].chapterContentOrder;
-                        var ddlabel=$("<label name='contentlabel'></label>").append("课时"+(j+1));
+                        var ddnumber = chapterContentList[j].chapterContentOrder;
+                        var ddlabel = $("<label name='contentlabel'></label>").append("课时" + (j + 1));
                         var ddhidden = $("<input type='hidden' name='ddnumber' value='" + ddnumber + "'/>");
-                        var editbutton = $("<a class='rightfloat' href='javascript:editContent(\""+chapterContentList[j].id+"\","+ddnumber+","+dtnumber+")'>编辑</a>");
-                        var delbutton =$("<a class='rightfloat' href='javascript:delContent(\""+chapterContentList[j].id+"\","+ddnumber+","+dtnumber+")'>删除</a>");
+                        var editbutton = $("<a class='rightfloat' href='javascript:editContent(\"" + chapterContentList[j].id + "\"," + ddnumber + "," + dtnumber + ")'>编辑</a>");
+                        var delbutton = $("<a class='rightfloat' href='javascript:delContent(\"" + chapterContentList[j].id + "\"," + ddnumber + "," + dtnumber + ")'>删除</a>");
 
-                        var ddnode = $("<dd id='dd"+ddnumber+"' class='ddview'></dd>")
+                        var ddnode = $("<dd id='dd" + ddnumber + "' class='ddview'></dd>")
                             .append(ddlabel)
                             .append(chapterContentList[j].chapterContentName)
                             .append(delbutton)
@@ -174,115 +185,8 @@
     });
 
 
-    function deleteChapter(id, n) {
-        $.ajax({
-                type: "POST",
-                url: "/chapter/delete",
-                data: "chapterid=" + id,
-                success: function (delmsg) {
-
-                    if (delmsg.status == 200) {
-
-                        $("#div" + n).remove();
-                        //删除后更新索引
-                        $("#container div").each(function (index, domEle) {
-
-                            $(domEle).find("label[name='chapterlabel']").html("第" + (index + 1) + "章");
-                        })
-                    }
-                }
-            }
-        );
-    }
-
-    function delContent(id,dn,tn){
-        $.ajax({
-                type: "POST",
-                url: "/chaptercontent/delete",
-                data: "id=" + id,
-                success: function (delmsg) {
-
-                    if (delmsg.status == 200) {
-
-                        $("#container #div"+tn + " #dd"+dn).remove();
-                        //删除后更新索引
-                        $("#container #div"+tn+" dd").each(function (index, domEle) {
-
-                            $(domEle).find("label[name='contentlabel']").html("第" + (index + 1) + "章");
-                        })
-                    }
-                }
-            }
-        );
-    }
-
-    function editContent(id,dn,tn) {
-        $("#container #div"+tn + " #dd"+dn).html("");
-
-        $.ajax({
-            type: "POST",
-            url: "/chaptercontent/findbyid",
-            data: "id="+id,
-            success: function (msg) {
-                if (msg.status == 200) {
-                 //   var ddnode = $("<dd id='dd" + dn + "'></dd>");
-                    console.log(msg);
-                    var contentname = $("<input class='easyui-textbox' name='contentname' style='width: 30%' value='"+msg.data.chapterContentName+"'/>");
-                    var p1node = $("<p></p>").append("<label >课时名称：</label>").append(contentname);
-                    var videolabel=$("<label name='videoname'></label>").append(msg.data.file.fileName);
-                    var  videoidhidden=$("<input type='hidden' name='videoid'/>").val(msg.data.fileId);
-
-
-                    var videobutton = $("<a class='middelbutton' href='javascript:openFileList("+dn+","+tn+")'>关联视频</a>");
-                    var p2node = $("<p></p>").append("<label>关联视频：</label>").append(videolabel).append(videoidhidden).append(videobutton);
-                    var p3node = $("<p></p>").append("<label>免费预览：</label>").append("<input type='radio' name='free' value='收费' checked />收费&nbsp;&nbsp;").append("<input type='radio' name='free' value='免费' />免费");
-                    var savebutton = $("<a class='middelbutton' onclick='updateContent(" + tn + "," + dn + ",\"" + id + "\")' style='margin-right: 10px'>保存</a>");
-                    var cancelbutton = $("<a class='middelbutton' onclick='cancelContent(" + tn + ","+dn+")'>取消</a>");
-                    var p4node = $("<p style='text-align: center;' ></p>").append(savebutton).append(cancelbutton);
-                    var ddnumbderhidde = $("<input type='hidden' name='ddnumber' value='" + dn + "'/>");
-                    $("#container #div"+tn + " #dd"+dn).append(p1node).append(p2node).append(p3node).append(p4node).append(ddnumbderhidde);
-                   // $("#div" + tn + " dd[name='addcontent']").before(ddnode);
-
-                    $("#div"+tn+" #dd"+dn+" input[value='"+msg.data.free+"']").attr("checked","checked");
-
-                    $.parser.parse();
-                }
-            }});
-    }
-
-//保存更新
-    function updateContent(tn,dn,id){
-
-        var contentname = $("#div"+tn+" #dd"+dn+" input[name='contentname']").val();
-        var fileid = $("#div"+tn+" #dd"+dn+" input[name='videoid']").val();
-        var free = $("#div"+tn+" #dd"+dn+" input[type='radio']:checked").val();
-
-        $.ajax({
-            type: "POST",
-            url: "/chaptercontent/edit",
-            data: "id=" + id + "&chapterContentName=" + contentname + "&fileId="+fileid+"&free="+free,
-            success: function (msg) {
-                $("#div"+tn+" #dd"+dn).html("");
-                var ddlabel=$("<label name='contentlabel'></label>").append("课时");
-                var ddhidden = $("<input type='hidden' name='ddnumber' value='" + dn + "'/>");
-                var editbutton = $("<a class='rightfloat' href='javascript:editContent(\""+id+"\","+dn+","+tn+")'>编辑</a>");
-                var delbutton =$("<a class='rightfloat' href='javascript:delContent(\""+id+"\","+dn+","+tn+")'>删除</a>");
-
-                $("#div"+tn+" #dd"+dn)
-                    .append(ddlabel)
-                    .append(msg.data.chapterContentName)
-                    .append(delbutton)
-                    .append(editbutton);
-
-
-            }
-        });
-    }
-
-
-
     function addChapter() {
-        var dtnumber = $("#container div:last-child input[name='dthidden']").val();
+        var dtnumber = $("#container div:last-child dt input[name='dthidden']").val();
 
         if (dtnumber == undefined) {
             dtnumber = 0;
@@ -294,16 +198,23 @@
         var chapternumber = $("#container div").length;
 
         var label1 = $("<label name='chapterlabel'></label>").html("第" + (chapternumber + 1) + "章");
+        var chapternumber=$("<input type='hidden' name='numberhidden' value='"+(chapternumber + 1)+"'/>");
         var txtbox1 = $("<input class='easyui-textbox' style='width: 60%' name='chaptername'/>");
         var linkbutton1 = $("<a style='display:inline' name='savebutton' onclick='saveChapter(" + dtnumber + ")'>保存</a>");
         var hiddennode = $("<input type='hidden' name='order' value='" + dtnumber + "'/>");
         var dthidden = $("<input type='hidden' name='dthidden' value='" + dtnumber + "'/>");
+
         var divnode = $("<div id='div" + dtnumber + "'></div>");
         var dlnode = $("<dl></dl>");
         var dtnode = $("<dt></dt>");
 
 
-        dtnode.append(label1).append(txtbox1).append(linkbutton1).append(hiddennode).append(dthidden);
+        dtnode.append(label1)
+            .append(txtbox1)
+            .append(linkbutton1)
+            .append(hiddennode)
+            .append(dthidden)
+            .append(chapternumber);
         dlnode.append(dtnode);
         divnode.append(dlnode);
 
@@ -312,11 +223,11 @@
     }
 
 
-    function saveChapter(n) {
+    function saveChapter(tn) {
 
-        var chaptername = $("#div" + n + " input[name='chaptername']").val();
+        var chaptername = $("#div" + tn + " input[name='chaptername']").val();
         var couserid = $("#courseid").val();
-        var level = $("#div" + n + " input[name='order']").val();
+        var level = $("#div" + tn + " input[name='dthidden']").val();
 
 
         $.ajax({
@@ -326,22 +237,241 @@
                 success: function (msg) {
                     if (msg.status == 200) {
 
-                        $("#div" + n + " a[name='savebutton']").remove();
-                        var linkbutton1 = $("<a style='display:inline' name='editbutton' onclick='editChapter(\"" + msg.data + "\")'>修改</a>");
-                        var linkbutton2 = $("<a style='display:inline' name='removebutton' onclick='deleteChapter(\"" + msg.data + "\"," + n + ")'>删除</a>");
-                        $("#div" + n + " dt").append(linkbutton2).append(linkbutton1);
+
+                        var chapternumber = $("#div"+tn+" dt input[name='numberhidden']").val();
+
+                        var chaptername =$("#div"+tn+" dt input[name='chaptername']").val();
+                        $("#div"+tn+" dl dt").html("");
+                        var dthidden = $("<input type='hidden' name='dthidden' value='" + tn + "'/>");
+                        var label1 = $("<label  name='chapterlabel'></label>").append("第"+chapternumber+"章");
+                        var chapternumberhidden=$("<input type='hidden' name='numberhidden' value='" + chapternumber + "'/>");
+                        var label2 =$("<label ></label>").append(chaptername);
+                        var idhidden = $("<input type='hidden' name='chapterid' value='" + msg.data + "'/>");
+                        var linkbutton1 = $("<a style='display:inline' name='editbutton' onclick='editChapter("+tn+",\""+chaptername+"\")'>修改</a>");
+                        var linkbutton2 = $("<a style='display:inline' name='removebutton' onclick='deleteChapter("+tn + ")'>删除</a>");
+                        $("#div" + tn + " dt")
+                            .append(label1)
+                            .append(label2)
+                            .append(linkbutton2)
+                            .append(linkbutton1)
+                            .append(dthidden)
+                            .append(idhidden)
+                            .append(chapternumberhidden);
+
 
                         var ddnode = $("<dd style='text-align: center' name='addcontent'></dd>");
-                        var linkbutton3 = $("<a style='display:inline' name='addContentBtn' onclick='addcontent(\"" + msg.data + "\"," + n + ")'>添加课时</a>");
+                        var linkbutton3 = $("<a style='display:inline' name='addContentBtn' onclick='addcontent(\"" + msg.data + "\"," + tn + ")'>添加课时</a>");
                         ddnode.append(linkbutton3);
 
-                        $("#div" + n + " dl").append(ddnode);
+                        $("#div" + tn + " dl").append(ddnode);
                     }
 
                 }
             }
         );
     }
+
+
+    function editChapter(tn,chaptername){
+        var cnumber =$("#div"+tn+"  dt input[name='numberhidden']").val();
+
+        var id= $("#div"+tn+" dt input[name='chapterid']").val();
+
+        var label1 = $("<label name='chapterlabel'></label>").html("第" + cnumber + "章");
+        var chapternumber=$("<input type='hidden' name='numberhidden' value='"+cnumber+"'/>");
+        var txtbox1 = $("<input class='easyui-textbox' style='width: 60%' name='chaptername' value='"+chaptername+"'/>");
+        var linkbutton1 = $("<a style='display:inline' name='savebutton' onclick='updateChapter(" + tn + ")'>保存</a>");
+        var hiddennode = $("<input type='hidden' name='order' value='" + tn + "'/>");
+        var dthidden = $("<input type='hidden' name='dthidden' value='" + tn + "'/>");
+        var idhidden = $("<input type='hidden' name='chapterid' value='" +id + "'/>");
+        $("#div"+tn +" dt").html("");
+
+
+        $("#div"+tn +" dt").append(label1)
+            .append(txtbox1)
+            .append(linkbutton1)
+            .append(hiddennode)
+            .append(dthidden)
+            .append(chapternumber).append(idhidden);
+
+
+
+        $.parser.parse();
+    }
+
+
+    function updateChapter(tn){
+
+        var chaptername =$("#div"+tn+" dt input[name='chaptername']").val();
+
+        var id= $("#div"+tn+" dt input[name='chapterid']").val();
+        $.ajax({
+            type: "POST",
+            url: "/chapter/update",
+            data: "id=" + id+"&chapterName="+chaptername,
+            success: function (msg) {
+                if(msg.status==200){
+                    var chapternumber = $("#div"+tn+" dt input[name='numberhidden']").val();
+
+                    var chaptername =$("#div"+tn+" dt input[name='chaptername']").val();
+                    $("#div"+tn+" dl dt").html("");
+                    var dthidden = $("<input type='hidden' name='dthidden' value='" + tn + "'/>");
+                    var label1 = $("<label  name='chapterlabel'></label>").append("第"+chapternumber+"章");
+                    var chapternumberhidden=$("<input type='hidden' name='numberhidden' value='" + chapternumber + "'/>");
+                    var label2 =$("<label ></label>").append(chaptername);
+                    var chapternamehidde = $("<input type='hidden' name='chaptername' value='"+chaptername+"'/>");
+                    var linkbutton1 = $("<a style='display:inline' name='editbutton' onclick='editChapter("+tn+",\""+chaptername+"\")'>修改</a>");
+                    var linkbutton2 = $("<a style='display:inline' name='removebutton' onclick='deleteChapter(" + tn + ")'>删除</a>");
+                    var idhidden = $("<input type='hidden' name='chapterid' value='" +id + "'/>");
+                    $("#div" + tn + " dt")
+                        .append(label1)
+                        .append(label2)
+                        .append(linkbutton2)
+                        .append(linkbutton1)
+                        .append(dthidden)
+                        .append(chapternumberhidden)
+                        .append(chapternamehidde)
+                        .append(idhidden);
+
+                }
+
+            }
+        });
+    }
+
+
+    function deleteChapter( tn) {
+        var id= $("#div"+tn+" dt input[name='chapterid']").val();
+        $.ajax({
+                type: "POST",
+                url: "/chapter/delete",
+                data: "id=" + id,
+                success: function (delmsg) {
+
+                    if (delmsg.status == 200) {
+
+                        $("#div" + tn).remove();
+                        //删除后更新索引
+                        $("#container div").each(function (index, domEle) {
+
+                            $(domEle).find("label[name='chapterlabel']").html("第" + (index + 1) + "章");
+                            $(domEle).find("input[name='numberhidden']").val(index + 1);
+                        })
+                    }
+                }
+            }
+        );
+    }
+
+    function delContent(id, dn, tn) {
+        $.ajax({
+                type: "POST",
+                url: "/chaptercontent/delete",
+                data: "id=" + id,
+                success: function (delmsg) {
+
+                    if (delmsg.status == 200) {
+
+                        $("#container #div" + tn + " #dd" + dn).remove();
+                        //删除后更新索引
+                        $("#container #div" + tn + " dd").each(function (index, domEle) {
+
+                            $(domEle).find("label[name='contentlabel']").html("第" + (index + 1) + "章");
+                        })
+                    }
+                }
+            }
+        );
+    }
+
+    function editContent(id, dn, tn) {
+        $("#container #div" + tn + " #dd" + dn).html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/chaptercontent/findbyid",
+            data: "id=" + id,
+            success: function (msg) {
+                if (msg.status == 200) {
+                    //   var ddnode = $("<dd id='dd" + dn + "'></dd>");
+
+                    var contentname = $("<input class='easyui-textbox' name='contentname' style='width: 30%' value='" + msg.data.chapterContentName + "'/>");
+                    var p1node = $("<p></p>").append("<label >课时名称：</label>").append(contentname);
+                    if(msg.data.file!=null) {
+                        var videolabel = $("<label name='videoname'></label>").append(msg.data.file.fileName);
+                    }
+                    var videoidhidden = $("<input type='hidden' name='videoid'/>").val(msg.data.fileId);
+
+
+                    var videobutton = $("<a class='middelbutton' href='javascript:openFileList(" + dn + "," + tn + ")'>关联视频</a>");
+                    var p2node = $("<p></p>").append("<label>关联视频：</label>")
+                        .append(videolabel)
+                        .append(videoidhidden)
+                        .append(videobutton);
+                    var p3node = $("<p></p>").append("<label>免费预览：</label>")
+                        .append("<input type='radio' name='free"+tn+dn+"' value='收费' checked />收费&nbsp;&nbsp;")
+                        .append("<input type='radio' name='free"+tn+dn+"' value='免费' />免费");
+                    var savebutton = $("<a class='middelbutton' onclick='updateContent(" + tn + "," + dn + ",\"" + id + "\")' style='margin-right: 10px'>保存</a>");
+                    var cancelbutton = $("<a class='middelbutton' onclick='canceleditContent(" + tn + "," + dn + ",\""+id+"\")'>取消</a>");
+                    var p4node = $("<p style='text-align: center;' ></p>").append(savebutton).append(cancelbutton);
+                    var ddnumbderhidde = $("<input type='hidden' name='ddnumber' value='" + dn + "'/>");
+                    $("#container #div" + tn + " #dd" + dn).append(p1node).append(p2node).append(p3node).append(p4node).append(ddnumbderhidde);
+                    // $("#div" + tn + " dd[name='addcontent']").before(ddnode);
+
+                    $("#div" + tn + " #dd" + dn + " input[value='" + msg.data.free + "']").attr("checked", "checked");
+
+                    $.parser.parse();
+                }
+            }
+        });
+    }
+
+    function canceleditContent(tn, dn,id) {
+       contentname=  $("#div" + tn + " #dd" + dn+" input[name='contentname']").val();
+        $("#div" + tn + " #dd" + dn).html("");
+        $("#div" + tn + " #dd" + dn).addClass("ddview");
+        var ddlabel = $("<label name='contentlabel'></label>").append("课时");
+        var ddhidden = $("<input type='hidden' name='ddnumber' value='" + dn + "'/>");
+        var editbutton = $("<a class='rightfloat' href='javascript:editContent(\"" + id + "\"," + dn + "," + tn + ")'>编辑</a>");
+        var delbutton = $("<a class='rightfloat' href='javascript:delContent(\"" + id + "\"," + dn + "," + tn + ")'>删除</a>");
+
+        $("#div" + tn + " #dd" + dn)
+            .append(ddlabel)
+            .append(contentname)
+            .append(delbutton)
+            .append(editbutton).append(ddhidden);
+
+    }
+
+    //保存更新
+    function updateContent(tn, dn, id) {
+
+        var contentname = $("#div" + tn + " #dd" + dn + " input[name='contentname']").val();
+        var fileid = $("#div" + tn + " #dd" + dn + " input[name='videoid']").val();
+        var free = $("#div" + tn + " #dd" + dn + " input[type='radio']:checked").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/chaptercontent/edit",
+            data: "id=" + id + "&chapterContentName=" + contentname + "&fileId=" + fileid + "&free=" + free,
+            success: function (msg) {
+                $("#div" + tn + " #dd" + dn).html("");
+                var ddlabel = $("<label name='contentlabel'></label>").append("课时");
+                var ddhidden = $("<input type='hidden' name='ddnumber' value='" + dn + "'/>");
+                var editbutton = $("<a class='rightfloat' href='javascript:editContent(\"" + id + "\"," + dn + "," + tn + ")'>编辑</a>");
+                var delbutton = $("<a class='rightfloat' href='javascript:delContent(\"" + id + "\"," + dn + "," + tn + ")'>删除</a>");
+
+                $("#div" + tn + " #dd" + dn)
+                    .append(ddlabel)
+                    .append(msg.data.chapterContentName)
+                    .append(delbutton)
+                    .append(editbutton).append(ddhidden);
+
+
+            }
+        });
+    }
+
 
     function addcontent(id, tn) {
 
@@ -352,16 +482,17 @@
             dn++;
         }
 
+
         var ddnode = $("<dd id='dd" + dn + "'></dd>");
         var contentname = $("<input class='easyui-textbox' name='contentname' style='width: 30%' />");
         var p1node = $("<p></p>").append("<label >课时名称：</label>").append(contentname);
-        var videolabel=$("<label name='videoname'></label>");
-        var  videoidhidden=$("<input type='hidden' name='videoid'/>");
-        var videobutton = $("<a class='middelbutton' href='javascript:openFileList("+dn+","+tn+")'>关联视频</a>");
+        var videolabel = $("<label name='videoname'></label>");
+        var videoidhidden = $("<input type='hidden' name='videoid'/>");
+        var videobutton = $("<a class='middelbutton' href='javascript:openFileList(" + dn + "," + tn + ")'>关联视频</a>");
         var p2node = $("<p></p>").append("<label>关联视频：</label>").append(videolabel).append(videoidhidden).append(videobutton);
-        var p3node = $("<p></p>").append("<label>免费预览：</label>").append("<input type='radio' value='收费' checked />收费&nbsp;&nbsp;").append("<input type='radio' value='免费' />免费");
+        var p3node = $("<p></p>").append("<label>免费预览：</label>").append("<input type='radio' value='收费' name='free"+tn+dn+"' checked />收费&nbsp;&nbsp;").append("<input type='radio' name='free"+tn+dn+"' value='免费' />免费");
         var savebutton = $("<a class='middelbutton' onclick='saveContent(" + tn + "," + dn + ",\"" + id + "\")' style='margin-right: 10px'>保存</a>");
-        var cancelbutton = $("<a class='middelbutton' onclick='cancelContent(" + tn + ","+dn+")'>取消</a>");
+        var cancelbutton = $("<a class='middelbutton' onclick='canceladdContent(" + tn + "," + dn + ")'>取消</a>");
         var p4node = $("<p style='text-align: center'></p>").append(savebutton).append(cancelbutton);
         var ddnumbderhidde = $("<input type='hidden' name='ddnumber' value='" + dn + "'/>");
         ddnode.append(p1node).append(p2node).append(p3node).append(p4node).append(ddnumbderhidde);
@@ -369,43 +500,58 @@
         $.parser.parse();
     }
 
-    function cancelContent(n,d) {
+    function canceladdContent(n, d) {
         $("#div" + n + " #dd" + d).remove();
 
     }
 
-    function saveContent(t, d, chapterid) {
+    function saveContent(tn, dn, chapterid) {
 
-        var contentname = $("#div" + t + " #dd" + d + " input[name='contentname']").val();
+        var contentname = $("#div" + tn + " #dd" + dn + " input[name='contentname']").val();
 
-        var order = $("#div" + t + " #dd" + d + " input[name='ddnumber']").val();
-        var fileid = $("#div" + t + " #dd" + d + " input[name='videoid']").val();
-        var free =  $("#div" + t + " #dd" + d + " input[type='radio']:checked").val();
+
+        var order = $("#div" + tn + " #dd" + dn + " input[name='ddnumber']").val();
+        var fileid = $("#div" + tn + " #dd" + dn + " input[name='videoid']").val();
+        var free = $("#div" + tn + " #dd" + dn + " input[type='radio']:checked").val();
         $.ajax({
                 type: "POST",
                 url: "/chaptercontent/add",
-                data: "chapterId=" + chapterid + "&chapterContentName=" + contentname + "&chapterContentOrder=" + order+"&fileId="+fileid+"&free="+free,
+                data: "chapterId=" + chapterid + "&chapterContentName=" + contentname + "&chapterContentOrder=" + order + "&fileId=" + fileid + "&free=" + free,
                 success: function (msg) {
+                    if(msg.status==200){
+                        var keshi=$("#div" + tn + " dd").length-1;
+                    $("#div" + tn + " #dd" + dn).html("");
+                        $("#div" + tn + " #dd" + dn).addClass("ddview");
+                    var ddlabel = $("<label name='contentlabel'></label>").append("课时"+keshi);
+                    var ddhidden = $("<input type='hidden' name='ddnumber' value='" + dn + "'/>");
+                    var editbutton = $("<a class='rightfloat' href='javascript:editContent(\"" + msg.data + "\"," + dn + "," + tn + ")'>编辑</a>");
+                    var delbutton = $("<a class='rightfloat' href='javascript:delContent(\"" + msg.data + "\"," + dn + "," + tn + ")'>删除</a>");
 
+                    $("#div" + tn + " #dd" + dn)
+                        .append(ddlabel)
+                        .append(contentname)
+                        .append(delbutton)
+                        .append(editbutton).append(ddhidden);
+                    }
                 }
             }
         )
     }
 
-    function openFileList(dn,tn){
+    function openFileList(dn, tn) {
 
         $("#dn").val(dn);
         $("#tn").val(tn);
         $("#win1").window({
-            width:600,
-            height:400
+            width: 600,
+            height: 400
         });
         $("#dg1").datagrid({
-            url:'/file/list',
-            columns:[
+            url: '/file/list',
+            columns: [
                 [
-                    {field:'id',title:'id',width:100},
-                    {field:'fileName',title:'fileName',width:100}
+                    {field: 'id', title: 'id', width: 100},
+                    {field: 'fileName', title: 'fileName', width: 100}
                 ]
             ]
         });
@@ -417,11 +563,11 @@
 
 
     $("#btn_addvideo").bind(
-        "click",function(){
-            var row=$("#dg1").datagrid("getSelected");
+        "click", function () {
+            var row = $("#dg1").datagrid("getSelected");
 
-            $("#div"+$('#tn').val()+" #dd"+$('#dn').val()+" label[name='videoname']").html(row.fileName);
-            $("#div"+$('#tn').val()+" #dd"+$('#dn').val()+" input[name='videoid']").val(row.id);
+            $("#div" + $('#tn').val() + " #dd" + $('#dn').val() + " label[name='videoname']").html(row.fileName);
+            $("#div" + $('#tn').val() + " #dd" + $('#dn').val() + " input[name='videoid']").val(row.id);
             $("#win1").window("close");
 
         }
@@ -429,12 +575,12 @@
 
 
     $("#btn_cancelvideo").bind(
-        "click",function(){
+        "click", function () {
             $("#win1").window("close");
 
         }
     )
-    $("#win1").css("display","none");
+    $("#win1").css("display", "none");
 
 
 </script>

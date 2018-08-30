@@ -12,41 +12,6 @@
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
 
     <link rel="stylesheet" href="../../js/webuploader/webuploader.css" />
-
-<!--kindEditor-->
-    <link rel="stylesheet" href="../../js/kindeditor/themes/default/default.css" />
-    <script charset="utf-8" src="../../js/kindeditor/kindeditor-all-min.js"></script>
-    <script charset="utf-8" src="../../js/kindeditor/lang/zh-CN.js"></script>
-    <script>
-        var editor1;
-        KindEditor.ready(function(K) {
-            editor1 = K.create('textarea[name="courseDetails"]', {
-                uploadJson : '../jsp/upload_json.jsp',
-                allowFileManager : false,
-                items:[
-                    'source', '|', 'undo', 'redo', '|',   'cut', 'copy', 'paste',
-                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
-                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|',
-                     'table', 'hr',  'pagebreak'
-                ],
-                afterCreate : function() {
-                    var self = this;
-                    K.ctrl(document, 13, function() {
-                        self.sync();
-                        document.forms['example'].submit();
-                    });
-                    K.ctrl(self.edit.doc, 13, function() {
-                        self.sync();
-                        document.forms['example'].submit();
-                    });
-                }
-            });
-
-        });
-    </script>
     <style type="text/css">
 
         *{font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;}
@@ -81,7 +46,7 @@
 
         }
         .cover #picker {
-           text-align: center;
+            text-align: center;
             z-index: 1000;
             margin: 80px auto 30px auto;
         }
@@ -100,6 +65,118 @@
             overflow: hidden;
         }
     </style>
+<!--kindEditor-->
+    <link rel="stylesheet" href="../../js/kindeditor/themes/default/default.css" />
+    <script charset="utf-8" src="../../js/kindeditor/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="../../js/kindeditor/lang/zh-CN.js"></script>
+    <script src="../../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor1;
+        KindEditor.ready(function(K) {
+            editor1 = K.create('textarea[name="courseDetails"]', {
+                uploadJson : '../jsp/upload_json.jsp',
+                allowFileManager : false,
+                items:[
+                    'source', '|', 'undo', 'redo', '|',   'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|',
+                     'table', 'hr',  'pagebreak'
+                ],
+                afterCreate : function() {
+                    var self = this;
+                    K.ctrl(document, 13, function() {
+                        self.sync();
+                        document.forms['example'].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function() {
+                        self.sync();
+                        document.forms['example'].submit();
+                    });
+                }
+            });
+
+        });
+
+        $(document).ready(function(){
+            //图片上传
+            // 初始化Web Uploader
+            var uploader = WebUploader.create({
+                swf: "Uploader.swf",
+                // 文件接收服务端。
+                server : '/course/uploadcover',
+                pick: {
+                    id: '#picker',
+                    label: '点击选择图片'
+                },
+                auto:true,
+                paste: document.body,
+                //限制只能上传一个文件
+
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize : false,
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                },
+                chunked:false
+            });
+
+            uploader.on("uploadSuccess",function(file,response){
+
+                $("#c_image_url").val(response.data);
+                $("#upControl_IMG").attr("src","/"+response.data);
+            })
+
+            //分类
+            $("#type1").combobox({
+                url:'/types/findbyparentid',
+                valueField:'id',
+                textField:'typeName',
+                onSelect:function(record){
+                    var parentid = record.id;
+                    $("#type2").combobox({
+                        url:'/types/findbyparentid?parentid='+parentid,
+                        valueField:'id',
+                        textField:'typeName',
+                        onSelect:function(record1){
+                            $("#type3").combobox({
+                                    url: '/types/findbyparentid?parentid=' + record1.id,
+                                    valueField: 'id',
+                                    textField: 'typeName'
+                                }
+                            )
+                        }
+                    })
+                }
+            })
+
+            //保存
+            $("#btn_save").click(function(){
+                editor1.sync();
+                $.ajax({
+                    type: "POST",
+                    url: "/course/add",
+                    data: $("#ff").serialize(),
+                    success: function(msg){
+                        if(msg.status==200){
+
+
+
+                        }else{
+                            $.messager.alert('错误','创建失败',"error");
+                        }
+                    }
+                });
+            });
+        })
+    </script>
+
 </head>
 <body>
 
@@ -192,92 +269,7 @@
         </div>
     </form>
 
-    <script src="../../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    //图片上传
-    // 初始化Web Uploader
-    var uploader = WebUploader.create({
-        swf: "Uploader.swf",
-        // 文件接收服务端。
-        server : '/course/uploadcover',
-        pick: {
-            id: '#picker',
-            label: '点击选择图片'
-        },
-        auto:true,
-        paste: document.body,
-        //限制只能上传一个文件
-
-        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-        resize : false,
-        // 只允许选择图片文件。
-        accept: {
-            title: 'Images',
-            extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/*'
-        },
-        chunked:false
-    });
-
-    uploader.on("uploadSuccess",function(file,response){
-
-        $("#c_image_url").val(response.data);
-        $("#upControl_IMG").attr("src","/"+response.data);
-    })
-
-    //分类
-    $("#type1").combobox({
-        url:'/types/findbyparentid',
-        valueField:'id',
-        textField:'typeName',
-        onSelect:function(record){
-            var parentid = record.id;
-            $("#type2").combobox({
-                url:'/types/findbyparentid?parentid='+parentid,
-                valueField:'id',
-                textField:'typeName',
-                onSelect:function(record1){
-                    $("#type3").combobox({
-                        url: '/types/findbyparentid?parentid=' + record1.id,
-                        valueField: 'id',
-                        textField: 'typeName'
-                    }
-                    )
-                }
-            })
-        }
-    })
-
-    //保存
-    $("#btn_save").click(function(){
-        editor1.sync();
-        $.ajax({
-            type: "POST",
-            url: "/course/add",
-            data: $("#ff").serialize(),
-            success: function(msg){
-                if(msg.status==200){
 
 
-                    var url = "/chapter/toadd?id="+msg.data;
-                    //iframe层
-                    layer.open({
-                        type: 2,
-                        title: "添加章节",
-                        shadeClose: true,
-                        shade: [0.6, '#606060'],
-                        area: ['80%', '90%'],
-                        content: url
-                    });
-
-                }else{
-                    $.messager.alert('错误','创建失败',"error");
-                }
-            }
-        });
-    });
-
-</script>
 </body>
 </html>

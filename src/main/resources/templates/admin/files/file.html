@@ -66,7 +66,7 @@
             (new WebUploader.Uploader()).md5File(file, 0, 10*1024*1024).progress(function(percentage){
 
             }).then(function(val){
-                console.warn(val);
+
 
                 md5Mark = val;
                 userInfo.md5 = val;
@@ -117,7 +117,6 @@
                     status: "chunkCheck"
                     , name: uniqueFileName
                     , chunkIndex: block.chunk
-
                     , size: block.end - block.start
                 }
                 , cache: false

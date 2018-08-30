@@ -26,6 +26,7 @@ String id = UUID.randomUUID().toString();
         content.setChapterContentCreatedate(new Date());
         try {
             chapterContentService.add(content);
+
             return ModouResult.build(200,"success",id);
         }catch(Exception ex){
             return  ModouResult.build(400,"error");

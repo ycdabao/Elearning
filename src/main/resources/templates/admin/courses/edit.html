@@ -6,13 +6,14 @@
     <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
     <script src="../../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
-
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
     <!-- 中文化 -->
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
 
     <link rel="stylesheet" href="../../js/webuploader/webuploader.css" />
-
+    <script src="../../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
 <!--kindEditor-->
     <link rel="stylesheet" href="../../js/kindeditor/themes/default/default.css" />
     <script charset="utf-8" src="../../js/kindeditor/kindeditor-all-min.js"></script>
@@ -46,7 +47,162 @@
             });
 
         });
+
+        $(document).ready(function(){
+
+
+
+            //图片上传
+            // 初始化Web Uploader
+            var uploader = WebUploader.create({
+                swf: "Uploader.swf",
+                // 文件接收服务端。
+                server : '/course/uploadcover',
+                pick: {
+                    id: '#picker',
+                    label: '点击选择图片'
+                },
+                auto:true,
+                paste: document.body,
+                //限制只能上传一个文件
+
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize : false,
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                },
+                chunked:false
+            });
+
+            uploader.on("uploadSuccess",function(file,response){
+
+                $("#c_image_url").val(response.data);
+                $("#upControl_IMG").attr("src","/"+response.data);
+            })
+
+            //分类
+            $("#type1").combobox({
+                url:'/types/findbyparentid',
+                valueField:'id',
+                textField:'typeName',
+                onSelect:function(record){
+                    $("#type2").combobox("clear");
+                    $("#type3").combobox("clear");
+                    var parentid = record.id;
+                    $("#type2").combobox({
+                        url:'/types/findbyparentid?parentid='+parentid,
+                        valueField:'id',
+                        textField:'typeName',
+                        onSelect:function(record1){
+
+                            $("#type3").combobox({
+                                    url: '/types/findbyparentid?parentid=' + record1.id,
+                                    valueField: 'id',
+                                    textField: 'typeName'
+                                }
+                            )
+                        }
+                    })
+                }
+            })
+
+
+            //初始化表单
+            $.ajax({
+                    type: "POST",
+                    url: "/course/findbyid",
+                    data:"id=[[${courseid}]]",
+                    success: function (msg) {
+
+                        if(msg.status==200){
+                            $("#courseid").val(msg.data.id);
+                            $("#courseName").textbox("setValue",msg.data.courseName);
+                            $("input:radio[name='courseDifficulty'][value='"+msg.data.courseDifficulty+"']").attr("checked",true);
+                            $("#courseSummary").textbox("setValue",msg.data.courseSummary);
+                            $("#courseCrowd").textbox("setValue",msg.data.courseCrowd);
+                            //$("#courseDetails").val(msg.data.courseDetails);
+                            KindEditor.html("#courseDetails",msg.data.courseDetails);
+                            $("#courseLabel").textbox("setValue",msg.data.courseLabel);
+                            $("#upControl_IMG").attr("src","/"+msg.data.courseCover);
+                            $("#c_image_url").val(msg.data.courseCover);
+                            $("input:radio[name='coursePriceType'][value='"+msg.data.coursePriceType+"']").attr("checked",true);
+                            $("#coursePrice").textbox("setValue",msg.data.coursePrice);
+                            $("#type1").combobox({
+                                url: '/types/findbyparentid',
+                                valueField: 'id',
+                                textField: 'typeName',
+                                onLoadSuccess:function(){
+                                    var t1 = $("#type1").combobox("getData");
+                                    for(var i=0; i<t1.length; i++){
+                                        if(t1[i].id==msg.data.courseType1){
+                                            $("#type1").combobox("select",msg.data.courseType1);
+                                        }
+                                    }
+
+                                    $("#type2").combobox({
+                                        url:'/types/findbyparentid?parentid='+msg.data.courseType1,
+                                        valueField:'id',
+                                        textField:'typeName',
+                                        onLoadSuccess:function(){
+
+                                            var t2 = $("#type2").combobox("getData");
+                                            for(var i=0; i<t2.length; i++){
+                                                if(t2[i].id==msg.data.courseType2){
+                                                    $("#type2").combobox("select",msg.data.courseType2);
+                                                }
+                                            }
+
+                                            if($("#type2").combobox("getValue")!=null&&$("#type2").combobox("getValue")!="") {
+
+                                                $("#type3").combobox({
+                                                    url: '/types/findbyparentid?parentid=' + msg.data.courseType2,
+                                                    valueField: 'id',
+                                                    textField: 'typeName',
+                                                    onLoadSuccess: function () {
+                                                        var t3 = $("#type3").combobox("getData");
+                                                        for (var i = 0; i < t3.length; i++) {
+                                                            if (t3[i].id == msg.data.courseType3) {
+                                                                $("#type3").combobox("select", msg.data.courseType3);
+                                                            }
+                                                        }
+
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                }
+            )
+
+
+            //保存
+            $("#btn_save").click(function(){
+                editor1.sync();
+                $.ajax({
+                    type: "POST",
+                    url: "/course/update",
+                    data: $("#ff").serialize(),
+                    success: function(msg){
+                        if(msg.status==200){
+                            layer.close(layer.index);
+                            window.parent.location.reload();
+
+                        }else{
+                            $.messager.alert('错误','创建失败',"error");
+                        }
+                    }
+                });
+            });
+        })
     </script>
+
     <style type="text/css">
 
         *{font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;}
@@ -104,6 +260,7 @@
 <body>
 
     <form id="ff" method="post">
+        <input type="hidden" name="id" id="courseid" />
         <div>
         <dl>
             <dt>课程标题:</dt>
@@ -117,7 +274,7 @@
                 <div >
                     <input class="easyui-combobox" id="type1" name="courseType1" style="width:20%;" data-options="label:'一级分类'"/>
                     <input class="easyui-combobox" id="type2" name="courseType2" style="width:20%;" data-options="label:'二级分类'"/>
-                    <input class="easyui-combobox" id="type3" name="courseType" style="width:20%;" data-options="label:'三级分类'"/>
+                    <input class="easyui-combobox" id="type3" name="courseType3" style="width:20%;" data-options="label:'三级分类'"/>
                 </div>
             </dd>
             <dt>课程难度:</dt>
@@ -192,169 +349,7 @@
         </div>
     </form>
 
-    <script src="../../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
 
 
-
-
-
-
-    //图片上传
-    // 初始化Web Uploader
-    var uploader = WebUploader.create({
-        swf: "Uploader.swf",
-        // 文件接收服务端。
-        server : '/course/uploadcover',
-        pick: {
-            id: '#picker',
-            label: '点击选择图片'
-        },
-        auto:true,
-        paste: document.body,
-        //限制只能上传一个文件
-
-        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-        resize : false,
-        // 只允许选择图片文件。
-        accept: {
-            title: 'Images',
-            extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/*'
-        },
-        chunked:false
-    });
-
-    uploader.on("uploadSuccess",function(file,response){
-
-        $("#c_image_url").val(response.data);
-        $("#upControl_IMG").attr("src","/"+response.data);
-    })
-
-    //分类
-    $("#type1").combobox({
-        url:'/types/findbyparentid',
-        valueField:'id',
-        textField:'typeName',
-        onSelect:function(record){
-            $("#type2").combobox("clear");
-            $("#type3").combobox("clear");
-            var parentid = record.id;
-            $("#type2").combobox({
-                url:'/types/findbyparentid?parentid='+parentid,
-                valueField:'id',
-                textField:'typeName',
-                onSelect:function(record1){
-
-                    $("#type3").combobox({
-                        url: '/types/findbyparentid?parentid=' + record1.id,
-                        valueField: 'id',
-                        textField: 'typeName'
-                    }
-                    )
-                }
-            })
-        }
-    })
-
-
-    //初始化表单
-    $.ajax({
-        type: "POST",
-        url: "/course/findbyid",
-        data:"id=[[${courseid}]]",
-        success: function (msg) {
-
-            if(msg.status==200){
-
-                $("#courseName").textbox("setValue",msg.data.courseName);
-                $("input:radio[name='courseDifficulty'][value='"+msg.data.courseDifficulty+"']").attr("checked",true);
-               $("#courseSummary").textbox("setValue",msg.data.courseSummary);
-               $("#courseCrowd").textbox("setValue",msg.data.courseCrowd);
-               //$("#courseDetails").val(msg.data.courseDetails);
-                KindEditor.html("#courseDetails",msg.data.courseDetails);
-               $("#courseLabel").textbox("setValue",msg.data.courseLabel);
-               $("#upControl_IMG").attr("src","/"+msg.data.courseCover);
-                $("input:radio[name='coursePriceType'][value='"+msg.data.coursePriceType+"']").attr("checked",true);
-                $("#coursePrice").textbox("setValue",msg.data.coursePrice);
-                $("#type1").combobox({
-                    url: '/types/findbyparentid',
-                    valueField: 'id',
-                    textField: 'typeName',
-                    onLoadSuccess:function(){
-                       var t1 = $("#type1").combobox("getData");
-                       for(var i=0; i<t1.length; i++){
-                           if(t1[i].id==msg.data.courseType1){
-                               $("#type1").combobox("select",msg.data.courseType1);
-                           }
-                       }
-
-                        $("#type2").combobox({
-                            url:'/types/findbyparentid?parentid='+msg.data.courseType1,
-                            valueField:'id',
-                            textField:'typeName',
-                            onLoadSuccess:function(){
-
-                                var t2 = $("#type2").combobox("getData");
-                                for(var i=0; i<t2.length; i++){
-                                    if(t2[i].id==msg.data.courseType2){
-                                        $("#type2").combobox("select",msg.data.courseType2);
-                                    }
-                                }
-
-                                if($("#type2").combobox("getValue")!=null&&$("#type2").combobox("getValue")!="") {
-
-                                    $("#type3").combobox({
-                                        url: '/types/findbyparentid?parentid=' + msg.data.courseType2,
-                                        valueField: 'id',
-                                        textField: 'typeName',
-                                        onLoadSuccess: function () {
-                                            var t3 = $("#type3").combobox("getData");
-                                            for (var i = 0; i < t3.length; i++) {
-                                                if (t3[i].id == msg.data.courseType3) {
-                                                    $("#type3").combobox("select", msg.data.courseType3);
-                                                }
-                                            }
-
-                                        }
-                                    })
-                                }
-                        }
-                        });
-                    }
-                });
-            }
-        }
-    }
-    )
-
-
-    //保存
-    $("#btn_save").click(function(){
-        editor1.sync();
-        $.ajax({
-            type: "POST",
-            url: "/course/add",
-            data: $("#ff").serialize(),
-            success: function(msg){
-                if(msg.status==200){
-                   // window.open("/chapter/toadd?id="+msg.data,"SelectUser", "scrollbars=yes,width=600,height=400,left=150,top=100,status=yes,resizable=yes");
-
-                    var chapterwin = $("<div></div>").window({
-                        width:600,
-                        height:400,
-                        modal:true,
-                        href:"/chapter/toadd?id="+msg.data
-                    })
-
-                }else{
-                    $.messager.alert('错误','创建失败',"error");
-                }
-            }
-        });
-    });
-
-</script>
 </body>
 </html>

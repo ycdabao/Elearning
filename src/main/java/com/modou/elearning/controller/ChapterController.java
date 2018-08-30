@@ -36,11 +36,11 @@ public class ChapterController {
 
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public ModouResult delete(String chapterid) {
+    public ModouResult delete(String id) {
 
 
         try {
-            chapterService.delete(chapterid);
+            chapterService.delete(id);
             return ModouResult.build(200, "succes");
         } catch (Exception ex) {
             return ModouResult.build(400, "error");
