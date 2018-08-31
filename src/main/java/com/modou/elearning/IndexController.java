@@ -72,4 +72,10 @@ public class IndexController {
         return "/admin/chapter/add";
     }
 
+
+    @RequestMapping("/view")
+    public String view(){
+        return "/view";
+    }
+
 }

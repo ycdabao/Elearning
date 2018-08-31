@@ -44,11 +44,14 @@
 <script src="../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/webuploader/md5.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/webuploader/webuploader.js" type="text/javascript" charset="utf-8"></script>
+
+
+
 <script type="text/javascript">
     var userInfo = {userId:"kazaff", md5:""};   //用户会话信息
     var chunkSize = 5000 * 1024;        //分块大小
     var uniqueFileName = null;          //文件唯一标识符
-    var md5Mark = null;
+	var md5Mark;
 
 
 
@@ -62,29 +65,25 @@
         beforeSendFile: function(file){
             //秒传验证
             var task = new $.Deferred();
-            var start = new Date().getTime();
-            (new WebUploader.Uploader()).md5File(file, 0, 10*1024*1024).progress(function(percentage){
+
+            (new WebUploader.Uploader()).md5File(file,5*1024*1024).progress(function(percentage){
 
             }).then(function(val){
-
-
-                md5Mark = val;
-                userInfo.md5 = val;
-
+		/*	md5Mark=val;
+                userInfo.md5 = val;*/
+		md5Mark=   md5(''+userInfo.userId+file.name+file.type+file.lastModifiedDate+file.size);
+                userInfo.md5= md5(''+userInfo.userId+file.name+file.type+file.lastModifiedDate+file.size);
                 $.ajax({
                     type: "POST"
                     , url: backEndUrl
                     , data: {
                         status: "md5Check"
-                        , md5: val
+                        , md5: md5Mark
                     }
                     , cache: false
-                    , timeout: 1000 //todo 超时的话，只能认为该文件不曾上传过
+                    , timeout: 5000 //todo 超时的话，只能认为该文件不曾上传过
                     , dataType: "json"
                 }).then(function(data, textStatus, jqXHR){
-
-
-
                     if(data.ifExist){   //若存在，这返回失败给WebUploader，表明该文件不需要上传
                         task.reject();
 
@@ -142,32 +141,35 @@
                 var task = new $.Deferred();
                 uniqueFileName = md5(''+userInfo.userId+file.name+file.type+file.lastModifiedDate+file.size);
 
-                $.ajax({
-                    type: "POST"
-                    , url: backEndUrl
-                    , data: {
-                        status: "chunksMerge"
-                        , name: uniqueFileName
-                        , chunks: chunksTotal
-                        , ext: file.ext
-                        , md5: md5Mark
-                        ,originalName:file.name
-                    }
-                    , cache: false
-                    , dataType: "json"
-                }).then(function(data, textStatus, jqXHR){
+                    $.ajax({
+                        type: "POST"
+                        , url: backEndUrl
+                        , data: {
+                            status: "chunksMerge"
+                            , name: uniqueFileName
+                            , chunks: chunksTotal
+                            , ext: file.ext
+                            , md5: uniqueFileName
+                            ,originalName:file.name
+                        }
+                        , cache: false
+                        , dataType: "json"
+                    }).then(function(data, textStatus, jqXHR){
 
-                    //todo 检查响应是否正常
+                        //todo 检查响应是否正常
 
-                    task.resolve();
-                    file.path = data.path;
-                    UploadComlate(file);
+                        task.resolve();
+                        file.path = data.path;
+                        UploadComlate(file);
 
-                }, function(jqXHR, textStatus, errorThrown){
-                    task.reject();
-                });
+                    }, function(jqXHR, textStatus, errorThrown){
+                        task.reject();
+                    });
 
-                return $.when(task);
+                    return $.when(task);
+
+
+
             }else{
                 UploadComlate(file);
             }
@@ -202,7 +204,7 @@
         , prepareNextFile: true
         , chunked: true
         , chunkSize: chunkSize
-
+        ,threads:1
         , formData: function(){return $.extend(true, {}, userInfo);}
         , fileNumLimit: 10
         , fileSingleSizeLimit: 1000 * 1024 * 1024
