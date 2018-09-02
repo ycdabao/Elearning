@@ -7,6 +7,7 @@ import com.modou.elearning.service.UserService;
 import com.modou.elearning.utils.ModouResult;
 
 import com.modou.elearning.utils.StringUtils;
+import com.modou.elearning.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,6 @@ import org.springframework.util.DigestUtils;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService{
         users.setUserPass(DigestUtils.md5DigestAsHex(users.getUserPass().getBytes()));
         users.setUserCreatedate(new Date());
         users.setUserModifydate(new Date());
-        users.setId(UUID.randomUUID().toString());
+        users.setId(UUIDUtil.creatUUID());
         usersMapper.insert(users);
 
         return ModouResult.ok();

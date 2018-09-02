@@ -10,7 +10,7 @@ public class Files implements Serializable {
 
     private Date fileCreatedate;
 
-    private String fileName;
+    private String filename;
 
     private String fileType;
 
@@ -52,12 +52,12 @@ public class Files implements Serializable {
         this.fileCreatedate = fileCreatedate;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName == null ? null : fileName.trim();
+    public void setFilename(String filename) {
+        this.filename = filename == null ? null : filename.trim();
     }
 
     public String getFileType() {

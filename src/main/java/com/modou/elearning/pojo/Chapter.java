@@ -19,14 +19,14 @@ public class Chapter implements Serializable {
     private Date chapterModifydate;
 
     public List<ChapterContent> getChapterContentList() {
-        return chapterContentList;
+        return ChapterContentList;
     }
 
     public void setChapterContentList(List<ChapterContent> chapterContentList) {
-        this.chapterContentList = chapterContentList;
+        ChapterContentList = chapterContentList;
     }
 
-    private List<ChapterContent> chapterContentList = new ArrayList<ChapterContent>();
+    private List<ChapterContent> ChapterContentList=new ArrayList<ChapterContent>();
 
     private static final long serialVersionUID = 1L;
 

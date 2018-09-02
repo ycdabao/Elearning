@@ -228,7 +228,7 @@ public class FileServiceImpl {
         files.setId(key);
         files.setFileCreatedate(new Date());
         files.setFileContent(file);
-        files.setFileName(originalName);
+        files.setFilename(originalName);
         files.setFileCreateby(userid);
         filesMapper.insert(files);
 

@@ -27,6 +27,4 @@ public interface ChapterMapper {
     int updateByPrimaryKeySelective(Chapter record);
 
     int updateByPrimaryKey(Chapter record);
-
-    Integer selectmaxorder(@Param("courseid") String courseid);
 }

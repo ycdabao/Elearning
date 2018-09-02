@@ -5,6 +5,7 @@ import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.CourseService;
 import com.modou.elearning.utils.EasyuiResult;
 import com.modou.elearning.utils.ModouResult;
+import com.modou.elearning.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping(value = "/course")
@@ -50,7 +50,7 @@ public class CourseController {
         courses.setCourseCreatedate(new Date());
         courses.setCourseStatus("草稿");
         courses.setCourseStudentNumber(0);
-        String courseid=UUID.randomUUID().toString();
+        String courseid= UUIDUtil.creatUUID();
         courses.setId(courseid);
         try {
             courseService.add(courses);

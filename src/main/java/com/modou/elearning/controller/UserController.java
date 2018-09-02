@@ -73,7 +73,7 @@ public class UserController {
     @RequestMapping(value="/dologin")
     @ResponseBody
     public ModouResult login(String login, String password, HttpSession session){
-        Users  user = userService.login(login,password);
+        Users user = userService.login(login,password);
 
         if(user==null){
             ModouResult result = new ModouResult(400,"用户名或密码错误",null);

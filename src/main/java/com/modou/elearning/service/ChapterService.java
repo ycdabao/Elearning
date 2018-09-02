@@ -1,7 +1,6 @@
 package com.modou.elearning.service;
 
 import com.modou.elearning.pojo.Chapter;
-import com.modou.elearning.pojo.ChapterContent;
 
 import java.util.List;
 

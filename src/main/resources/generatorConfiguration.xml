@@ -31,10 +31,20 @@
 		</javaClientGenerator>
 		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
 
-		<table tableName="chapter_content" domainObjectName="ChapterContent"></table>
+		<!--table tableName="chapter_content" domainObjectName="ChapterContent"></table>
 		<table tableName="courses" domainObjectName="Courses"></table>
+		<table tableName="users" domainObjectName="Users"></table>
+		<table tableName="folder" domainObjectName="Folder"></table>
+		<table tableName="posts_type" domainObjectName="PostsType"></table-->
+		<table tableName="files" domainObjectName="Files"></table>
+		<!--table tableName="types" domainObjectName="Types"></table>
 
-		
-		
+		<table tableName="chapter" domainObjectName="Chapter"></table>
+
+		<table tableName="comments" domainObjectName="Comments"></table>
+		<table tableName="auth_function" domainObjectName="AuthFunction"></table>
+		<table tableName="auth_role" domainObjectName="AuthRole"></table>
+		<table tableName="role_function" domainObjectName="RoleFunction"></table>
+		<table tableName="user_role" domainObjectName="UserRole"></table-->
 	</context>
 </generatorConfiguration>
