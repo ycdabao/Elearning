@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.modou.elearning.mapper.PostsTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.modou.elearning.pojo.PostsType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="type_createby" property="typeCreateby" jdbcType="VARCHAR" />
+    <result column="type_createdate" property="typeCreatedate" jdbcType="DATE" />
+    <result column="type_modifyby" property="typeModifyby" jdbcType="VARCHAR" />
+    <result column="type_modifydate" property="typeModifydate" jdbcType="DATE" />
+    <result column="type_status" property="typeStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type_name, type_createby, type_createdate, type_modifyby, type_modifydate, type_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.PostsTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from posts_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from posts_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from posts_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.modou.elearning.pojo.PostsTypeExample" >
+    delete from posts_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.modou.elearning.pojo.PostsType" >
+    insert into posts_type (id, type_name, type_createby, 
+      type_createdate, type_modifyby, type_modifydate, 
+      type_status)
+    values (#{id,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{typeCreateby,jdbcType=VARCHAR}, 
+      #{typeCreatedate,jdbcType=DATE}, #{typeModifyby,jdbcType=VARCHAR}, #{typeModifydate,jdbcType=DATE}, 
+      #{typeStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.modou.elearning.pojo.PostsType" >
+    insert into posts_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="typeName != null" >
+        type_name,
+      </if>
+      <if test="typeCreateby != null" >
+        type_createby,
+      </if>
+      <if test="typeCreatedate != null" >
+        type_createdate,
+      </if>
+      <if test="typeModifyby != null" >
+        type_modifyby,
+      </if>
+      <if test="typeModifydate != null" >
+        type_modifydate,
+      </if>
+      <if test="typeStatus != null" >
+        type_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCreateby != null" >
+        #{typeCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCreatedate != null" >
+        #{typeCreatedate,jdbcType=DATE},
+      </if>
+      <if test="typeModifyby != null" >
+        #{typeModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="typeModifydate != null" >
+        #{typeModifydate,jdbcType=DATE},
+      </if>
+      <if test="typeStatus != null" >
+        #{typeStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.modou.elearning.pojo.PostsTypeExample" resultType="java.lang.Integer" >
+    select count(*) from posts_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update posts_type
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeName != null" >
+        type_name = #{record.typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeCreateby != null" >
+        type_createby = #{record.typeCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeCreatedate != null" >
+        type_createdate = #{record.typeCreatedate,jdbcType=DATE},
+      </if>
+      <if test="record.typeModifyby != null" >
+        type_modifyby = #{record.typeModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeModifydate != null" >
+        type_modifydate = #{record.typeModifydate,jdbcType=DATE},
+      </if>
+      <if test="record.typeStatus != null" >
+        type_status = #{record.typeStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update posts_type
+    set id = #{record.id,jdbcType=INTEGER},
+      type_name = #{record.typeName,jdbcType=VARCHAR},
+      type_createby = #{record.typeCreateby,jdbcType=VARCHAR},
+      type_createdate = #{record.typeCreatedate,jdbcType=DATE},
+      type_modifyby = #{record.typeModifyby,jdbcType=VARCHAR},
+      type_modifydate = #{record.typeModifydate,jdbcType=DATE},
+      type_status = #{record.typeStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.modou.elearning.pojo.PostsType" >
+    update posts_type
+    <set >
+      <if test="typeName != null" >
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCreateby != null" >
+        type_createby = #{typeCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCreatedate != null" >
+        type_createdate = #{typeCreatedate,jdbcType=DATE},
+      </if>
+      <if test="typeModifyby != null" >
+        type_modifyby = #{typeModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="typeModifydate != null" >
+        type_modifydate = #{typeModifydate,jdbcType=DATE},
+      </if>
+      <if test="typeStatus != null" >
+        type_status = #{typeStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.modou.elearning.pojo.PostsType" >
+    update posts_type
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      type_createby = #{typeCreateby,jdbcType=VARCHAR},
+      type_createdate = #{typeCreatedate,jdbcType=DATE},
+      type_modifyby = #{typeModifyby,jdbcType=VARCHAR},
+      type_modifydate = #{typeModifydate,jdbcType=DATE},
+      type_status = #{typeStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
