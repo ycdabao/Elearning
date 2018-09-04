@@ -35,28 +35,27 @@
 </div>
 <script>
     function submitForm(){
-        $('#ff').form('submit',{
-            onSubmit:function(){
-                if(($(this).form('enableValidation').form('validate'))){
+
+                if(($("#ff").form('enableValidation').form('validate'))){
                     $.ajax({
                         type: "POST",
                         url: "/user/dologin",
                         data: $("#ff").serialize(),
                         dataType:"json",
                         success: function(result){
+                            console.log(result.status);
+                            console.log(result.data);
                             if(result.status==400){
 
                             }
-                            console.log(result.status);
-                            console.log(result.data);
+
                             if(result.status==200){
                                 window.location.href=result.data;
                             }
                         }
                     });
                 }
-            }
-        });
+
     }
     function clearForm(){
         $('#ff').form('clear');

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建角色</title>
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
+    <script src="../../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+    <!-- 中文化 -->
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+
+
+    <style type="text/css">
+
+        *{font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;}
+        dd{    float: left;
+            width: 900px;
+            margin-bottom: 30px;
+            min-height: 28px;
+            line-height: 28px;
+            position: relative;}
+
+        dt{
+            float: left;
+            width: 115px;
+            padding-right: 40px;
+            text-align: right;
+            line-height: 28px;
+        }
+        .cover {
+            width: 500px;
+            height: 300px;
+            background: #EEE;
+            border: 1px solid #DDD;
+            position: relative;
+        }
+        .cover img{
+
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+
+        }
+        .cover #picker {
+            text-align: center;
+            z-index: 1000;
+            margin: 80px auto 30px auto;
+        }
+        .cover p{padding-left: 80px;
+            display: block;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+            color: #6a6a6a;
+        }
+        .clear {
+            clear: both;
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            $("#btn_save").linkbutton({
+                onClick:function(){
+                    var data=$("#ff").serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "/role/add",
+                        data: data,
+                        dataType:'json',
+                        success: function(msg){
+                            if(msg.status==200){
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                parent.layer.close(index); //再执行关闭
+                            }
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+
+</head>
+<body>
+
+<form id="ff" method="post">
+    <div>
+        <dl>
+            <dt>角色名称:</dt>
+            <dd>
+                <div >
+                    <input class="easyui-textbox" name="roleName" style="width:80%" data-options="required:true,prompt:'请填写角色名称'">
+                </div>
+            </dd>
+            <dt>角色编码:</dt>
+            <dd>
+                <div >
+                    <input class="easyui-textbox" name="roleCode" style="width:80%;" data-options="prompt:'请填写角色编码',multiline:false,required:false">
+                </div>
+            </dd>
+            <dt>角色描述:</dt>
+            <dd>
+                <div >
+                    <input class="easyui-textbox" name="roleDescription" style="width:80%;height:60px" data-options="prompt:'请填写角色描述信息',multiline:true,required:false">
+                </div>
+            </dd>
+            <dt>
+            </dt>
+            <dd style="text-align: center">
+                <a class="easyui-linkbutton" id="btn_save">保存</a>
+                <a class="easyui-linkbutton">清空</a>
+            </dd>
+
+
+        </dl>
+    </div>
+</form>
+
+
+
+</body>
+</html>

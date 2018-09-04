@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程管理</title>
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
+    <!-- 中文化 -->
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+    <style type="text/css">
+        *{font-family: 微软雅黑}
+        a{text-decoration: none; color: black}
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            <!--初始化课程列表-->
+            $("#userslist").datagrid({
+                url:'/user/list',
+                autoRowHeight:true,
+                fitColumns:true,
+                striped:true,
+                columns:[
+                    [
+
+                        {field:'userName',title:'用户名',align:'center'},
+                        {field:'userTel',title:'电话',width:'20%',align:'center'},
+                        {field:'userNickname',title:'用户昵称',align:'center'},
+                        {field:'userEmail',title:'邮箱',width:'10%',align:'center'},
+                        {field:'userCreatedate',title:'创建日期',width:'5%',align:'center'},
+                        {field:'userModifydate',title:'修改日期',width:'5%',align:'center'},
+                        {field:'userStatus',title:'状态',align:'center',width:'5%'},
+                        {field:'id',title:'操作',formatter:function(value,row,index){
+                                var content="<a href='javascript:editcourse(\""+value+"\")'  style='display: block;margin-bottom: 10px'>编辑课程信息</a>";
+                                return content;
+                            }},
+                    ]
+                ],
+                pagination:true
+            });
+        })
+
+
+        function editcourse(courseid){
+
+
+            var url = "/course/toedit?id="+courseid;
+            //iframe层
+            layer.open({
+                type: 2,
+                title: "编辑用户信息",
+                shadeClose: true,
+                shade: [0.6, '#606060'],
+                area: ['80%', '90%'],
+                content: url
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <table class="easyui-datagrid" id="userslist" >    </table>
+
+
+
+</body>
+</html>

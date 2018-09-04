@@ -8,16 +8,16 @@ import java.util.List;
 
 public interface CourseService {
 
-    public String saveCover(MultipartFile file,String path) throws IOException;
+     String saveCover(MultipartFile file,String path) throws IOException;
 
 
-    public void add(Courses courses);
+     void add(Courses courses);
 
-    public List<Courses> findbyCodition(Courses courses,int page,int pageSize);
+     List<Courses> findbyCodition(Courses courses,int page,int rows);
 
-    public int count(Courses courses);
+     int count(Courses courses);
 
-    public Courses findById(String id);
+     Courses findById(String id);
 
     void update(Courses courses);
 }

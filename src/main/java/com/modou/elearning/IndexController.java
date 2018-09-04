@@ -12,6 +12,9 @@ public class IndexController {
 
         return "/admin/index";
     }
+
+
+
     @RequestMapping(value="/tofile")
     public String file(){
         return "/admin/files/file";
@@ -20,6 +23,12 @@ public class IndexController {
     @RequestMapping(value="/tologin")
     public String tologin(){
         return "/admin/login";
+    }
+
+
+    @RequestMapping(value="/toregister")
+    public String toregister(){
+        return "/admin/register";
     }
 
     @RequestMapping(value="/toindex")

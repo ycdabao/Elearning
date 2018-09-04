@@ -1,14 +1,878 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8"/>
+    <title>2018SQL入门：SQLServer基础编程实战微课_w3cschool</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="/css/modou.css"/>
+    <link href="/css/sweet-alert-dev.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/css/minicourse.css?v9"/>
+    <link rel="stylesheet" type="text/css" href="/css/project.css"/>
+    <style type="text/css">
+        .star_score {
+            overflow: hidden;
+        }
+
+        .star_score span {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: url(/statics/img/star-off.png) no-repeat;
+            background-size: 100%;
+            cursor: pointer;
+            position: relative;
+            left: 0px;
+        }
+
+        .star_score span.active, .star_score span.select {
+            background: url(/statics/img/star-on.png) no-repeat;
+            background-size: 100%;
+        }
+
+        #evaluates {
+            position: relative;
+            left: -100px;
+        }
+    </style>
+
 </head>
 <body>
-<video controls="controls" autoplay="autoplay">
+<div id="full-height-container">
+    <!--引入头部-->
+    <!--header start-->
+    <div id="header">
+        <div id="header_item">
+            <div id="header_index">
+                <div id="header-l">
+                    <a href="//www.w3cschool.cn" title="w3cschool" class="logo"><img
+                            src="//7nsts.w3cschool.cn/images/w3c/header-logo.png" alt="W3Cschool"/></a>
+                    <ul class="header-menu">
+                        <li><a href="//www.w3cschool.cn/minicourse/" title="编程微课首页">编程微课首页</a></li>
+                        <li><a href="//www.w3cschool.cn/minicourse/list" title="微课列表">编程课程列表</a></li>
+                        <li><a href="//www.w3cschool.cn/codecamp/" title="编程实战列表">编程实战</a></li>
+                        <li><a href="//www.w3cschool.cn/vip" title="会员">会员<i class="hot-icon"></i></a></li>
+                    </ul>
+                </div>
+                <div id="header-r">
+                    <div class="sig-box">
+                        <a href="/register?refer=/">注册</a><!-- href="/register?refer=/" --> |
+                        <a href="/login?refer=/">登录</a>
+                    </div>
+                    <a href="//www.w3cschool.cn/download" target="_blank" class="header-app" title="w3cschool移动端">移动端
+                        <div class="dropdown-content qrcode-box">
+                            <span class="j"></span>
+                            <div class="qrcode-img">
+                                <img src="//7nsts.w3cschool.cn/images/w3c/app-qrcode2.png" alt="扫码下载APP" width="150"
+                                     height="150">
+                                <p>扫码下载APP</p>
+                            </div>
+                            <div class="qrcode-img">
+                                <img src="//7nsts.w3cschool.cn/images/w3c/w3cschool.png" alt="w3cschool公众号" width="150"
+                                     height="150">
+                                <p>w3cschool公众号</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var apppath = '/minicourse/play/sqlservervideo';
+        var domain = '//www.w3cschool.cn';
+    </script>
+    <!--header end-->
+    <div class="courselist-banner">
+        <div class="index-wrapper">
+            <div class="bread-nav bread-nav-banner">
+                <div class="current-position">
+                    <a href="/minicourse">首页</a>
+                    &gt;&nbsp;<a href="/minicourse/list">编程微课列表</a>
+                    &gt;&nbsp;<span>2018SQL入门：SQLServer基础</span>
+                </div>
+            </div>
+            <div class="courselist-banner-content">
+                <div class="courselist-banner-l">
+                    <img src="//7n.w3cschool.cn/attachments/image/201809/big_93522_18.png" alt="2018SQL入门：SQLServer基础"/>
+                </div>
+                <div class="courselist-banner-r">
+                    <h2>2018SQL入门：SQLServer基础</h2>
+                    <div class="courselist-banner-meta">
+                        <span><i class="icon-chapter-list icon-section-video"></i>视频课程</span>
+                        <i class="c-line"></i>
+                        <span>10 节</span>
+                        <i class="c-line"></i>
+                        <span>10 个小点</span>
+                        <i class="c-line"></i>
+                        <span>5 人参与</span>
+                    </div>
+                    <div class="courselist-banner-info">
+                        <span class="cur-price">免费</span>
+                    </div>
+                    <div class="courselist-banner-footer">
+                        <a href="/login?refer=/minicourse/play/sqlservervideo" class="go-btn login-btn">登录学习</a>
+                        &nbsp;&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="courselist-content">
+        <div class="index-wrapper">
+            <div class="courselist-list">
+                <div class="courselist-nav">
+                    <ul class="courselist-nav-tabs">
+                        <li targid="morecontent" id="courselist-intro" class="active">
+                            <a href="javascript:;" title="课程介绍" class="courselist-nav-name">课程介绍</a>
+                        </li>
+                        <li targid="courselist" id="courselist-menu">
+                            <a href="javascript:;" title="课程目录" class="courselist-nav-name ">课程目录
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="courselist-body">
+                    <div id="morecontent" class="courselist-d content-intro active">
+                        <h2>SQL课程介绍</h2>
+                        <p>在计算机的世界里所有程序的根本都是通过各种花样的页面与交互去处理数据。严格来说，数据才是根本，程序只是控制处理数据的一种手段，而SQL是计算机世界里用于处理数据的脚本语言。</p>
+                        <p>本章课程涵盖SQL数据库的基础，主要学习SQL数据库的基础知识、数据表的常用操作及各种约束的使用，以及综合的运用各种命令实现记录进行CURD等操作，为后续的学习打下夯实的基础。</p>
+                        <h2>SQL能做什么</h2>
+                        <p><span style="font-weight: normal;">1.存储大量的数据、方便查询和操作。</span></p>
+                        <p>2.保持数据信息的一致、完整。</p>
+                        <p>3.实现数据的共享及数据的安全</p>
+                        <p>4.通过组合分析，产生新的有用信息，常用于大量数据的分析工作。</p>
+                        <h2>SQL课程目标</h2>
+                        <p>1.理解数据库相关的基本概念。</p>
+                        <p>2.熟识SQL Server的基本操作。</p>
+                        <p>3.创建数据库、表、检查约束。</p>
+                        <p>4.编写T-SQL执行数据查询。</p>
+                        <p>5.为Java开发提供数据存储和查询基础</p>
+                        <h2>新手学习建议</h2>
+                        <p>1.先看完视频，用APP或者电脑网站都可以。</p>
+                        <p>2.禁止复制黏贴，代码一定要自己敲。</p>
+                        <p>3.学完后，做课后习题，并且再看一次视频复习。</p>
+                        <p>4.本章课程为10节，平均每节课程的时间为40分钟。</p>
+                        <h2>优秀的讲师</h2>
+                        <p>讲师：雷伟</p>
+                        <p>老师拥有10年以上Java开发及培训经验。曾任东莞汉康科技股份公司项目经理，参与“汉康ERP”系统的开发及维护工作。</p>
+                        <p>2007年后进行IT培训行业，曾担任秦皇岛北大青鸟学术主管一职，在职期间主持编写内部教材《JavaWeb开发实战》一书。</p>
+                        <p>之后进入三峡大学国际软件学院担任Android高级讲师一职，</p>
+                        <p>先后培养的学生过千人，在长期的一线教学过程中积累了大量宝贵的教学经验。</p>
+                        <h2>适宜人群</h2>
+                        <p>1.无相关经验的零基础学员</p>
+                        <p>2.从事数据分析相关岗位的学员</p>
+                        <h2>学习须知</h2>
+                        <p>1.&nbsp;本课程为视频课程，共10节。</p>
+                        <p>2.&nbsp;在课程学习中，如有任何问题，请联系QQ客服：3400982550。&nbsp;</p>
+                        <p><br></p></div>
+                    <div id="courselist" class="courselist-d courselist-catalog ">
+                        <div class="chapter-item">
+                            <h3>SQLServer基础<i class="icon-chapter-list icon-chapter-open"></i></h3>
+                            <ul class="chapter-box">
 
-    <source src="/2eae483d-4607-4ea9-a795-a194a815a844.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-</video>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="courselist-sidebar">
+                <div class="sidebar-box">
+                    <h2 class="sidebar-title">推荐课程</h2>
+                    <div class="recom-list">
+                        <ul class="recom-item">
+                            <li>
+                                <a href="/minicourse/play/python3course" class="recom-course-img">
+                                    <img src="//7n.w3cschool.cn/attachments/cover/cover_python3course.png?t=1533207296"
+                                         alt=""/>
+                                </a>
+                                <div class="recom-course-content">
+                                    <a href="/minicourse/play/python3course" class="recom-course-name" target="_blank">Python
+                                        3 微课</a>
+                                    <div class="recom-course-meta">
+                                        <span class="recom-course-people">20131人参与</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/minicourse/play/javaminicourse" class="recom-course-img">
+                                    <img src="//7n.w3cschool.cn/attachments/cover/cover_javaminicourse.png?t=1533277607"
+                                         alt=""/>
+                                </a>
+                                <div class="recom-course-content">
+                                    <a href="/minicourse/play/javaminicourse" class="recom-course-name" target="_blank">Java微课</a>
+                                    <div class="recom-course-meta">
+                                        <span class="recom-course-people">11758人参与</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/minicourse/play/jscourse" class="recom-course-img">
+                                    <img src="//7n.w3cschool.cn/attachments/cover/cover_jscourse.png?t=1533207314"
+                                         alt=""/>
+                                </a>
+                                <div class="recom-course-content">
+                                    <a href="/minicourse/play/jscourse" class="recom-course-name" target="_blank">Javascript微课</a>
+                                    <div class="recom-course-meta">
+                                        <span class="recom-course-people">26345人参与</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sidebar-box">
+                    <h2 class="sidebar-title">课程评价</h2>
+                    <div class="recom-list">
+                        <div id="evaluate-box"><span class="star_score"></span></div>
+                    </div>
+                </div>
+                <div class="sidebar-box">
+                    <h2 class="sidebar-title">今日微课积分榜</h2>
+                    <div class="top-list">
+                        <ul class="top-item">
+                            <li>
+                                <span class="top-num top-hot">1</span>
+                                <a href="/u/38642" title="jb850759592" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_38642.jpg" alt="jb850759592">
+                                    <span class="top-uname">jb850759592</span>
+                                </a>
+                                <span class="top-meta"><b>30</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num top-hot">2</span>
+                                <a href="/u/511711" title="song1156" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_511711.jpg" alt="song1156">
+                                    <span class="top-uname">song1156</span>
+                                </a>
+                                <span class="top-meta"><b>25</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num top-hot">3</span>
+                                <a href="/u/79881" title="学号:79881" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_79881.jpg" alt="学号:79881">
+                                    <span class="top-uname">学号:79881</span>
+                                </a>
+                                <span class="top-meta"><b>22</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num ">4</span>
+                                <a href="/u/701561" title="路飞桑s" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_701561.jpg" alt="路飞桑s">
+                                    <span class="top-uname">路飞桑s</span>
+                                </a>
+                                <span class="top-meta"><b>22</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num ">5</span>
+                                <a href="/u/673980" title="学号:673980" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_0.jpg" alt="学号:673980">
+                                    <span class="top-uname">学号:673980</span>
+                                </a>
+                                <span class="top-meta"><b>21</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num ">6</span>
+                                <a href="/u/669598" title="驋潑" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_669598.jpg" alt="驋潑">
+                                    <span class="top-uname">驋潑</span>
+                                </a>
+                                <span class="top-meta"><b>18</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num ">7</span>
+                                <a href="/u/644284" title="风3544" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_644284.jpg" alt="风3544">
+                                    <span class="top-uname">风3544</span>
+                                </a>
+                                <span class="top-meta"><b>17</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num ">8</span>
+                                <a href="/u/199608" title="♔亦云" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_199608.jpg" alt="♔亦云">
+                                    <span class="top-uname">♔亦云</span>
+                                </a>
+                                <span class="top-meta"><b>17</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num ">9</span>
+                                <a href="/u/598508" title="" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/" alt="">
+                                    <span class="top-uname"></span>
+                                </a>
+                                <span class="top-meta"><b>16</b>积分</span>
+                            </li>
+                            <li>
+                                <span class="top-num ">10</span>
+                                <a href="/u/461293" title="Lenacer" target="_blank">
+                                    <img src="//7n.w3cschool.cn/attachments/avatar2/avatar_461293.jpg" alt="Lenacer">
+                                    <span class="top-uname">Lenacer</span>
+                                </a>
+                                <span class="top-meta"><b>12</b>积分</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--广告放置-->
+                <div class="abox-item">
+                    <div class="sidebar-box">
+                        <div class="abox"><a href="https://www.w3cschool.cn/minicourse/play/javainit"
+                                             target="_blank"><img
+                                src="https://www.w3cschool.cn/attachments/image/20180828/1535460236212344.png"
+                                alt="壁虎老师java入门视频课程"/></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cert-area">
+        <div class="cert-area-main" style="display: none;">
+            <div class="cert-area-content">
+                <div class="cert-area-top">
+                    <span class="cert-area-title">课程证书</span>
+                    <span class="cert-area-close">X</span>
+                </div>
+                <div id="canvasdiv" class="canvasdiv" style="width: 1000px;height: 707px;"></div>
+                <div class="cert-area-bg">
+                    <div class="cert-area-container">
+                        <div class="cert-uname"></div>
+                        <div class="cert-meta">顺利完成了《<span class="cert-name"></span>》课程的学习，特发此证。</div>
+                        <div class="cert-enmeta">This is certify that you has successfully completed the course.</div>
+                    </div>
+                    <div class="cert-area-meta">
+                        <p>证书查询：https://www.w3cschool.cn
+                        <p>
+                        <p class="cert-id">
+                        <p>
+                        <p class="cert-date">
+                        <p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--引入底部-->
+    <!--footer start-->
+    <div id="footer_item">
+        <div id="footer">
+            <div class="footer-box">
+                <div class="footer-title">网站相关</div>
+                <div class="footer-items">
+                    <a href="//www.w3cschool.cn/about/about.html">关于我们</a>
+                    <a href="//www.w3cschool.cn/about/join.html">加入我们</a>
+                    <a href="//www.w3cschool.cn/about/disclaimer.html">免责声明</a>
+                    <a href="//www.w3cschool.cn/sitemap/">网站地图</a>
+                </div>
+            </div>
+            <div class="footer-box">
+                <div class="footer-title">内容专区</div>
+                <div class="footer-items">
+                    <a href="//www.w3cschool.cn/tutorial" title="编程入门教程">编程入门教程</a>
+                    <a href="//www.w3cschool.cn/manual" title="技术文档参考手册">极客文档</a>
+                    <a href="//123.w3cschool.cn/webtools" title="编程在线工具">在线工具</a>
+                    <a href="//www.w3cschool.cn/archives/" title="文章存档">文章存档</a>
+                </div>
+            </div>
+            <div class="footer-box">
+                <div class="footer-title">常用链接</div>
+                <div class="footer-items">
+                    <a href="//123.w3cschool.cn" title="技术学习极客导航">极客导航</a>
+                    <a href="//www.w3cschool.cn/codecamp/" target="_blank" title="编程实战">编程实战</a>
+                    <a href="//www.w3cschool.cn/download" target="_blank" title="w3cschool离线版下载">w3cschool离线下载</a>
+                    <a href="//m.w3cschool.cn/" target="_blank" title="w3cschool手机版">w3cschool手机版</a>
+                </div>
+            </div>
+            <div class="footer-box">
+                <div class="footer-title">联系我们</div>
+                <div class="footer-items">
+                    <a target="_blank" href="https://www.w3cschool.cn/w3cschool/question-10232085.html" title="常见问题QA">常见问题QA</a>
+                    <a target="_blank" href="//www.w3cschool.cn/links" title="友情链接">友情链接</a>
+                    <a target="_blank"
+                       href="//shang.qq.com/wpa/qunwpa?idkey=69bf2226eb0fbd411c740b015055bab665fcef4721dbe974882223b476e2962e"
+                       ref="nofollow">官方QQ群：236419487</a>
+                    <a target="_blank" href="//wpa.qq.com/msgrd?v=3&amp;uin=3532917531&amp;site=qq&amp;menu=yes"
+                       ref="nofollow">商务合作QQ：3532917531</a>
+                </div>
+            </div>
+            <div class="footer-box">
+                <div class="tcode"><img
+                        src="//7n.w3cschool.cn/statics/images/w3c/w3cschool.png?imageView2/1/w/100/h/100" alt="微信订阅号"
+                        width="100" height="100"></div>
+                <p class="tcode-txt">微信号：w3cschoolcn</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright&copy;2018 亿动科技 <a href="//www.w3cschool.cn" title="w3cschool">w3cschool.cn </a> All Rights
+                Reserved. 闽ICP备15016281号-3</p>
+        </div>
+    </div>
+    <div id="dialogBackground" class="dialogBackground"></div>
+    <div class="bottom-tools" style="bottom: 40px;">
+        <a id="scrollUp" href="javascript:;" title="飞回顶部"></a>
+        <a class="onlinenote" style="display: none;" title="在线笔记" href="javascript:;" data-module="page">在线笔记</a>
+        <div class="qr-tool">二维码</div>
+        <a id="feedback" class="webjy" title="建议反馈" href="javascript:;" data-module="page"
+           onclick="showDialogBox(this)">建议反馈</a>
+        <div class="qr-img"><img src="//7n.w3cschool.cn/statics/images/w3c/w3cschool.jpg?imageView2/1/w/100/h/100"
+                                 alt="二维码"></div>
+    </div>
+
+    <div class="feedback-Box" style="display: none;">
+        <div class="feedback-Box-content" style="width: 662px;">
+            <div class="feedback-Box-top">
+                <span class="feedback-Box-title">意见反馈</span>
+                <span onclick="closeDialogBox(this)" class="feedback-Box-close">X</span>
+            </div>
+            <ul>
+                <li class="feedback-box">
+                    <div id="feedbackRadio" type="radio" name="feedbackType" data-value="0" style=""> 意见反馈：</div>
+                    <textarea name="reportInfo" id="elmaaa" class="feedback-text" rows="15"
+                              placeholder="请留下您宝贵的意见反馈吧。"></textarea>
+                    <p>联系方式：</p>
+                    <input type="text" placeholder="留个联系方式呗..." name="reportAddress" class="radio-text"
+                           id="reportAddress" style="height: 30px;width: 200px;">
+                </li>
+            </ul>
+            <button class="search-s" onclick="dialogSubmit(this)" id="reportSubmit">提交</button>
+        </div>
+    </div>
+
+    <div id="note-start" style="display: none"></div>
+
+    <div id="detail" style="display:none;">
+        <div id="note-Dialog" class="note-Dialog">
+
+            <div class="note-Box-content">
+                <div class="ntitlebox">
+                    <input type="text" placeholder="" name="ntitle" class="ntitle" id="ntitle">
+                </div>
+                <div id="editorarea">
+                    <textarea name="ncontent" id="ncontent" class="ncontent" rows="15" placeholder=""
+                              style="width: 700px;height:200px;overflow:auto;"></textarea>
+                </div>
+                <p></p>
+                <a class="closenote" href="/my/note" target="_blank">查看完整版笔记</a>
+                <button class="notesubmit" id="notesubmit">保存</button>
+                <button class="notebtn pull-right closenote" style="margin:20px 0">关闭</button>
+            </div>
+        </div>
+    </div>
+    <!--footer end-->
+
+</div>
+<script src="/js/jquery-easyui-1.5.5.4/jquery.min.js" type="text/javascript"></script>
+<script src="/js/view-js/commonfooter.js" type="text/javascript"></script>
+<!-- <script src="//www.w3cschool.cn/statics/plugins/sweetAlert/js/sweet-alert.min.js" type="text/javascript"></script> -->
+<script src="/js/view-js/sweet-alert-dev.js" type="text/javascript"></script>
+<script src="/js/view-js/html2canvas.js" type="text/javascript"></script>
+<script src="/js/view-js/ajaxdo.core.js" type="text/javascript"></script>
+<script src="/js/view-js/dialog.core.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var uid = "0";
+    var ename = "sqlservervideo";
+    var NeedPay = "0";
+    var forvip = '0';
+    var viptype = '';
+    var realName = '';
+    var nameConfirm = '';
+
+    $(document).ready(function () {
+
+
+        //加载课程信息
+        $.ajax({
+                url: "/course/findbyid",
+                type: "post",
+                dataType: 'json',
+                data: {
+                    "id": "8cf2e522c49e432f8af8c6b064c3b117",
+                },
+                success: function (response) {
+
+                    var content="";
+                    var chapterList= response.data.chapterList;
+                    for(var i=0;i< chapterList.length; i++ ){
+
+                        content += '<li data-cp="1923" data-locked="unclock" data-preview="1"> <a href = "/minicourse/play/sqlservervideo?cp=1923" title = "数据库基础" > <i class= "icon-chapter-list icon-section-video" ></i> <span> '+chapterList[i].chapterName+' </span> < /a> </li>';
+
+                    }
+                    $(".chapter-box").html(content);
+                }
+            }
+        );
+
+
+        $(".courselist-nav-tabs > li").on('click', function () {
+            var targid = $(this).attr('targid');
+            $(".courselist-d").removeClass("active");
+            $("#" + targid).addClass("active");
+            $(".courselist-nav-tabs > li").removeClass("active");
+            $(this).addClass("active");
+        });
+        var _targid = GetUrlParam("menutype");
+        if (typeof _targid != 'undefined' && _targid != '' && _targid != null) {
+            $("#courselist-menu").click();
+        }
+        $(".chapter-item h3").click(function () {
+            if ($(this).next('ul').is(":hidden")) {
+                $(this).next('ul').slideDown();
+                $(this).children("i").addClass("icon-chapter-open").removeClass("icon-chapter-close");
+            } else {
+                $(this).next('ul').slideUp();
+                $(this).children('i').addClass("icon-chapter-close").removeClass("icon-chapter-open");
+            }
+        });
+        $(".chapter-box a").on("click", function () {
+            if ($(this).parent().attr("data-locked") == "lock") {
+                if (($(this).parent().attr("data-preview") == 1)) {
+                    if (uid == 0) {
+                        swal({
+                                title: "该章节不可预览,请登录后继续学习!",
+                                text: "是否现在前往登录?",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "前往登录",
+                                cancelButtonText: "我再逛逛",
+                                closeOnConfirm: false
+                            },
+                            function () {
+                                window.location.href = "/login?refer=/minicourse/play/" + ename;
+                            });
+                    } else {
+                        if (NeedPay == "1") {
+                            swal({
+                                title: "该章节不可预览,需要购买才能学习!",
+                                text: "是否现在前往购买?",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "前往购买",
+                                cancelButtonText: "我再想想",
+                                closeOnConfirm: false
+                            }, function () {
+                                window.open("/project/payRead/" + ename);
+                                showPayResult();
+                            });
+                        } else {
+                            swal("建议根据教程顺序进行学习哦~");
+                        }
+                    }
+                } else {
+                    swal("建议根据教程顺序进行学习哦~");
+                }
+            }
+        });
+        $(".buy-btn").on("click", function () {
+            showPayResult();
+        });
+        if (uid == 0) {
+            setUnlock(ename);
+        } else {
+            localStorage.clear();
+        }
+        var isPreview = $('.go-btn').html();
+        if (isPreview != '开始学习') {
+            $('.preview-icon').removeClass('preview-hidden');
+        }
+
+    });
+
+    function setUnlock(proName) {
+        if (typeof(Storage) === "undefined") {
+            swal("友情提示", "抱歉！您的浏览器不支持 Web Storage ...可能无法解锁下一章,建议登录以后进行学习");
+            return false;
+        }
+        var plist = localStorage.getItem("minicourse" + proName);
+        if (plist != undefined) {
+            plist = JSON.parse(plist);
+            $(".chapter-box li").each(function () {
+                if ($.inArray($(this).attr("data-cp"), plist) != -1) {
+                    $(this).attr("data-locked", "open");
+                    $(this).find("i").removeClass("icon-section-option");
+                    $(this).find("i").removeClass("icon-section-locked");
+                    $(this).find("i").addClass("icon-section-unlocked");
+                    var baby;
+                    if ($(this).next().length != 0) {
+                        baby = $(this).next();
+                    } else {
+                        baby = $(this).parent().parent().next().find("li:first");
+                        if (baby.length == 0) {
+                            return false;
+                        }
+                    }
+                    if (baby.attr("data-preview") == 0) {
+                        var cp = baby.attr("data-cp");
+                        baby.attr("data-locked", "unclock");
+                        baby.find("i").removeClass("icon-section-unlocked");
+                        baby.find("i").removeClass("icon-section-locked");
+                        baby.find("i").addClass("icon-section-option");
+                        baby.find("a").attr("href", "/minicourse/play/" + proName + "?cp=" + cp);
+                    }
+                }
+            });
+        }
+    }
+
+    function showPayResult() {
+        swal({
+            title: "支付遇到问题?",
+            text: "温馨提示：支付完成前请不要关闭窗口，完成支付后请根据情况点击下面按钮",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "支付成功",
+            cancelButtonText: "遇到问题",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                location.reload();
+            } else {
+                window.location.href = "https://www.w3cschool.cn/tif2eq/tif2eq-payerror.html";
+            }
+        });
+    }
+
+    // 获取证书
+    $(function () {
+        $(".view-btn").on("click", function (e) {
+            $(".cert-area-bg").show();
+            $("#canvasdiv").hide();
+            getCertInfo($(this));
+        });
+        $(".cert-area-close").on("click", function () {
+            $(".cert-area-main").hide();
+        });
+
+    });
+
+    function clippic() {
+        html2canvas($(".cert-area-bg")[0], {
+            onrendered: function (canvas) {
+                var nodecanvas = $("canvas")[0];
+                if (nodecanvas == undefined) {
+                    document.getElementById("canvasdiv").appendChild(canvas);
+                } else {
+                    document.getElementById("canvasdiv").replaceChild(canvas, nodecanvas);
+                }
+                nodecanvas = $("canvas")[0];
+                var imgData = nodecanvas.toDataURL("png");
+                $("#canvasdiv").show();
+            }
+        });
+
+    }
+
+    function getRemoteCertInfo(pid, rname) {
+        $.ajax({
+            url: "/minicourse/getMiniCertInfo",
+            type: "post",
+            dataType: 'json',
+            data: {
+                "pid": pid,
+                "rname": rname
+            },
+            success: function (data) {
+                if (data.statusCode == 200) {
+//加载数据,打开证书显示
+                    $(".cert-area-main").show(700);
+                    var info = data.data;
+                    var projectinfo = info.projectinfo;
+                    $(".cert-area-title").html('【' + projectinfo.bookname + '】课程证书');
+                    $(".cert-uname").html(info.realname);
+// $(".cert-enname").html(info.enname);
+// $(".cert-uid").html('（ID:'+info.uid+'）');
+                    $(".cert-name").html('' + projectinfo.bookname + '');
+                    $(".cert-id").html('证书编号：' + info.certid);
+                    $(".cert-date").html('发证日期：' + info.date);
+                    clippic();
+                    $(".cert-area-bg").hide();
+                } else {
+                    $(".cert-area-bg").hide();
+                    $(".cert-area-main").hide();
+                    $("body").css("overflow", "visible");
+                    toastr.error(data.message, '', {"positionClass": "toast-top-center"});
+                }
+            }
+        });
+    }
+
+
+    function inputRealName(cid) {
+        swal({
+                title: "输入！",
+                text: "您的真实姓名:",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "姓名",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消"
+            },
+            function (inputValue) {
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("请填写您的真实姓名:");
+                    return false
+                }
+                var rname = inputValue;
+                realName = rname;
+                nameConfirm = 1;
+                getRemoteCertInfo.call(this, cid, rname);
+                swal.close();
+                return true;
+            });
+    }
+
+    function getCertInfo(obj) {
+        var pid = $(obj).attr("data-pid");
+        var rname = '';
+        if ($.trim(realName) != '') {
+            if (nameConfirm == 0) {
+                swal({
+                        title: "",
+                        text: "你的真实姓名是: '" + realName + "' 吗?",
+                        type: "info",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "是",
+                        cancelButtonText: "不是"
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            rname = realName;
+                            getRemoteCertInfo.call(this, pid, rname);
+                        } else {
+                            setTimeout(function () {
+                                inputRealName.call(this, pid);
+                            }, 500);
+                        }
+                    }
+                );
+            } else { // 已经验证过就直接使用真实姓名
+                rname = realName;
+                getRemoteCertInfo.call(this, pid, rname);
+            }
+        } else {
+            inputRealName.call(this, pid);
+        }
+    }
+
+    // 查询url所带参数
+    //paraName 等找参数的名称
+    function GetUrlParam(paraName) {
+        var url = document.location.toString();
+        var arrObj = url.split("?");
+
+        if (arrObj.length > 1) {
+            var arrPara = arrObj[1].split("&");
+            var arr;
+
+            for (var i = 0; i < arrPara.length; i++) {
+                arr = arrPara[i].split("=");
+
+                if (arr != null && arr[0] == paraName) {
+                    return arr[1];
+                }
+            }
+            return "";
+        }
+        else {
+            return "";
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    // 如果需要给后台返值的话，返回 $(".star_score span.select").size()的值即可。
+    $(function () {
+//生成5个星星
+        for (var i = 0; i < 5; i++) {
+            var _html = '<span title="' + parseInt(i + 1) + '分"></span>';
+            $(".star_score").append(_html);
+        }
+//鼠标滑过，星星背景图片改成选中图片
+        $(".star_score span").hover(function () {
+            var index = $(this).index();
+            for (var i = 0; i <= index; i++) {
+                $(".star_score span").eq(i).addClass("active");
+            }
+//鼠标移除去掉激活效果
+        }, function () {
+            $(".star_score span").removeClass("active");
+        });
+//星星点击，这颗星星之前的所有星星加上选中效果
+        $(".star_score span").on("click", function () {
+            var x = $(this).index();
+            $(".star_score span").removeClass('select');
+            for (var i = 0; i <= x; i++) {
+                $(".star_score span").eq(i).addClass('select');
+            }
+            ;
+            evaluate(x + 1);
+        })
+    })
+
+    function evaluate(scores) {
+        var pid = 93522;
+        var uid = 0;
+        var bookname = '2018SQL入门：SQLServer基础';
+        $.ajax({
+            url: "/index/evaluate",
+            type: "post",
+            data: {
+                score: scores,
+                pid: pid,
+                uid: uid,
+                title: bookname,
+                type: 2,
+            },
+            dataType: "json",
+            success: function (msg) {
+                console.log(msg);
+                if (msg.statusCode == 200) {
+                    swal({
+                            title: "评分成功",
+                            text: "非常感谢您的评分，您还有什么建议吗？",
+                            type: "input",
+                            showCancelButton: true,
+                            closeOnConfirm: false,
+                            confirmButtonText: '确定',
+                            cancelButtonText: '关闭',
+                            animation: "slide-from-top",
+                            inputPlaceholder: "输入您的建议"
+                        },
+                        function (inputValue) {
+                            if (inputValue === false) return false;
+                            if (inputValue === "") {
+                                swal.showInputError("请输入您的建议");
+                                return false;
+                            }
+                            $.ajax({
+                                url: "/index/proposal",
+                                type: "post",
+                                data: {
+                                    id: msg.data,
+                                    advise: inputValue,
+                                },
+                                dataType: "json",
+                                success: function (msg) {
+                                    swal("谢谢您的建议，我们会努力提供更好的服务");
+                                }
+                            });
+                        });
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>

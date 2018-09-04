@@ -550,8 +550,8 @@
             url: '/file/list',
             columns: [
                 [
-                    {field: 'id', title: 'id', width: 100},
-                    {field: 'fileName', title: 'fileName', width: 100}
+                    {field: 'id', title: '编号', width: 100},
+                    {field: 'filename', title: '资源名称', width: 100}
                 ]
             ]
         });
@@ -566,7 +566,7 @@
         "click", function () {
             var row = $("#dg1").datagrid("getSelected");
 
-            $("#div" + $('#tn').val() + " #dd" + $('#dn').val() + " label[name='videoname']").html(row.fileName);
+            $("#div" + $('#tn').val() + " #dd" + $('#dn').val() + " label[name='videoname']").html(row.filename);
             $("#div" + $('#tn').val() + " #dd" + $('#dn').val() + " input[name='videoid']").val(row.id);
             $("#win1").window("close");
 

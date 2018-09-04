@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角色管理</title>
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/layer/layer.js"></script>
+    <!-- 中文化 -->
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+    <style type="text/css">
+        *{font-family: 微软雅黑}
+        a{text-decoration: none; color: black}
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            <!--初始化课程列表-->
+            $("#rolelist").datagrid({
+                url:'/role/list',
+                autoRowHeight:true,
+                fitColumns:true,
+                striped:true,
+                columns:[
+                    [
+
+                        {field:'roleName',title:'角色名称',align:'center'},
+                        {field:'roleCode',title:'角色编码',align:'center'},
+                        {field:'roleDescription',title:'描述',align:'center'},
+                        {field:'id',title:'操作',formatter:function(value,row,index){
+                                var content="<a href='javascript:editcourse(\""+value+"\")'  style='display: block;margin-bottom: 10px'>编辑课程信息</a>";
+                                return content;
+                            }},
+                    ]
+                ],
+                pagination:true
+            });
+
+            <!--打开添加窗口-->
+            $("#btn_add").linkbutton({
+                onClick:function(){
+                    var url = "/role/toadd";
+                    //iframe层
+                    layer.open({
+                        type: 2,
+                        title: "创建角色",
+                        shadeClose: true,
+                        shade: [0.6, '#606060'],
+                        area: ['80%', '90%'],
+                        content: url
+                    });
+                }
+            });
+        })
+
+
+
+
+    </script>
+</head>
+<body>
+<div style="margin: 5px">
+    <a id="btn_add" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',text:'创建新角色'"></a>
+</div>
+    <table class="easyui-datagrid" id="rolelist" >    </table>
+
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.5.5.4/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.5.5.4/themes/icon.css"/>
+    <script type="text/javascript" src="../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+    <!-- 中文化 -->
+    <script type="text/javascript" src="../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+
+<div style="margin:20px 0;"></div>
+<div class="easyui-panel" title="注册" style="width:100%;width:500px;padding:30px 60px;margin:0px auto">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="userTel" style="width:100%" data-options="label:'手机号:',required:true">
+        </div>
+
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="userPass" style="width:100%"
+                   data-options="label:'密码:',required:true,type:'password'">
+        </div>
+
+
+    </form>
+    <div style="text-align:center;padding:5px 0">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
+    </div>
+</div>
+<script>
+    function submitForm() {
+
+        if (($("#ff").form('enableValidation').form('validate'))) {
+            $.ajax({
+                type: "POST",
+                url: "/user/doregister",
+                data: $("#ff").serialize(),
+                dataType: "json",
+                success: function (result) {
+                    if (result.status == 400) {
+
+                    }
+                    console.log(result.status);
+                    console.log(result.data);
+                    if (result.status == 200) {
+                        window.location.href = result.data;
+                    }
+                }
+            });
+        }
+
+    }
+
+    function clearForm() {
+        $('#ff').form('clear');
+    }
+</script>
+
+</body>
+</html>

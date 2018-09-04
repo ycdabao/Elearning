@@ -2,7 +2,10 @@ package com.modou.elearning.service.impl;
 
 
 import com.github.pagehelper.PageHelper;
+import com.modou.elearning.mapper.ChapterMapper;
 import com.modou.elearning.mapper.CoursesMapper;
+import com.modou.elearning.pojo.Chapter;
+import com.modou.elearning.pojo.ChapterExample;
 import com.modou.elearning.pojo.Courses;
 import com.modou.elearning.pojo.CoursesExample;
 import com.modou.elearning.service.CourseService;
@@ -22,6 +25,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     CoursesMapper coursesMapper;
+
+    @Autowired
+    ChapterMapper chapterMapper;
 
     @Override
     public String saveCover(MultipartFile file,String path)throws IOException {
@@ -78,7 +84,15 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Courses findById(String id) {
-        return coursesMapper.selectByPrimaryKey(id);
+        ChapterExample example1 = new ChapterExample();
+        ChapterExample.Criteria c1= example1.createCriteria();
+        c1.andChapterCourseidEqualTo(id);
+
+        List<Chapter> chapterList=chapterMapper.selectByExample(example1);
+        Courses courses = coursesMapper.selectByPrimaryKey(id);
+        courses.setChapterList(chapterList);
+
+        return courses;
     }
 
     @Override

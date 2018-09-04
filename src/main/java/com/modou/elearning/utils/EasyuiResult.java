@@ -11,7 +11,7 @@ public class EasyuiResult<T> {
         this.total=total;
     }
 
-
+    public EasyuiResult(){}
 
 
     public List<T> getRows() {

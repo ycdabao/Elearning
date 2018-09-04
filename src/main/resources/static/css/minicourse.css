@@ -1,0 +1,1416 @@
+/* ----------------------------------- minicourse页面样式  ----------------------------------- */
+/* 头部样式 */
+#full-height-container #header {
+    width: 100%;
+    height: 80px;
+}
+#full-height-container #header_item {
+    position: fixed;
+    height: 80px;
+    top: 0px;
+    width: 100%;
+    z-index: 1000;
+    background: #F9F9f9;
+}
+#full-height-container #header_index {
+    width: 100%;
+    min-width: 1129px;
+    padding: 0 20px;
+    height: 80px;
+    line-height: 80px;
+    box-sizing: border-box;
+}
+#full-height-container #header-l,#full-height-container #header-r {
+    height: 80px;
+}
+#header-l {
+    width: 60%;
+}
+#header-r {
+    width: 40%;
+}
+#full-height-container #header-l li {
+    padding: 0;
+    white-space: normal;
+}
+#full-height-container .qrcode-box {
+    left: -182px;
+}
+#full-height-container .qrcode-box .j {
+    left: 60%;
+}
+/* 课程通用样式 */
+.course-item {
+    margin-left: -30px;
+}
+.course-item li {
+    float: left;
+    width: 21.5%;
+    margin: 0 0 30px 40px;
+    text-align: left;
+}
+.course-box {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+.course-box:hover {
+    box-shadow: 0 3px 5px rgba(0,0,0,.3);
+}
+.course-box a {
+    color: #333;
+}
+.course-img {
+    position: relative;
+    height: 149px;
+    line-height: 149px;
+    text-align: center; 
+    background-color: #ddd;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px; 
+}
+.course-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.course-desc {
+    text-align: center;
+}
+.course-desc h3 {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 10px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.course-meta {
+    height: 21px;
+    font-size: 14px;
+    color: #666;
+    padding: 15px 10px;
+}
+.course-meta .cur-price {
+    font-size: 16px;
+    color: #d2322d;
+}
+.course-meta .pre-price {
+    font-size: 13px;
+}
+.more-btn {
+    font-size: 18px;
+    color: #d9534f;
+}
+.more-btn:hover {
+    color: #d2322d;
+}
+.course-tag {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px 5px;
+    color: #fff;
+    line-height: 20px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 4px;
+}
+.vip-course-tag {
+    background-color: #ffa01a;
+}
+.svip-course-tag {
+    background-color: #ff5900;
+}
+.isoff-course-tag {
+    background-color: #7ed321;
+}
+.new-course-tag {
+    position: absolute;
+    background-color: #f03d31;
+    border: 2px solid #fff;
+    border-radius: 12px;
+    top: -8px;
+    left: -8px;
+    z-index: 10;
+    font-family: dincondm;
+    font-size: 12px;
+    color: #fff;
+    line-height: 20px;
+    padding: 0 8px;
+}
+.go-btn {
+    display: inline-block;
+    width: 180px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    background-color: #f5c607;
+    border: 1px solid #f5c607;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+}
+.go-btn:hover {
+    background-color: #eaad06;
+    border: 1px solid #eaad06;
+    color: #fff;
+}
+.play-icon {
+    display: inline-block;
+    width: 48px;
+    height: 48px;  
+    vertical-align: middle;
+}
+
+/****** 微课首页 ******/
+.minicourse-banner {
+    width: 100%;
+    min-width: 1129px;
+    min-height: 500px;
+    background: #1cbc80 url("//7nsts.w3cschool.cn/images/w3c/minicourse-banner.png") no-repeat center center;
+}
+.minicourse-banner {
+    position: relative;
+}
+.minicourse-banner .go-btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+}
+.section {
+    margin: 30px 0;
+    overflow: hidden;
+    text-align: center;
+}
+.secion-title {
+    position: relative;
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: 500;
+    color: #333;
+}
+.section .intro {
+    line-height: 30px;
+    font-size: 18px;
+    color: #444;
+}
+.section .intro b {
+    color: #ff5200;
+}
+.item-content2 {
+    background: #43cea2; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #43cea2, #185a9d); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #43cea2, #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.item-content2 .secion-title,.item-content2 .section .intro {
+    color: #fff;
+}
+.clients-content {
+    margin: 40px 0 0;
+    overflow: hidden;
+}
+.clients-img {
+    float: left;
+    width: 55%;
+    margin-right: 5%;
+}
+.clients-img img {
+    display: block;
+    width: 500px;
+    vertical-align: middle;
+}
+.clients-item {
+    float: right;
+    width: 40%;
+    text-align: left;
+}
+.clients-title {
+    font-size: 24px;
+    font-weight: normal;
+    color: #fff;
+    margin: 10px 0 20px;
+}
+.clients-item .intro {
+    margin-bottom: 30px;
+}
+.app-qrcode {
+    display: inline-block;
+    margin-right: 5%;
+}
+.app-qrcode img {
+    width: 160px;
+    background-color: #FFF;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 4px;
+}
+.app-qrcode p {
+    margin: 10px 0 0;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}
+.app-download-box {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+}
+.download-btn {
+    display: block;
+    width: 180px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #f5c607;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 6px;
+    text-align: center;
+    margin: 20px 0;
+}
+.download-btn:hover {
+    background-color: #eaad06;
+    color: #fff;
+}
+.section-bottom .secion-title span {
+    margin: 0 8px;
+    font-size: 36px;
+    color: #d12610;
+}
+.section-bottom .intro {
+    margin-bottom: 30px;
+}
+.section-bottom .go-btn {
+    width: 350px;
+}
+.cert-content {
+    margin: 60px 0 0;
+    overflow: hidden;
+    text-align: left;
+}
+.section-img {
+    position: relative;
+    float: left;
+    width: 55%;
+    margin-right: 5%;
+}
+.cert-demo {
+    max-width: 600px;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.16);
+}
+.section-img p {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #333;
+}
+.section-block {
+    float: right;
+    width: 40%;
+}
+.section-block h4 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+}
+.section-block p {
+    line-height: 30px;
+    font-size: 16px;
+    color: #333;
+    margin: 20px 0;
+}
+.cert-desc-box {
+    margin: 0 0 40px;
+}
+.icon-cert-desc {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.icon-cert-d1 {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-cert-d1.png") no-repeat center center;
+}
+.icon-cert-d2 {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-cert-d2.png") no-repeat center center;
+}
+.icon-cert-d3 {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-cert-d3.png") no-repeat center center;
+}
+
+/****** 微课列表页 ******/
+.step-title {
+    position: relative;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.step-title h2 {
+    font-size: 26px;
+    font-weight: 500;
+    color: #333;
+}
+.step-title p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #444;
+}
+
+/****** 微课售卖页 ******/
+.courselist-banner {
+    width: 100%;
+    min-width: 1129px;
+    min-height: 400px;
+    background-color: #fff;
+}
+.courselist-banner .bread-nav {
+    margin-bottom: 25px;
+}
+.courselist-banner .bread-nav-banner, .courselist-banner .bread-nav-banner a {
+    color: #666;
+    opacity: 1;
+}
+.courselist-banner .bread-nav-banner a:hover {
+    color: #d2322d;
+}
+.courselist-banner-content {
+    margin-top: 10px;
+}
+.courselist-banner-l {
+    float: left;
+    position: relative;
+}
+.courselist-banner-l img {
+    display: block;
+    width: 500px;
+    height: 278px;
+    border-radius: 6px;
+}
+.courselist-banner-r {
+    position: relative;
+    margin-left: 550px;
+    min-height: 278px;
+}
+.courselist-banner-r h2 {
+    font-size: 26px;
+    font-weight: 500;
+}
+.courselist-banner-meta {
+    margin-top: 10px;
+}
+.courselist-banner-meta span {
+    display: inline-block;
+    font-size: 15px;
+    color: #666;
+}
+.courselist-banner-meta .c-line {
+    display: inline-block;
+    width: 1px;
+    height: 18px;
+    background-color: #bbb;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+.courselist-banner-meta .icon-chapter-list {
+    margin-right: 5px;
+    margin-top: -2px;
+}
+.get-cert-box {
+    width: 450px;
+    font-size: 15px;
+    color: #666;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+.get-cert-box span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.course-cert-ico {
+    background: url("//7nsts.w3cschool.cn/images/w3c/course-cert-ico.png") no-repeat center center;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.get-cert-btn {
+    display: inline-block;
+    color: #d9534f;
+    margin-left: 10px;
+}
+.get-cert-btn:hover {
+    color: #d2322d;
+}
+.courselist-banner-info {
+    margin-top: 30px;
+    font-size: 16px;
+    color: #666;
+}
+.courselist-banner-info .cur-price {
+    font-size: 26px;
+    color: #d2322d;
+}
+.courselist-banner-info .vip-tag {
+    display: inline-block;
+    padding: 4px 6px;
+    font-size: 13px;
+    border-radius: 8px;
+}
+.courselist-banner-info .vip-free {
+    background-color: #ffe4db;
+    color: #ff5000;
+}
+.courselist-banner-info .svip-free {
+    background-color: #feeae6;
+    color: #d2322d;
+}
+.courselist-banner-footer {
+    position: absolute;
+    bottom: 0;
+}
+.courselist-banner-content .go-btn {
+    width: 150px;
+    background-color: #f0ad4e;
+    border: 1px solid #f0ad4e;
+}
+.courselist-banner-content .go-btn:hover {
+    background-color: #ed9c28;
+    border: 1px solid #ed9c28;
+} 
+.courselist-banner-content .login-btn,.courselist-banner-content .buy-btn {
+    background-color: #d2322d;
+    border: 1px solid #d2322d;
+}
+.courselist-banner-content .login-btn:hover,.courselist-banner-content .buy-btn:hover {
+    background-color: #c92027;
+    border: 1px solid #c92027;
+}
+.courselist-banner-content .try-btn {
+    background-color: #fff;
+    border: 1px solid #d2322d;
+    color: #d2322d;
+    margin-left: 10px;
+}
+.courselist-banner-content .try-btn:hover {
+    background-color: #feeae6;
+    border: 1px solid #d2322d;
+}
+.course-discuss-btn {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 15px;
+    color: #666;
+}
+.course-discuss-btn:hover {
+    color: #333;
+}
+.course-discuss-ico {
+    background: url("//7nsts.w3cschool.cn/images/w3c/course-discuss-ico.png") no-repeat center center;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+/* 课程介绍、课程目录 */
+.courselist-content {
+    width: 100%;
+    min-width: 1129px;
+    background-color: #f9f9f9;
+    margin-bottom: 25px;
+}
+.courselist-list {
+    position: relative;
+    float: left;
+    width: 834px;
+    background-color: #fff;
+    min-height: 884px;
+    margin-right: 15px;
+}
+.courselist-nav-tabs {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #ddd;
+    margin: 5px 25px 0;
+}
+.courselist-nav-tabs li {
+    float: left;
+    margin-right: 25px;
+    cursor: pointer;
+}
+.courselist-nav-tabs li a {
+    display: block;
+    padding: 0 20px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    margin-top: -1px;
+}
+.courselist-nav-tabs li.active a {
+    border-bottom: 2px solid #d2322d;
+    color: #d2322d;
+}
+.courselist-nav-tabs li a:hover {
+    color: #d2322d;
+}
+.courselist-body {
+    padding: 0 25px;
+}
+.courselist-d {
+    display: none;
+}
+.courselist-d.active {
+    display: block;
+}
+.courselist-detail p {
+    color: #555 !important;
+}
+.courselist-catalog {
+    padding: 25px 0;
+}
+.icon-chapter-list {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.icon-chapter-close {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-chapter-close.png?t=0817") no-repeat center center;
+}
+.icon-chapter-open {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-chapter-open.png?t=0817") no-repeat center center;
+}
+.icon-section-option {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-section-option.png?t=0817") no-repeat center center;
+}
+.icon-section-locked {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-section-locked.png?t=0817") no-repeat center center;
+}
+.icon-section-unlocked {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-section-unlocked.png?t=0817") no-repeat center center;
+}
+.icon-section-audio {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-section-audio.png") no-repeat center center;
+}
+.icon-section-video {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-section-video.png") no-repeat center center;
+}
+.chapter-item {
+    margin-bottom: 20px;
+}
+.chapter-item h3 {
+    position: relative;
+    height: 42px;
+    line-height: 42px;
+    font-size: 15px;
+    color: #333;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    padding: 0 15px;
+    cursor:pointer;
+    margin-bottom: 15px;
+}
+.chapter-item h3 .icon-chapter-list {
+    float: right;
+    margin: 11px 6px;
+}
+.chapter-box {
+    padding-left: 20px;
+}
+.chapter-box li {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #ddd;
+}
+.chapter-box li a {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    padding-right: 10px;
+}
+.chapter-box li a:hover {
+    color: #d2322d;
+}
+.icon-section-right {
+    float: right;
+}
+.preview-icon {
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    border: 1px solid #d2322d;
+    padding: 0 6px;
+    border-radius: 4px;
+    color: #d2322d;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 9px 0;
+}
+.preview-hidden {
+    display: none;
+}
+
+/* 售卖页右侧 */
+.courselist-sidebar {
+    float: left;
+    width: 280px;
+}
+.courselist-sidebar .sidebar-box {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+.courselist-sidebar .sidebar-title {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.courselist-sidebar .sidebar-title::before {
+    content: "";
+    background: #d9534f;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    margin-bottom: 3px;
+    vertical-align: middle;
+}
+.courselist-sidebar a:hover {
+    color: #d2322d;
+}
+.top-item li {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+.top-item li .top-num {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background-color: #a6a6a6;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+.top-item li .top-hot {
+    background-color: #f5c607;
+}
+.top-item li img {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 3px;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.top-item li .top-uname {
+    width: auto;
+    max-width: 38%;
+    display: inline-block;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    color: #333;
+}
+.top-item li .top-uname:hover {
+    color: #d2322d;
+}
+.top-item li .top-meta {
+    float: right;
+    font-size: 13px;
+    color: #666;
+    text-align: right;
+}
+.top-item li .top-meta b {
+    color: #d12610;
+    margin: 0 3px;
+}
+.author-item {
+    font-size: 14px;
+    color: #666;
+}
+.author-img {
+    float: left;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #FFF;
+    box-shadow: 0px 3px 3px rgba(193, 191, 192, 0.5);
+}
+.author-intro {
+    margin-left: 70px;
+    min-height: 60px;
+}
+.author-name {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+.icon-v {
+    background: url("//7nsts.w3cschool.cn/images/w3c/gold-small.png") no-repeat 0px 0px;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: -3px;
+}
+.author-approveinfo {
+    margin-top: 5px;
+    word-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.author-summary {
+    margin-top: 15px;
+    line-height: 1.7;
+}
+.recom-item li {
+    margin-bottom: 15px;
+}
+.recom-course-img {
+    float: left;
+    width: 80px;
+    height: 50px;
+    border-radius: 6px;
+    position: relative;
+}
+.recom-course-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+.recom-course-content {
+    margin-left: 95px;
+    height: 50px;
+}
+.recom-course-name {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    padding-top: 3px;
+    word-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.recom-course-meta {
+    font-size: 12px;
+    color: #666;
+}
+.recom-course-price {
+    font-weight: 600;
+}
+
+/****** 证书弹出模态框 ******/
+.cert-area-main {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1200;
+    overflow-y: scroll;
+}
+.cert-area-content {
+    position: relative;
+    width: 1000px;
+    height: auto;
+    min-height: 430px;
+    margin: 0 auto;
+    overflow: hidden;
+    top: 10%;
+    z-index: 1200;
+    background-color: #fff;
+    border-radius: 4px;
+    -moz-border-radius: 4px;     
+    -webkit-border-radius: 4px;
+}
+.cert-area-top {
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 15px;
+}
+.cert-area-title {
+    font-size: 16px;
+    color: #333;
+}
+.cert-area-close {
+    float: right;
+    width: 20px;
+    height: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: #9e9e9e;
+    text-shadow: 0 1px 0 #fff;
+    cursor: pointer;
+}
+.cert-area-bg {
+    position: relative;
+    width: 1000px;
+    height: 707px;
+    background: url("/statics/images/w3c/minicourse-cert-bg.png") no-repeat;
+    background-size: 1000px 707px;
+    font-family: "SimHei";
+}
+.cert-area-container {
+    position: relative;
+    top: 30%;
+    left: 8%;
+    font-size: 24px;
+    color: #333;
+    max-width: 54%;
+}
+.cert-area-container .cert-uname {
+    font-size: 40px;
+    color: #000;
+}
+.cert-area-container .cert-meta {
+    margin-top: 30px;
+    line-height: 34px;
+}
+.cert-enmeta {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #666;
+}
+.cert-area-meta {
+    position: absolute;
+    bottom: 6%;
+    left: 8%;
+}
+.cert-area-meta p {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #666;
+}
+
+/****** 微课做题页 ******/
+.play-banner {
+    width: 100%;
+    min-width: 1129px;
+    background: #43C6AC;
+    background: -webkit-linear-gradient(to right, #43C6AC, #191654);  
+    background: linear-gradient(to right, #43C6AC, #191654); 
+}
+.play-banner-content,.play-content {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+.play-banner-content .section-title {
+    padding-top: 40px;
+    font-size: 26px;
+    font-weight: 500;
+    color: #fff;
+}
+.nav-courselist {
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-width: 110px;
+    height: 38px;
+    line-height: 36px;
+    background-color: #f0ad4e;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 15px;
+    text-align: center;
+}
+.nav-exam-courselist-time{
+    position: absolute;
+    right: 120px;
+    top: 0;
+    min-width: 110px;
+    height: 38px;
+    line-height: 36px;
+    background-color: #e5e5e5;
+    color: #333;
+    border-radius: 4px;
+    font-size: 15px;
+    text-align: center;
+}
+.nav-courselist:hover {
+    background-color: #ed9c28;
+    color: #fff;
+}
+.icon-aside-menu {
+    width: 20px;
+    height: 20px;
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-aside-menu.png");
+    margin-right: 5px;
+}
+/* 内容显示区域 */
+.play-body #wrapper {
+    margin: 0 auto 45px;
+}
+.play-area {
+    background-color: #fff;
+    border-radius: 0 0 4px 4px;
+    min-height: 400px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
+}
+.play-progress {
+    position: relative;
+    padding: 0 25px;
+    background-color: #42c4ab;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+}
+.play-card-item {
+    display: inline-block;
+}
+.play-card-list li {
+    display: inline-block;
+    margin-right: 10px;
+}
+.play-card-list li a {
+    display: inline-block;
+    min-width: 45px;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+.play-card-list li .active {
+    background-color: #f5c607;
+}
+.play-card-list li a.locked {
+    opacity: 0.6;
+}
+.play-card-list li .icon-content-title,.play-card-list li .icon-exam-title {
+    width: 28px;
+    height: 28px;
+}
+.play-card-list li .icon-content-title {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-content-title.png");
+}
+.play-card-list li .icon-exam-title {
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-exam-title.png");
+}
+.play-card-item span{
+    margin:0 20px;
+}
+.progress-nums {
+    float: right;
+    font-size: 20px;
+    color: #333;
+}
+.play-item {
+    padding: 20px 30px 40px;
+    overflow: hidden;
+}
+.play-title .content-title {
+    font-size: 20px;
+    color: #333;
+}
+.play-title .exam-title {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.7;
+    font-weight: 500;
+}
+.play-title .content-title,.play-title .exam-title {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.play-exam-content {
+    margin: 30px 0;
+    font-size: 15px;
+    color: #333;
+}
+.play-exam-content .content-intro {
+    padding: 0;
+    font-size: 15px;
+}
+.exam-btn-box {
+    margin-top: 20px;
+}
+.btn-submit {
+    display: inline-block;
+    width: 150px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background-color: #b4e4fd;
+    color: #0083c7;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.exam-btn-jump {
+    float: right; 
+    opacity: 0.8;
+}
+.exam-btn-jump:hover {
+    opacity: 1;
+    color: #0083c7;
+}
+.btn-discussion{
+    display: inline-block;
+    width: 150px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background-color: #e9e9e9;
+    color: #333;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.exam-btn-discussion{
+    float: left; 
+    opacity: 0.8;
+}
+.exam-btn-discussion:hover {
+    opacity: 1;
+    color: #3d3d3d;
+}
+.exam-choose {
+    padding: 15px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.exam-option-content {
+    display: inline-block;
+}
+.exam-choose .exam-option-content {
+    vertical-align: top;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-left: 10px;
+}
+.exam-choose .checkbox, .exam-choose .radio {
+    display: inline-block;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+}
+.exam-choose .checkbox input, .exam-choose .radio input {
+    /*display: none;*/
+}
+.exam-choose .checkbox .icons,.exam-choose .radio .icons,.exam-option .icons {
+    border: 1px solid #aaa;
+    vertical-align: -3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    display: inline-block;
+    border-radius: 2px;
+    line-height: normal;
+    position: relative;
+}
+.exam-choose .radio .icons,.exam-option .icons{
+    border-radius: 50%;
+}
+.exam-choose .checkbox.checked .icons, .exam-choose .radio.checked .icons {
+    border: 1px solid #1bcc68;
+    background: #1bcc68;
+}
+.fill-box {
+    display: inline-block;
+    width: 54px;
+    height: 32px;
+    line-height: 32px;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px #888;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0 5px;
+    margin: 5px 3px;
+}
+.fill-box-content {
+    display: inline-block;
+    width: 54px;
+    height: 32px;
+    line-height: 32px;
+    background-color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    margin: 5px 3px;
+    border-bottom: 1px solid #000;
+    cursor: pointer;
+}
+.fill-box-content[data-aid] {
+    border-color: #69bd1f;
+}
+.fill-box-content[data-aid="0"] {
+    border-color: #000;
+}
+.input-box {
+    border: none;
+    text-align: left;
+}
+.fill-box:focus,.fill-box:hover {
+    box-shadow: 1px 1px 5px #666;
+}
+.choose-fill-box {
+    vertical-align: middle;
+    width: auto;
+    min-width: 54px;
+}
+.exam-choose-fill .fill-box {
+    float: left;
+    width: auto;
+    min-width: 54px;
+    margin: 10px 17px 10px 3px;
+    color: #69bd1f;
+    cursor: pointer;
+}
+.exam-choose-fill .fill-box.checked {
+    color: #999;
+}
+.exam-drag-sort {
+    margin-top: 5px;
+    padding: 15px 20px;
+    background-color: #eee;
+    border-radius: 4px;
+}
+.exam-drag-sort:hover {
+    box-shadow: 1px 1px 5px #888;
+}
+.exam-drag-sort span {
+    display: inline-block;
+    max-width: 90%;
+    white-space: pre-wrap;
+}
+.play-drag-sort {
+    background: url("//7nsts.w3cschool.cn/images/w3c/play-drag-sort.png");
+    width: 25px;
+    height: 25px;
+    float: right;
+    margin-right: 20px;
+}
+/* 点击显示目录列表 */
+.play-aside {
+    width: 400px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: #fff;
+    overflow-y: auto;
+    border-left: 1px solid #ddd;
+    box-shadow: 5px 5px 5px rgba(0,0,0,.175);
+}
+.play-aside h2 {
+    padding: 15px 10px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+.play-aside .close-btn {
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    background: url("//7nsts.w3cschool.cn/images/w3c/close-btn2.png") no-repeat center center;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.play-aside .close-btn:hover {
+    opacity: 1;
+}
+.play-aside .chapter-item h3 {
+    border-radius: 0;
+    padding: 0 15px;
+}
+.play-aside .chapter-box {
+    padding-left: 20px;
+}
+#foo li:hover {
+    cursor:move;
+}
+/* 上一题、下一题  */
+.play-nav-box .nav {
+    position: absolute;
+    top: 50px;
+    opacity: 0.8;
+}
+.play-nav-box .nav:hover {
+    opacity: 1;
+}
+.play-nav-box .play-nav-prev {
+    left: -80px;
+}
+.play-nav-box .play-nav-next {
+    right: -80px;
+}
+.play-icon-prev {
+    background: url("//7nsts.w3cschool.cn/images/w3c/play-icon-prev3.png");
+}
+.play-icon-next {
+    background: url("//7nsts.w3cschool.cn/images/w3c/play-icon-next3.png");
+}
+.play-icon-check {
+    background: url("//7nsts.w3cschool.cn/images/w3c/play-icon-check2.png");
+}
+.icon-edit {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url("//7nsts.w3cschool.cn/images/w3c/icon-edit.png");
+}
+/* 提示 */
+.play-tip-area {
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    width: 400px;
+    min-height: 200px;
+    z-index: 1500;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
+}
+.play-tip-right {
+    background-color: #EBFCEE;
+}
+.play-tip-error {
+    background-color: #FAEAE6;
+}
+.play-tip-box {
+    font-size: 15px;
+    color: #333;
+    margin: 12px 0 0;
+}
+.play-tip-box h2 {
+    font-size: 18px;
+}
+.play-icon-exp,.play-icon-credit {
+    width: 32px;
+    height: 32px;
+}
+.play-icon-exp {
+    background: url("//7nsts.w3cschool.cn/images/w3c/exp-ico.png");
+}
+.play-icon-credit {
+    background: url("//7nsts.w3cschool.cn/images/w3c/credit-ico.png");
+}
+.play-icon-right,.play-icon-error {
+    width: 64px;
+    height: 64px;
+}
+.play-icon-right {
+    background: url("//7nsts.w3cschool.cn/images/w3c/course-right-ico.png");
+}
+.play-icon-error {
+    background: url("//7nsts.w3cschool.cn/images/w3c/course-error-ico.png");
+}
+.credit-info .play-icon {
+    margin-right: 3px;
+}
+.try-again,.try-goon {
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    width: 64px;
+    height: 64px;
+}
+.go-home {
+    position: absolute;
+    right: 90px;
+    bottom: -20px;
+    width: 64px;
+    height: 64px;
+    background: url("/statics/images/w3c/home.png");
+    background-size: 64px;
+}
+.try-again {
+    background: url("//7nsts.w3cschool.cn/images/w3c/play-try-again.png");
+}
+.try-goon {
+    background: url("//7nsts.w3cschool.cn/images/w3c/play-try-goon.png");
+}
+#error-analysis {
+    padding: 0 20px 10px;
+    text-align: left;
+    line-height: 1.7;
+}
+.modal-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1200;
+    display:none;
+}
+.exam-radio {
+    display: none;
+}
+.op-checked {
+    box-shadow: 2px 2px 3px #ccc;
+}
+.icons-checked {
+    border: 1px solid #42c4ab !important;
+    background: url("//7nsts.w3cschool.cn/images/w3c/icons-checked.png") !important;
+}
+.fill-box-as-checked {
+    color: #999 !important;
+}
+.fill-box-as-checked:hover {
+    cursor: default;
+}
+.play-body .content-intro input.input-box {
+    font-family: arial;
+    font-size: 26px;
+    border: none;
+    box-shadow: none;
+    border-bottom: 1px solid #333;
+    border-radius: unset;
+    padding: 0;
+    height: auto;
+}
+.play-body .content-intro input.input-box:focus {
+    border-bottom: 3px solid #090;
+}
+#qcontent[data-qtype="5"] p {
+    font-family: arial;
+    font-size: 26px;
+}
+
+
+/* ----------------------------------- 页面自适应 ----------------------------------- */
+@media (min-width:1200px) {
+    .courselist-list {
+        width: 834px;
+    }
+}
+@media (min-width:1300px) {
+    .courselist-list {
+        width: 934px;
+    }
+}
