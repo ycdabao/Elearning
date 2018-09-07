@@ -8,6 +8,7 @@ import com.modou.elearning.pojo.Chapter;
 import com.modou.elearning.pojo.ChapterExample;
 import com.modou.elearning.pojo.Courses;
 import com.modou.elearning.pojo.CoursesExample;
+import com.modou.elearning.service.ChapterService;
 import com.modou.elearning.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class CourseServiceImpl implements CourseService {
     CoursesMapper coursesMapper;
 
     @Autowired
-    ChapterMapper chapterMapper;
+    ChapterService chapterService;
 
     @Override
     public String saveCover(MultipartFile file,String path)throws IOException {
@@ -84,11 +85,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Courses findById(String id) {
-        ChapterExample example1 = new ChapterExample();
-        ChapterExample.Criteria c1= example1.createCriteria();
-        c1.andChapterCourseidEqualTo(id);
-
-        List<Chapter> chapterList=chapterMapper.selectByExample(example1);
+        List<Chapter> chapterList=chapterService.selectChapterAndChapterContent(id);
         Courses courses = coursesMapper.selectByPrimaryKey(id);
         courses.setChapterList(chapterList);
 

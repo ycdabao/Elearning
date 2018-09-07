@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/role")
+@RequestMapping(value = "/admin/role")
 public class AuthRoleController {
 
     @Autowired

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 
 @Controller
-@RequestMapping(value="/chaptercontent")
+@RequestMapping(value="/admin/chaptercontent")
 public class ChaterContentController {
 
     @Autowired

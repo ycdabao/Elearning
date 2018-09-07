@@ -27,7 +27,7 @@
 <script type="text/javascript">
     <!--初始化文件列表-->
     $("#filedatagrid").datagrid({
-        url:'/file/list',
+        url:'/admin/file/list',
         columns:[
             [
             {field:'filename',title:'文件名称'},
@@ -41,7 +41,7 @@
 $("#btn-add").linkbutton({
     onClick:function(){
         $('#window-upload').window("resize",{top:$(document).scrollTop() + ($(window).height()-250) * 0.5});
-        var content1 = '<iframe id="iframe1"  scrolling="auto" frameborder="0"  src="/tofile" style="width:100%;height:300px;"></iframe>';
+        var content1 = '<iframe id="iframe1"  scrolling="auto" frameborder="0"  src="/admin/tofile" style="width:100%;height:300px;"></iframe>';
 
         $("#window-upload").window({"content":content1});
         $("#window-upload").window("open");

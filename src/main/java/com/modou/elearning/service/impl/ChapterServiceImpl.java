@@ -2,10 +2,8 @@ package com.modou.elearning.service.impl;
 
 import com.modou.elearning.mapper.ChapterContentMapper;
 import com.modou.elearning.mapper.ChapterMapper;
-import com.modou.elearning.pojo.Chapter;
-import com.modou.elearning.pojo.ChapterContent;
-import com.modou.elearning.pojo.ChapterContentExample;
-import com.modou.elearning.pojo.ChapterExample;
+import com.modou.elearning.mapper.FilesMapper;
+import com.modou.elearning.pojo.*;
 import com.modou.elearning.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,9 @@ public class ChapterServiceImpl  implements ChapterService{
 
     @Autowired
     ChapterContentMapper chapterContentMapper;
+
+    @Autowired
+    FilesMapper filesMapper;
 
     @Override
     @Transactional
@@ -72,7 +73,16 @@ public class ChapterServiceImpl  implements ChapterService{
            c2.andChapterIdEqualTo(c.getId());
          example2.setOrderByClause("chapter_content_order asc");
            List<ChapterContent> chapterContentList=chapterContentMapper.selectByExample(example2);
+
+          for(ChapterContent c3: chapterContentList){
+              Files file =   filesMapper.selectByPrimaryKey(c3.getFileId());
+              c3.setFile(file);
+          }
+
            c.setChapterContentList(chapterContentList);
+
+
+
        }
 
         return chapterList;

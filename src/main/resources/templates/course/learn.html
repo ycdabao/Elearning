@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
+    <style type="text/css">
+        body{
+            background-color: black;
+        }
+        #video{
+            margin: 0px auto;
+            width: 800px;
+            height: 600px;
+            display: block;
+        }
+
+        video::-webkit-media-controls-enclosure {
+            overflow:hidden;
+        }
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+<video id="video" ></video>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#video").attr("src","/[[${fileId}]]");
+        $("#video").attr("controls", "controls");
+    })
+
+</script>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ import com.modou.elearning.utils.EasyuiResult;
 import com.modou.elearning.utils.ModouResult;
 import com.modou.elearning.utils.UUIDUtil;
 import com.modou.elearning.utils.ValidateCode;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.plugin.util.UIUtil;
+
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/admin/user")
 public class UserController {
 
     @Autowired
@@ -97,7 +97,7 @@ public class UserController {
         }
 
 
-        return ModouResult.build(200,"success","/index");
+        return ModouResult.build(200,"success","/admin/index");
     }
 
 

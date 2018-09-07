@@ -7,36 +7,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class IndexController {
-    @RequestMapping(value="/index")
+
+
+
+    @RequestMapping(value="/unahthorized")
+    public String unahthorized(){
+        return "/admin/unahthorized";
+    }
+
+
+
+
+
+    @RequestMapping(value="/admin/index")
     public String index(){
 
         return "/admin/index";
     }
 
 
-
-    @RequestMapping(value="/tofile")
+    @RequestMapping(value="/admin/tofile")
     public String file(){
         return "/admin/files/file";
     }
 
-    @RequestMapping(value="/tologin")
+    @RequestMapping(value="/admin/tologin")
     public String tologin(){
         return "/admin/login";
     }
 
 
-    @RequestMapping(value="/toregister")
+    @RequestMapping(value="/admin/toregister")
     public String toregister(){
         return "/admin/register";
     }
 
-    @RequestMapping(value="/toindex")
-    public String toindex(){
-        return "/courses/index";
-    }
 
-    @RequestMapping(value="/course/toadd")
+
+    @RequestMapping(value="/admin/course/toadd")
     public String courseadd(){
         return "/admin/courses/add";
     }
@@ -47,7 +55,7 @@ public class IndexController {
      * @param model
      * @return
      */
-    @RequestMapping(value="/course/toedit")
+    @RequestMapping(value="/admin/course/toedit")
     public String courseedit(@RequestParam(required = true) String id, Model model){
         model.addAttribute("courseid",id);
 
@@ -60,7 +68,7 @@ public class IndexController {
      * @param model
      * @return
      */
-    @RequestMapping(value="/chapter/toedit")
+    @RequestMapping(value="/admin/chapter/toedit")
     public String chapteredit(@RequestParam(required = true) String id, Model model){
         model.addAttribute("courseid",id);
         return "/admin/chapter/edit";
@@ -70,21 +78,18 @@ public class IndexController {
      * 课程列表
      * @return
      */
-    @RequestMapping(value="/course/tolist")
+    @RequestMapping(value="/admin/course/tolist")
     public String tocourselist(){
         return "/admin/courses/list";
     }
 
-    @RequestMapping(value="/chapter/toadd")
+    @RequestMapping(value="/admin/chapter/toadd")
     public String chapteradd(@RequestParam(required = true) String id, Model model){
         model.addAttribute("courseid",id);
         return "/admin/chapter/add";
     }
 
 
-    @RequestMapping("/view")
-    public String view(){
-        return "/view";
-    }
+
 
 }

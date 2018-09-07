@@ -37,7 +37,7 @@
         if (($("#ff").form('enableValidation').form('validate'))) {
             $.ajax({
                 type: "POST",
-                url: "/user/doregister",
+                url: "/admin/user/doregister",
                 data: $("#ff").serialize(),
                 dataType: "json",
                 success: function (result) {

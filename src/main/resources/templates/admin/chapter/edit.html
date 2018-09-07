@@ -119,7 +119,7 @@
     $("#container").html("");
     $.ajax({
         type: "POST",
-        url: "/chapter/findbycourseid",
+        url: "/admin/chapter/findbycourseid",
         data: "courseid=[[${courseid}]]",
         success: function (msg) {
             if (msg.status == 200) {
@@ -232,7 +232,7 @@
 
         $.ajax({
                 type: "POST",
-                url: "/chapter/add",
+                url: "/admin/chapter/add",
                 data: "chapterCourseid=" + couserid + "&chapterName=" + chaptername + "&chapterOrder=" + level,
                 success: function (msg) {
                     if (msg.status == 200) {
@@ -307,7 +307,7 @@
         var id= $("#div"+tn+" dt input[name='chapterid']").val();
         $.ajax({
             type: "POST",
-            url: "/chapter/update",
+            url: "/admin/chapter/update",
             data: "id=" + id+"&chapterName="+chaptername,
             success: function (msg) {
                 if(msg.status==200){
@@ -344,7 +344,7 @@
         var id= $("#div"+tn+" dt input[name='chapterid']").val();
         $.ajax({
                 type: "POST",
-                url: "/chapter/delete",
+                url: "/admin/chapter/delete",
                 data: "id=" + id,
                 success: function (delmsg) {
 
@@ -366,7 +366,7 @@
     function delContent(id, dn, tn) {
         $.ajax({
                 type: "POST",
-                url: "/chaptercontent/delete",
+                url: "/admin/chaptercontent/delete",
                 data: "id=" + id,
                 success: function (delmsg) {
 
@@ -389,7 +389,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/chaptercontent/findbyid",
+            url: "/admin/chaptercontent/findbyid",
             data: "id=" + id,
             success: function (msg) {
                 if (msg.status == 200) {
@@ -452,7 +452,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/chaptercontent/edit",
+            url: "/admin/chaptercontent/edit",
             data: "id=" + id + "&chapterContentName=" + contentname + "&fileId=" + fileid + "&free=" + free,
             success: function (msg) {
                 $("#div" + tn + " #dd" + dn).html("");
@@ -515,7 +515,7 @@
         var free = $("#div" + tn + " #dd" + dn + " input[type='radio']:checked").val();
         $.ajax({
                 type: "POST",
-                url: "/chaptercontent/add",
+                url: "/admin/chaptercontent/add",
                 data: "chapterId=" + chapterid + "&chapterContentName=" + contentname + "&chapterContentOrder=" + order + "&fileId=" + fileid + "&free=" + free,
                 success: function (msg) {
                     if(msg.status==200){
@@ -547,7 +547,7 @@
             height: 400
         });
         $("#dg1").datagrid({
-            url: '/file/list',
+            url: '/admin/file/list',
             columns: [
                 [
                     {field: 'id', title: '编号', width: 100},

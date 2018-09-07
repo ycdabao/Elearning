@@ -85,7 +85,7 @@
 
             //分类
             $("#type1").combobox({
-                url:'/types/findbyparentid',
+                url:'/admin/types/findbyparentid',
                 valueField:'id',
                 textField:'typeName',
                 onSelect:function(record){
@@ -93,13 +93,13 @@
                     $("#type3").combobox("clear");
                     var parentid = record.id;
                     $("#type2").combobox({
-                        url:'/types/findbyparentid?parentid='+parentid,
+                        url:'/admin/types/findbyparentid?parentid='+parentid,
                         valueField:'id',
                         textField:'typeName',
                         onSelect:function(record1){
 
                             $("#type3").combobox({
-                                    url: '/types/findbyparentid?parentid=' + record1.id,
+                                    url: '/admin/types/findbyparentid?parentid=' + record1.id,
                                     valueField: 'id',
                                     textField: 'typeName'
                                 }
@@ -113,7 +113,7 @@
             //初始化表单
             $.ajax({
                     type: "POST",
-                    url: "/course/findbyid",
+                    url: "/admin/course/findbyid",
                     data:"id=[[${courseid}]]",
                     success: function (msg) {
 
@@ -131,7 +131,7 @@
                             $("input:radio[name='coursePriceType'][value='"+msg.data.coursePriceType+"']").attr("checked",true);
                             $("#coursePrice").textbox("setValue",msg.data.coursePrice);
                             $("#type1").combobox({
-                                url: '/types/findbyparentid',
+                                url: '/admin/types/findbyparentid',
                                 valueField: 'id',
                                 textField: 'typeName',
                                 onLoadSuccess:function(){
@@ -143,7 +143,7 @@
                                     }
 
                                     $("#type2").combobox({
-                                        url:'/types/findbyparentid?parentid='+msg.data.courseType1,
+                                        url:'/admin/types/findbyparentid?parentid='+msg.data.courseType1,
                                         valueField:'id',
                                         textField:'typeName',
                                         onLoadSuccess:function(){
@@ -158,7 +158,7 @@
                                             if($("#type2").combobox("getValue")!=null&&$("#type2").combobox("getValue")!="") {
 
                                                 $("#type3").combobox({
-                                                    url: '/types/findbyparentid?parentid=' + msg.data.courseType2,
+                                                    url: '/admin/types/findbyparentid?parentid=' + msg.data.courseType2,
                                                     valueField: 'id',
                                                     textField: 'typeName',
                                                     onLoadSuccess: function () {
@@ -187,7 +187,7 @@
                 editor1.sync();
                 $.ajax({
                     type: "POST",
-                    url: "/course/update",
+                    url: "/admin/course/update",
                     data: $("#ff").serialize(),
                     success: function(msg){
                         if(msg.status==200){

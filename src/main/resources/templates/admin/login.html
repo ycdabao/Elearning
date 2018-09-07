@@ -14,7 +14,7 @@
 
 <div style="margin:20px 0;"></div>
 <div class="easyui-panel" title="登录" style="width:100%;width:500px;padding:30px 60px;margin:0px auto">
-    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="/user/dologin">
+    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true" action="/admin/user/dologin">
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="login" style="width:100%" data-options="label:'手机号:',required:true">
         </div>
@@ -24,7 +24,7 @@
         </div>
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="message" style="width:100%" data-options="label:'验证码:'">
-            <img src="/user/getvalidatecode"/>
+            <img src="/admin/user/getvalidatecode"/>
         </div>
 
     </form>
@@ -39,7 +39,7 @@
                 if(($("#ff").form('enableValidation').form('validate'))){
                     $.ajax({
                         type: "POST",
-                        url: "/user/dologin",
+                        url: "/admin/user/dologin",
                         data: $("#ff").serialize(),
                         dataType:"json",
                         success: function(result){

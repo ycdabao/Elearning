@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping(value="/types")
+@RequestMapping(value="/admin/types")
 public class TypesController {
 
 

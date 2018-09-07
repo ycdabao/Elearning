@@ -55,7 +55,7 @@
 
 
 
-    var backEndUrl = 'http://127.0.0.1:8080/file/fileUpload';
+    var backEndUrl = 'http://127.0.0.1:8080/admin/file/fileUpload';
 
     WebUploader.Uploader.register({
         "before-send-file": "beforeSendFile"
@@ -229,7 +229,7 @@
             uploader.removeFile(file,true);	//从上传文件列表中删除
             $.ajax({
                 type: "POST",
-                url: "/file/removeFile",
+                url: "/admin/file/removeFile",
                 data: "fileName="+fileName+"&extension="+file.name.substring(file.name.lastIndexOf("." )),
                 success: function(msg){
 

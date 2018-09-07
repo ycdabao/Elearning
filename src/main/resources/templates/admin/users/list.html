@@ -18,7 +18,7 @@
         $(document).ready(function () {
             <!--初始化课程列表-->
             $("#userslist").datagrid({
-                url:'/user/list',
+                url:'/admin/user/list',
                 autoRowHeight:true,
                 fitColumns:true,
                 striped:true,
@@ -46,7 +46,7 @@
         function editcourse(courseid){
 
 
-            var url = "/course/toedit?id="+courseid;
+            var url = "/admin/course/toedit?id="+courseid;
             //iframe层
             layer.open({
                 type: 2,

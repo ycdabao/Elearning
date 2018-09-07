@@ -107,7 +107,7 @@
             var uploader = WebUploader.create({
                 swf: "Uploader.swf",
                 // 文件接收服务端。
-                server : '/course/uploadcover',
+                server : '/admin/course/uploadcover',
                 pick: {
                     id: '#picker',
                     label: '点击选择图片'
@@ -135,18 +135,18 @@
 
             //分类
             $("#type1").combobox({
-                url:'/types/findbyparentid',
+                url:'/admin/types/findbyparentid',
                 valueField:'id',
                 textField:'typeName',
                 onSelect:function(record){
                     var parentid = record.id;
                     $("#type2").combobox({
-                        url:'/types/findbyparentid?parentid='+parentid,
+                        url:'/admin/types/findbyparentid?parentid='+parentid,
                         valueField:'id',
                         textField:'typeName',
                         onSelect:function(record1){
                             $("#type3").combobox({
-                                    url: '/types/findbyparentid?parentid=' + record1.id,
+                                    url: '/admin/types/findbyparentid?parentid=' + record1.id,
                                     valueField: 'id',
                                     textField: 'typeName'
                                 }
@@ -161,7 +161,7 @@
                 editor1.sync();
                 $.ajax({
                     type: "POST",
-                    url: "/course/add",
+                    url: "/admin/course/add",
                     data: $("#ff").serialize(),
                     success: function(msg){
                         if(msg.status==200){

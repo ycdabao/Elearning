@@ -56,7 +56,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/chapter/add",
+                url: "/admin/chapter/add",
                 data: "chapterName=" + chnametextbox.val() + "&chapterOrder=" + chorder.val() + "&chapterCourseid=[[${courseid}]]",
                 success: function (msg1) {
 
@@ -75,7 +75,7 @@
                         charemovebutton.bind("click",function(){    //删除按事件
                             $.ajax({
                                 type: "POST",
-                                url: "/chapter/delete",
+                                url: "/admin/chapter/delete",
                                 data:"chapterid="+msg1.data,
                                 success: function (msg2) {
                                     if(msg1.status==200){
@@ -89,7 +89,7 @@
                         chaeditbutton.bind("click",function(){    //更新按钮事件
                             $.ajax({
                                 type: "POST",
-                                url: "/chapter/update",
+                                url: "/admin/chapter/update",
                                 data:"chapterid="+msg1.data+"&chapterName="+chnametextbox.val(),
                                 success: function (msg2) {
 
@@ -140,7 +140,7 @@
 
                                 $.ajax({
                                     type: "POST",
-                                    url: "/chaptercontent/add",
+                                    url: "/admin/chaptercontent/add",
                                     data:"chapterId="+msg1.data+"&fileId="+n2+"&free="+n3+"&chapterContentName="+n1+"&chapterContentOrder="+videonumber,
                                     success: function (msg2) {
                                             if(msg2.status==200){
@@ -167,7 +167,7 @@
                                         height:400
                                     })
                                $("#dg1").datagrid({
-                                   url:'/file/list',
+                                   url:'/admin/file/list',
                                    columns:[
                                        [
                                            {field:'id',title:'id',width:100},

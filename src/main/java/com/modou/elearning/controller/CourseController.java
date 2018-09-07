@@ -20,13 +20,14 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/course")
+@RequestMapping(value = "/admin/course")
 public class CourseController {
 
     private String uploadFolder = "/coverupload";
 
     @Autowired
     private CourseService courseService;
+
 
     @RequestMapping(value = "/uploadcover")
     @ResponseBody

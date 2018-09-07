@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/chapter")
+@RequestMapping(value = "/admin/chapter")
 public class ChapterController {
 
     @Autowired

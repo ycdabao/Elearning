@@ -7,6 +7,7 @@ import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.EasyuiResult;
 import com.modou.elearning.utils.ModouResult;
 import com.modou.elearning.utils.fileutil.FileInfo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping(value="/file")
+@RequestMapping(value="/admin/file")
 
 public class FileController {
 
@@ -41,6 +42,7 @@ public class FileController {
 
         return "/admin/files/list";
     }
+
 
 
     @RequestMapping(value="/list")

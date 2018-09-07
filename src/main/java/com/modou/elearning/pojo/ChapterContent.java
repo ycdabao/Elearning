@@ -19,14 +19,14 @@ public class ChapterContent implements Serializable {
     private Date chapterContentCreatedate;
 
     private Date chapterContentModifydate;
-    private Files files;
+    private Files file;
 
     public Files getFile() {
-        return files;
+        return file;
     }
 
-    public void setFile(Files files) {
-        this.files = files;
+    public void setFile(Files file) {
+        this.file = file;
     }
 
 
