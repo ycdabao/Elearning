@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>2018SQL入门：SQLServer基础编程实战微课_w3cschool</title>
+    <title>魔豆IT教育</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="renderer" content="webkit"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -51,7 +51,7 @@
                     <a href="//www.imodou.com.cn" title="魔豆" class="logo"><img
                             src="/images/logo.png" alt="魔豆"/></a>
                     <ul class="header-menu">
-                        <li><a href="//www.imodou.com.cn/minicourse/" title="编程微课首页">编程微课首页</a></li>
+                        <li><a href="/course/index" title="编程微课首页">编程微课首页</a></li>
                         <li><a href="//www.imodou.com.cn/minicourse/list" title="微课列表">编程课程列表</a></li>
                         <li><a href="//www.imodou.com.cn/codecamp/" title="编程实战列表">编程实战</a></li>
                         <li><a href="//www.imodou.com.cn/vip" title="会员">会员<i class="hot-icon"></i></a></li>
@@ -92,7 +92,7 @@
                 <div class="current-position">
                     <a href="/minicourse">首页</a>
                     &gt;&nbsp;<a href="/minicourse/list">编程微课列表</a>
-                    &gt;&nbsp;<span>2018SQL入门：SQLServer基础</span>
+                    &gt;&nbsp;<span></span>
                 </div>
             </div>
             <div class="courselist-banner-content">
@@ -509,6 +509,9 @@
                     }
                     $(".chapter-box").html(content);
                     $(".courselist-banner-l img").attr("src","/"+response.data.courseCover);
+                    $("title").html(response.data.courseName);
+                    $(".current-position span").html(response.data.courseName);
+                    $(".courselist-banner-r h2").html(response.data.courseName);
                 }
             }
         );
