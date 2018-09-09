@@ -6,7 +6,7 @@
     <groupId>com.modou</groupId>
     <artifactId>elearning</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>elearning</name>
     <description>Demo project for Spring Boot</description>
@@ -109,6 +109,14 @@
                     <configurationFile>${basedir}/src/main/resources/generatorConfiguration.xml</configurationFile>
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.modou.elearning.ElearningApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

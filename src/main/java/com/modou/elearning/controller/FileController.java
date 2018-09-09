@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,8 @@ public class FileController {
     private final static Logger log = LoggerFactory.getLogger(FileController.class);
 
 
-    private String uploadFolder="d:/temp/files";
+    @Value("${file.video.uploadfolter}")
+    private String uploadFolder;
 
     @Autowired
     private FileServiceImpl wu;
@@ -40,7 +42,7 @@ public class FileController {
     @RequestMapping(value="/tolist")
     public String printWelcome(ModelMap model) {
 
-        return "/admin/files/list";
+        return "admin/files/list";
     }
 
 
@@ -71,7 +73,7 @@ public class FileController {
 
 
     //大文件上传
-    @RequestMapping(value = "fileUpload", method = RequestMethod.POST)
+    @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
     @ResponseBody
     public String fileUpload(String status, FileInfo info, @RequestParam(value = "file", required = false) MultipartFile file,HttpSession session){
 

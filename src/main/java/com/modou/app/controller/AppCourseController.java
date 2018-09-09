@@ -43,24 +43,24 @@ public class AppCourseController {
 
     @RequestMapping(value="/index")
     public String index(){
-        return "/course/index";
+        return "course/index";
     }
 
     @RequestMapping(value="/toview")
     public String toview(String id,Model model){
         model.addAttribute("id",id);
-        return "/course/view";
+        return "course/view";
     }
 
     @RequestMapping(value="/view")
     public String view(){
-        return "/course/learn";
+        return "course/learn";
     }
 
     @RequestMapping(value="/tolearn")
     public String tolearn(String fileId,Model model){
         model.addAttribute("fileId",fileId);
-        return "/course/learn";
+        return "course/learn";
     }
 
 }

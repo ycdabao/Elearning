@@ -12,7 +12,7 @@ public class IndexController {
 
     @RequestMapping(value="/unahthorized")
     public String unahthorized(){
-        return "/admin/unahthorized";
+        return "admin/unahthorized";
     }
 
 
@@ -22,31 +22,31 @@ public class IndexController {
     @RequestMapping(value="/admin/index")
     public String index(){
 
-        return "/admin/index";
+        return "admin/index";
     }
 
 
     @RequestMapping(value="/admin/tofile")
     public String file(){
-        return "/admin/files/file";
+        return "admin/files/file";
     }
 
     @RequestMapping(value="/admin/tologin")
     public String tologin(){
-        return "/admin/login";
+        return "admin/login";
     }
 
 
     @RequestMapping(value="/admin/toregister")
     public String toregister(){
-        return "/admin/register";
+        return "admin/register";
     }
 
 
 
     @RequestMapping(value="/admin/course/toadd")
     public String courseadd(){
-        return "/admin/courses/add";
+        return "admin/courses/add";
     }
 
     /**
@@ -59,7 +59,7 @@ public class IndexController {
     public String courseedit(@RequestParam(required = true) String id, Model model){
         model.addAttribute("courseid",id);
 
-        return "/admin/courses/edit";
+        return "admin/courses/edit";
     }
 
     /**
@@ -71,7 +71,7 @@ public class IndexController {
     @RequestMapping(value="/admin/chapter/toedit")
     public String chapteredit(@RequestParam(required = true) String id, Model model){
         model.addAttribute("courseid",id);
-        return "/admin/chapter/edit";
+        return "admin/chapter/edit";
     }
 
     /**
@@ -80,13 +80,13 @@ public class IndexController {
      */
     @RequestMapping(value="/admin/course/tolist")
     public String tocourselist(){
-        return "/admin/courses/list";
+        return "admin/courses/list";
     }
 
     @RequestMapping(value="/admin/chapter/toadd")
     public String chapteradd(@RequestParam(required = true) String id, Model model){
         model.addAttribute("courseid",id);
-        return "/admin/chapter/add";
+        return "admin/chapter/add";
     }
 
 

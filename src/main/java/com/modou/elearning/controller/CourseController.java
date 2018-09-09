@@ -7,6 +7,7 @@ import com.modou.elearning.utils.EasyuiResult;
 import com.modou.elearning.utils.ModouResult;
 import com.modou.elearning.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +24,8 @@ import java.util.List;
 @RequestMapping(value = "/admin/course")
 public class CourseController {
 
-    private String uploadFolder = "/coverupload";
+    @Value("${file.cover.uploadfolder}")
+    private String coverFolder;
 
     @Autowired
     private CourseService courseService;
@@ -34,7 +36,7 @@ public class CourseController {
     public ModouResult uploadCover(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
 
         try {
-            String path = courseService.saveCover(file, "d://temp//cover");
+            String path = courseService.saveCover(file, coverFolder);
 
             return ModouResult.build(200, "上传成功", path);
         } catch (IOException ex) {
