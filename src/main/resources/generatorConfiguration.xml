@@ -10,8 +10,8 @@
 		</commentGenerator>
 		<!-- 数据库链接URL、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://116.62.159.48:3306/elearning"
-			userId="root" password="imodou20170212">
+			connectionURL="jdbc:mysql://192.168.2.88:3306/elearning"
+			userId="root" password="root">
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />

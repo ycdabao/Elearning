@@ -515,6 +515,126 @@ public class FilesExample {
             return (Criteria) this;
         }
 
+        public Criteria andFileDurationIsNull() {
+            addCriterion("file_duration is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationIsNotNull() {
+            addCriterion("file_duration is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationEqualTo(Long value) {
+            addCriterion("file_duration =", value, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationNotEqualTo(Long value) {
+            addCriterion("file_duration <>", value, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationGreaterThan(Long value) {
+            addCriterion("file_duration >", value, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationGreaterThanOrEqualTo(Long value) {
+            addCriterion("file_duration >=", value, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationLessThan(Long value) {
+            addCriterion("file_duration <", value, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationLessThanOrEqualTo(Long value) {
+            addCriterion("file_duration <=", value, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationIn(List<Long> values) {
+            addCriterion("file_duration in", values, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationNotIn(List<Long> values) {
+            addCriterion("file_duration not in", values, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationBetween(Long value1, Long value2) {
+            addCriterion("file_duration between", value1, value2, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileDurationNotBetween(Long value1, Long value2) {
+            addCriterion("file_duration not between", value1, value2, "fileDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeIsNull() {
+            addCriterion("file_size is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeIsNotNull() {
+            addCriterion("file_size is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeEqualTo(Long value) {
+            addCriterion("file_size =", value, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeNotEqualTo(Long value) {
+            addCriterion("file_size <>", value, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeGreaterThan(Long value) {
+            addCriterion("file_size >", value, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeGreaterThanOrEqualTo(Long value) {
+            addCriterion("file_size >=", value, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeLessThan(Long value) {
+            addCriterion("file_size <", value, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeLessThanOrEqualTo(Long value) {
+            addCriterion("file_size <=", value, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeIn(List<Long> values) {
+            addCriterion("file_size in", values, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeNotIn(List<Long> values) {
+            addCriterion("file_size not in", values, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeBetween(Long value1, Long value2) {
+            addCriterion("file_size between", value1, value2, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileSizeNotBetween(Long value1, Long value2) {
+            addCriterion("file_size not between", value1, value2, "fileSize");
+            return (Criteria) this;
+        }
+
         public Criteria andFileCountIsNull() {
             addCriterion("file_count is null");
             return (Criteria) this;

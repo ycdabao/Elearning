@@ -8,6 +8,8 @@
     <result column="fileName" property="filename" jdbcType="VARCHAR" />
     <result column="file_type" property="fileType" jdbcType="VARCHAR" />
     <result column="file_folder" property="fileFolder" jdbcType="VARCHAR" />
+    <result column="file_duration" property="fileDuration" jdbcType="BIGINT" />
+    <result column="file_size" property="fileSize" jdbcType="BIGINT" />
     <result column="file_count" property="fileCount" jdbcType="INTEGER" />
     <result column="file_favorites" property="fileFavorites" jdbcType="INTEGER" />
     <result column="file_share" property="fileShare" jdbcType="INTEGER" />
@@ -75,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, file_createby, file_createdate, fileName, file_type, file_folder, file_count, 
-    file_favorites, file_share, file_status
+    id, file_createby, file_createdate, fileName, file_type, file_folder, file_duration, 
+    file_size, file_count, file_favorites, file_share, file_status
   </sql>
   <sql id="Blob_Column_List" >
     file_content
@@ -132,12 +134,14 @@
   <insert id="insert" parameterType="com.modou.elearning.pojo.Files" >
     insert into files (id, file_createby, file_createdate, 
       fileName, file_type, file_folder, 
-      file_count, file_favorites, file_share, 
-      file_status, file_content)
+      file_duration, file_size, file_count, 
+      file_favorites, file_share, file_status, 
+      file_content)
     values (#{id,jdbcType=VARCHAR}, #{fileCreateby,jdbcType=VARCHAR}, #{fileCreatedate,jdbcType=TIMESTAMP}, 
       #{filename,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, #{fileFolder,jdbcType=VARCHAR}, 
-      #{fileCount,jdbcType=INTEGER}, #{fileFavorites,jdbcType=INTEGER}, #{fileShare,jdbcType=INTEGER}, 
-      #{fileStatus,jdbcType=VARCHAR}, #{fileContent,jdbcType=LONGVARCHAR})
+      #{fileDuration,jdbcType=BIGINT}, #{fileSize,jdbcType=BIGINT}, #{fileCount,jdbcType=INTEGER}, 
+      #{fileFavorites,jdbcType=INTEGER}, #{fileShare,jdbcType=INTEGER}, #{fileStatus,jdbcType=VARCHAR}, 
+      #{fileContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.modou.elearning.pojo.Files" >
     insert into files
@@ -159,6 +163,12 @@
       </if>
       <if test="fileFolder != null" >
         file_folder,
+      </if>
+      <if test="fileDuration != null" >
+        file_duration,
+      </if>
+      <if test="fileSize != null" >
+        file_size,
       </if>
       <if test="fileCount != null" >
         file_count,
@@ -194,6 +204,12 @@
       </if>
       <if test="fileFolder != null" >
         #{fileFolder,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDuration != null" >
+        #{fileDuration,jdbcType=BIGINT},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=BIGINT},
       </if>
       <if test="fileCount != null" >
         #{fileCount,jdbcType=INTEGER},
@@ -239,6 +255,12 @@
       <if test="record.fileFolder != null" >
         file_folder = #{record.fileFolder,jdbcType=VARCHAR},
       </if>
+      <if test="record.fileDuration != null" >
+        file_duration = #{record.fileDuration,jdbcType=BIGINT},
+      </if>
+      <if test="record.fileSize != null" >
+        file_size = #{record.fileSize,jdbcType=BIGINT},
+      </if>
       <if test="record.fileCount != null" >
         file_count = #{record.fileCount,jdbcType=INTEGER},
       </if>
@@ -267,6 +289,8 @@
       fileName = #{record.filename,jdbcType=VARCHAR},
       file_type = #{record.fileType,jdbcType=VARCHAR},
       file_folder = #{record.fileFolder,jdbcType=VARCHAR},
+      file_duration = #{record.fileDuration,jdbcType=BIGINT},
+      file_size = #{record.fileSize,jdbcType=BIGINT},
       file_count = #{record.fileCount,jdbcType=INTEGER},
       file_favorites = #{record.fileFavorites,jdbcType=INTEGER},
       file_share = #{record.fileShare,jdbcType=INTEGER},
@@ -284,6 +308,8 @@
       fileName = #{record.filename,jdbcType=VARCHAR},
       file_type = #{record.fileType,jdbcType=VARCHAR},
       file_folder = #{record.fileFolder,jdbcType=VARCHAR},
+      file_duration = #{record.fileDuration,jdbcType=BIGINT},
+      file_size = #{record.fileSize,jdbcType=BIGINT},
       file_count = #{record.fileCount,jdbcType=INTEGER},
       file_favorites = #{record.fileFavorites,jdbcType=INTEGER},
       file_share = #{record.fileShare,jdbcType=INTEGER},
@@ -310,6 +336,12 @@
       <if test="fileFolder != null" >
         file_folder = #{fileFolder,jdbcType=VARCHAR},
       </if>
+      <if test="fileDuration != null" >
+        file_duration = #{fileDuration,jdbcType=BIGINT},
+      </if>
+      <if test="fileSize != null" >
+        file_size = #{fileSize,jdbcType=BIGINT},
+      </if>
       <if test="fileCount != null" >
         file_count = #{fileCount,jdbcType=INTEGER},
       </if>
@@ -335,6 +367,8 @@
       fileName = #{filename,jdbcType=VARCHAR},
       file_type = #{fileType,jdbcType=VARCHAR},
       file_folder = #{fileFolder,jdbcType=VARCHAR},
+      file_duration = #{fileDuration,jdbcType=BIGINT},
+      file_size = #{fileSize,jdbcType=BIGINT},
       file_count = #{fileCount,jdbcType=INTEGER},
       file_favorites = #{fileFavorites,jdbcType=INTEGER},
       file_share = #{fileShare,jdbcType=INTEGER},
@@ -349,6 +383,8 @@
       fileName = #{filename,jdbcType=VARCHAR},
       file_type = #{fileType,jdbcType=VARCHAR},
       file_folder = #{fileFolder,jdbcType=VARCHAR},
+      file_duration = #{fileDuration,jdbcType=BIGINT},
+      file_size = #{fileSize,jdbcType=BIGINT},
       file_count = #{fileCount,jdbcType=INTEGER},
       file_favorites = #{fileFavorites,jdbcType=INTEGER},
       file_share = #{fileShare,jdbcType=INTEGER},

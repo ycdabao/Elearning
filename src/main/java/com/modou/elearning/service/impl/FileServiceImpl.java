@@ -7,6 +7,8 @@ import com.modou.elearning.pojo.FilesExample;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import com.modou.elearning.utils.fileutil.FileLock;
 
+import it.sauronsoftware.jave.Encoder;
+import it.sauronsoftware.jave.MultimediaInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -225,13 +227,21 @@ public class FileServiceImpl {
     public boolean saveMd52FileMap(String key, String file,String originalName,String userid,File outputFile) {
         //获取时长
         Encoder encoder = new Encoder();
-
+        long ls=0;
+        try {
+            MultimediaInfo m = encoder.getInfo(outputFile);
+            ls = m.getDuration()/1000;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Files files = new Files();
         files.setId(key);
         files.setFileCreatedate(new Date());
         files.setFileContent(file);
         files.setFilename(originalName);
         files.setFileCreateby(userid);
+        files.setFileDuration(ls);
+        files.setFileSize(outputFile.length());
         filesMapper.insert(files);
 
         return true;

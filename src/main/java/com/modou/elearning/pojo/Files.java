@@ -16,6 +16,10 @@ public class Files implements Serializable {
 
     private String fileFolder;
 
+    private Long fileDuration;
+
+    private Long fileSize;
+
     private Integer fileCount;
 
     private Integer fileFavorites;
@@ -74,6 +78,22 @@ public class Files implements Serializable {
 
     public void setFileFolder(String fileFolder) {
         this.fileFolder = fileFolder == null ? null : fileFolder.trim();
+    }
+
+    public Long getFileDuration() {
+        return fileDuration;
+    }
+
+    public void setFileDuration(Long fileDuration) {
+        this.fileDuration = fileDuration;
+    }
+
+    public Long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(Long fileSize) {
+        this.fileSize = fileSize;
     }
 
     public Integer getFileCount() {
