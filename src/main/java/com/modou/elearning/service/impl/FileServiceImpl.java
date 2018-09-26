@@ -1,6 +1,9 @@
 package com.modou.elearning.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.modou.elearning.mapper.FilesMapper;
+import com.modou.elearning.pojo.Files;
+import com.modou.elearning.pojo.FilesExample;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import com.modou.elearning.utils.fileutil.FileLock;
 
@@ -43,7 +46,7 @@ public class FileServiceImpl {
 
 
 
-    public List<Files> list(String userid,Integer page,Integer pageSize){
+    public List<Files> list(String userid, Integer page, Integer pageSize){
 
         FilesExample example = new FilesExample();
         FilesExample.Criteria c = example.createCriteria();
@@ -178,7 +181,7 @@ public class FileServiceImpl {
 
 
                     //将MD5签名和合并后的文件path存入持久层
-                    if (this.saveMd52FileMap(md5, outputFile.getName(),originalName,userid)) {
+                    if (this.saveMd52FileMap(md5, outputFile.getName(),originalName,userid,outputFile)) {
                         log.error("文件[" + md5 + "=>" + outputFile.getName() + "]保存关系到持久成失败，但并不影响文件上传，只会导致日后该文件可能被重复上传而已");
                     }
 
@@ -219,7 +222,9 @@ public class FileServiceImpl {
      * @return
      */
     @Transactional
-    public boolean saveMd52FileMap(String key, String file,String originalName,String userid) {
+    public boolean saveMd52FileMap(String key, String file,String originalName,String userid,File outputFile) {
+        //获取时长
+        Encoder encoder = new Encoder();
 
         Files files = new Files();
         files.setId(key);

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AppVideoController {
 
     @RequestMapping(value="/playvideo")
-    public vod playVideo(){
+    public void playVideo(){
 
     }
 

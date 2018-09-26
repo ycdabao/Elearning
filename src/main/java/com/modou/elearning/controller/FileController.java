@@ -1,6 +1,7 @@
 package com.modou.elearning.controller;
 
 
+import com.modou.elearning.pojo.Files;
 import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.EasyuiResult;
@@ -47,7 +48,7 @@ public class FileController {
 
     @RequestMapping(value="/list")
     @ResponseBody
-    public EasyuiResult<Files> list(@RequestParam(defaultValue = "1") Integer page,@RequestParam(defaultValue ="10" ) Integer rows,HttpSession session){
+    public EasyuiResult<Files> list(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue ="10" ) Integer rows, HttpSession session){
 
         Users  user = (Users)session.getAttribute("user");
 
