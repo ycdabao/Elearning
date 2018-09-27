@@ -3,54 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <title>资源管理</title>
-    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css"/>
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
     <!-- 中文化 -->
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
     <style type="text/css">
-        *{font-family: 微软雅黑}
+        * {
+            font-family: 微软雅黑
+        }
     </style>
 </head>
 <body>
 
 <div style="margin: 5px">
-    <a id="btn-add" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',text:'上传文件'"></a>
+    <a id="btn-add" href="javascript:void(0)" class="easyui-linkbutton"
+       data-options="iconCls:'icon-add',text:'上传文件'"></a>
 </div>
 
-<div id="window-upload" class="easyui-window" data-options="width:'800px',modal:true,shadow:true,closed:true,title:'文件上传'"></div>
+<div id="window-upload" class="easyui-window"
+     data-options="width:'800px',modal:true,shadow:true,closed:true,title:'文件上传'"></div>
 
 
-    <table class="easyui-datagrid" id="filedatagrid"></table>
+<table class="easyui-datagrid" id="filedatagrid"></table>
 
 <script type="text/javascript">
     <!--初始化文件列表-->
     $("#filedatagrid").datagrid({
-        url:'/admin/file/list',
-        columns:[
+        url: '/admin/file/list',
+        columns: [
             [
-            {field:'filename',title:'文件名称'},
-            {field:'fileCreatedate',title:'上传时间'}
-        ]
-        ],
-        pagination:true
-    });
+                {field: 'filename', title: '文件名称'},
+                {field: 'fileCreatedate', title: '上传时间'},
+                {field: 'fileDuration', title: '时长',formatter: function (value, row, index) {
+
+                        var hour = (value/3600);
+                        var minute = Math.floor(value/60);
+                        var second = (value-minute*60)<10?'0'+(value-minute*60):value-minute*60;
+                        var length = minute+":"+second;
+                        return length;
+                     }
+    },
+    {
+        field:'fileSize', title: '文件大小',formatter: function (value, row, index) {
+
+            return Math.round(value/1024/1024)+"MB";
+        }
+    }
+    ]
+    ],
+    pagination:true
+    })
+    ;
 
     <!--打开上传窗口-->
-$("#btn-add").linkbutton({
-    onClick:function(){
-        $('#window-upload').window("resize",{top:$(document).scrollTop() + ($(window).height()-250) * 0.5});
-        var content1 = '<iframe id="iframe1"  scrolling="auto" frameborder="0"  src="/admin/tofile" style="width:100%;height:300px;"></iframe>';
+    $("#btn-add").linkbutton({
+        onClick: function () {
+            $('#window-upload').window("resize", {top: $(document).scrollTop() + ($(window).height() - 250) * 0.5});
+            var content1 = '<iframe id="iframe1"  scrolling="auto" frameborder="0"  src="/admin/tofile" style="width:100%;height:300px;"></iframe>';
 
-        $("#window-upload").window({"content":content1});
-        $("#window-upload").window("open");
-    },
+            $("#window-upload").window({"content": content1});
+            $("#window-upload").window("open");
+        },
 
-})
+    })
     <!--关闭上传窗口同时刷新列表-->
     $("#window-upload").window({
-        onClose:function(){
+        onClose: function () {
             $("#filedatagrid").datagrid("load");
         }
     })

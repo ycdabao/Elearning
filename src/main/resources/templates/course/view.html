@@ -126,17 +126,29 @@
             <div class="courselist-list">
                 <div class="courselist-nav">
                     <ul class="courselist-nav-tabs">
-                        <li targid="morecontent" id="courselist-intro" class="active">
-                            <a href="javascript:;" title="课程介绍" class="courselist-nav-name">课程介绍</a>
-                        </li>
-                        <li targid="courselist" id="courselist-menu">
+                        <li targid="courselist" id="courselist-menu" class="active">
                             <a href="javascript:;" title="课程目录" class="courselist-nav-name ">课程目录
                             </a>
                         </li>
+                        <li targid="morecontent" id="courselist-intro" >
+                            <a href="javascript:;" title="课程介绍" class="courselist-nav-name">课程介绍</a>
+                        </li>
+
                     </ul>
                 </div>
                 <div class="courselist-body">
-                    <div id="morecontent" class="courselist-d content-intro active">
+
+                    <div id="courselist" class="courselist-d courselist-catalog active">
+                        <div class="chapter-item">
+                            <h3>SQLServer基础<i class="icon-chapter-list icon-chapter-open"></i></h3>
+                            <ul class="chapter-box">
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="morecontent" class="courselist-d content-intro">
                         <h2>SQL课程介绍</h2>
                         <p>在计算机的世界里所有程序的根本都是通过各种花样的页面与交互去处理数据。严格来说，数据才是根本，程序只是控制处理数据的一种手段，而SQL是计算机世界里用于处理数据的脚本语言。</p>
                         <p>本章课程涵盖SQL数据库的基础，主要学习SQL数据库的基础知识、数据表的常用操作及各种约束的使用，以及综合的运用各种命令实现记录进行CURD等操作，为后续的学习打下夯实的基础。</p>
@@ -169,15 +181,7 @@
                         <p>1.&nbsp;本课程为视频课程，共10节。</p>
                         <p>2.&nbsp;在课程学习中，如有任何问题，请联系QQ客服：3400982550。&nbsp;</p>
                         <p><br></p></div>
-                    <div id="courselist" class="courselist-d courselist-catalog ">
-                        <div class="chapter-item">
-                            <h3>SQLServer基础<i class="icon-chapter-list icon-chapter-open"></i></h3>
-                            <ul class="chapter-box">
 
-
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="courselist-sidebar">
@@ -502,7 +506,14 @@
                         var ccList = chapterList[i].chapterContentList;
 
                         for(var j=0; j<ccList.length; j++){
-                      content+= '<a class="a1" href = "/course/tolearn?fileId='+ccList[j].file.fileContent+'" title = "数据库基础" ><i class="icon-chapter-list icon-section-video"></i><span>'+ccList[j].chapterContentName+' </span> </a>';
+                            var fileDuration=ccList[j].file.fileDuration;
+
+                            var minute = Math.floor(fileDuration/60);
+                            var second = (fileDuration-minute*60)<10?'0'+(fileDuration-minute*60):fileDuration-minute*60;
+                            var length = minute+":"+second;
+
+                      content+= '<a class="a1" href = "/course/tolearn?fileId='+ccList[j].file.fileContent+'" title = "数据库基础" ><i class="icon-chapter-list icon-section-video"></i><span>'+ccList[j].chapterContentName+' </span>' +
+                          '<span style="display:inline-block;position: absolute;right:0px;padding-right: 10px">'+length+'</span> </a>';
                         }
                         content+="</li>";
 

@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.channels.FileChannel;
 
 import java.security.MessageDigest;
@@ -39,39 +41,37 @@ public class FileServiceImpl {
     private String msg;
 
 
-    public Files findbyid(String id){
-      Files files=   filesMapper.selectByPrimaryKey(id);
+    public Files findbyid(String id) {
+        Files files = filesMapper.selectByPrimaryKey(id);
 
         return files;
 
     }
 
 
-
-    public List<Files> list(String userid, Integer page, Integer pageSize){
+    public List<Files> list(String userid, Integer page, Integer pageSize) {
 
         FilesExample example = new FilesExample();
         FilesExample.Criteria c = example.createCriteria();
-        if(userid!=null&&!userid.equals("")){
+        if (userid != null && !userid.equals("")) {
             c.andFileCreatebyEqualTo(userid);
         }
         example.setOrderByClause("file_createdate desc");
-        PageHelper.offsetPage((page-1)*pageSize,pageSize);
+        PageHelper.offsetPage((page - 1) * pageSize, pageSize);
         List<Files> filesList = filesMapper.selectByExample(example);
         return filesList;
 
     }
 
 
-    public int count(String userid){
+    public int count(String userid) {
         FilesExample example = new FilesExample();
         FilesExample.Criteria c = example.createCriteria();
-        if(userid!=null&&!userid.equals("")){
+        if (userid != null && !userid.equals("")) {
             c.andFileCreatebyEqualTo(userid);
         }
         return filesMapper.countByExample(example);
     }
-
 
 
     /**
@@ -128,7 +128,7 @@ public class FileServiceImpl {
      * @return
      */
     @Transactional
-    public String chunksMerge(String folder, String ext, int chunks, String md5, String path,String originalName,String userid) {
+    public String chunksMerge(String folder, String ext, int chunks, String md5, String path, String originalName, String userid) {
 
         //合并后的目标文件
         String target;
@@ -183,7 +183,7 @@ public class FileServiceImpl {
 
 
                     //将MD5签名和合并后的文件path存入持久层
-                    if (this.saveMd52FileMap(md5, outputFile.getName(),originalName,userid,outputFile)) {
+                    if (this.saveMd52FileMap(md5, outputFile.getName(), originalName, userid, outputFile)) {
                         log.error("文件[" + md5 + "=>" + outputFile.getName() + "]保存关系到持久成失败，但并不影响文件上传，只会导致日后该文件可能被重复上传而已");
                     }
 
@@ -224,15 +224,37 @@ public class FileServiceImpl {
      * @return
      */
     @Transactional
-    public boolean saveMd52FileMap(String key, String file,String originalName,String userid,File outputFile) {
+    public boolean saveMd52FileMap(String key, String file, String originalName, String userid, File outputFile) {
         //获取时长
         Encoder encoder = new Encoder();
-        long ls=0;
+        long ls = 0;
+
         try {
             MultimediaInfo m = encoder.getInfo(outputFile);
-            ls = m.getDuration()/1000;
+            ls = m.getDuration() / 1000;
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        //获取大小
+        long size = 0;
+        FileChannel fc = null;
+        try {
+            FileInputStream fis = new FileInputStream(outputFile);
+            fc = fis.getChannel();
+            size = fc.size();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (null != fc) {
+                try {
+                    fc.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         Files files = new Files();
         files.setId(key);
@@ -241,8 +263,9 @@ public class FileServiceImpl {
         files.setFilename(originalName);
         files.setFileCreateby(userid);
         files.setFileDuration(ls);
-        files.setFileSize(outputFile.length());
+        files.setFileSize(size);
         filesMapper.insert(files);
+
 
         return true;
     }
