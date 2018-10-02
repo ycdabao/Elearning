@@ -14,6 +14,10 @@ public class Files implements Serializable {
 
     private String fileCover;
 
+    private Integer fileWidth;
+
+    private Integer fileHeight;
+
     private String fileType;
 
     private String fileFolder;
@@ -72,6 +76,22 @@ public class Files implements Serializable {
 
     public void setFileCover(String fileCover) {
         this.fileCover = fileCover == null ? null : fileCover.trim();
+    }
+
+    public Integer getFileWidth() {
+        return fileWidth;
+    }
+
+    public void setFileWidth(Integer fileWidth) {
+        this.fileWidth = fileWidth;
+    }
+
+    public Integer getFileHeight() {
+        return fileHeight;
+    }
+
+    public void setFileHeight(Integer fileHeight) {
+        this.fileHeight = fileHeight;
     }
 
     public String getFileType() {

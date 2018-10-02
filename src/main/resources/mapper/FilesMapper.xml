@@ -7,6 +7,8 @@
     <result column="file_createdate" property="fileCreatedate" jdbcType="TIMESTAMP" />
     <result column="fileName" property="filename" jdbcType="VARCHAR" />
     <result column="file_cover" property="fileCover" jdbcType="VARCHAR" />
+    <result column="file_width" property="fileWidth" jdbcType="INTEGER" />
+    <result column="file_height" property="fileHeight" jdbcType="INTEGER" />
     <result column="file_type" property="fileType" jdbcType="VARCHAR" />
     <result column="file_folder" property="fileFolder" jdbcType="VARCHAR" />
     <result column="file_duration" property="fileDuration" jdbcType="BIGINT" />
@@ -78,8 +80,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, file_createby, file_createdate, fileName, file_cover, file_type, file_folder, 
-    file_duration, file_size, file_count, file_favorites, file_share, file_status
+    id, file_createby, file_createdate, fileName, file_cover, file_width, file_height, 
+    file_type, file_folder, file_duration, file_size, file_count, file_favorites, file_share, 
+    file_status
   </sql>
   <sql id="Blob_Column_List" >
     file_content
@@ -134,15 +137,17 @@
   </delete>
   <insert id="insert" parameterType="com.modou.elearning.pojo.Files" >
     insert into files (id, file_createby, file_createdate, 
-      fileName, file_cover, file_type, 
-      file_folder, file_duration, file_size, 
-      file_count, file_favorites, file_share, 
-      file_status, file_content)
+      fileName, file_cover, file_width, 
+      file_height, file_type, file_folder, 
+      file_duration, file_size, file_count, 
+      file_favorites, file_share, file_status, 
+      file_content)
     values (#{id,jdbcType=VARCHAR}, #{fileCreateby,jdbcType=VARCHAR}, #{fileCreatedate,jdbcType=TIMESTAMP}, 
-      #{filename,jdbcType=VARCHAR}, #{fileCover,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, 
-      #{fileFolder,jdbcType=VARCHAR}, #{fileDuration,jdbcType=BIGINT}, #{fileSize,jdbcType=BIGINT}, 
-      #{fileCount,jdbcType=INTEGER}, #{fileFavorites,jdbcType=INTEGER}, #{fileShare,jdbcType=INTEGER}, 
-      #{fileStatus,jdbcType=VARCHAR}, #{fileContent,jdbcType=LONGVARCHAR})
+      #{filename,jdbcType=VARCHAR}, #{fileCover,jdbcType=VARCHAR}, #{fileWidth,jdbcType=INTEGER}, 
+      #{fileHeight,jdbcType=INTEGER}, #{fileType,jdbcType=VARCHAR}, #{fileFolder,jdbcType=VARCHAR}, 
+      #{fileDuration,jdbcType=BIGINT}, #{fileSize,jdbcType=BIGINT}, #{fileCount,jdbcType=INTEGER}, 
+      #{fileFavorites,jdbcType=INTEGER}, #{fileShare,jdbcType=INTEGER}, #{fileStatus,jdbcType=VARCHAR}, 
+      #{fileContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.modou.elearning.pojo.Files" >
     insert into files
@@ -161,6 +166,12 @@
       </if>
       <if test="fileCover != null" >
         file_cover,
+      </if>
+      <if test="fileWidth != null" >
+        file_width,
+      </if>
+      <if test="fileHeight != null" >
+        file_height,
       </if>
       <if test="fileType != null" >
         file_type,
@@ -205,6 +216,12 @@
       </if>
       <if test="fileCover != null" >
         #{fileCover,jdbcType=VARCHAR},
+      </if>
+      <if test="fileWidth != null" >
+        #{fileWidth,jdbcType=INTEGER},
+      </if>
+      <if test="fileHeight != null" >
+        #{fileHeight,jdbcType=INTEGER},
       </if>
       <if test="fileType != null" >
         #{fileType,jdbcType=VARCHAR},
@@ -259,6 +276,12 @@
       <if test="record.fileCover != null" >
         file_cover = #{record.fileCover,jdbcType=VARCHAR},
       </if>
+      <if test="record.fileWidth != null" >
+        file_width = #{record.fileWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileHeight != null" >
+        file_height = #{record.fileHeight,jdbcType=INTEGER},
+      </if>
       <if test="record.fileType != null" >
         file_type = #{record.fileType,jdbcType=VARCHAR},
       </if>
@@ -298,6 +321,8 @@
       file_createdate = #{record.fileCreatedate,jdbcType=TIMESTAMP},
       fileName = #{record.filename,jdbcType=VARCHAR},
       file_cover = #{record.fileCover,jdbcType=VARCHAR},
+      file_width = #{record.fileWidth,jdbcType=INTEGER},
+      file_height = #{record.fileHeight,jdbcType=INTEGER},
       file_type = #{record.fileType,jdbcType=VARCHAR},
       file_folder = #{record.fileFolder,jdbcType=VARCHAR},
       file_duration = #{record.fileDuration,jdbcType=BIGINT},
@@ -318,6 +343,8 @@
       file_createdate = #{record.fileCreatedate,jdbcType=TIMESTAMP},
       fileName = #{record.filename,jdbcType=VARCHAR},
       file_cover = #{record.fileCover,jdbcType=VARCHAR},
+      file_width = #{record.fileWidth,jdbcType=INTEGER},
+      file_height = #{record.fileHeight,jdbcType=INTEGER},
       file_type = #{record.fileType,jdbcType=VARCHAR},
       file_folder = #{record.fileFolder,jdbcType=VARCHAR},
       file_duration = #{record.fileDuration,jdbcType=BIGINT},
@@ -344,6 +371,12 @@
       </if>
       <if test="fileCover != null" >
         file_cover = #{fileCover,jdbcType=VARCHAR},
+      </if>
+      <if test="fileWidth != null" >
+        file_width = #{fileWidth,jdbcType=INTEGER},
+      </if>
+      <if test="fileHeight != null" >
+        file_height = #{fileHeight,jdbcType=INTEGER},
       </if>
       <if test="fileType != null" >
         file_type = #{fileType,jdbcType=VARCHAR},
@@ -381,6 +414,8 @@
       file_createdate = #{fileCreatedate,jdbcType=TIMESTAMP},
       fileName = #{filename,jdbcType=VARCHAR},
       file_cover = #{fileCover,jdbcType=VARCHAR},
+      file_width = #{fileWidth,jdbcType=INTEGER},
+      file_height = #{fileHeight,jdbcType=INTEGER},
       file_type = #{fileType,jdbcType=VARCHAR},
       file_folder = #{fileFolder,jdbcType=VARCHAR},
       file_duration = #{fileDuration,jdbcType=BIGINT},
@@ -398,6 +433,8 @@
       file_createdate = #{fileCreatedate,jdbcType=TIMESTAMP},
       fileName = #{filename,jdbcType=VARCHAR},
       file_cover = #{fileCover,jdbcType=VARCHAR},
+      file_width = #{fileWidth,jdbcType=INTEGER},
+      file_height = #{fileHeight,jdbcType=INTEGER},
       file_type = #{fileType,jdbcType=VARCHAR},
       file_folder = #{fileFolder,jdbcType=VARCHAR},
       file_duration = #{fileDuration,jdbcType=BIGINT},

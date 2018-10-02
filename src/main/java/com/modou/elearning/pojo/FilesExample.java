@@ -445,6 +445,126 @@ public class FilesExample {
             return (Criteria) this;
         }
 
+        public Criteria andFileWidthIsNull() {
+            addCriterion("file_width is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthIsNotNull() {
+            addCriterion("file_width is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthEqualTo(Integer value) {
+            addCriterion("file_width =", value, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthNotEqualTo(Integer value) {
+            addCriterion("file_width <>", value, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthGreaterThan(Integer value) {
+            addCriterion("file_width >", value, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthGreaterThanOrEqualTo(Integer value) {
+            addCriterion("file_width >=", value, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthLessThan(Integer value) {
+            addCriterion("file_width <", value, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthLessThanOrEqualTo(Integer value) {
+            addCriterion("file_width <=", value, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthIn(List<Integer> values) {
+            addCriterion("file_width in", values, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthNotIn(List<Integer> values) {
+            addCriterion("file_width not in", values, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthBetween(Integer value1, Integer value2) {
+            addCriterion("file_width between", value1, value2, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileWidthNotBetween(Integer value1, Integer value2) {
+            addCriterion("file_width not between", value1, value2, "fileWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightIsNull() {
+            addCriterion("file_height is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightIsNotNull() {
+            addCriterion("file_height is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightEqualTo(Integer value) {
+            addCriterion("file_height =", value, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightNotEqualTo(Integer value) {
+            addCriterion("file_height <>", value, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightGreaterThan(Integer value) {
+            addCriterion("file_height >", value, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightGreaterThanOrEqualTo(Integer value) {
+            addCriterion("file_height >=", value, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightLessThan(Integer value) {
+            addCriterion("file_height <", value, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightLessThanOrEqualTo(Integer value) {
+            addCriterion("file_height <=", value, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightIn(List<Integer> values) {
+            addCriterion("file_height in", values, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightNotIn(List<Integer> values) {
+            addCriterion("file_height not in", values, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightBetween(Integer value1, Integer value2) {
+            addCriterion("file_height between", value1, value2, "fileHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileHeightNotBetween(Integer value1, Integer value2) {
+            addCriterion("file_height not between", value1, value2, "fileHeight");
+            return (Criteria) this;
+        }
+
         public Criteria andFileTypeIsNull() {
             addCriterion("file_type is null");
             return (Criteria) this;
