@@ -12,6 +12,8 @@ public class Files implements Serializable {
 
     private String filename;
 
+    private String fileCover;
+
     private String fileType;
 
     private String fileFolder;
@@ -62,6 +64,14 @@ public class Files implements Serializable {
 
     public void setFilename(String filename) {
         this.filename = filename == null ? null : filename.trim();
+    }
+
+    public String getFileCover() {
+        return fileCover;
+    }
+
+    public void setFileCover(String fileCover) {
+        this.fileCover = fileCover == null ? null : fileCover.trim();
     }
 
     public String getFileType() {

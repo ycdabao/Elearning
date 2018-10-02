@@ -1,9 +1,6 @@
 package com.modou.elearning.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.modou.elearning.mapper.FilesMapper;
-import com.modou.elearning.pojo.Files;
-import com.modou.elearning.pojo.FilesExample;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import com.modou.elearning.utils.fileutil.FileLock;
 
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.nio.channels.FileChannel;
 
 import java.security.MessageDigest;

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/videojs/video.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../js/videojs/video-js.min.css">
     <style type="text/css">
         body{
             background-color: black;
@@ -15,42 +17,61 @@
             display: block;
         }
 
-        video::-webkit-media-controls-enclosure {
-            overflow:hidden;
+
+
+        .video-js .vjs-subtitles{
+            font-family: "lucida grande", "lucida sans unicode", lucida, "Helvetica Neue", helvetica, "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: #fc6;
+            font-size: 2em;
+            line-height: 1em;
         }
-        video::-webkit-media-controls-panel {
-            width: calc(100% + 30px);
+
+        /*播放按钮居中*/
+        .vjs-big-play-button {
+            left: 50% !important;
+            top: 50% !important;
+            margin-left: -2em;
+            margin-top: -1.3em;
         }
     </style>
 </head>
 <body>
 <div id="container">
-<video id="video" ></video>
-    <div class="controls">
-        <!-- 播放/暂停 -->
-        <a href="javascript:;" class="switch fa fa-play"></a>
-        <!-- 全屏 -->
-        <a href="javascript:;" class="expand fa fa-expand"></a>
-        <!-- 进度条 -->
-        <div class="progress">
-            <div class="loaded"></div>
-            <div class="line"></div>
-            <div class="bar"></div>
-        </div>
-        <!-- 时间 -->
-        <div class="timer">
-            <span class="current">00:00:00</span> /
-            <span class="total">00:00:00</span>
-        </div>
-        <!-- 声音 -->
-    </div>
+
+    <video id="video" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"  poster="">
+
+    </video>
 
 </div>
 
 <script type="text/javascript">
     $(document).ready(function(){
         $("#video").attr("src","/[[${fileId}]]");
-        $("#video").attr("controls", "controls");
+
+
+        var player = videojs('video',{
+            "autoplay" : false,
+            "controls" : true,
+            "techOrder" : [ "html5"],
+            //"width":"100%",
+            //"height":"100%",
+            "sources" : [ {
+                src : "/[[${fileId}]]"
+
+            } ]
+        });
+
+
+        var controlBar;
+        speedControl = document.createElement('div');
+        speedControl.style.border="1px solid red";
+        speedControl.innerHTML="1px";
+        controlBar = document.getElementsByClassName('vjs-control-bar')[0];
+        insertBeforeNode = document.getElementsByClassName('vjs-fullscreen-control')[0];
+        controlBar.insertBefore(speedControl,insertBeforeNode);
+
+
+
     })
 
 </script>

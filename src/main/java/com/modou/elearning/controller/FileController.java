@@ -1,7 +1,6 @@
 package com.modou.elearning.controller;
 
 
-import com.modou.elearning.pojo.Files;
 import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.EasyuiResult;
