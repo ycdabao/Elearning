@@ -1,6 +1,7 @@
 package com.modou.elearning.controller;
 
 
+import com.modou.elearning.pojo.Files;
 import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.EasyuiResult;
@@ -73,7 +74,7 @@ public class FileController {
     //大文件上传
     @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
     @ResponseBody
-    public String fileUpload(String status, FileInfo info, @RequestParam(value = "file", required = false) MultipartFile file,HttpSession session){
+    public String fileUpload(String status, FileInfo info, @RequestParam(value = "file", required = false) MultipartFile file,HttpSession session)throws Exception{
 
         Users  user = (Users)session.getAttribute("user");
 

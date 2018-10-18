@@ -1,7 +1,11 @@
 package com.modou.app.controller;
 
+import com.modou.elearning.pojo.ChapterContent;
 import com.modou.elearning.pojo.Courses;
+import com.modou.elearning.pojo.Files;
+import com.modou.elearning.service.ChapterContentService;
 import com.modou.elearning.service.CourseService;
+import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.ModouResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.jnlp.FileSaveService;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -21,6 +26,12 @@ public class AppCourseController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private FileServiceImpl fileServiceImpl;
+
+    @Autowired
+    private ChapterContentService chapterContentService;
 
 
     @RequestMapping(value="/list")
@@ -58,8 +69,13 @@ public class AppCourseController {
     }
 
     @RequestMapping(value="/tolearn")
-    public String tolearn(String fileId,Model model){
-        model.addAttribute("fileId",fileId);
+    public String tolearn(String chapterContentId,Model model){
+        //Files files= fileServiceImpl.findbyid(fileId);
+        ChapterContent cc=chapterContentService.findbyid(chapterContentId);
+        Files files= cc.getFile();
+
+        model.addAttribute("files",files);
+        model.addAttribute("chapterContentId",chapterContentId);
         return "course/learn";
     }
 

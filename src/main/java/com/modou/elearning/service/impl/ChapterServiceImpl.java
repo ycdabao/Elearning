@@ -2,6 +2,7 @@ package com.modou.elearning.service.impl;
 
 import com.modou.elearning.mapper.ChapterContentMapper;
 import com.modou.elearning.mapper.ChapterMapper;
+import com.modou.elearning.mapper.FilesMapper;
 import com.modou.elearning.pojo.*;
 import com.modou.elearning.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;

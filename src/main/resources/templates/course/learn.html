@@ -33,39 +33,54 @@
             margin-left: -2em;
             margin-top: -1.3em;
         }
+
+        .vjs-customer-speedbar{
+
+        }
     </style>
 </head>
 <body>
 <div id="container">
 
-    <video id="video" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"  poster="">
+    <video id="video" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"  >
 
     </video>
 
 </div>
 
 <script type="text/javascript">
+
     $(document).ready(function(){
-        $("#video").attr("src","/[[${fileId}]]");
 
 
         var player = videojs('video',{
             "autoplay" : false,
             "controls" : true,
-            "techOrder" : [ "html5"],
+            "techOrder" : ["html5"],
+            "poster":"/[[${files.fileCover}]]",
             //"width":"100%",
             //"height":"100%",
             "sources" : [ {
-                src : "/[[${fileId}]]"
+                src : "/video/playvideo?id=[[${chapterContentId}]]"
 
             } ]
         });
 
 
         var controlBar;
-        speedControl = document.createElement('div');
-        speedControl.style.border="1px solid red";
-        speedControl.innerHTML="1px";
+        var speedControl =document.createElement("div");
+        speedControl.className="vjs-remaining-time vjs-time-control vjs-control";
+        var span1 = document.createElement("span");
+        span1.className="vjs-control-text";
+        span1.innerHTML="1px";
+        var span2 = document.createElement("span");
+        span2.className="vjs-remaining-time-display";
+
+        span2.innerHTML="1px";
+
+        speedControl.appendChild(span1).appendChild(span2);
+
+
         controlBar = document.getElementsByClassName('vjs-control-bar')[0];
         insertBeforeNode = document.getElementsByClassName('vjs-fullscreen-control')[0];
         controlBar.insertBefore(speedControl,insertBeforeNode);

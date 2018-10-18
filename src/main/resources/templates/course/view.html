@@ -512,7 +512,7 @@
                             var second = (fileDuration-minute*60)<10?'0'+(fileDuration-minute*60):fileDuration-minute*60;
                             var length = minute+":"+second;
 
-                      content+= '<a class="a1" href = "/course/tolearn?fileId='+ccList[j].file.fileContent+'" title = "数据库基础" ><i class="icon-chapter-list icon-section-video"></i><span>'+ccList[j].chapterContentName+' </span>' +
+                      content+= '<a class="a1" href = "/course/tolearn?chapterContentId='+ccList[j].id+'" title = "数据库基础" ><i class="icon-chapter-list icon-section-video"></i><span>'+ccList[j].chapterContentName+' </span>' +
                           '<span style="display:inline-block;position: absolute;right:0px;padding-right: 10px">'+length+'</span> </a>';
                         }
                         content+="</li>";

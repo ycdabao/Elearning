@@ -27,11 +27,11 @@ public class FfmpegUtil {
      * @throws IOException
      * @throws InterruptedException
      */
-    public void getThumb(String videoFilename, String thumbFilename, int width,
+    public static  void getThumb(String videoFilename, String thumbFilename, int width,
                          int height, int hour, int min, float sec) throws IOException,
             InterruptedException
     {
-        ProcessBuilder processBuilder = new ProcessBuilder(ffmpegApp, "-y",
+        ProcessBuilder processBuilder = new ProcessBuilder("C:\\Program Files (x86)\\ffmpeg-20180930-d702769-win64-static\\bin\\ffmpeg.exe", "-y",
                 "-i", videoFilename, "-vframes", "1", "-ss", hour + ":" + min
                 + ":" + sec, "-f", "mjpeg", "-s", width + "*" + height,
                 "-an", thumbFilename);
@@ -58,7 +58,7 @@ public class FfmpegUtil {
      *
      * 得到第一秒（也是第一帧）图片
      */
-    public void getThumb(String videoFilename, String thumbFilename, int width,
+    public static void getThumb(String videoFilename, String thumbFilename, int width,
                          int height) throws IOException, InterruptedException
     {
         getThumb(videoFilename, thumbFilename, width, height, 0, 0, 1);

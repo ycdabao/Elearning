@@ -1,6 +1,10 @@
 package com.modou.elearning.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.modou.elearning.mapper.FilesMapper;
+import com.modou.elearning.pojo.Files;
+import com.modou.elearning.pojo.FilesExample;
+import com.modou.elearning.utils.FfmpegUtil;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import com.modou.elearning.utils.fileutil.FileLock;
 
@@ -9,6 +13,7 @@ import it.sauronsoftware.jave.MultimediaInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +30,12 @@ import java.util.concurrent.locks.Lock;
 @Scope("prototype")
 public class FileServiceImpl {
     private final static Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
+
+@Value("${video.cover.width}")
+private int videoCoverWidth;
+
+@Value("${video.cover.height}")
+private int videoCoverHeight;
 
 
     @Autowired
@@ -219,7 +230,12 @@ public class FileServiceImpl {
      * @return
      */
     @Transactional
-    public boolean saveMd52FileMap(String key, String file, String originalName, String userid, File outputFile) {
+    public boolean saveMd52FileMap(String key, String file, String originalName, String userid, File outputFile) throws IOException, InterruptedException {
+      //获取封面
+        String t=outputFile.getAbsolutePath().substring(0,outputFile.getAbsolutePath().lastIndexOf("\\")+1);
+        FfmpegUtil.getThumb(outputFile.getAbsolutePath(),t+file+".png",videoCoverWidth,videoCoverHeight);
+
+
         //获取时长
         Encoder encoder = new Encoder();
         long ls = 0;
@@ -259,6 +275,7 @@ public class FileServiceImpl {
         files.setFileCreateby(userid);
         files.setFileDuration(ls);
         files.setFileSize(size);
+        files.setFileCover(file+".png");
         filesMapper.insert(files);
 
 
