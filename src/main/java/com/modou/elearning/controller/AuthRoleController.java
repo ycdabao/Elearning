@@ -4,8 +4,7 @@ import com.modou.elearning.pojo.AuthRole;
 import com.modou.elearning.service.AuthRoleService;
 import com.modou.elearning.utils.EasyuiResult;
 import com.modou.elearning.utils.ModouResult;
-import com.modou.elearning.utils.UUIDUtil;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.modou.elearning.utils.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +47,7 @@ public class AuthRoleController {
     @ResponseBody
     public ModouResult add(AuthRole role) {
         try {
-            String id = UUIDUtil.creatUUID();
+            String id = IDUtil.creatUUID();
             role.setId(id);
             authRoleService.add(role);
             return ModouResult.build(200,"success",id);

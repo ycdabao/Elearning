@@ -3,7 +3,7 @@ package com.modou.elearning.controller;
 import com.modou.elearning.pojo.ChapterContent;
 import com.modou.elearning.service.ChapterContentService;
 import com.modou.elearning.utils.ModouResult;
-import com.modou.elearning.utils.UUIDUtil;
+import com.modou.elearning.utils.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ public class ChaterContentController {
     @RequestMapping(value="/add")
     @ResponseBody
     public ModouResult add(ChapterContent content){
-String id = UUIDUtil.creatUUID();
+String id = IDUtil.creatUUID();
         content.setId(id);
         content.setChapterContentCreatedate(new Date());
         try {

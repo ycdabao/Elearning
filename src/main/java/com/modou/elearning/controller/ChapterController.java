@@ -3,7 +3,7 @@ package com.modou.elearning.controller;
 import com.modou.elearning.pojo.Chapter;
 import com.modou.elearning.service.ChapterService;
 import com.modou.elearning.utils.ModouResult;
-import com.modou.elearning.utils.UUIDUtil;
+import com.modou.elearning.utils.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class ChapterController {
     @ResponseBody
     public ModouResult add(Chapter chapter) {
         chapter.setChapterCreatedate(new Date());
-        String id = UUIDUtil.creatUUID();
+        String id = IDUtil.creatUUID();
         chapter.setId(id);
 
         try {

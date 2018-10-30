@@ -4,7 +4,7 @@ import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.UserService;
 import com.modou.elearning.utils.EasyuiResult;
 import com.modou.elearning.utils.ModouResult;
-import com.modou.elearning.utils.UUIDUtil;
+import com.modou.elearning.utils.IDUtil;
 import com.modou.elearning.utils.ValidateCode;
 
 import org.apache.shiro.SecurityUtils;
@@ -62,7 +62,7 @@ public class UserController {
     public ModouResult register(Users user) {
         try {
             String password = new SimpleHash("MD5", user.getUserPass(), "imodou", 3).toHex();
-            user.setId(UUIDUtil.creatUUID());
+            user.setId(IDUtil.creatUUID());
             user.setUserPass(password);
             user.setUserCreatedate(new Date());
             user.setUserModifydate(new Date());

@@ -5,6 +5,7 @@ import com.modou.elearning.mapper.FilesMapper;
 import com.modou.elearning.pojo.Files;
 import com.modou.elearning.pojo.FilesExample;
 import com.modou.elearning.utils.FfmpegUtil;
+import com.modou.elearning.utils.IDUtil;
 import com.modou.elearning.utils.fileutil.FileInfo;
 import com.modou.elearning.utils.fileutil.FileLock;
 
@@ -36,6 +37,12 @@ private int videoCoverWidth;
 
 @Value("${video.cover.height}")
 private int videoCoverHeight;
+
+@Value("${ffmpeg.path}")
+private String ffmpegComdPath;
+
+@Value("${file.video.uploadfolder}")
+private String videoUploadfolder;
 
 
     @Autowired
@@ -188,6 +195,11 @@ private int videoCoverHeight;
                     outChannel.close();
 
 
+                    //将mp4切割为ts文件
+                    FfmpegUtil ffmpegUtil = new FfmpegUtil(ffmpegComdPath);
+               ffmpegUtil.cutVideo(outputFile.getAbsolutePath());
+
+
                     //将MD5签名和合并后的文件path存入持久层
                     if (this.saveMd52FileMap(md5, outputFile.getName(), originalName, userid, outputFile)) {
                         log.error("文件[" + md5 + "=>" + outputFile.getName() + "]保存关系到持久成失败，但并不影响文件上传，只会导致日后该文件可能被重复上传而已");
@@ -233,7 +245,7 @@ private int videoCoverHeight;
     public boolean saveMd52FileMap(String key, String file, String originalName, String userid, File outputFile) throws IOException, InterruptedException {
       //获取封面
         String t=outputFile.getAbsolutePath().substring(0,outputFile.getAbsolutePath().lastIndexOf("\\")+1);
-        FfmpegUtil.getThumb(outputFile.getAbsolutePath(),t+file+".png",videoCoverWidth,videoCoverHeight);
+        FfmpegUtil.getThumb(outputFile.getAbsolutePath(),t+ IDUtil.getFileName(file)+".png",videoCoverWidth,videoCoverHeight);
 
 
         //获取时长
@@ -275,7 +287,7 @@ private int videoCoverHeight;
         files.setFileCreateby(userid);
         files.setFileDuration(ls);
         files.setFileSize(size);
-        files.setFileCover(file+".png");
+        files.setFileCover(IDUtil.getFileName(file)+".png");
         filesMapper.insert(files);
 
 

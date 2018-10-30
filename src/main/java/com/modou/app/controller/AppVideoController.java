@@ -2,10 +2,13 @@ package com.modou.app.controller;
 
 import com.modou.elearning.pojo.ChapterContent;
 import com.modou.elearning.pojo.Files;
+import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.ChapterContentService;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,10 @@ public class AppVideoController {
  @Autowired
     ChapterContentService chapterContentService;
 
+ @Value("${file.video.uploadfolder}")
+    String uploadPath;
+
+
     @RequestMapping(value="/playvideo")
     public void playVideo(String id, HttpServletRequest request, HttpServletResponse response){
 
@@ -35,7 +42,7 @@ public class AppVideoController {
         if(cc.getFree().equals("免费")) {
             //String path = request.getServletContext().getRealPath("d:/upload/files/"+filecontent);
 
-            String path = "d:/upload/files/" +     cc.getFile().getFileContent();
+            String path = uploadPath +  File.separator+   cc.getFile().getFileContent();
             BufferedInputStream bis = null;
             try {
                 File file = new File(path);
@@ -137,7 +144,8 @@ public class AppVideoController {
             }
 
         }else{
-            SecurityUtils.getSubject();
+          Subject subject=  SecurityUtils.getSubject();
+            Users user = (Users)subject.getPrincipal();
         }
 
     }

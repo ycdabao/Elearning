@@ -5,8 +5,12 @@ import com.modou.elearning.pojo.Files;
 import com.modou.elearning.pojo.Users;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.EasyuiResult;
+import com.modou.elearning.utils.IDUtil;
 import com.modou.elearning.utils.ModouResult;
 import com.modou.elearning.utils.fileutil.FileInfo;
+import org.apache.catalina.security.SecurityUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +35,7 @@ public class FileController {
     private final static Logger log = LoggerFactory.getLogger(FileController.class);
 
 
-    @Value("${file.video.uploadfolter}")
+    @Value("${file.video.uploadfolder}")
     private String uploadFolder;
 
     @Autowired
@@ -76,12 +80,14 @@ public class FileController {
     @ResponseBody
     public String fileUpload(String status, FileInfo info, @RequestParam(value = "file", required = false) MultipartFile file,HttpSession session)throws Exception{
 
-        Users  user = (Users)session.getAttribute("user");
+      //  Users  user = (Users)session.getAttribute("user");
+        Subject subject= SecurityUtils.getSubject();
+        Users user = (Users)subject.getPrincipal();
 
         if(status == null){	//文件上传
             if(file != null && !file.isEmpty()){	//验证请求不会包含数据上传，所以避免NullPoint这里要检查一下file变量是否为null
                 try {
-                    File target = wu.getReadySpace(info, this.uploadFolder);	//为上传的文件准备好对应的位置
+                    File target = wu.getReadySpace(info, IDUtil.createUploadPath(uploadFolder,user.getId()));	//为上传的文件准备好对应的位置
                     if(target == null){
                         return "{\"status\": 0, \"message\": \"" + wu.getErrorMsg() + "\"}";
                     }
@@ -117,7 +123,7 @@ public class FileController {
             }else if(status.equals("chunkCheck")){	//分块验证
 
                 //检查目标分片是否存在且完整
-                if(wu.chunkCheck(this.uploadFolder + "/" + info.getName() + "/" + info.getChunkIndex(), Long.valueOf(info.getSize()))){
+                if(wu.chunkCheck(IDUtil.createUploadPath(uploadFolder,user.getId()) + "/" + info.getName() + "/" + info.getChunkIndex(), Long.valueOf(info.getSize()))){
                     return "{\"ifExist\": 1}";
                 }else{
                     return "{\"ifExist\": 0}";
@@ -127,7 +133,7 @@ public class FileController {
 
 
 
-                String path = wu.chunksMerge(info.getName(), info.getExt(), info.getChunks(), info.getMd5(), this.uploadFolder,info.getOriginalName(),user.getId());
+                String path = wu.chunksMerge(info.getName(), info.getExt(), info.getChunks(), info.getMd5(), IDUtil.createUploadPath(uploadFolder,user.getId()),info.getOriginalName(),user.getId());
                 if(path == null){
                     return "{\"status\": 0, \"message\": \"" + wu.getErrorMsg() + "\"}";
                 }
@@ -144,7 +150,9 @@ public class FileController {
     @RequestMapping(value = "removeFile", method = RequestMethod.POST)
     @ResponseBody
     public String removeFile(String fileName,String extension){
-        wu.removeFile(fileName,this.uploadFolder,extension);
+        Subject subject= SecurityUtils.getSubject();
+        Users user = (Users)subject.getPrincipal();
+        wu.removeFile(fileName,IDUtil.createUploadPath(uploadFolder,user.getId()),extension);
         return "success";
     }
 }
