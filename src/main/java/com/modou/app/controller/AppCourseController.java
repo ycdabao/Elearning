@@ -3,8 +3,10 @@ package com.modou.app.controller;
 import com.modou.elearning.pojo.ChapterContent;
 import com.modou.elearning.pojo.Courses;
 import com.modou.elearning.pojo.Files;
+import com.modou.elearning.pojo.Types;
 import com.modou.elearning.service.ChapterContentService;
 import com.modou.elearning.service.CourseService;
+import com.modou.elearning.service.TypesService;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.ModouResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,15 @@ public class AppCourseController {
     @Autowired
     private ChapterContentService chapterContentService;
 
+    @Autowired
+    private TypesService typesService;
+
+    @RequestMapping(value="/typelist")
+    @ResponseBody
+    public ModouResult typeList(){
+        List<Types> typesList= typesService.findByParentId(1);
+        return ModouResult.build(200,"success",typesList);
+    }
 
     @RequestMapping(value="/list")
     @ResponseBody

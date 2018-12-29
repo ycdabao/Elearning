@@ -1,216 +1,653 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>在线课程 | 魔豆IT教育</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="renderer" content="webkit" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="/css/modou.css" />
-    <link rel="stylesheet" type="text/css" href="/css/minicourse.css">
+    <meta charset="utf-8">
+    <title>传智播客和黑马程序员视频库_传智播客和黑马程序员全套视频教程下载</title>
+    <meta name="keywords" content="宜昌魔豆IT教育" />
+    <meta name="description" content="宜昌魔豆IT教育-免费提供全套视频教程下载和免费公开课，以及各学科学习路线图。" />
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.itheima.com/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="../../css/course/global.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/course/style.css"/>
     <script type="text/javascript" src="../../js/jquery-easyui-1.7.0/jquery.min.js"></script>
-</head>
-<body>
-<div id="full-height-container">
-    <!--引入头部-->
-    <!--header start-->
-    <div id="header">
-        <div id="header_item">
-            <div id="header_index">
-                <div id="header-l">
-                    <a href="//www.w3cschool.cn" title="w3cschool" class="logo"><img src="//7nsts.w3cschool.cn/images/w3c/header-logo.png" alt="W3Cschool" /></a>
-                    <ul class="header-menu">
-                        <li><a href="//www.w3cschool.cn/minicourse/" title="编程微课首页">编程微课首页</a></li>
-                        <li><a href="//www.w3cschool.cn/minicourse/list" title="微课列表">编程课程列表</a></li>
-                        <li><a href="//www.w3cschool.cn/codecamp/" title="编程实战列表">编程实战</a></li>
-                        <li><a href="//www.w3cschool.cn/vip" title="会员">会员<i class="hot-icon"></i></a></li>
-                    </ul>
-                </div>
-                <div id="header-r">
-                    <div class="sig-box" >
-                        <a href="/register?refer=/">注册</a><!-- href="/register?refer=/" --> |
-                        <a href="/login?refer=/">登录</a>
-                    </div>
-                    <a href="//www.w3cschool.cn/download" target="_blank" class="header-app" title="w3cschool移动端">移动端
-                        <div class="dropdown-content qrcode-box">
-                            <span class="j"></span>
-                            <div class="qrcode-img">
-                                <img src="//7nsts.w3cschool.cn/images/w3c/app-qrcode2.png" alt="扫码下载APP" width="150" height="150">
-                                <p>扫码下载APP</p>
-                            </div>
-                            <div class="qrcode-img">
-                                <img src="//7nsts.w3cschool.cn/images/w3c/w3cschool.png" alt="w3cschool公众号" width="150" height="150">
-                                <p>w3cschool公众号</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        var apppath = '/minicourse/list';
-        var domain  = '//www.w3cschool.cn';
-    </script>
-    <!--header end-->
-    <div id="wrapper">
-        <div class="bread-nav">
-            <div class="current-position">
-                <img src="//7nsts.w3cschool.cn/yimages/positionred.png" alt="编程微课首页" />
-                <a href="//www.w3cschool.cn/minicourse">首页</a>
-                &gt;&nbsp;<span>编程课程列表</span>
-            </div>
-        </div>
-        <div class="course-content minicourse-content">
-            <div class="step-title">
-                <h2>视频课程列表</h2>
-            </div>
-            <ul class="course-item">
+    <script type="text/javascript" src="/Home/js/layer/layer.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/course/index.css"/><script type="text/javascript">
+    function getCookie(c_name){
+        if (document.cookie.length>0){
+            c_start=document.cookie.indexOf(c_name + "=")
+            if (c_start!=-1){
+                c_start=c_start + c_name.length+1
+                c_end=document.cookie.indexOf(";",c_start)
+                if (c_end==-1) c_end=document.cookie.length
+                return unescape(document.cookie.substring(c_start,c_end))
+            }
+        }
+        return ""
+    }
+    function setCookie(c_name,value,expiredays){
+        var exdate=new Date()
+        exdate.setDate(exdate.getDate()+expiredays)
+        document.cookie=c_name+ "=" +escape(value)+
+            ((expiredays==null) ? "" : "; expires="+exdate.toGMTString())
+    }
+    function delCookie(name){
+        var date = new Date();
+        date.setTime(date.getTime() - 10000);
+        document.cookie = name + "=a  ; expires=" + date.toGMTString();
+    }
 
+    $(function(){
+        $.ajax({
+            type: "POST",
+            url: "/course/typelist",
+            dataType:"json",
+            success:function(data){
+                var typelist = data.data;
 
-            </ul>
-            <div class="clear"></div>
-
-
-        </div>
-    </div>
-    <!--引入底部-->
-    <!--footer start-->
-    <div id="footer_item">
-        <div id="footer">
-            <div class="footer-box">
-                <div class="footer-title">网站相关</div>
-                <div class="footer-items">
-                    <a href="//www.w3cschool.cn/about/about.html">关于我们</a>
-                    <a href="//www.w3cschool.cn/about/join.html">加入我们</a>
-                    <a href="//www.w3cschool.cn/about/disclaimer.html">免责声明</a>
-                    <a href="//www.w3cschool.cn/sitemap/">网站地图</a>
-                </div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-title">内容专区</div>
-                <div class="footer-items">
-                    <a href="//www.w3cschool.cn/tutorial" title="编程入门教程">编程入门教程</a>
-                    <a href="//www.w3cschool.cn/manual" title="技术文档参考手册">极客文档</a>
-                    <a href="//123.w3cschool.cn/webtools" title="编程在线工具">在线工具</a>
-                    <a href="//www.w3cschool.cn/archives/" title="文章存档">文章存档</a>
-                </div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-title">常用链接</div>
-                <div class="footer-items">
-                    <a href="//123.w3cschool.cn" title="技术学习极客导航">极客导航</a>
-                    <a href="//www.w3cschool.cn/codecamp/" target="_blank" title="编程实战">编程实战</a>
-                    <a href="//www.w3cschool.cn/download" target="_blank" title="w3cschool离线版下载">w3cschool离线下载</a>
-                    <a href="//m.w3cschool.cn/" target="_blank" title="w3cschool手机版">w3cschool手机版</a>
-                </div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-title">联系我们</div>
-                <div class="footer-items">
-                    <a target="_blank" href="https://www.w3cschool.cn/w3cschool/question-10232085.html" title="常见问题QA">常见问题QA</a>
-                    <a target="_blank" href="//www.w3cschool.cn/links" title="友情链接">友情链接</a>
-                    <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=69bf2226eb0fbd411c740b015055bab665fcef4721dbe974882223b476e2962e" ref="nofollow">官方QQ群：236419487</a>
-                    <a target="_blank" href="//wpa.qq.com/msgrd?v=3&amp;uin=3532917531&amp;site=qq&amp;menu=yes" ref="nofollow">商务合作QQ：3532917531</a>
-                </div>
-            </div>
-            <div class="footer-box">
-                <div class="tcode"><img src="//7n.w3cschool.cn/statics/images/w3c/w3cschool.png?imageView2/1/w/100/h/100" alt="微信订阅号" width="100" height="100"></div>
-                <p class="tcode-txt">微信号：w3cschoolcn</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>Copyright&copy;2018 亿动科技 <a href="//www.w3cschool.cn" title="w3cschool">w3cschool.cn </a> All Rights Reserved. 闽ICP备15016281号-3</p>
-        </div>
-    </div>
-    <div id="dialogBackground" class="dialogBackground"></div>
-    <div class="bottom-tools" style="bottom: 40px;">
-        <a id="scrollUp" href="javascript:;" title="飞回顶部"></a>
-        <a class="onlinenote" style="display: none;" title="在线笔记" href="javascript:;" data-module="page">在线笔记</a>
-        <div class="qr-tool">二维码</div>
-        <a id="feedback" class="webjy" title="建议反馈" href="javascript:;" data-module="page" onclick="showDialogBox(this)">建议反馈</a>
-        <div class="qr-img"><img src="//7n.w3cschool.cn/statics/images/w3c/w3cschool.jpg?imageView2/1/w/100/h/100" alt="二维码"></div>
-    </div>
-
-    <div class="feedback-Box" style="display: none;">
-        <div class="feedback-Box-content" style="width: 662px;">
-            <div class="feedback-Box-top">
-                <span class="feedback-Box-title">意见反馈</span>
-                <span onclick="closeDialogBox(this)" class="feedback-Box-close">X</span>
-            </div>
-            <ul>
-                <li class="feedback-box" >
-                    <div id="feedbackRadio" type="radio" name="feedbackType" data-value="0" style=""> 意见反馈：</div>
-                    <textarea  name="reportInfo" id="elmaaa" class="feedback-text" rows="15" placeholder="请留下您宝贵的意见反馈吧。"></textarea>
-                    <p>联系方式：</p>
-                    <input type="text" placeholder="留个联系方式呗..." name="reportAddress" class="radio-text" id="reportAddress" style="height: 30px;width: 200px;">
-                </li>
-            </ul>
-            <button class="search-s" onclick="dialogSubmit(this)" id="reportSubmit">提交</button>
-        </div>
-    </div>
-
-    <div id="note-start" style="display: none"></div>
-
-    <div id="detail" style="display:none;">
-        <div id="note-Dialog" class="note-Dialog" >
-
-            <div class="note-Box-content" >
-                <div class="ntitlebox">
-                    <input type="text" placeholder="" name="ntitle" class="ntitle" id="ntitle" >
-                </div>
-                <div id="editorarea">
-                    <textarea  name="ncontent" id="ncontent" class="ncontent" rows="15" placeholder="" style="width: 700px;height:200px;overflow:auto;" ></textarea>
-                </div>
-                <p></p>
-                <a class="closenote" href="/my/note" target="_blank" >查看完整版笔记</a>
-                <button class="notesubmit"  id="notesubmit">保存</button>
-                <button class="notebtn pull-right closenote" style="margin:20px 0" >关闭</button>
-            </div>
-        </div>
-    </div>
-    <!--footer end-->
-
-</div>
-<script type="text/javascript">
-$(document).ready(function(){
-    $.ajax({
-        type: "POST",
-        url: "/course/list",
-        dataType:"json",
-        success: function(msg){
-            if(msg.status==200){
-                var courseList = msg.data;
-
-                for(var i=0; i<courseList.length; i++){
-                    $(".course-item").append('<li>' +
-                        '    <div class="course-box">' +
-                        '        <a title="'+courseList[i].courseName+'" href="/course/toview?id='+courseList[i].id+'" target="_blank">' +
-                        '        <div class="course-img">' +
-                        '        <img src="/'+courseList[i].courseCover+'" alt="'+courseList[i].courseName+'[精品视频课]" />' +
-                        '        <span class="course-tag isoff-course-tag">第三方</span>' +
-                        '        </div>' +
-                        '        <div class="course-desc">' +
-                        '        <h3>'+courseList[i].courseName+'</h3>' +
-                        '        </div>' +
-                        '        <div class="course-meta">' +
-                        '        <span class="cur-price">免费</span>n' +
-                        '        <span class="pull-right">2726人参与</span>' +
-                        '    </div>' +
-                        '    </a>' +
-                        '    </div>' +
-                        '    </li>');
-
+                for(var i=0; i<typelist.length; i++){
+                    var type= typelist[i];
+                    $("#typeul").append("<li ><a href='javascript:void(0);' subject='"+type.id+"'>"+type.typeName+"</a></li>");
                 }
 
             }
-        }
-    });
-})
+        })
+    })
 </script>
+    <meta property="qc:admins" content="227015377243134636" />
+</head>
+<body>
+<!-- @通用头部 start -->
+<div class="topbar">
+    <div class="inner">
+        <div class="top_l">
+            <p><a href="http://www.itcast.cn" target="_blank">传智播客</a>、<a href="http://www.itheima.com" target="_blank">黑马程序员</a>免费视频教程、公开课资源下载平台 </p>
+        </div>
+        <div class="top_r">
+            <p class="slogan"> 全国咨询热线：400-618-9090</p>
+        </div>
+    </div>
+</div>
+<div class="header">
+    <div class="header_in">
+        <div class="head_l">
+            <h1><a href="/"><img src="/Upload//Images/2017-03-14/58c74cb468f98.png" alt="黑马云课堂" /></a></h1>
+            <ul class="nav">
+                <li><a href="/" class="afont current ">首页</a></li>
+                <li><a href="/open" class="afont ">公开课</a></li>
+                <li><a href="/course" class="afont ">免费视频教程</a></li>
+                <li><a href="/map" class="afont ">学习路线图</a></li>
+                <li><a href="http://bbs.itheima.com?yun" class="afont" target="_blank" >技术社区</a></li>			</ul>
+        </div>
+        <div class="head_r">
+            <div class="search agd">
+                <form action="/search" method="get">
+                    <input type="text" class="search_l" name="keys" autocomplete="off" placeholder="请输入搜索内容" onclick="this.select();" />
+                    <input type="submit" class="search_r" />
+                    <ul class="serul">
+                        <li><a href="/search?keys=Java" >Java</a></li><li><a href="/search?keys=Python" >Python</a></li><li><a href="/search?keys=php" >php</a></li><li><a href="/search?keys=HTML5" >HTML5</a></li>					</ul>
+                </form>
+            </div>
+            <div class="quik" id="loginq"><a href="http://passport.itheima.com/login?appid=4487aa412ec8" class="afont" >登录</a> <a href="http://passport.itheima.com/register?appid=4487aa412ec8" class="afont ">注册</a> </div>
+            <div class="userhd" id="loginh">
+                <div class="userlist" id="loginh">
+                    <img src="" width="40" height="40" id="myhead" />
+                    <a href="http://passport.itheima.com" class="afont agd auser" target="_blank" id="myname">个人中心</a>
+                    <ul id="listhide">
+                        <li><a href="/member/sms.html" class="afont agd">我的消息</a></li>
+                        <li><a href="/member/open.html" class="afont agd">我的课程</a></li>
+                        <li><a href="/member/down.html" class="afont agd">我的下载</a></li>
+                        <li><a href="/member/fav.html" class="afont agd">我的收藏</a></li>
+                        <li><a href="/login/out.html" class="afont agd">安全退出</a></li>
+                    </ul>
+                </div>
+            </div>
+            <script type="text/javascript" src="/login/isenter.html"></script>
+        </div>
+    </div>
+</div>
 
-<script src="/js/view-js/commonfooter.js" type="text/javascript"></script>
-</body>
+<!-- @通用头部 end -->
+<!-- 上线广告弹窗
+<div class="adzhe" style="display:none"></div>
+<div class="onban" style="display:none">
+	<span title="点击关闭" id="sclose"><img src="/Home/images/mm.jpg" width="31" height="31" /></span>
+	<a href="http://bbs.itcast.cn/thread-84716-1-1.html?ku" target="_blank"><img src="/Home/images/online.jpg" width="880" height="500" /></a>
+</div>  -->
+<!-- 焦点图 start -->
+<div class="ban">
+    <div class="ban_in">
+        <ul>
+            <li class="first" ><a href="http://yun.itheima.com/course/273.html?1811ku-hda1" target="_blank" style="background:url('/Upload/Images/2018-12-26/5c22ebb3dd60a.jpg') no-repeat center top;"></a></li><li  ><a href="http://yun.itheima.com/course/499.html?1811ku-hda2" target="_blank" style="background:url('/Upload/Images/2018-12-24/5c209b0cdeb5b.jpg') no-repeat center top;"></a></li><li  ><a href="http://yun.itheima.com/course/364.html?1812ku-hda3" target="_blank" style="background:url('/Upload/Images/2018-12-19/5c1a03307f5b0.jpg') no-repeat center top;"></a></li><li  ><a href="http://yun.itheima.com/course/396.html?1812ku-hda4" target="_blank" style="background:url('/Upload/Images/2018-12-19/5c1a04b78cc30.jpg') no-repeat center top;"></a></li><li  ><a href="http://yun.itheima.com/course/250.html?1812ku-hda5" target="_blank" style="background:url('/Upload/Images/2018-12-19/5c1a055f93762.jpg') no-repeat center top;"></a></li><li  ><a href="http://yun.itheima.com/course/416.html?1812ku-hda6" target="_blank" style="background:url('/Upload/Images/2018-12-19/5c1a049b99965.jpg') no-repeat center top;"></a></li><li  ><a href="http://h5.itcast.cn/sd?1812sylb2" target="_blank" style="background:url('/Upload/Images/2018-12-27/5c243507b57c4.jpg') no-repeat center top;"></a></li>		</ul>
+    </div>
+    <div class="czbutton">
+        <a href="#" id="czleftbut"></a>
+        <a href="#" id="czrightbut"></a>
+    </div>
+    <div class="czxinxi">
+        <ul>
+            <li class="cur" ><a href="http://yun.itheima.com/course/273.html?1811ku-hda1" target="_blank">Python入门教程完整版（懂中文就能学会）</a></li><li  ><a href="http://yun.itheima.com/course/499.html?1811ku-hda2" target="_blank">4天快速入门Python数据挖掘</a></li><li  ><a href="http://yun.itheima.com/course/364.html?1812ku-hda3" target="_blank">ReactJs精品教程</a></li><li  ><a href="http://yun.itheima.com/course/396.html?1812ku-hda4" target="_blank">看完就会-laravel框架教程</a></li><li  ><a href="http://yun.itheima.com/course/250.html?1812ku-hda5" target="_blank">AE视频教程|黑马程序员</a></li><li  ><a href="http://yun.itheima.com/course/416.html?1812ku-hda6" target="_blank">超级火爆的区块链运营技术</a></li><li  ><a href="http://h5.itcast.cn/sd?1812sylb2" target="_blank">双旦狂欢季，砸金蛋，赢报名豪礼</a></li>		</ul>
+    </div>
+</div>
+
+<!-- 焦点图 end -->
+<!-- 内容区域 start -->
+<div class="wrap">
+    <div class="wrap_in">
+
+        <div class="box box1">
+            <div class="hd hd2 hdhover">
+                <ul class="slidenav" id="typeul">
+                    <li class="cur one"><a href="javascript:void(0);" subject="0">免费视频</a></li>
+                </ul>
+                <span class="num">视频章节数：<span style="font-size:16px;font-weight:bold">5102</span></span>
+            </div>
+            <div class="alllist course">
+                <ul class="cur" id="courseShow">
+                    <li>
+                        <a href="/course/375.html" target="_blank">
+                            <img src="/Upload//./Images/20180806/5b6817e00a106.jpg" alt="java基础教程（编程就像打字一样简单）" width="283" height="186">
+                            <div class="zhe agd"></div>
+                            <span class="star video_s"></span>
+                        </a>
+                        <div class="bdtxt">
+                            <h3><a href="/course/375.html" class="afont">java基础教程（编程就像打字一样简单）</a></h3>
+                            <p>已经有<strong>30632</strong>人学习</p>
+                        </div>
+                    </li><li>
+                    <a href="/course/6.html" target="_blank">
+                        <img src="/Upload//./Images/20150828/55e02efda8a0c.jpg" alt="JavaWeb教程_JavaWeb入门教程|黑马程序员" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/6.html" class="afont">JavaWeb教程_JavaWeb入门教程|黑马程序员</a></h3>
+                        <p>已经有<strong>67114</strong>人学习</p>
+                    </div>
+                </li><li>
+                    <a href="/course/420.html" target="_blank">
+                        <img src="/Upload//./Images/20180806/5b679fbb75913.jpg" alt="go语言基础深入浅出" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/420.html" class="afont">go语言基础深入浅出</a></h3>
+                        <p>已经有<strong>1383</strong>人学习</p>
+                    </div>
+                </li><li>
+                    <a href="/course/301.html" target="_blank">
+                        <img src="/Upload//./Images/20180806/5b681838eacd1.jpg" alt="大数据hadoop教程入门" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/301.html" class="afont">大数据hadoop教程入门</a></h3>
+                        <p>已经有<strong>3417</strong>人学习</p>
+                    </div>
+                </li><li>
+                    <a href="/course/273.html" target="_blank">
+                        <img src="/Upload//./Images/20180806/5b6817bf3a9ae.jpg" alt="Python入门教程完整版（懂中文就能学会）" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/273.html" class="afont">Python入门教程完整版（懂中文就能学会）</a></h3>
+                        <p>已经有<strong>24935</strong>人学习</p>
+                    </div>
+                </li><li>
+                    <a href="/course/267.html" target="_blank">
+                        <img src="/Upload//./Images/20170809/598ad70525c4f.jpg" alt="Web前端入门教程_Web前端入门视频教程(html+css+JavaScript)入门|黑马程序员" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/267.html" class="afont">Web前端入门教程_Web前端入门视频教程(html+css+JavaScript)入门|黑马程序员</a></h3>
+                        <p>已经有<strong>12858</strong>人学习</p>
+                    </div>
+                </li><li>
+                    <a href="/course/470.html" target="_blank">
+                        <img src="/Upload//./Images/20181011/5bbeffc7f1539.jpg" alt="Linux运维工作场景解决方案零基础到就业" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/470.html" class="afont">Linux运维工作场景解决方案零基础到就业</a></h3>
+                        <p>已经有<strong>958</strong>人学习</p>
+                    </div>
+                </li><li>
+                    <a href="/course/369.html" target="_blank">
+                        <img src="/Upload//./Images/20180425/5ae037472637e.jpg" alt="轻松掌握C语言视频教程（会打字就能学会）" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/369.html" class="afont">轻松掌握C语言视频教程（会打字就能学会）</a></h3>
+                        <p>已经有<strong>8351</strong>人学习</p>
+                    </div>
+                </li><li>
+                    <a href="/course/354.html" target="_blank">
+                        <img src="/Upload//./Images/20180806/5b6817fee651a.jpg" alt="2018版Photoshop从浅入深教程" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/354.html" class="afont">2018版Photoshop从浅入深教程</a></h3>
+                        <p>已经有<strong>5548</strong>人学习</p>
+                    </div>
+                </li><li>
+                    <a href="/course/381.html" target="_blank">
+                        <img src="/Upload//./Images/20180611/5b1e0c5f2cd40.jpg" alt="PHP初级教程_PHP零基础通关宝典" width="283" height="186">
+                        <div class="zhe agd"></div>
+                        <span class="star video_s"></span>
+                    </a>
+                    <div class="bdtxt">
+                        <h3><a href="/course/381.html" class="afont">PHP初级教程_PHP零基础通关宝典</a></h3>
+                        <p>已经有<strong>3211</strong>人学习</p>
+                    </div>
+                </li>				</ul>
+            </div>
+            <p style="text-align:center; clear:both; margin-bottom:30px;"><a href="/course" target="_blank" class="more" style="line-height:43px;">查看更多<span>>></span></a></p>
+        </div>
+
+        <p class="clearfix"><p>
+        <div class="box box1">
+            <div class="hd hd1 hdhover">
+                <ul class="slidenav">
+                    <li class="cur one"><a href="javascript:void(0);" subject="0">近期公开课</a></li>
+                    <li ><a href="javascript:void(0);" subject="1">Java</a></li><li ><a href="javascript:void(0);" subject="7">Python</a></li><li ><a href="javascript:void(0);" subject="3">UI/UE</a></li><li ><a href="javascript:void(0);" subject="4">前端</a></li><li ><a href="javascript:void(0);" subject="139">云计算大数据</a></li><li ><a href="javascript:void(0);" subject="5">PHP</a></li><li ><a href="javascript:void(0);" subject="6">C/C++</a></li><li ><a href="javascript:void(0);" subject="136">产品经理</a></li><li ><a href="javascript:void(0);" subject="8">新媒体/电商</a></li><li ><a href="javascript:void(0);" subject="135">软件测试</a></li><li class="cur_br"><a href="javascript:void(0);" subject="140">Go语言与区块链</a></li><li ><a href="javascript:void(0);" subject="133">Android</a></li><li ><a href="javascript:void(0);" subject="2">iOS</a></li><li ><a href="javascript:void(0);" subject="141">网络安全+运维工程师</a></li><li ><a href="javascript:void(0);" subject="142">影视制作</a></li><li ><a href="javascript:void(0);" subject="143">PMP项目管理认证</a></li>				</ul>
+                <span class="num">公开课总数：<span style="font-size:16px;font-weight:bold">321</span></span>
+            </div>
+            <div class="alllist course">
+                <ul class="cur" id="openShow">
+                    <li>
+                        <a href="/open/361.html" target="_blank">
+                            <img src="/Upload//./Images/20181123/5bf77768a7e4e.png" alt="Python从零基础到大牛项目实战：抓取景点评论数量实现旅游景点推荐" width="283" height="186">
+                            <div class="zhe agd"></div>
+                            <span class="bm_btn video_s">立即</br>报名</span>
+        <p class="xkfl">Python</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/361.html" class="afont">Python从零基础到大牛项目实战：抓取景点评论数量实现旅游景点推荐</a></h3>
+            <div class="mydate">
+                <p><strong>2019-01-08</strong>开课</p>
+                <p class="mydate_r"><strong>462</strong>人报名</p>
+            </div>
+        </div>
+        </li><li>
+        <a href="/open/369.html" target="_blank">
+            <img src="/Upload//./Images/20181226/5c233f91df410.png" alt="RHEL8测试版--抢先体验新技术" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="bm_btn video_s">立即</br>报名</span>
+            <p class="xkfl">网络安全+运维工程师</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/369.html" class="afont">RHEL8测试版--抢先体验新技术</a></h3>
+            <div class="mydate">
+                <p><strong>2019-01-10</strong>开课</p>
+                <p class="mydate_r"><strong>379</strong>人报名</p>
+            </div>
+        </div>
+    </li><li>
+        <a href="/open/368.html" target="_blank">
+            <img src="/Upload//./Images/20181206/5c08ea23ef975.png" alt="数据库分片--分布式事务" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="star video_s"></span>							<p class="xkfl">Java</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/368.html" class="afont">数据库分片--分布式事务</a></h3>
+            <div class="mydate">
+                <p><a href="/open/368.html" class="afont" style="width:auto;">资料下载</a></p>
+                <p class="mydate_r"><strong>26</strong>人下载</p>							</div>
+        </div>
+    </li><li>
+        <a href="/open/364.html" target="_blank">
+            <img src="/Upload//./Images/20181126/5bfbbf016a676.jpeg" alt="你没有玩过的电影火焰特效——C4D火焰特效大神之路" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="star video_s"></span>							<p class="xkfl">影视制作</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/364.html" class="afont">你没有玩过的电影火焰特效——C4D火焰特效大神之路</a></h3>
+            <div class="mydate">
+                <p><a href="/open/364.html" class="afont" style="width:auto;">资料下载</a></p>
+                <p class="mydate_r"><strong>24</strong>人下载</p>							</div>
+        </div>
+    </li><li>
+        <a href="/open/367.html" target="_blank">
+            <img src="/Upload//./Images/20181206/5c08bcc2d7522.png" alt="两小时掌握Flutter移动App开发" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="star video_s"></span>							<p class="xkfl">前端</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/367.html" class="afont">两小时掌握Flutter移动App开发</a></h3>
+            <div class="mydate">
+                <p><a href="/open/367.html" class="afont" style="width:auto;">资料下载</a></p>
+                <p class="mydate_r"><strong>126</strong>人下载</p>							</div>
+        </div>
+    </li><li>
+        <a href="/open/362.html" target="_blank">
+            <img src="/Upload//./Images/20181123/5bf78ece67f1b.png" alt="一小时教你制作抖音播放量破百万的短视频" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="bm_btn video_s">立即</br>报名</span>
+            <p class="xkfl">新媒体/电商</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/362.html" class="afont">一小时教你制作抖音播放量破百万的短视频</a></h3>
+            <div class="mydate">
+                <p><strong>2018-12-11</strong>开课</p>
+                <p class="mydate_r"><strong>350</strong>人报名</p>
+            </div>
+        </div>
+    </li><li>
+        <a href="/open/363.html" target="_blank">
+            <img src="/Upload//./Images/20181126/5bfbad5234ac1.png" alt="Mybatis源码分析" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="star video_s"></span>							<p class="xkfl">Java</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/363.html" class="afont">Mybatis源码分析</a></h3>
+            <div class="mydate">
+                <p><a href="/open/363.html" class="afont" style="width:auto;">资料下载</a></p>
+                <p class="mydate_r"><strong>201</strong>人下载</p>							</div>
+        </div>
+    </li><li>
+        <a href="/open/359.html" target="_blank">
+            <img src="/Upload//./Images/20181113/5bea9695d8f97.png" alt="抖音短视频播放量破百万的秘笈" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="star video_s"></span>							<p class="xkfl">新媒体/电商</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/359.html" class="afont">抖音短视频播放量破百万的秘笈</a></h3>
+            <div class="mydate">
+                <p><a href="/open/359.html" class="afont" style="width:auto;">资料下载</a></p>
+                <p class="mydate_r"><strong>61</strong>人下载</p>							</div>
+        </div>
+    </li><li>
+        <a href="/open/357.html" target="_blank">
+            <img src="/Upload//./Images/20181108/5be3cea0de754.png" alt="数据同步终极解决方案 - Canal" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="star video_s"></span>							<p class="xkfl">Java</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/357.html" class="afont">数据同步终极解决方案 - Canal</a></h3>
+            <div class="mydate">
+                <p><a href="/open/357.html" class="afont" style="width:auto;">资料下载</a></p>
+                <p class="mydate_r"><strong>121</strong>人下载</p>							</div>
+        </div>
+    </li><li>
+        <a href="/open/360.html" target="_blank">
+            <img src="/Upload//./Images/20181116/5bee44e5b6c86.png" alt="白话https" width="283" height="186">
+            <div class="zhe agd"></div>
+            <span class="star video_s"></span>							<p class="xkfl">网络安全+运维工程师</p>
+        </a>
+        <div class="bdtxt">
+            <h3><a href="/open/360.html" class="afont">白话https</a></h3>
+            <div class="mydate">
+                <p><a href="/open/360.html" class="afont" style="width:auto;">资料下载</a></p>
+                <p class="mydate_r"><strong>156</strong>人下载</p>							</div>
+        </div>
+    </li>				</ul>
+    </div>
+    <p style="text-align:center; clear:both; margin-bottom:30px;"><a href="/open" target="_blank" class="more"  style="line-height:43px;">查看更多<span>>></span></a></p>
+</div>
+<p class="clearfix"><p>
+    <!-- <div class="box box4">
+        <div class="hd">
+            <h2>公开课优势</h2>
+        </div>
+        <ul class="strengthbox">
+            <li>
+                <div class="picbox">
+                    <img src="/Home/images/strength1.jpg"  />
+                </div>
+                <img src="/Home/images/strength5.jpg" width="285" height="80" />
+                <p>不耽误上班/上学时间<br>20：00~22：00<br>公开课直播等你来</p>
+            </li>
+            <li>
+                <div class="picbox">
+                    <img src="/Home/images/strength2.jpg"  />
+                </div>
+                <img src="/Home/images/strength6.jpg" width="285" height="80" />
+                <p>大牛级讲师在线讲解流行新技术<br>课后互动问答<br>问题当场解决</p>
+            </li>
+            <li>
+                <div class="picbox">
+                    <img src="/Home/images/strength3.jpg"  />
+                </div>
+                <img src="/Home/images/strength7.jpg" width="285" height="80" />
+                <p>暖心鼓励师夜间相伴<br>把最美的歌声送给最爱学习的你</p>
+            </li>
+            <li style="margin-right:0;">
+                <div class="picbox">
+                    <img src="/Home/images/strength4.jpg"  />
+                </div>
+                <img src="/Home/images/strength8.jpg" width="285" height="80" />
+                <p>课后抽奖<br>光盘/教材/红包/特刊独家放送<br>还有更多有趣的活动带你high到爆</p>
+            </li>
+        </ul>
+    </div> -->
+    <div class="box box2">
+        <div class="hd">
+            <h2>学习路线图</h2>
+            <a href="/map">更多内容>></a>
+        </div>
+        <ul class="pathbox">
+            <li class="agd">
+                <a href="/map/21.html" target="_blank">
+                    <img src="/Home/images/android_path.png" width="68" height="76" class="agd" />
+                    <h3>Android+物联网视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li class="agd">
+                <a href="/map/22.html" target="_blank">
+                    <img src="/Home/images/java_bg.png" width="56" height="76" class="agd" />
+                    <h3>Java视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li class="agd">
+                <a href="/map/23.html" target="_blank">
+                    <img src="/Home/images/php_path.png" width="96" height="76" />
+                    <h3>PHP视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li class="agd">
+                <a href="/map/24.html" target="_blank">
+                    <img src="/Home/images/icd_path.png" width="77" height="76" />
+                    <h3>UI设计视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li class="agd">
+                <a href="/map/25.html" target="_blank">
+                    <img src="/Home/images/c_path.png" width="105" height="76"  />
+                    <h3>C/C++视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li class="agd">
+                <a href="/map/26.html" target="_blank">
+                    <img src="/Home/images/ios_path.jpg" width="60" height="76"  />
+                    <h3>iOS视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li>
+                <a href="/map/27.html" target="_blank">
+                    <img src="/Home/images/m_bg.png" width="61" height="76" />
+                    <h3>新媒体/电商运营视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li class="agd">
+                <a href="/map/50.html" target="_blank">
+                    <img src="/Home/images/web_bg.png" width="54" height="76" />
+                    <h3>前端与移动开发视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li class="agd">
+                <a href="/map/61.html" target="_blank">
+                    <img src="/Home/images/h5_bg.jpg" width="80" height="80" />
+                    <h3>H5+全栈工程师视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+            <li class="agd" >
+                <a href="/map/53.html" target="_blank">
+                    <img src="/Home/images/game_bg.png" />
+                    <h3>人工智能+Python视频下载</h3>
+                    <button class="agd">立即查看</button>
+                </a>
+            </li>
+        </ul>
+<p style="clear:both; height:0px; font-size:0;"></p>
+</div>
+<div class="box box1 box3">
+    <div class="hd">
+        <ul class="slidenav">
+            <li><a href="javascript:void(0);">友情链接</a></li>
+        </ul>
+        <div class=""></div>
+        <div class="cls"></div>
+    </div>
+    <div class="course">
+        <div class="linkbox">
+            <a href="http://www.itcast.cn" target="_blank">传智播客</a><a href="http://www.itheima.com" target="_blank">黑马程序员</a><a href="https://www.boxuegu.com" target="_blank">博学谷</a><a href="http://bbs.itheima.com" target="_blank">技术社区</a><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1481135711" target="_blank">申请友情链接</a>				</div>
+    </div>
+</div>
+</div>
+</div>
+<div class="tanchang">
+    <a href="http://h5.itcast.cn/sd?1812sytc" target="_blank"><img src="/Upload/Images/2018-12-28/5c2578fc2d7a5.jpg" /></a>	<span class="tc_close"></span>
+</div>
+</div>
+<script>
+    var isclose = getCookie('isclose');
+    if (isclose!=null && isclose!=""){
+        $(".tanchang").stop().animate({"width":"280px","height":"188px","right":0,"margin-right":"5px","bottom":0,"margin-bottom":"5px"},600);
+        $(".tanchang .tc_close").one("click", function(){
+            $(".tanchang").hide();
+        });
+    }else{
+        setTimeout(function(){
+            $(".tanchang").stop().animate({"margin-bottom":"-252px"},800);
+        },3000)
+    }
+    $(".tanchang .tc_close").click(function(){
+        setCookie("isclose",1,1);
+        $(".tanchang").stop().animate({"width":"280px","height":"188px","right":0,"margin-right":"5px","bottom":0,"margin-bottom":"5px"},600);
+    });
+    setTimeout(function(){
+        setCookie("isclose",1,1);
+        $(".tanchang").stop().animate({"width":"280px","height":"188px","right":0,"margin-right":"5px","bottom":0,"margin-bottom":"5px"},600);
+    },7000)
+</script><!-- 内容区域 end -->
+<!-- @通用底部 start -->
+<div class="footer">
+    <div class="inner">
+        <div class="ft_l ft_l1">
+            <div class="ft_l_txt">
+                <h3>帮助中心</h3>
+                <ul>
+                    <li><a href="/article/39.html" target="_blank">新手指南</a></li><li><a href="/article/40.html" target="_blank">常见问题</a></li><li><a href="/article/36.html" target="_blank">名额预定</a></li><li><a href="/article/42.html" target="_blank">意见反馈</a></li>				</ul>
+            </div>
+            <div class="ft_l_txt">
+                <h3>交流合作</h3>
+                <ul>
+                    <li><a href="http://bbs.itheima.com?yun" target="_blank">技术交流</a></li><li><a href="/article/45.html" target="_blank">联系我们</a></li><li><a href="/article/47.html" target="_blank">版权声明</a></li>				</ul>
+            </div>
+            <div class="ft_l_txt">
+                <h3>站内地图</h3>
+                <ul>
+                    <li><a href="http://yun.itheima.com/map/22.html" target="_blank">Java教程</a></li><li><a href="http://yun.itheima.com/map/23.html" target="_blank">PHP教程</a></li><li><a href="http://yun.itheima.com/map/53.html" target="_blank">Python教程</a></li><li><a href="http://yun.itheima.com/map" target="_blank">更多学科视频</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="ft_l ft_l2">
+            <div class="it_wx">
+                <p>黑马程序员视频库</p>
+                <img src="/Home/images/wxheima.jpg" width="120" height="120" /> </div>
+            <div class="boniu_wx">
+                <p>黑马程序员QQ</p>
+                <img src="/Home/images/wxopen.jpg" width="120" height="120" /> </div>
+        </div>
+        <div class="ft_l ft_l3">
+            <div class="share">
+                <div class="share_in">
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_mshare" data-cmd="mshare" title="分享到一键分享"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a></div>
+                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                    </script>
+                </div>
+            </div>
+            <p class="pp2" style="margin-top:28px;">播妞QQ：3077485083</p>
+            <p class="pp2">黑马程序员QQ：1679806262</p>
+            <p class="pp2">官方微博地址：<a href="http://weibo.com/itheima" target="_blank">http://weibo.com/itheima</a></p>
+        </div>
+    </div>
+    <p class="copy">京ICP备08001421号 京公网安备110108007702
+    <div id="tongji">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261487506'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1261487506%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?b1e14226f5d3e84b1e6c8d1e409dba39";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </div></p>
+</div>
+<div class="nav_right">
+    <ul>
+        <li><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1679806262" target="_blank"><span>鼓励师在线</span></a></li>
+        <li class="nav2"><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1679806262" target="_blank"><span>意见与建议</span></a></li>
+        <li class="nav3"><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1679806262" target="_blank"><span>学习资料库</span></a></li>
+        <li class="nav4"><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1481135711" target="_blank"><span>问答集中营</span></a></li>
+        <li class="nav5" id="back"><a href="javascript:;">TOP</a></li>
+    </ul>
+</div>
+<script type="text/javascript" src="/Home/js/qj.js"></script>
+<script type="text/javascript" src="/Home/js/layer/layer.js"></script>
+<script type="text/javascript" src="/Home/js/verify.js"></script>
+<script type="text/javascript">
+    $(function(){
+
+
+
+        $(window).scroll(function(){
+            var A = $(window).scrollTop();
+            if(A > 400){
+                $("#back").css("visibility","visible");
+            }else{
+                $("#back").css("visibility","hidden");
+            }
+        });
+        $("#back").click(function(){
+            $("html,body").animate(
+                {
+                    "scrollTop":0
+                },400);
+        })
+        $(".nav_right ul li").mouseenter(function(){
+            $(this).find("span").css("visibility","visible").animate({
+                right: "59px"
+            },80);
+        })
+        $(".nav_right ul li").mouseleave(function(){
+            $(this).find("span").css({"visibility":"hidden","right":"0"});
+        })
+        $(".hdhover").hover(
+            function () {
+                $(this).stop().animate({height: '118px'}, "slow");
+            },
+            function () {
+                $(this).stop().animate({height: '56px'}, "slow");
+            }
+        );
+    })
+</script>
+<script type="text/javascript" src="/Home/js/index.js"></script></body>
 </html>
+<!-- @通用底部 end -->
