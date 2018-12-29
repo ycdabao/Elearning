@@ -36,7 +36,7 @@ public class AppVideoController {
     @RequestMapping(value="/playvideo")
     public void playVideo(String id, HttpServletRequest request, HttpServletResponse response){
 
-        System.out.println("xxxxx");
+
 
        ChapterContent cc= chapterContentService.findbyid(id);
         if(cc.getFree().equals("免费")) {

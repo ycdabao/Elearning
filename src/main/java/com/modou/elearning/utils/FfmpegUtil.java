@@ -80,7 +80,7 @@ public class FfmpegUtil {
      * @return 时长 格式hh:MM:ss
      * @throws FileNotFoundException 视频不存在抛出此异常
      */
-    private String getVideoTime(File file) throws FileNotFoundException {
+    private Integer getVideoTime(File file) throws FileNotFoundException {
         if (!file.exists()) {
             throw new FileNotFoundException(file.getAbsolutePath() + "不存在");
         }
@@ -92,17 +92,36 @@ public class FfmpegUtil {
         String msg = result.getMsg();
         if (result.isSuccess()) {
             //\d{2}:\d{2}:\d{2}
-            Pattern pattern = Pattern.compile("\\d{2}:\\d{2}:\\d{2}");
+            Pattern pattern = Pattern.compile("Duration: (.*?), start: (.*?), bitrate: (\\d*) kb\\/s");
             Matcher matcher = pattern.matcher(msg);
-            String time = "";
+            Integer time = null;
             while (matcher.find()) {
-                time = matcher.group();
+                 time = getTimelen(matcher.group(1));
             }
             return time;
         } else {
-            return "";
+            return null;
         }
     }
+
+
+
+    private static int getTimelen(String timelen) {
+        int min = 0;
+        String strs[] = timelen.split(":");
+        if (strs[0].compareTo("0") > 0) {
+            min += Integer.valueOf(strs[0]) * 60 * 60;//秒
+        }
+        if (strs[1].compareTo("0") > 0) {
+            min += Integer.valueOf(strs[1]) * 60;
+        }
+        if (strs[2].compareTo("0") > 0) {
+            min += Math.round(Float.valueOf(strs[2]));
+        }
+        return min;
+    }
+
+
 
     /**
      * 获取文件大小
@@ -124,7 +143,7 @@ public class FfmpegUtil {
      * @return 分割后的文件路径
      * @throws Exception 文件
      */
-  public  void cutVideo(String filePath) throws Exception {
+ public  List<String> cutVideo(String filePath) throws Exception {
         File file = new File(filePath);
         if (!file.exists()) {
             throw new FileNotFoundException(filePath + "文件不存在");
@@ -145,13 +164,13 @@ public class FfmpegUtil {
       commands.add("-vbsf");
       commands.add("h264_mp4toannexb");
 
-      commands.add(filePath.substring(0,filePath.lastIndexOf(File.pathSeparator)+1)+IDUtil.getFileName(filePath)+".ts");
+      commands.add(filePath.substring(0,filePath.lastIndexOf("\\")+1)+IDUtil.getFileName(filePath)+".ts");
       runCommand(commands);
 
       commands.clear();
       commands.add("ffmpeg");
       commands.add("-i");
-      commands.add(filePath.substring(0,filePath.lastIndexOf(File.pathSeparator)+1)+IDUtil.getFileName(filePath)+".ts");
+      commands.add(filePath.substring(0,filePath.lastIndexOf("\\")+1)+IDUtil.getFileName(filePath)+".ts");
       commands.add("-c");
       commands.add("copy");
       commands.add("-map");
@@ -163,10 +182,87 @@ public class FfmpegUtil {
       commands.add("-segment_time");
       commands.add("60");
 
-      commands.add(filePath.substring(0,filePath.lastIndexOf(File.pathSeparator)+1)+IDUtil.getFileName(filePath)+"%03d"+".ts");
-      runCommand(commands);
+      commands.add(filePath.substring(0,filePath.lastIndexOf("\\")+1)+IDUtil.getFileName(filePath)+"%03d"+".mp4");
+      CmdResult result  =runCommand(commands);
 
+     //从ffmpeg获得的时间长度
+     Integer videoSecond = getVideoTime(file);
+
+     List<String> r = new ArrayList<String>();
+     int loop = videoSecond%60!=0?videoSecond/60+1:videoSecond/60;
+     for(int i=0;i<loop; i++){
+         if(i<=9) {
+             r.add("/" + IDUtil.getFileName(filePath) + "00" + i + ".mp4");
+         }else if(i<=99){
+             r.add("/" + IDUtil.getFileName(filePath) + "0" + i + ".mp4");
+         }else{
+             r.add("/" + IDUtil.getFileName(filePath) +  i + ".mp4");
+         }
+     }
+     return r;
     }
+
+
+    /**
+     * @param filePath 要处理的文件路径
+     * @return 分割后的文件路径
+     * @throws Exception 文件
+     */
+  /*  public List<String> cutVideo(String filePath) throws Exception {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            throw new FileNotFoundException(filePath + "文件不存在");
+        }
+        if (!filePath.endsWith(".mp4")) {
+            throw new Exception("文件格式错误");
+        }
+        //从ffmpeg获得的时间长度00:00:00格式
+        String videoTimeString = getVideoTime(file);
+        //将时长转换为秒数
+        int videoSecond = parseTimeToSecond(videoTimeString);
+        //视频文件的大小
+        long fileLength = getVideoFileLength(file);
+        List<String> cutedVideoPaths = new ArrayList<String>();
+        if (fileLength <= blockSize) {//如果视频文件大小不大于预设值，则直接返回原视频文件
+            cutedVideoPaths.add(filePath);
+        } else {//如果超过预设大小，则需要切割
+            int partNum = (int) (fileLength / blockSize);//文件大小除以分块大小的商
+            long remainSize = fileLength % blockSize;//余数
+            int cutNum;
+            if (remainSize > 0) {
+                cutNum = partNum + 1;
+            } else {
+                cutNum = partNum;
+            }
+            int eachPartTime = videoSecond / cutNum;
+            List<String> commands = new ArrayList<String>();
+            String fileFolder = file.getParentFile().getAbsolutePath();
+            String fileName[] = file.getName().split("\\.");
+            commands.add("ffmpeg");
+            for (int i = 0; i < cutNum; i++) {
+                commands.add("-i");
+                commands.add(filePath);
+                commands.add("-ss");
+                commands.add(parseTimeToString(eachPartTime * i));
+                if (i != cutNum - 1) {
+                    commands.add("-t");
+                    commands.add(parseTimeToString(eachPartTime));
+                }
+                commands.add("-acodec");
+                commands.add("copy");
+                commands.add("-vcodec");
+                commands.add("copy");
+                commands.add(fileFolder + File.separator + fileName[0] + "_part" + i + "." + fileName[1]);
+                commands.add("-y");
+                cutedVideoPaths.add(File.separator + fileName[0] + "_part" + i + "." + fileName[1]);
+            }
+            runCommand(commands);
+        }
+        return cutedVideoPaths;
+    }*/
+
+
+
     /**
      * 执行Cmd命令方法
      *
@@ -174,6 +270,7 @@ public class FfmpegUtil {
      * @return 执行结果
      */
     private synchronized CmdResult runCommand(List<String> command) {
+
         CmdResult cmdResult = new CmdResult(false, "");
         ProcessBuilder builder = new ProcessBuilder(command);
         builder.redirectErrorStream(true);

@@ -3,95 +3,423 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
-    <script type="text/javascript" src="../../js/videojs/video.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../js/videojs/video-js.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="../../js/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link href="../../js/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../js/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../js/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css">
     <style type="text/css">
-        body{
-            background-color: black;
+        *{margin: 0px; padding: 0px;    font-family: -apple-system,BlinkMacSystemFont,Microsoft YaHei UI,Microsoft YaHei,Roboto,Hiragino Sans GB,Source Han Sans CN,Fira Sans,Droid Sans,Helvetica Neue,arial,sans-serif;}
+        body{background-color: #fff}
+        #container{    position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            left: 0;
+            top: 0;
         }
-        #video{
-            margin: 0px auto;
-            width: 800px;
-            height: 600px;
+
+        #shadow{ position: absolute;
+            height:300px;
+            width:400px;
+            margin:-150px 0 0 -200px;
+            top:50%;
+            left: 50%;
+            background-color: rgba(0,0,0,0);
+            z-index: 1000;
+            text-align: center;
+            line-height: 300px;
+        }
+
+        #shadow span{
+            font-size: 48px;
+            font-weight: bold;}
+
+        #mvideo{background-color: rgb(0, 0, 0);
+            width: 100%;
+            height: 100%;
             display: block;
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;}
+        #controlBar{position: absolute; bottom: 0px; width: 100%;height: 40px;background-color:#333;}
+        #progressBar{position: relative; width: 100%;height:4px;background-color: gray}
+        #progress{position: absolute;top: 0px; width: 0px;height:4px;background-color: orange}
+        #currentProgress{position: absolute;top: -3px; width: 10px;height:10px;background-color: orange;border-radius: 10px}
+        #showtime{display: inline-block;width: 40px; height:20px; background-color: rgba(0,0,0,0.9); position: absolute;
+        top:-20px;color: #ffffff;font-size: 8px;text-align: center; line-height: 20px;display: none;
         }
+        #control{height:36px;line-height:36px;color:#fff; vertical-align: middle}
+        #startButton{color:white;font-size:20px;margin-left: 10px;  position: relative;
+            top: 50%;
+            transform: translateY(-50%);float:left}
+        #ctime{float: left;font-size: 12px;margin-left: 20px}
 
+        #fullscreenButton{font-size: 20px; position: relative;
+            top: 50%;
+            transform: translateY(-50%);float: right;right:30px}
+        #speedButton{width: 60px;height: 30px;font-size: 14px; float: right;right:60px;
+            position: relative;border-radius: 30px;top: 50%;
+            transform: translateY(-50%);line-height: 30px;text-align: center;font-weight: bold}
+        #speedul{
+            display: none;
+            position: absolute;
+            bottom:30px;
+            font-weight: normal;
+            width: 60px;
 
-
-        .video-js .vjs-subtitles{
-            font-family: "lucida grande", "lucida sans unicode", lucida, "Helvetica Neue", helvetica, "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            color: #fc6;
-            font-size: 2em;
-            line-height: 1em;
         }
-
-        /*播放按钮居中*/
-        .vjs-big-play-button {
-            left: 50% !important;
-            top: 50% !important;
-            margin-left: -2em;
-            margin-top: -1.3em;
+        #volumeButton{
+            font-size: 20px; position: relative;
+            top: 50%;
+            transform: translateY(-50%);float: right;right:90px
         }
+        #speedul li{list-style-type: none;text-align: center}
+        #currenttime{margin-left: 10px;font-size:12px}
 
-        .vjs-customer-speedbar{
-
-        }
     </style>
 </head>
 <body>
 <div id="container">
+    <div id="shadow">
+        <span class="glyphicon  glyphicon-play" id="shadowPalyer"></span>
 
-    <video id="video" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"  >
+    </div>
+    <video id="mvideo" ></video>
 
-    </video>
+    <div id="controlBar">
 
+        <span id="showtime"></span>
+        <div id="progressBar">
+            <div id="progress"></div>
+            <div id="currentProgress"></div>
+        </div>
+        <div id="control" >
+            <div id="startButton" class="glyphicon  glyphicon-play " ></div>
+           <div id="ctime"> <span id="currenttime">00:00</span>/<span id="totaltime"></span></div>
+
+            <div id="fullscreenButton" class="glyphicon glyphicon-fullscreen"></div>
+            <div id="speedButton">倍速
+                <ul id="speedul">
+                    <li>0.5x</li>
+                    <li>1.0x</li>
+                    <li>1.25x</li>
+                    <li>1.5x</li>
+                    <li>2.0x</li>
+                </ul>
+            </div>
+            <div id="volumeButton" class="glyphicon glyphicon-volume-down"></div>
+        </div>
+    </div>
 </div>
+</body>
 
 <script type="text/javascript">
 
-    $(document).ready(function(){
+    //获取视频列表
+    var videoList="[[${files.fileContent}]]".split(",");
+    for(var i=0; i<videoList.length; i++){
+        videoList[i]="/"+"[[${files.fileCreateby}]]"+"/"+getTime(dateToGMT("[[${files.fileCreatedate}]]"))+videoList[i];
 
 
-        var player = videojs('video',{
-            "autoplay" : false,
-            "controls" : true,
-            "techOrder" : ["html5"],
-            "poster":"/[[${files.fileCover}]]",
-            //"width":"100%",
-            //"height":"100%",
-            "sources" : [ {
-               src:"/video/playvideo?id=[[${chapterContentId}]]",
-                type:"video/mp4"
-                //src:"/[[${files.fileContent}]]"
-            } ]
+    }
 
-        });
+    //获取视频总时间
+    var totalTime= [[${files.fileDuration}]];
 
-
-        var controlBar;
-        var speedControl =document.createElement("div");
-        speedControl.className="vjs-remaining-time vjs-time-control vjs-control";
-        var span1 = document.createElement("span");
-        span1.className="vjs-control-text";
-        span1.innerHTML="1px";
-        var span2 = document.createElement("span");
-        span2.className="vjs-remaining-time-display";
-
-        span2.innerHTML="1px";
-
-        speedControl.appendChild(span1).appendChild(span2);
+    var controlBar = document.getElementById("controlBar")
+    var container = document.getElementById("container");
+    var mvideo = document.getElementById("mvideo");
+    var progressBar = document.getElementById("progressBar");
+    var progress= document.getElementById("progress");
+    var currentProgress=document.getElementById("currentProgress");
+    var showtime=document.getElementById("showtime");
+    var startButton= document.getElementById("startButton");
+    var currenttimespan= document.getElementById("currenttime");
+    var totaltimespan=document.getElementById("totaltime");
+    var fullscreenButton=document.getElementById("fullscreenButton");
+    var speedButton= document.getElementById("speedButton");
+    var speedul= document.getElementById("speedul");
+    var shadow= document.getElementById("shadow");
+    var shadowPalyer=document.getElementById("shadowPalyer");
+    var curr=0;
+    mvideo.onended=mplay;
 
 
-        controlBar = document.getElementsByClassName('vjs-control-bar')[0];
-        insertBeforeNode = document.getElementsByClassName('vjs-fullscreen-control')[0];
-        controlBar.insertBefore(speedControl,insertBeforeNode);
+    totaltimespan.innerText=coverttime(totalTime)+"";
+
+
+    //速度控制
+    speedButton.onclick=function(){
+        speedul.style.display="block";
+    }
+
+    $("#speedul li").click(function(){
+        $("#speedul li").css("color","#fff");
+
+        $(this).css("color","orange");
+        mvideo.playbackRate=parseFloat($(this).text());
+    });
+
+    $("#speedul").mouseleave(function(){
+        $("#speedul").fadeOut(1000);
+    });
+
+
+    //全屏
+    fullscreenButton.onclick=function(){
+        if( fullscreenButton.className=="glyphicon glyphicon-resize-small"){
+            exitFullScreen();
+            fullscreenButton.className="glyphicon glyphicon-fullscreen";
+        }else {
+            fullScreen();
+            fullscreenButton.className = "glyphicon glyphicon-resize-small";
+        }
+    }
 
 
 
-    })
+    var startButtonCount=true;
+
+    //开始播放
+    startButton.onclick=function(){
+
+        if(startButtonCount==true) {
+            if (mvideo.paused == true) {
+                this.className = "glyphicon  glyphicon-pause";
+                mplay();
+                startButtonCount=false;
+                shadow.style.display="none";
+            } else {
+                this.className = "glyphicon  glyphicon-play";
+                mvideo.pause();
+                shadow.style.display="block";
+            }
+        }else{
+            if (mvideo.paused == true) {
+                this.className = "glyphicon  glyphicon-pause";
+                mvideo.play();
+                shadow.style.display="none";
+
+            } else {
+                this.className = "glyphicon  glyphicon-play";
+                mvideo.pause();
+                shadow.style.display="block";
+
+            }
+        }
+
+    }
+
+    //居中播放按钮
+    shadowPalyer.onclick=function(){
+        if(startButtonCount==true) {
+            if (mvideo.paused == true) {
+                startButton.className = "glyphicon  glyphicon-pause";
+                mplay();
+                startButtonCount=false;
+                shadow.style.display="none";
+            } else {
+                startButton.className = "glyphicon  glyphicon-play";
+                mvideo.pause();
+                shadow.style.display="block";
+            }
+        }else{
+            if (mvideo.paused == true) {
+                startButton.className = "glyphicon  glyphicon-pause";
+                mvideo.play();
+                shadow.style.display="none";
+
+            } else {
+                startButton.className = "glyphicon  glyphicon-play";
+                mvideo.pause();
+                shadow.style.display="block";
+
+            }
+        }
+    }
+
+
+
+    function mplay(){
+        mvideo.src=videoList[curr];
+
+        mvideo.load(videoList[curr]);
+        mvideo.play();
+
+        curr++;
+        if(curr >= videoList.length){
+            curr = 0; // 播放完了，重新播放
+        }
+    }
+
+
+    var w = container.clientWidth||container.offsetWidth;
+    var currentProgressWidth=$("#currentProgress").width();
+    //播放时间更新
+    mvideo.ontimeupdate=function(){
+      var currentTime= mvideo.currentTime;
+      var percent= currentTime/totalTime;
+      if(percent>0){
+       progress.style.width=percent*100+"%";
+
+       currentProgress.style.left=(percent*100-(currentProgressWidth/w)*100)+"%";
+
+          currenttime.innerText=coverttime(currentTime)+"";
+
+      }
+
+   }
+
+   //前进
+    progressBar.onclick=function(event){
+        var e = event || window.event;
+        var ex = e.offsetX;
+
+        var t= (ex/w)*totalTime;        //指定位置对应的时间
+
+        progress.style.width=(ex/w)*100+"%";
+        currentProgress.style.left=((ex/w)*100-(currentProgressWidth/w)*100)+"%";
+
+
+        var index = Math.floor(t/60);
+        curr=index;
+        mplay();
+
+
+    }
+
+
+
+   //进度条悬浮
+    progressBar.onmousemove=function(event){
+
+
+        var e = event || window.event;
+        var ex = e.offsetX;
+
+       var t= (ex/w)*totalTime;
+      if(e.srcElement.id!="currentProgress") {
+          this.style.cursor = "pointer";
+
+          showtime.innerHTML = coverttime(t);
+          showtime.style.left = (ex - 20) + "px";
+          showtime.style.display = "block";
+      }
+    }
+
+    //进度条移除
+    progressBar.onmouseout=function(){
+
+
+        showtime.style.display="none";
+    }
+
+
+
+    container.onmouseover=function(){
+        controlBar.style.display="block";
+    }
+
+    container.onmouseout=function(){
+        controlBar.style.display="none";
+    }
+
+
+    function coverttime(t){
+        var minutes = Math.floor(t/60);
+        var seconds= Math.floor(t-minutes*60);
+        minutes=minutes<10?"0"+minutes:minutes;
+        seconds=seconds<10?"0"+seconds:seconds;
+        return minutes+":"+seconds;
+    }
+
+
+    function getTime(t){
+        var year =t.getFullYear();
+        var month =(t.getMonth()+1)<10?"0"+(t.getMonth()+1):(t.getMonth()+1);
+        var d = (t.getDate())<10?"0"+(t.getDate()):(t.getDate())
+
+        return year+"-"+month+"-"+d;
+    }
+
+    function dateToGMT(strDate){
+        var dateStr=strDate.split(" ");
+        var strGMT = dateStr[0]+" "+dateStr[1]+" "+dateStr[2]+" "+dateStr[5]+" "+dateStr[3]+" GMT+0800";
+        var date = new Date(Date.parse(strGMT));
+        return date;
+    }
+
+
+
+    //拖放
+    $( "#currentProgress" ).draggable({ axis: "y",  axis: "x",start: function() {
+            mvideo.pause();
+        },
+        drag: function(event) {
+
+        },
+        stop: function(event) {
+            var e = event || window.event;
+
+
+
+            var ex = e.clientX-(window.document.body.offsetWidth-w)/2;      //计算拖动的宽度
+
+            if(ex>=w){
+              //  e.clientX=(w+(window.document.body.offsetWidth-w)/2);
+                ex=w;
+            }
+
+                console.log(ex);
+            console.log(w);
+            var t= (ex/w)*totalTime;        //指定位置对应的时间
+
+            progress.style.width=(ex/w)*100+"%";
+            currentProgress.style.left=((ex/w)*100-(currentProgressWidth/w)*100)+"%";
+
+
+            var index = Math.floor(t/60);
+            curr=index;
+            mplay();
+
+        }});
+
+
+
+    // 全屏代码
+    function fullScreen() {
+        var elem = document.body;
+        if (elem.webkitRequestFullScreen) {
+            elem.webkitRequestFullScreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.requestFullScreen) {
+            elem.requestFullscreen();
+        } else {
+            notice.notice_show("浏览器不支持全屏API或已被禁用", null, null, null, true, true);
+        }
+    }
+    function exitFullScreen() {
+        var elem = document;
+        if (elem.webkitCancelFullScreen) {
+            elem.webkitCancelFullScreen();
+        } else if (elem.mozCancelFullScreen) {
+            elem.mozCancelFullScreen();
+        } else if (elem.cancelFullScreen) {
+            elem.cancelFullScreen();
+        } else if (elem.exitFullscreen) {
+            elem.exitFullscreen();
+        } else {
+            notice.notice_show("浏览器不支持全屏API或已被禁用", null, null, null, true, true);
+        }
+    }
+
+
 
 </script>
 
-</body>
 </html>

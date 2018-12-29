@@ -1,84 +1,147 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>后台管理</title>
-    <link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.5.5.4/themes/icon.css" />
-    <script type="text/javascript" src="../js/jquery-easyui-1.5.5.4/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.7.0/themes/bootstrap/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.7.0/themes/icon.css" />
+    <script type="text/javascript" src="../../js/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
     <!-- 中文化 -->
-    <script type="text/javascript" src="../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../../js/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
     <style type="text/css">
         *{font-family: 微软雅黑}
     </style>
 </head>
 <body class="easyui-layout">
-<!--div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">north region</div-->
-<div data-options="region:'west',split:true" style="width:150px;padding:10px;">
-    <ul class="easyui-tree" id="nav">
-        <li><span>课程管理</span>
-            <ul>
-                <li data-options="attributes:{ 'url':'/admin/file/tolist'}">视频管理</li>
-                <li data-options="attributes:{ 'url':'/admin/course/toadd'}">发布课程</li>
-                <li data-options="attributes:{ 'url':'/admin/course/tolist'}">课程管理</li>
-            </ul>
 
-        </li>
-        <li>
-            <span>系统设置</span>
-            <ul>
-                <li data-options="attributes:{ 'url':'/admin/user/tolist'}">用户管理</li>
-                <li data-options="attributes:{ 'url':'/admin/role/tolist'}">角色管理</li>
-                <li>授权管理</li>
 
-            </ul>
-        </li>
 
-    </ul>
+<div data-options="region:'center'" >
+    <div style="width:100%;height:100%;position: relative;">
+        <div id="LeftMenuDiv" style="width: 202px;height:100%;display: inline-block;">
+            <div class="easyui-panel" title="菜单列表" style="width:100%;height:100%;overflow-x:hidden;overflow-y:auto;" data-options="onOpen:onPanelOpen">
+                <div id="LeftMenu" style="">
+                </div>
+            </div>
+        </div>
+
+        <div id="mainTab" class="easyui-tabs" data-options="fit:true" style="display: inline-block; position: absolute;">
+            <div title="首页" data-options="closable:false" style="overflow:hidden;background-color:#fff;">
+                <iframe scrolling="auto" frameborder="0" src="" style="width:100%;height:100%"></iframe>
+            </div>
+        </div>
+    </div>
 
 </div>
 
-<div data-options="region:'center'">
-    <div id="tbs" class="easyui-tabs"></div>
-
-</div>
+<link rel="stylesheet" type="text/css" href="../../css/admin/sidemenu_style.css">
 <script type="text/javascript">
-    $("#nav").tree({
-        onClick: function(node){
-           if($("#nav").tree("isLeaf",node.target)){
-               if($("#tbs").tabs("exists",node.text)){
-                   $("#tbs").tabs("select",node.text)
-               }else{
-                   var content = '<iframe id="iframe"  scrolling="auto" frameborder="0"  src="'+node.attributes.url+'" style="width:100%;height:500px;"></iframe>';
-               $("#tbs").tabs('add',{
-                   title: node.text,
-                   content:content,
-                   closable:true
-               });
-               }
-           }
+    var data = [{
+        text: '课程管理',
+        iconCls: 'fa fa-wpforms',
+        children: [{
+            text: '视频管理',
+           href:'/admin/file/tolist'
+        },{
+            text: '发布课程',
+           href:'/admin/course/toadd'
+        },{
+            text: '课程管理',
+          href:'/admin/course/tolist'
+        }]
+    },{
+        text: '系统设置',
+        iconCls: 'fa fa-at',
+        children: [{
+            text: '用户管理',
+            href:'/admin/user/tolist'
+        },{
+            text: '角色管理',
+            href:'/admin/role/tolist'
+        },{
+            text: '授权'
+
+        }]
+    }];
+
+    $("#LeftMenu").sidemenu({
+        data:data,
+        onSelect: function(node){
+            console.log(node);
+
+                if($("#mainTab").tabs("exists",node.text)){
+                    $("#mainTab").tabs("select",node.text)
+                }else{
+                    var content = '<iframe id="iframe"  scrolling="auto" frameborder="0"  src="'+node.href+'" style="width:100%;height:99%"></iframe>';
+                    $("#mainTab").tabs('add',{
+                        title: node.text,
+                        content:content,
+                        closable:true
+                    });
+                }
+
         }
     })
 
-/*
-    function iframeLoad() {
-        document.getElementById("iframe").height = 0;
-        document.getElementById("iframe").height = document.getElementById("iframe").contentWindow.document.body.scrollHeight;
+    function onPanelOpen() {
+        var panel = $(this);
+        var _1e = panel.panel("header").children("div.panel-tool");
+        _1e.children("a.panel-tool-collapse").hide();
+        var _20 = "layout-button-left";// + _1f[dir];
+        var t = _1e.children("a." + _20);
+        if (!t.length) {
+            t = $("<a href=\"javascript:;\"></a>").addClass(_20).appendTo(_1e);
+            t.bind("click", { dir: "left" }, function (e) {
+                if (e.target.className == "layout-button-right") {
+                    e.target.className = "layout-button-left"
+                    onWestExpand();
+                    panel.panel("setTitle", panel.titleTemp);
+                    panel.panel('resize', {
+                        width: 202
+                    });
+                    var leftMenuDiv = $('#LeftMenuDiv');
+                    leftMenuDiv.each(function () {
+                        this.style.width = '202px';
+                    });
+                }
+                else {
+                    e.target.className = "layout-button-right"
+                    onWestCollapse();
+                    var opt = panel.panel('options');
+                    panel.titleTemp = opt.title;
+                    panel.panel("setTitle", "");
+                    panel.panel('resize', {
+                        width: 42
+                    });
+                    var leftMenuDiv = $('#LeftMenuDiv');
+                    leftMenuDiv.each(function () {
+                        this.style.width = '42px';
+                    });
+                }
+                return false;
+            });
+        }
+        //$(this).panel("options").collapsible ? t.show() : t.hide();
     }
-*/
-    /*function reinitIframe(){
-        var iframe = document.getElementById("iframe");
 
-        try{
-            var bHeight = iframe.contentWindow.document.body.scrollHeight;
-            var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-            var height = Math.max(bHeight, dHeight);
-            iframe.height = height;
-            console.log(height);
-        }catch (ex){}
+    function onWestCollapse() {
+        var opts = $('#LeftMenu').sidemenu('options');
+        if (opts.collapsed != 'collapse') {
+            $('#LeftMenu').sidemenu('collapse');
+            $('#LeftMenu').sidemenu('resize', {
+                width: 40
+            });
+        }
     }
-    window.setInterval("reinitIframe()", 200);*/
+    function onWestExpand() {
+        var opts = $('#LeftMenu').sidemenu('options');
+        if (opts.collapsed != 'expand') {
+            $('#LeftMenu').sidemenu('expand');
+            $('#LeftMenu').sidemenu('resize', {
+                width: 200
+            });
+        }
+    }
 </script>
 </body>
 </html>

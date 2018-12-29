@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>发布课程</title>
-    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/default/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.5.5.4/themes/icon.css" />
-    <script src="../../js/webuploader/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" src="../../js/jquery-easyui-1.7.0/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/layer/layer.js"></script>
-    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.7.0/themes/bootstrap/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.7.0/themes/icon.css" />
+
+    <script type="text/javascript" src="../../js/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
     <!-- 中文化 -->
-    <script type="text/javascript" src="../../js/jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../../js/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+
 
     <link rel="stylesheet" href="../../js/webuploader/webuploader.css" />
     <style type="text/css">
 
         *{font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;}
-        dd{    float: left;
-            width: 900px;
+        .line{
+            width: 70%;
             margin-bottom: 30px;
             min-height: 28px;
             line-height: 28px;
@@ -24,7 +28,7 @@
 
         dt{
             float: left;
-            width: 115px;
+            width: 25%;
             padding-right: 40px;
             text-align: right;
             line-height: 28px;
@@ -178,89 +182,86 @@
 </head>
 <body>
 
-    <form id="ff" method="post">
-        <div>
-        <dl>
-            <dt>课程标题:</dt>
-            <dd>
-                <div >
+    <form id="ff" method="post" >
+        <div style="margin-left: 30px">
+
+
+                <div class="line">
+                    <label for="courseName">课程标题:</label>
                     <input class="easyui-textbox" name="courseName" style="width:80%" data-options="required:true,prompt:'请填写课程标题，最多50字'">
                 </div>
-            </dd>
-            <dt>分类:</dt>
-            <dd>
-                <div >
+
+
+                <div class="line">
+                    <label for="courseType1">分类:</label>
                     <input class="easyui-combobox" id="type1" name="courseType1" style="width:20%;" data-options="label:'一级分类'"/>
                     <input class="easyui-combobox" id="type2" name="courseType2" style="width:20%;" data-options="label:'二级分类'"/>
                     <input class="easyui-combobox" id="type3" name="courseType3" style="width:20%;" data-options="label:'三级分类'"/>
                 </div>
-            </dd>
-            <dt>课程难度:</dt>
-            <dd>
-                <div >
+
+
+                <div class="line">
+                    <label for="courseDifficulty">课程难度:</label>
                     <input type="radio" name="courseDifficulty" value="初级" checked/>初级
                     <input type="radio" name="courseDifficulty" value="中级"/>中级
                     <input type="radio" name="courseDifficulty" value="高级"/>高级
                 </div>
-            </dd>
-            <dt>课程简介:</dt>
-            <dd>
-                <div >
+
+                <div class="line">
+                    <label for="courseSummary">课程简介:</label>
                     <input class="easyui-textbox" name="courseSummary" style="width:80%;height:60px" data-options="prompt:'不能少于10字，方便用户快速匹配自己是否为该课程使用人群',required:true,multiline:true">
                 </div>
-            </dd>
-            <dt>适用人群:</dt>
-            <dd>
-                <div >
+
+                <div class="line">
+                    <label for="courseCrowd">适用人群:</label>
                     <input class="easyui-textbox" name="courseCrowd" style="width:80%;" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
                 </div>
-            </dd>
 
-            <dt>课程详情</dt>
-            <dd>
-                <div >
+                <div class="line">
+                    <label for="courseCrowd">课程详情:</label>
                     <textarea name="courseDetails" cols="100" rows="8" style="width:80%;height:200px;"></textarea>
                 </div>
 
-            </dd>
-            <dt>课程标签:</dt>
-            <dd>
-                <div >
+
+
+                <div class="line">
+                    <label for="courseLabel">课程标签:</label>
                     <input class="easyui-textbox" name="courseLabel" style="width:80%;" data-options="prompt:'多个标签用空格进行间隔',required:true">
                 </div>
-            </dd>
-            <dt>课程封面</dt>
-            <dd>
-                <div class="cover">
 
-                    <div id="picker">上传图片</div>
-                    <p>文件大小：2M以内</p>
-                    <p>支持格式：png/jpg/jpeg</p>
-                    <p>尺寸规则：500px * 300px (此尺寸等比例缩放)</p>
-                    <img src="" id="upControl_IMG">
-                    <div class="upControl" id="upControl_Btn">&nbsp;</div>
+                <div class="line">
+                    <label >课程封面:</label>
+                        <div class="cover">
+
+                            <div id="picker">上传图片</div>
+                            <p>文件大小：2M以内</p>
+                            <p>支持格式：png/jpg/jpeg</p>
+                            <p>尺寸规则：500px * 300px (此尺寸等比例缩放)</p>
+                            <img src="" id="upControl_IMG">
+                            <div class="upControl" id="upControl_Btn">&nbsp;</div>
+                        </div>
+                        <input type="hidden" name="courseCover" id="c_image_url" value=""/>
+
                 </div>
-                <input type="hidden" name="courseCover" id="c_image_url" value="">
 
-            </dd>
-            <dt>课程价格:</dt>
-            <dd>
-                <div >
+
+                <div class="line">
+                    <label for="coursePriceType">课程价格:</label>
                    <input type="radio" name="coursePriceType" value="免费" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
 
                 </div>
-                <div >
+                <div class="line">
+                    <label for="coursePriceType"></label>
                     <input type="radio" name="coursePriceType" value="付费"/>付费
                     <input class="easyui-textbox" name="coursePrice" style="display: inline-block;margin-left: 20px"/>
                 </div>
-            </dd>
 
-            <dt>
-            </dt>
-            <dd style="text-align: center">
+
+
+            <div style="text-align: center" class="line">
                 <a class="easyui-linkbutton" id="btn_save">保存</a>
                 <a class="easyui-linkbutton">清空</a>
-            </dd>
+            </div>
 
 
         </dl>
