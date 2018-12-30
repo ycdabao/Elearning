@@ -6,7 +6,7 @@ import com.modou.elearning.pojo.Files;
 import com.modou.elearning.pojo.Types;
 import com.modou.elearning.service.ChapterContentService;
 import com.modou.elearning.service.CourseService;
-import com.modou.elearning.service.TypesService;
+import com.modou.elearning.service.SubjectService;
 import com.modou.elearning.service.impl.FileServiceImpl;
 import com.modou.elearning.utils.ModouResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.jnlp.FileSaveService;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class AppCourseController {
     private ChapterContentService chapterContentService;
 
     @Autowired
-    private TypesService typesService;
+    private SubjectService typesService;
 
     @RequestMapping(value="/typelist")
     @ResponseBody

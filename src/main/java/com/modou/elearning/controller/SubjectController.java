@@ -1,7 +1,7 @@
 package com.modou.elearning.controller;
 
 import com.modou.elearning.pojo.Types;
-import com.modou.elearning.service.TypesService;
+import com.modou.elearning.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +12,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value="/admin/types")
-public class TypesController {
+public class SubjectController {
 
 
     @Autowired
-    TypesService typesService;
+    SubjectService typesService;
 
 
     @RequestMapping(value="/findbyparentid")

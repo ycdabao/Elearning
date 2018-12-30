@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<!-- 数据库驱动包位置 -->
-	<classPathEntry location="e:\mysql-connector-java-5.1.45-bin.jar" />
+	<classPathEntry location="e:\mysql-connector-java-5.1.47.jar" />
 	<context id="sqlserverTables">
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 		<commentGenerator>
@@ -10,7 +10,7 @@
 		</commentGenerator>
 		<!-- 数据库链接URL、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.2.88:3306/elearning"
+			connectionURL="jdbc:mysql://127.0.0.1/elearning"
 			userId="root" password="root">
 		</jdbcConnection>
 		<javaTypeResolver>
@@ -36,7 +36,8 @@
 		<table tableName="users" domainObjectName="Users"></table>
 		<table tableName="folder" domainObjectName="Folder"></table>
 		<table tableName="posts_type" domainObjectName="PostsType"></table-->
-		<table tableName="files" domainObjectName="Files"></table>
+		<table tableName="subject" domainObjectName="Subject"></table>
+		<table tableName="courses" domainObjectName="Courses"></table>
 		<!--table tableName="types" domainObjectName="Types"></table>
 
 		<table tableName="chapter" domainObjectName="Chapter"></table>

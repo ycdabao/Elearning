@@ -2,10 +2,10 @@ package com.modou.elearning.service.impl;
 
 
 import com.github.pagehelper.PageHelper;
-import com.modou.elearning.mapper.ChapterMapper;
+
 import com.modou.elearning.mapper.CoursesMapper;
 import com.modou.elearning.pojo.Chapter;
-import com.modou.elearning.pojo.ChapterExample;
+
 import com.modou.elearning.pojo.Courses;
 import com.modou.elearning.pojo.CoursesExample;
 import com.modou.elearning.service.ChapterService;

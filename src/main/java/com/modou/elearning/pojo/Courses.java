@@ -1,20 +1,18 @@
 package com.modou.elearning.pojo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Courses implements Serializable {
     private String id;
 
     private String courseName;
 
-    private Integer courseType1;
+    private Integer courseSubject1;
 
-    private Integer courseType2;
+    private Integer courseSubject2;
 
-    private Integer courseType3;
+    private Integer courseSubject3;
 
     private String courseDifficulty;
 
@@ -46,16 +44,6 @@ public class Courses implements Serializable {
 
     private Integer courseStudentNumber;
 
-    public List<Chapter> getChapterList() {
-        return chapterList;
-    }
-
-    public void setChapterList(List<Chapter> chapterList) {
-        this.chapterList = chapterList;
-    }
-
-    private List<Chapter> chapterList = new ArrayList<Chapter>();
-
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -74,28 +62,28 @@ public class Courses implements Serializable {
         this.courseName = courseName == null ? null : courseName.trim();
     }
 
-    public Integer getCourseType1() {
-        return courseType1;
+    public Integer getCourseSubject1() {
+        return courseSubject1;
     }
 
-    public void setCourseType1(Integer courseType1) {
-        this.courseType1 = courseType1;
+    public void setCourseSubject1(Integer courseSubject1) {
+        this.courseSubject1 = courseSubject1;
     }
 
-    public Integer getCourseType2() {
-        return courseType2;
+    public Integer getCourseSubject2() {
+        return courseSubject2;
     }
 
-    public void setCourseType2(Integer courseType2) {
-        this.courseType2 = courseType2;
+    public void setCourseSubject2(Integer courseSubject2) {
+        this.courseSubject2 = courseSubject2;
     }
 
-    public Integer getCourseType3() {
-        return courseType3;
+    public Integer getCourseSubject3() {
+        return courseSubject3;
     }
 
-    public void setCourseType3(Integer courseType3) {
-        this.courseType3 = courseType3;
+    public void setCourseSubject3(Integer courseSubject3) {
+        this.courseSubject3 = courseSubject3;
     }
 
     public String getCourseDifficulty() {

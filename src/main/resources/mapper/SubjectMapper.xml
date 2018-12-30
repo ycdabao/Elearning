@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.modou.elearning.mapper.SubjectMapper" >
+  <resultMap id="BaseResultMap" type="com.modou.elearning.pojo.Subject" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+    <result column="subject_createby" property="subjectCreateby" jdbcType="VARCHAR" />
+    <result column="subject_createdate" property="subjectCreatedate" jdbcType="TIMESTAMP" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
+    <result column="subject_modifyby" property="subjectModifyby" jdbcType="VARCHAR" />
+    <result column="subject_modifydate" property="subjectModifydate" jdbcType="TIMESTAMP" />
+    <result column="subject_status" property="subjectStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, subject_name, subject_createby, subject_createdate, parentid, subject_modifyby, 
+    subject_modifydate, subject_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.SubjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from subject
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from subject
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from subject
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.modou.elearning.pojo.SubjectExample" >
+    delete from subject
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.modou.elearning.pojo.Subject" >
+    insert into subject (id, subject_name, subject_createby, 
+      subject_createdate, parentid, subject_modifyby, 
+      subject_modifydate, subject_status)
+    values (#{id,jdbcType=INTEGER}, #{subjectName,jdbcType=VARCHAR}, #{subjectCreateby,jdbcType=VARCHAR}, 
+      #{subjectCreatedate,jdbcType=TIMESTAMP}, #{parentid,jdbcType=INTEGER}, #{subjectModifyby,jdbcType=VARCHAR}, 
+      #{subjectModifydate,jdbcType=TIMESTAMP}, #{subjectStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.modou.elearning.pojo.Subject" >
+    insert into subject
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="subjectName != null" >
+        subject_name,
+      </if>
+      <if test="subjectCreateby != null" >
+        subject_createby,
+      </if>
+      <if test="subjectCreatedate != null" >
+        subject_createdate,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+      <if test="subjectModifyby != null" >
+        subject_modifyby,
+      </if>
+      <if test="subjectModifydate != null" >
+        subject_modifydate,
+      </if>
+      <if test="subjectStatus != null" >
+        subject_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="subjectName != null" >
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCreateby != null" >
+        #{subjectCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCreatedate != null" >
+        #{subjectCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="subjectModifyby != null" >
+        #{subjectModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectModifydate != null" >
+        #{subjectModifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subjectStatus != null" >
+        #{subjectStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.modou.elearning.pojo.SubjectExample" resultType="java.lang.Integer" >
+    select count(*) from subject
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update subject
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectName != null" >
+        subject_name = #{record.subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectCreateby != null" >
+        subject_createby = #{record.subjectCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectCreatedate != null" >
+        subject_createdate = #{record.subjectCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.parentid != null" >
+        parentid = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectModifyby != null" >
+        subject_modifyby = #{record.subjectModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectModifydate != null" >
+        subject_modifydate = #{record.subjectModifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.subjectStatus != null" >
+        subject_status = #{record.subjectStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update subject
+    set id = #{record.id,jdbcType=INTEGER},
+      subject_name = #{record.subjectName,jdbcType=VARCHAR},
+      subject_createby = #{record.subjectCreateby,jdbcType=VARCHAR},
+      subject_createdate = #{record.subjectCreatedate,jdbcType=TIMESTAMP},
+      parentid = #{record.parentid,jdbcType=INTEGER},
+      subject_modifyby = #{record.subjectModifyby,jdbcType=VARCHAR},
+      subject_modifydate = #{record.subjectModifydate,jdbcType=TIMESTAMP},
+      subject_status = #{record.subjectStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.modou.elearning.pojo.Subject" >
+    update subject
+    <set >
+      <if test="subjectName != null" >
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCreateby != null" >
+        subject_createby = #{subjectCreateby,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCreatedate != null" >
+        subject_createdate = #{subjectCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="subjectModifyby != null" >
+        subject_modifyby = #{subjectModifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectModifydate != null" >
+        subject_modifydate = #{subjectModifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subjectStatus != null" >
+        subject_status = #{subjectStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.modou.elearning.pojo.Subject" >
+    update subject
+    set subject_name = #{subjectName,jdbcType=VARCHAR},
+      subject_createby = #{subjectCreateby,jdbcType=VARCHAR},
+      subject_createdate = #{subjectCreatedate,jdbcType=TIMESTAMP},
+      parentid = #{parentid,jdbcType=INTEGER},
+      subject_modifyby = #{subjectModifyby,jdbcType=VARCHAR},
+      subject_modifydate = #{subjectModifydate,jdbcType=TIMESTAMP},
+      subject_status = #{subjectStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

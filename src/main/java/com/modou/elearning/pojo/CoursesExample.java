@@ -245,183 +245,183 @@ public class CoursesExample {
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1IsNull() {
-            addCriterion("course_type1 is null");
+        public Criteria andCourseSubject1IsNull() {
+            addCriterion("course_subject1 is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1IsNotNull() {
-            addCriterion("course_type1 is not null");
+        public Criteria andCourseSubject1IsNotNull() {
+            addCriterion("course_subject1 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1EqualTo(Integer value) {
-            addCriterion("course_type1 =", value, "courseType1");
+        public Criteria andCourseSubject1EqualTo(Integer value) {
+            addCriterion("course_subject1 =", value, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1NotEqualTo(Integer value) {
-            addCriterion("course_type1 <>", value, "courseType1");
+        public Criteria andCourseSubject1NotEqualTo(Integer value) {
+            addCriterion("course_subject1 <>", value, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1GreaterThan(Integer value) {
-            addCriterion("course_type1 >", value, "courseType1");
+        public Criteria andCourseSubject1GreaterThan(Integer value) {
+            addCriterion("course_subject1 >", value, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1GreaterThanOrEqualTo(Integer value) {
-            addCriterion("course_type1 >=", value, "courseType1");
+        public Criteria andCourseSubject1GreaterThanOrEqualTo(Integer value) {
+            addCriterion("course_subject1 >=", value, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1LessThan(Integer value) {
-            addCriterion("course_type1 <", value, "courseType1");
+        public Criteria andCourseSubject1LessThan(Integer value) {
+            addCriterion("course_subject1 <", value, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1LessThanOrEqualTo(Integer value) {
-            addCriterion("course_type1 <=", value, "courseType1");
+        public Criteria andCourseSubject1LessThanOrEqualTo(Integer value) {
+            addCriterion("course_subject1 <=", value, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1In(List<Integer> values) {
-            addCriterion("course_type1 in", values, "courseType1");
+        public Criteria andCourseSubject1In(List<Integer> values) {
+            addCriterion("course_subject1 in", values, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1NotIn(List<Integer> values) {
-            addCriterion("course_type1 not in", values, "courseType1");
+        public Criteria andCourseSubject1NotIn(List<Integer> values) {
+            addCriterion("course_subject1 not in", values, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1Between(Integer value1, Integer value2) {
-            addCriterion("course_type1 between", value1, value2, "courseType1");
+        public Criteria andCourseSubject1Between(Integer value1, Integer value2) {
+            addCriterion("course_subject1 between", value1, value2, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType1NotBetween(Integer value1, Integer value2) {
-            addCriterion("course_type1 not between", value1, value2, "courseType1");
+        public Criteria andCourseSubject1NotBetween(Integer value1, Integer value2) {
+            addCriterion("course_subject1 not between", value1, value2, "courseSubject1");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2IsNull() {
-            addCriterion("course_type2 is null");
+        public Criteria andCourseSubject2IsNull() {
+            addCriterion("course_subject2 is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2IsNotNull() {
-            addCriterion("course_type2 is not null");
+        public Criteria andCourseSubject2IsNotNull() {
+            addCriterion("course_subject2 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2EqualTo(Integer value) {
-            addCriterion("course_type2 =", value, "courseType2");
+        public Criteria andCourseSubject2EqualTo(Integer value) {
+            addCriterion("course_subject2 =", value, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2NotEqualTo(Integer value) {
-            addCriterion("course_type2 <>", value, "courseType2");
+        public Criteria andCourseSubject2NotEqualTo(Integer value) {
+            addCriterion("course_subject2 <>", value, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2GreaterThan(Integer value) {
-            addCriterion("course_type2 >", value, "courseType2");
+        public Criteria andCourseSubject2GreaterThan(Integer value) {
+            addCriterion("course_subject2 >", value, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2GreaterThanOrEqualTo(Integer value) {
-            addCriterion("course_type2 >=", value, "courseType2");
+        public Criteria andCourseSubject2GreaterThanOrEqualTo(Integer value) {
+            addCriterion("course_subject2 >=", value, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2LessThan(Integer value) {
-            addCriterion("course_type2 <", value, "courseType2");
+        public Criteria andCourseSubject2LessThan(Integer value) {
+            addCriterion("course_subject2 <", value, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2LessThanOrEqualTo(Integer value) {
-            addCriterion("course_type2 <=", value, "courseType2");
+        public Criteria andCourseSubject2LessThanOrEqualTo(Integer value) {
+            addCriterion("course_subject2 <=", value, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2In(List<Integer> values) {
-            addCriterion("course_type2 in", values, "courseType2");
+        public Criteria andCourseSubject2In(List<Integer> values) {
+            addCriterion("course_subject2 in", values, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2NotIn(List<Integer> values) {
-            addCriterion("course_type2 not in", values, "courseType2");
+        public Criteria andCourseSubject2NotIn(List<Integer> values) {
+            addCriterion("course_subject2 not in", values, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2Between(Integer value1, Integer value2) {
-            addCriterion("course_type2 between", value1, value2, "courseType2");
+        public Criteria andCourseSubject2Between(Integer value1, Integer value2) {
+            addCriterion("course_subject2 between", value1, value2, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType2NotBetween(Integer value1, Integer value2) {
-            addCriterion("course_type2 not between", value1, value2, "courseType2");
+        public Criteria andCourseSubject2NotBetween(Integer value1, Integer value2) {
+            addCriterion("course_subject2 not between", value1, value2, "courseSubject2");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3IsNull() {
-            addCriterion("course_type3 is null");
+        public Criteria andCourseSubject3IsNull() {
+            addCriterion("course_subject3 is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3IsNotNull() {
-            addCriterion("course_type3 is not null");
+        public Criteria andCourseSubject3IsNotNull() {
+            addCriterion("course_subject3 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3EqualTo(Integer value) {
-            addCriterion("course_type3 =", value, "courseType3");
+        public Criteria andCourseSubject3EqualTo(Integer value) {
+            addCriterion("course_subject3 =", value, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3NotEqualTo(Integer value) {
-            addCriterion("course_type3 <>", value, "courseType3");
+        public Criteria andCourseSubject3NotEqualTo(Integer value) {
+            addCriterion("course_subject3 <>", value, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3GreaterThan(Integer value) {
-            addCriterion("course_type3 >", value, "courseType3");
+        public Criteria andCourseSubject3GreaterThan(Integer value) {
+            addCriterion("course_subject3 >", value, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3GreaterThanOrEqualTo(Integer value) {
-            addCriterion("course_type3 >=", value, "courseType3");
+        public Criteria andCourseSubject3GreaterThanOrEqualTo(Integer value) {
+            addCriterion("course_subject3 >=", value, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3LessThan(Integer value) {
-            addCriterion("course_type3 <", value, "courseType3");
+        public Criteria andCourseSubject3LessThan(Integer value) {
+            addCriterion("course_subject3 <", value, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3LessThanOrEqualTo(Integer value) {
-            addCriterion("course_type3 <=", value, "courseType3");
+        public Criteria andCourseSubject3LessThanOrEqualTo(Integer value) {
+            addCriterion("course_subject3 <=", value, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3In(List<Integer> values) {
-            addCriterion("course_type3 in", values, "courseType3");
+        public Criteria andCourseSubject3In(List<Integer> values) {
+            addCriterion("course_subject3 in", values, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3NotIn(List<Integer> values) {
-            addCriterion("course_type3 not in", values, "courseType3");
+        public Criteria andCourseSubject3NotIn(List<Integer> values) {
+            addCriterion("course_subject3 not in", values, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3Between(Integer value1, Integer value2) {
-            addCriterion("course_type3 between", value1, value2, "courseType3");
+        public Criteria andCourseSubject3Between(Integer value1, Integer value2) {
+            addCriterion("course_subject3 between", value1, value2, "courseSubject3");
             return (Criteria) this;
         }
 
-        public Criteria andCourseType3NotBetween(Integer value1, Integer value2) {
-            addCriterion("course_type3 not between", value1, value2, "courseType3");
+        public Criteria andCourseSubject3NotBetween(Integer value1, Integer value2) {
+            addCriterion("course_subject3 not between", value1, value2, "courseSubject3");
             return (Criteria) this;
         }
 

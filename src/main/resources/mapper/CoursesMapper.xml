@@ -4,9 +4,9 @@
   <resultMap id="BaseResultMap" type="com.modou.elearning.pojo.Courses" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="course_name" property="courseName" jdbcType="VARCHAR" />
-    <result column="course_type1" property="courseType1" jdbcType="INTEGER" />
-    <result column="course_type2" property="courseType2" jdbcType="INTEGER" />
-    <result column="course_type3" property="courseType3" jdbcType="INTEGER" />
+    <result column="course_subject1" property="courseSubject1" jdbcType="INTEGER" />
+    <result column="course_subject2" property="courseSubject2" jdbcType="INTEGER" />
+    <result column="course_subject3" property="courseSubject3" jdbcType="INTEGER" />
     <result column="course_difficulty" property="courseDifficulty" jdbcType="VARCHAR" />
     <result column="course_summary" property="courseSummary" jdbcType="VARCHAR" />
     <result column="course_crowd" property="courseCrowd" jdbcType="VARCHAR" />
@@ -82,10 +82,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, course_name, course_type1, course_type2, course_type3, course_difficulty, course_summary, 
-    course_crowd, course_details, course_label, course_cover, course_price_type, course_price, 
-    course_status, course_createby, course_createdate, course_modifyby, course_modifydate, 
-    course_check_status, course_student_number
+    id, course_name, course_subject1, course_subject2, course_subject3, course_difficulty, 
+    course_summary, course_crowd, course_details, course_label, course_cover, course_price_type, 
+    course_price, course_status, course_createby, course_createdate, course_modifyby, 
+    course_modifydate, course_check_status, course_student_number
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.modou.elearning.pojo.CoursesExample" >
     select
@@ -118,15 +118,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.modou.elearning.pojo.Courses" >
-    insert into courses (id, course_name, course_type1, 
-      course_type2, course_type3, course_difficulty, 
+    insert into courses (id, course_name, course_subject1, 
+      course_subject2, course_subject3, course_difficulty, 
       course_summary, course_crowd, course_details, 
       course_label, course_cover, course_price_type, 
       course_price, course_status, course_createby, 
       course_createdate, course_modifyby, course_modifydate, 
       course_check_status, course_student_number)
-    values (#{id,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, #{courseType1,jdbcType=INTEGER}, 
-      #{courseType2,jdbcType=INTEGER}, #{courseType3,jdbcType=INTEGER}, #{courseDifficulty,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, #{courseSubject1,jdbcType=INTEGER}, 
+      #{courseSubject2,jdbcType=INTEGER}, #{courseSubject3,jdbcType=INTEGER}, #{courseDifficulty,jdbcType=VARCHAR}, 
       #{courseSummary,jdbcType=VARCHAR}, #{courseCrowd,jdbcType=VARCHAR}, #{courseDetails,jdbcType=VARCHAR}, 
       #{courseLabel,jdbcType=VARCHAR}, #{courseCover,jdbcType=VARCHAR}, #{coursePriceType,jdbcType=VARCHAR}, 
       #{coursePrice,jdbcType=REAL}, #{courseStatus,jdbcType=VARCHAR}, #{courseCreateby,jdbcType=VARCHAR}, 
@@ -142,14 +142,14 @@
       <if test="courseName != null" >
         course_name,
       </if>
-      <if test="courseType1 != null" >
-        course_type1,
+      <if test="courseSubject1 != null" >
+        course_subject1,
       </if>
-      <if test="courseType2 != null" >
-        course_type2,
+      <if test="courseSubject2 != null" >
+        course_subject2,
       </if>
-      <if test="courseType3 != null" >
-        course_type3,
+      <if test="courseSubject3 != null" >
+        course_subject3,
       </if>
       <if test="courseDifficulty != null" >
         course_difficulty,
@@ -204,14 +204,14 @@
       <if test="courseName != null" >
         #{courseName,jdbcType=VARCHAR},
       </if>
-      <if test="courseType1 != null" >
-        #{courseType1,jdbcType=INTEGER},
+      <if test="courseSubject1 != null" >
+        #{courseSubject1,jdbcType=INTEGER},
       </if>
-      <if test="courseType2 != null" >
-        #{courseType2,jdbcType=INTEGER},
+      <if test="courseSubject2 != null" >
+        #{courseSubject2,jdbcType=INTEGER},
       </if>
-      <if test="courseType3 != null" >
-        #{courseType3,jdbcType=INTEGER},
+      <if test="courseSubject3 != null" >
+        #{courseSubject3,jdbcType=INTEGER},
       </if>
       <if test="courseDifficulty != null" >
         #{courseDifficulty,jdbcType=VARCHAR},
@@ -275,14 +275,14 @@
       <if test="record.courseName != null" >
         course_name = #{record.courseName,jdbcType=VARCHAR},
       </if>
-      <if test="record.courseType1 != null" >
-        course_type1 = #{record.courseType1,jdbcType=INTEGER},
+      <if test="record.courseSubject1 != null" >
+        course_subject1 = #{record.courseSubject1,jdbcType=INTEGER},
       </if>
-      <if test="record.courseType2 != null" >
-        course_type2 = #{record.courseType2,jdbcType=INTEGER},
+      <if test="record.courseSubject2 != null" >
+        course_subject2 = #{record.courseSubject2,jdbcType=INTEGER},
       </if>
-      <if test="record.courseType3 != null" >
-        course_type3 = #{record.courseType3,jdbcType=INTEGER},
+      <if test="record.courseSubject3 != null" >
+        course_subject3 = #{record.courseSubject3,jdbcType=INTEGER},
       </if>
       <if test="record.courseDifficulty != null" >
         course_difficulty = #{record.courseDifficulty,jdbcType=VARCHAR},
@@ -338,9 +338,9 @@
     update courses
     set id = #{record.id,jdbcType=VARCHAR},
       course_name = #{record.courseName,jdbcType=VARCHAR},
-      course_type1 = #{record.courseType1,jdbcType=INTEGER},
-      course_type2 = #{record.courseType2,jdbcType=INTEGER},
-      course_type3 = #{record.courseType3,jdbcType=INTEGER},
+      course_subject1 = #{record.courseSubject1,jdbcType=INTEGER},
+      course_subject2 = #{record.courseSubject2,jdbcType=INTEGER},
+      course_subject3 = #{record.courseSubject3,jdbcType=INTEGER},
       course_difficulty = #{record.courseDifficulty,jdbcType=VARCHAR},
       course_summary = #{record.courseSummary,jdbcType=VARCHAR},
       course_crowd = #{record.courseCrowd,jdbcType=VARCHAR},
@@ -366,14 +366,14 @@
       <if test="courseName != null" >
         course_name = #{courseName,jdbcType=VARCHAR},
       </if>
-      <if test="courseType1 != null" >
-        course_type1 = #{courseType1,jdbcType=INTEGER},
+      <if test="courseSubject1 != null" >
+        course_subject1 = #{courseSubject1,jdbcType=INTEGER},
       </if>
-      <if test="courseType2 != null" >
-        course_type2 = #{courseType2,jdbcType=INTEGER},
+      <if test="courseSubject2 != null" >
+        course_subject2 = #{courseSubject2,jdbcType=INTEGER},
       </if>
-      <if test="courseType3 != null" >
-        course_type3 = #{courseType3,jdbcType=INTEGER},
+      <if test="courseSubject3 != null" >
+        course_subject3 = #{courseSubject3,jdbcType=INTEGER},
       </if>
       <if test="courseDifficulty != null" >
         course_difficulty = #{courseDifficulty,jdbcType=VARCHAR},
@@ -426,9 +426,9 @@
   <update id="updateByPrimaryKey" parameterType="com.modou.elearning.pojo.Courses" >
     update courses
     set course_name = #{courseName,jdbcType=VARCHAR},
-      course_type1 = #{courseType1,jdbcType=INTEGER},
-      course_type2 = #{courseType2,jdbcType=INTEGER},
-      course_type3 = #{courseType3,jdbcType=INTEGER},
+      course_subject1 = #{courseSubject1,jdbcType=INTEGER},
+      course_subject2 = #{courseSubject2,jdbcType=INTEGER},
+      course_subject3 = #{courseSubject3,jdbcType=INTEGER},
       course_difficulty = #{courseDifficulty,jdbcType=VARCHAR},
       course_summary = #{courseSummary,jdbcType=VARCHAR},
       course_crowd = #{courseCrowd,jdbcType=VARCHAR},
