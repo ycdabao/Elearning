@@ -87,23 +87,23 @@
 
             //分类
             $("#type1").combobox({
-                url:'/admin/types/findbyparentid',
+                url:'/admin/subject/findbyparentid',
                 valueField:'id',
-                textField:'typeName',
+                textField:'subjectName',
                 onSelect:function(record){
                     $("#type2").combobox("clear");
                     $("#type3").combobox("clear");
                     var parentid = record.id;
                     $("#type2").combobox({
-                        url:'/admin/types/findbyparentid?parentid='+parentid,
+                        url:'/admin/subject/findbyparentid?parentid='+parentid,
                         valueField:'id',
-                        textField:'typeName',
+                        textField:'subjectName',
                         onSelect:function(record1){
 
                             $("#type3").combobox({
-                                    url: '/admin/types/findbyparentid?parentid=' + record1.id,
+                                    url: '/admin/subject/findbyparentid?parentid=' + record1.id,
                                     valueField: 'id',
-                                    textField: 'typeName'
+                                    textField: 'subjectName'
                                 }
                             )
                         }
@@ -133,41 +133,41 @@
                             $("input:radio[name='coursePriceType'][value='"+msg.data.coursePriceType+"']").attr("checked",true);
                             $("#coursePrice").textbox("setValue",msg.data.coursePrice);
                             $("#type1").combobox({
-                                url: '/admin/types/findbyparentid',
+                                url: '/admin/subject/findbyparentid',
                                 valueField: 'id',
-                                textField: 'typeName',
+                                textField: 'subjectName',
                                 onLoadSuccess:function(){
                                     var t1 = $("#type1").combobox("getData");
                                     for(var i=0; i<t1.length; i++){
-                                        if(t1[i].id==msg.data.courseType1){
-                                            $("#type1").combobox("select",msg.data.courseType1);
+                                        if(t1[i].id==msg.data.courseSubject1){
+                                            $("#type1").combobox("select",msg.data.courseSubject1);
                                         }
                                     }
 
                                     $("#type2").combobox({
-                                        url:'/admin/types/findbyparentid?parentid='+msg.data.courseType1,
+                                        url:'/admin/subject/findbyparentid?parentid='+msg.data.courseSubject1,
                                         valueField:'id',
-                                        textField:'typeName',
+                                        textField:'subjectName',
                                         onLoadSuccess:function(){
 
                                             var t2 = $("#type2").combobox("getData");
                                             for(var i=0; i<t2.length; i++){
-                                                if(t2[i].id==msg.data.courseType2){
-                                                    $("#type2").combobox("select",msg.data.courseType2);
+                                                if(t2[i].id==msg.data.courseSubject2){
+                                                    $("#type2").combobox("select",msg.data.courseSubject2);
                                                 }
                                             }
 
                                             if($("#type2").combobox("getValue")!=null&&$("#type2").combobox("getValue")!="") {
 
                                                 $("#type3").combobox({
-                                                    url: '/admin/types/findbyparentid?parentid=' + msg.data.courseType2,
+                                                    url: '/admin/subject/findbyparentid?parentid=' + msg.data.courseSubject2,
                                                     valueField: 'id',
-                                                    textField: 'typeName',
+                                                    textField: 'subjectName',
                                                     onLoadSuccess: function () {
                                                         var t3 = $("#type3").combobox("getData");
                                                         for (var i = 0; i < t3.length; i++) {
-                                                            if (t3[i].id == msg.data.courseType3) {
-                                                                $("#type3").combobox("select", msg.data.courseType3);
+                                                            if (t3[i].id == msg.data.courseSubject3) {
+                                                                $("#type3").combobox("select", msg.data.courseSubject3);
                                                             }
                                                         }
 
@@ -208,20 +208,14 @@
     <style type="text/css">
 
         *{font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;}
-        dd{    float: left;
-            width: 900px;
+
+        .line{
+            width: 70%;
             margin-bottom: 30px;
             min-height: 28px;
             line-height: 28px;
             position: relative;}
 
-        dt{
-            float: left;
-            width: 115px;
-            padding-right: 40px;
-            text-align: right;
-            line-height: 28px;
-        }
         .cover {
             width: 500px;
             height: 300px;
@@ -263,58 +257,54 @@
 
     <form id="ff" method="post">
         <input type="hidden" name="id" id="courseid" />
-        <div>
-        <dl>
-            <dt>课程标题:</dt>
-            <dd>
-                <div >
-                    <input class="easyui-textbox" id="courseName" name="courseName" style="width:80%" data-options="required:true,prompt:'请填写课程标题，最多50字'">
-                </div>
-            </dd>
-            <dt>分类:</dt>
-            <dd>
-                <div >
-                    <input class="easyui-combobox" id="type1" name="courseType1" style="width:20%;" data-options="label:'一级分类'"/>
-                    <input class="easyui-combobox" id="type2" name="courseType2" style="width:20%;" data-options="label:'二级分类'"/>
-                    <input class="easyui-combobox" id="type3" name="courseType3" style="width:20%;" data-options="label:'三级分类'"/>
-                </div>
-            </dd>
-            <dt>课程难度:</dt>
-            <dd>
-                <div >
-                    <input type="radio" name="courseDifficulty" value="初级" checked/>初级
-                    <input type="radio" name="courseDifficulty" value="中级"/>中级
-                    <input type="radio" name="courseDifficulty" value="高级"/>高级
-                </div>
-            </dd>
-            <dt>课程简介:</dt>
-            <dd>
-                <div >
-                    <input id="courseSummary" class="easyui-textbox" name="courseSummary" style="width:80%;height:60px" data-options="prompt:'不能少于10字，方便用户快速匹配自己是否为该课程使用人群',required:true,multiline:true">
-                </div>
-            </dd>
-            <dt>适用人群:</dt>
-            <dd>
-                <div >
-                    <input class="easyui-textbox" id="courseCrowd" name="courseCrowd" style="width:80%;" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
-                </div>
-            </dd>
+        <div style="margin-left: 30px">
 
-            <dt>课程详情</dt>
-            <dd>
-                <div >
-                    <textarea id="courseDetails" name="courseDetails" cols="100" rows="8" style="width:80%;height:200px;"></textarea>
-                </div>
 
-            </dd>
-            <dt>课程标签:</dt>
-            <dd>
-                <div >
-                    <input class="easyui-textbox" id="courseLabel" name="courseLabel" style="width:80%;" data-options="prompt:'多个标签用空格进行间隔',required:true">
-                </div>
-            </dd>
-            <dt>课程封面</dt>
-            <dd>
+            <div class="line">
+                <label for="courseName">课程标题:</label>
+                <input class="easyui-textbox" name="courseName" id="courseName" style="width:80%" data-options="required:true,prompt:'请填写课程标题，最多50字'">
+            </div>
+
+
+            <div class="line">
+                <label for="courseSubject1">分类:</label>
+                <input class="easyui-combobox" id="type1" name="courseSubject1" style="width:20%;" data-options="label:'一级分类'"/>
+                <input class="easyui-combobox" id="type2" name="courseSubject2" style="width:20%;" data-options="label:'二级分类'"/>
+                <input class="easyui-combobox" id="type3" name="courseSubject3" style="width:20%;" data-options="label:'三级分类'"/>
+            </div>
+
+
+            <div class="line">
+                <label for="courseDifficulty">课程难度:</label>
+                <input type="radio" name="courseDifficulty" value="初级" checked/>初级
+                <input type="radio" name="courseDifficulty" value="中级"/>中级
+                <input type="radio" name="courseDifficulty" value="高级"/>高级
+            </div>
+
+            <div class="line">
+                <label for="courseSummary">课程简介:</label>
+                <input class="easyui-textbox" name="courseSummary" id="courseSummary" style="width:80%;height:60px" data-options="prompt:'不能少于10字，方便用户快速匹配自己是否为该课程使用人群',required:true,multiline:true">
+            </div>
+
+            <div class="line">
+                <label for="courseCrowd">适用人群:</label>
+                <input class="easyui-textbox" name="courseCrowd" id="courseCrowd" style="width:80%;" data-options="prompt:'10-150字,对课程内容进行简要介绍，方便用户快速了解课程价值',required:true,multiline:true">
+            </div>
+
+            <div class="line">
+                <label for="courseCrowd">课程详情:</label>
+                <textarea name="courseDetails" id="courseDetails" cols="100" rows="8" style="width:80%;height:200px;"></textarea>
+            </div>
+
+
+
+            <div class="line">
+                <label for="courseLabel">课程标签:</label>
+                <input class="easyui-textbox" name="courseLabel" id="courseLabel" style="width:80%;" data-options="prompt:'多个标签用空格进行间隔',required:true">
+            </div>
+
+            <div class="line">
+                <label >课程封面:</label>
                 <div class="cover">
 
                     <div id="picker">上传图片</div>
@@ -324,30 +314,31 @@
                     <img src="" id="upControl_IMG">
                     <div class="upControl" id="upControl_Btn">&nbsp;</div>
                 </div>
-                <input type="hidden" name="courseCover" id="c_image_url" value="">
+                <input type="hidden" name="courseCover" id="c_image_url" value=""/>
 
-            </dd>
-            <dt>课程价格:</dt>
-            <dd>
-                <div >
-                   <input type="radio" name="coursePriceType" value="免费" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
+            </div>
 
-                </div>
-                <div >
-                    <input type="radio" name="coursePriceType" value="付费"/>付费
-                    <input class="easyui-textbox" name="coursePrice" id="coursePrice" style="display: inline-block;margin-left: 20px"/>
-                </div>
-            </dd>
 
-            <dt>
-            </dt>
-            <dd style="text-align: center">
+            <div class="line">
+                <label for="coursePriceType">课程价格:</label>
+                <input type="radio" name="coursePriceType" value="免费" checked/>免费<span style="color: #6a6a6a;display: inline-block;margin-left: 20px">所有用户都可免费观看的视频</span>
+
+            </div>
+            <div class="line">
+                <label for="coursePriceType"></label>
+                <input type="radio" name="coursePriceType" value="付费"/>付费
+                <input class="easyui-textbox" name="coursePrice"  id="coursePrice" style="display: inline-block;margin-left: 20px"/>
+            </div>
+
+
+
+            <div style="text-align: center" class="line">
                 <a class="easyui-linkbutton" id="btn_save">保存</a>
                 <a class="easyui-linkbutton">清空</a>
-            </dd>
+            </div>
 
 
-        </dl>
+
         </div>
     </form>
 
