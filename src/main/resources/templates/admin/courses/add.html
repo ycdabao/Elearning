@@ -139,20 +139,20 @@
 
             //分类
             $("#type1").combobox({
-                url:'/admin/types/findbyparentid',
+                url:'/admin/subject/findbyparentid',
                 valueField:'id',
-                textField:'typeName',
+                textField:'subjectName',
                 onSelect:function(record){
                     var parentid = record.id;
                     $("#type2").combobox({
-                        url:'/admin/types/findbyparentid?parentid='+parentid,
+                        url:'/admin/subject/findbyparentid?parentid='+parentid,
                         valueField:'id',
-                        textField:'typeName',
+                        textField:'subjectName',
                         onSelect:function(record1){
                             $("#type3").combobox({
-                                    url: '/admin/types/findbyparentid?parentid=' + record1.id,
+                                    url: '/admin/subject/findbyparentid?parentid=' + record1.id,
                                     valueField: 'id',
-                                    textField: 'typeName'
+                                    textField: 'subjectName'
                                 }
                             )
                         }
@@ -194,9 +194,9 @@
 
                 <div class="line">
                     <label for="courseType1">分类:</label>
-                    <input class="easyui-combobox" id="type1" name="courseType1" style="width:20%;" data-options="label:'一级分类'"/>
-                    <input class="easyui-combobox" id="type2" name="courseType2" style="width:20%;" data-options="label:'二级分类'"/>
-                    <input class="easyui-combobox" id="type3" name="courseType3" style="width:20%;" data-options="label:'三级分类'"/>
+                    <input class="easyui-combobox" id="type1" name="courseSubject1" style="width:20%;" data-options="label:'一级分类'"/>
+                    <input class="easyui-combobox" id="type2" name="courseSubject2" style="width:20%;" data-options="label:'二级分类'"/>
+                    <input class="easyui-combobox" id="type3" name="courseSubject3" style="width:20%;" data-options="label:'三级分类'"/>
                 </div>
 
 

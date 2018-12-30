@@ -88,7 +88,6 @@ public class CourseServiceImpl implements CourseService {
         List<Chapter> chapterList=chapterService.selectChapterAndChapterContent(id);
         Courses courses = coursesMapper.selectByPrimaryKey(id);
         courses.setChapterList(chapterList);
-
         return courses;
     }
 

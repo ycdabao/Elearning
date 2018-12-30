@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>传智播客和黑马程序员视频库_传智播客和黑马程序员全套视频教程下载</title>
+    <title>魔豆IT教育视频库</title>
     <meta name="keywords" content="宜昌魔豆IT教育" />
     <meta name="description" content="宜昌魔豆IT教育-免费提供全套视频教程下载和免费公开课，以及各学科学习路线图。" />
     <link type="image/x-icon" rel="shortcut icon" href="http://www.itheima.com/favicon.ico" />
@@ -39,14 +39,14 @@
     $(function(){
         $.ajax({
             type: "POST",
-            url: "/course/typelist",
+            url: "/course/subjectlist",
             dataType:"json",
             success:function(data){
-                var typelist = data.data;
+                var subjectlist = data.data;
 
-                for(var i=0; i<typelist.length; i++){
-                    var type= typelist[i];
-                    $("#typeul").append("<li ><a href='javascript:void(0);' subject='"+type.id+"'>"+type.typeName+"</a></li>");
+                for(var i=0; i<subjectlist.length; i++){
+                    var subject= subjectlist[i];
+                    $("#typeul").append("<li ><a href='javascript:void(0);' subject='"+subject.id+"'>"+subject.subjectName+"</a></li>");
                 }
 
             }

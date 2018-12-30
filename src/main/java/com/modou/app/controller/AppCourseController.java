@@ -3,7 +3,8 @@ package com.modou.app.controller;
 import com.modou.elearning.pojo.ChapterContent;
 import com.modou.elearning.pojo.Courses;
 import com.modou.elearning.pojo.Files;
-import com.modou.elearning.pojo.Types;
+import com.modou.elearning.pojo.Subject;
+
 import com.modou.elearning.service.ChapterContentService;
 import com.modou.elearning.service.CourseService;
 import com.modou.elearning.service.SubjectService;
@@ -37,11 +38,11 @@ public class AppCourseController {
     @Autowired
     private SubjectService typesService;
 
-    @RequestMapping(value="/typelist")
+    @RequestMapping(value="/subjectlist")
     @ResponseBody
-    public ModouResult typeList(){
-        List<Types> typesList= typesService.findByParentId(1);
-        return ModouResult.build(200,"success",typesList);
+    public ModouResult subjectList(){
+        List<Subject> subjectList= typesService.findByParentId(0);
+        return ModouResult.build(200,"success",subjectList);
     }
 
     @RequestMapping(value="/list")

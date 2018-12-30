@@ -2,6 +2,7 @@ package com.modou.elearning.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Courses implements Serializable {
     private String id;
@@ -43,6 +44,16 @@ public class Courses implements Serializable {
     private String courseCheckStatus;
 
     private Integer courseStudentNumber;
+
+    public List<Chapter> getChapterList() {
+        return chapterList;
+    }
+
+    public void setChapterList(List<Chapter> chapterList) {
+        this.chapterList = chapterList;
+    }
+
+    private List<Chapter> chapterList;
 
     private static final long serialVersionUID = 1L;
 
