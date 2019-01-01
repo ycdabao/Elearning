@@ -96,4 +96,17 @@ public class CourseServiceImpl implements CourseService {
     public void update(Courses courses) {
         coursesMapper.updateByPrimaryKeySelective(courses);
     }
+
+
+
+    @Override
+    public List<Courses> findHotTop10() {
+
+        CoursesExample example = new CoursesExample();
+
+        example.setOrderByClause("course_student_number desc");
+        PageHelper.offsetPage(0,10);
+
+        return coursesMapper.selectByExample(example);
+    }
 }

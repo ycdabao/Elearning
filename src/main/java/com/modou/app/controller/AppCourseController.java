@@ -38,12 +38,30 @@ public class AppCourseController {
     @Autowired
     private SubjectService typesService;
 
+    /**
+     * 首页显示所有分类
+     * @return
+     */
     @RequestMapping(value="/subjectlist")
     @ResponseBody
     public ModouResult subjectList(){
         List<Subject> subjectList= typesService.findByParentId(0);
         return ModouResult.build(200,"success",subjectList);
     }
+
+
+    /**
+     * 首页显示免费热门10
+
+     * @return
+     */
+    @RequestMapping(value="/freetoplist")
+    @ResponseBody
+    public ModouResult freeTopList(){
+        List<Courses> coursesList= courseService.findHotTop10();
+        return ModouResult.build(200,"success",coursesList);
+    }
+
 
     @RequestMapping(value="/list")
     @ResponseBody

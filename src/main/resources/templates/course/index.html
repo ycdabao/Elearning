@@ -37,6 +37,8 @@
     }
 
     $(function(){
+
+        <!--查找分类-->
         $.ajax({
             type: "POST",
             url: "/course/subjectlist",
@@ -51,6 +53,33 @@
 
             }
         })
+
+        <!--查找前10门课程-->
+
+        $.ajax({
+            type: "POST",
+            url: "/course/freetoplist",
+            dataType:"json",
+            success:function(data){
+                var courseList = data.data;
+
+                for(var i=0; i<courseList.length; i++){
+                    var course= courseList[i];
+                    $("#courseShow").append("<li> <a href='' target='_blank'>"+
+                        "<img src='/"+course.courseCover+"' alt='java基础教程（编程就像打字一样简单）' width='283' height='186'>"+
+                        "<div class='zhe agd'></div>"+
+                        "<span class='star video_s'></span>"+
+                        "</a>"+
+                        "<div class='bdtxt'>"+
+                        "<h3><a href='/course/375.html' class='afont'>"+course.courseName+"</a></h3>"+
+                    "<p>已经有<strong>30632</strong>人学习</p>"+
+                    "</div>"+
+                    "</li>");
+                }
+
+            }
+        })
+
     })
 </script>
     <meta property="qc:admins" content="227015377243134636" />
@@ -143,248 +172,7 @@
             </div>
             <div class="alllist course">
                 <ul class="cur" id="courseShow">
-                    <li>
-                        <a href="/course/375.html" target="_blank">
-                            <img src="/Upload//./Images/20180806/5b6817e00a106.jpg" alt="java基础教程（编程就像打字一样简单）" width="283" height="186">
-                            <div class="zhe agd"></div>
-                            <span class="star video_s"></span>
-                        </a>
-                        <div class="bdtxt">
-                            <h3><a href="/course/375.html" class="afont">java基础教程（编程就像打字一样简单）</a></h3>
-                            <p>已经有<strong>30632</strong>人学习</p>
-                        </div>
-                    </li><li>
-                    <a href="/course/6.html" target="_blank">
-                        <img src="/Upload//./Images/20150828/55e02efda8a0c.jpg" alt="JavaWeb教程_JavaWeb入门教程|黑马程序员" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/6.html" class="afont">JavaWeb教程_JavaWeb入门教程|黑马程序员</a></h3>
-                        <p>已经有<strong>67114</strong>人学习</p>
-                    </div>
-                </li><li>
-                    <a href="/course/420.html" target="_blank">
-                        <img src="/Upload//./Images/20180806/5b679fbb75913.jpg" alt="go语言基础深入浅出" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/420.html" class="afont">go语言基础深入浅出</a></h3>
-                        <p>已经有<strong>1383</strong>人学习</p>
-                    </div>
-                </li><li>
-                    <a href="/course/301.html" target="_blank">
-                        <img src="/Upload//./Images/20180806/5b681838eacd1.jpg" alt="大数据hadoop教程入门" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/301.html" class="afont">大数据hadoop教程入门</a></h3>
-                        <p>已经有<strong>3417</strong>人学习</p>
-                    </div>
-                </li><li>
-                    <a href="/course/273.html" target="_blank">
-                        <img src="/Upload//./Images/20180806/5b6817bf3a9ae.jpg" alt="Python入门教程完整版（懂中文就能学会）" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/273.html" class="afont">Python入门教程完整版（懂中文就能学会）</a></h3>
-                        <p>已经有<strong>24935</strong>人学习</p>
-                    </div>
-                </li><li>
-                    <a href="/course/267.html" target="_blank">
-                        <img src="/Upload//./Images/20170809/598ad70525c4f.jpg" alt="Web前端入门教程_Web前端入门视频教程(html+css+JavaScript)入门|黑马程序员" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/267.html" class="afont">Web前端入门教程_Web前端入门视频教程(html+css+JavaScript)入门|黑马程序员</a></h3>
-                        <p>已经有<strong>12858</strong>人学习</p>
-                    </div>
-                </li><li>
-                    <a href="/course/470.html" target="_blank">
-                        <img src="/Upload//./Images/20181011/5bbeffc7f1539.jpg" alt="Linux运维工作场景解决方案零基础到就业" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/470.html" class="afont">Linux运维工作场景解决方案零基础到就业</a></h3>
-                        <p>已经有<strong>958</strong>人学习</p>
-                    </div>
-                </li><li>
-                    <a href="/course/369.html" target="_blank">
-                        <img src="/Upload//./Images/20180425/5ae037472637e.jpg" alt="轻松掌握C语言视频教程（会打字就能学会）" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/369.html" class="afont">轻松掌握C语言视频教程（会打字就能学会）</a></h3>
-                        <p>已经有<strong>8351</strong>人学习</p>
-                    </div>
-                </li><li>
-                    <a href="/course/354.html" target="_blank">
-                        <img src="/Upload//./Images/20180806/5b6817fee651a.jpg" alt="2018版Photoshop从浅入深教程" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/354.html" class="afont">2018版Photoshop从浅入深教程</a></h3>
-                        <p>已经有<strong>5548</strong>人学习</p>
-                    </div>
-                </li><li>
-                    <a href="/course/381.html" target="_blank">
-                        <img src="/Upload//./Images/20180611/5b1e0c5f2cd40.jpg" alt="PHP初级教程_PHP零基础通关宝典" width="283" height="186">
-                        <div class="zhe agd"></div>
-                        <span class="star video_s"></span>
-                    </a>
-                    <div class="bdtxt">
-                        <h3><a href="/course/381.html" class="afont">PHP初级教程_PHP零基础通关宝典</a></h3>
-                        <p>已经有<strong>3211</strong>人学习</p>
-                    </div>
-                </li>				</ul>
-            </div>
-            <p style="text-align:center; clear:both; margin-bottom:30px;"><a href="/course" target="_blank" class="more" style="line-height:43px;">查看更多<span>>></span></a></p>
-        </div>
-
-        <p class="clearfix"><p>
-        <div class="box box1">
-            <div class="hd hd1 hdhover">
-                <ul class="slidenav">
-                    <li class="cur one"><a href="javascript:void(0);" subject="0">近期公开课</a></li>
-                    <li ><a href="javascript:void(0);" subject="1">Java</a></li><li ><a href="javascript:void(0);" subject="7">Python</a></li><li ><a href="javascript:void(0);" subject="3">UI/UE</a></li><li ><a href="javascript:void(0);" subject="4">前端</a></li><li ><a href="javascript:void(0);" subject="139">云计算大数据</a></li><li ><a href="javascript:void(0);" subject="5">PHP</a></li><li ><a href="javascript:void(0);" subject="6">C/C++</a></li><li ><a href="javascript:void(0);" subject="136">产品经理</a></li><li ><a href="javascript:void(0);" subject="8">新媒体/电商</a></li><li ><a href="javascript:void(0);" subject="135">软件测试</a></li><li class="cur_br"><a href="javascript:void(0);" subject="140">Go语言与区块链</a></li><li ><a href="javascript:void(0);" subject="133">Android</a></li><li ><a href="javascript:void(0);" subject="2">iOS</a></li><li ><a href="javascript:void(0);" subject="141">网络安全+运维工程师</a></li><li ><a href="javascript:void(0);" subject="142">影视制作</a></li><li ><a href="javascript:void(0);" subject="143">PMP项目管理认证</a></li>				</ul>
-                <span class="num">公开课总数：<span style="font-size:16px;font-weight:bold">321</span></span>
-            </div>
-            <div class="alllist course">
-                <ul class="cur" id="openShow">
-                    <li>
-                        <a href="/open/361.html" target="_blank">
-                            <img src="/Upload//./Images/20181123/5bf77768a7e4e.png" alt="Python从零基础到大牛项目实战：抓取景点评论数量实现旅游景点推荐" width="283" height="186">
-                            <div class="zhe agd"></div>
-                            <span class="bm_btn video_s">立即</br>报名</span>
-        <p class="xkfl">Python</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/361.html" class="afont">Python从零基础到大牛项目实战：抓取景点评论数量实现旅游景点推荐</a></h3>
-            <div class="mydate">
-                <p><strong>2019-01-08</strong>开课</p>
-                <p class="mydate_r"><strong>462</strong>人报名</p>
-            </div>
-        </div>
-        </li><li>
-        <a href="/open/369.html" target="_blank">
-            <img src="/Upload//./Images/20181226/5c233f91df410.png" alt="RHEL8测试版--抢先体验新技术" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="bm_btn video_s">立即</br>报名</span>
-            <p class="xkfl">网络安全+运维工程师</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/369.html" class="afont">RHEL8测试版--抢先体验新技术</a></h3>
-            <div class="mydate">
-                <p><strong>2019-01-10</strong>开课</p>
-                <p class="mydate_r"><strong>379</strong>人报名</p>
-            </div>
-        </div>
-    </li><li>
-        <a href="/open/368.html" target="_blank">
-            <img src="/Upload//./Images/20181206/5c08ea23ef975.png" alt="数据库分片--分布式事务" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="star video_s"></span>							<p class="xkfl">Java</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/368.html" class="afont">数据库分片--分布式事务</a></h3>
-            <div class="mydate">
-                <p><a href="/open/368.html" class="afont" style="width:auto;">资料下载</a></p>
-                <p class="mydate_r"><strong>26</strong>人下载</p>							</div>
-        </div>
-    </li><li>
-        <a href="/open/364.html" target="_blank">
-            <img src="/Upload//./Images/20181126/5bfbbf016a676.jpeg" alt="你没有玩过的电影火焰特效——C4D火焰特效大神之路" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="star video_s"></span>							<p class="xkfl">影视制作</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/364.html" class="afont">你没有玩过的电影火焰特效——C4D火焰特效大神之路</a></h3>
-            <div class="mydate">
-                <p><a href="/open/364.html" class="afont" style="width:auto;">资料下载</a></p>
-                <p class="mydate_r"><strong>24</strong>人下载</p>							</div>
-        </div>
-    </li><li>
-        <a href="/open/367.html" target="_blank">
-            <img src="/Upload//./Images/20181206/5c08bcc2d7522.png" alt="两小时掌握Flutter移动App开发" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="star video_s"></span>							<p class="xkfl">前端</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/367.html" class="afont">两小时掌握Flutter移动App开发</a></h3>
-            <div class="mydate">
-                <p><a href="/open/367.html" class="afont" style="width:auto;">资料下载</a></p>
-                <p class="mydate_r"><strong>126</strong>人下载</p>							</div>
-        </div>
-    </li><li>
-        <a href="/open/362.html" target="_blank">
-            <img src="/Upload//./Images/20181123/5bf78ece67f1b.png" alt="一小时教你制作抖音播放量破百万的短视频" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="bm_btn video_s">立即</br>报名</span>
-            <p class="xkfl">新媒体/电商</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/362.html" class="afont">一小时教你制作抖音播放量破百万的短视频</a></h3>
-            <div class="mydate">
-                <p><strong>2018-12-11</strong>开课</p>
-                <p class="mydate_r"><strong>350</strong>人报名</p>
-            </div>
-        </div>
-    </li><li>
-        <a href="/open/363.html" target="_blank">
-            <img src="/Upload//./Images/20181126/5bfbad5234ac1.png" alt="Mybatis源码分析" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="star video_s"></span>							<p class="xkfl">Java</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/363.html" class="afont">Mybatis源码分析</a></h3>
-            <div class="mydate">
-                <p><a href="/open/363.html" class="afont" style="width:auto;">资料下载</a></p>
-                <p class="mydate_r"><strong>201</strong>人下载</p>							</div>
-        </div>
-    </li><li>
-        <a href="/open/359.html" target="_blank">
-            <img src="/Upload//./Images/20181113/5bea9695d8f97.png" alt="抖音短视频播放量破百万的秘笈" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="star video_s"></span>							<p class="xkfl">新媒体/电商</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/359.html" class="afont">抖音短视频播放量破百万的秘笈</a></h3>
-            <div class="mydate">
-                <p><a href="/open/359.html" class="afont" style="width:auto;">资料下载</a></p>
-                <p class="mydate_r"><strong>61</strong>人下载</p>							</div>
-        </div>
-    </li><li>
-        <a href="/open/357.html" target="_blank">
-            <img src="/Upload//./Images/20181108/5be3cea0de754.png" alt="数据同步终极解决方案 - Canal" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="star video_s"></span>							<p class="xkfl">Java</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/357.html" class="afont">数据同步终极解决方案 - Canal</a></h3>
-            <div class="mydate">
-                <p><a href="/open/357.html" class="afont" style="width:auto;">资料下载</a></p>
-                <p class="mydate_r"><strong>121</strong>人下载</p>							</div>
-        </div>
-    </li><li>
-        <a href="/open/360.html" target="_blank">
-            <img src="/Upload//./Images/20181116/5bee44e5b6c86.png" alt="白话https" width="283" height="186">
-            <div class="zhe agd"></div>
-            <span class="star video_s"></span>							<p class="xkfl">网络安全+运维工程师</p>
-        </a>
-        <div class="bdtxt">
-            <h3><a href="/open/360.html" class="afont">白话https</a></h3>
-            <div class="mydate">
-                <p><a href="/open/360.html" class="afont" style="width:auto;">资料下载</a></p>
-                <p class="mydate_r"><strong>156</strong>人下载</p>							</div>
-        </div>
-    </li>				</ul>
+                </ul>
     </div>
     <p style="text-align:center; clear:both; margin-bottom:30px;"><a href="/open" target="_blank" class="more"  style="line-height:43px;">查看更多<span>>></span></a></p>
 </div>

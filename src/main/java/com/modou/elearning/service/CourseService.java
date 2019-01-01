@@ -20,4 +20,6 @@ public interface CourseService {
      Courses findById(String id);
 
     void update(Courses courses);
+
+    List<Courses> findHotTop10();
 }
